@@ -1,0 +1,185 @@
+{
+  "project_info": {
+    "project_number": "689296393966",
+    "firebase_url": "https://events-39b84-default-rtdb.firebaseio.com",
+    "project_id": "events-39b84",
+    "storage_bucket": "events-39b84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689296393966:android:6c0552a0f746d97ba415ff",
+        "android_client_info": {
+          "package_name": "com.example.makeitso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbYoPEcbqeYyFX-8ZWAc7YSU1c4LLy-8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689296393966:android:b6a443500d632e8aa415ff",
+        "android_client_info": {
+          "package_name": "com.flexcode.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbYoPEcbqeYyFX-8ZWAc7YSU1c4LLy-8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689296393966:android:285bbf4227889b8ea415ff",
+        "android_client_info": {
+          "package_name": "com.flexcode.events"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbYoPEcbqeYyFX-8ZWAc7YSU1c4LLy-8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689296393966:android:dfe4bbdf4d1d610aa415ff",
+        "android_client_info": {
+          "package_name": "com.flexcode.firebasecompose"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbYoPEcbqeYyFX-8ZWAc7YSU1c4LLy-8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689296393966:android:0205d0079555e761a415ff",
+        "android_client_info": {
+          "package_name": "com.flexcode.weathercoach"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbYoPEcbqeYyFX-8ZWAc7YSU1c4LLy-8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689296393966:android:c0b2d9c0499bc1f1a415ff",
+        "android_client_info": {
+          "package_name": "com.flexcode.wedatecompose"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbYoPEcbqeYyFX-8ZWAc7YSU1c4LLy-8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689296393966-qci58hgd4oj1jj1q0g9gdklgvr5bq1cm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

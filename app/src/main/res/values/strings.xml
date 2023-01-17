@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">We Date</string>
+    <string name="generic_error">Sorry Something went wrong</string>
+    <string name="email">Email</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone_number">PhoneNumber</string>
+    <string name="email_error">Please enter a valid email</string>
+    <string name="first_name_error">First Name cannot be Blank</string>
+    <string name="last_name_error">Last Name cannot be Blank</string>
+    <string name="phone_error">Phone Number cannot be lesss than 10 digits</string>
+    <string name="password_match_error">"Passwords don\'t match"</string>
+    <string name="password">Password</string>
+    <string name="password_error">Your password should have at least six digits and include one digit, one lower case letter and one upper case letter.</string>
+    <string name="password_visible">Password Visible</string>
+    <string name="recovery_email_sent">Check your inbox for the recovery email.</string>
+    <string name="password_invisible">Password Invisible</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="forgotPassword">Forgot Password</string>
+    <string name="no_account">Don\'t have an account?, Register</string>
+    <string name="have_account">Already have an account?, Login</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="logo">Logo</string>
+
+    <string name="next">Continue</string>
+    <string name="identify">Identify Yourself</string>
+    <string name="interest">Who are you \n interested in</string>
+    <string name="searching_for">What are you \n searching for</string>
+    <string name="profile_image">Add your \n profile</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="dob">Date of birth</string>
+    <string name="dd">DD</string>
+    <string name="mm">MM</string>
+    <string name="yy">YY</string>
+    <string name="men">Men</string>
+    <string name="women">Women</string>
+    <string name="everyone">Everyone</string>
+    <string name="relationship">Relationship</string>
+    <string name="hook_up">HookUp</string>
+    <string name="sth_casual">Something Casual</string>
+    <string name="donot_know">Don\'t know yet</string>
+
+    <string name="dd_error">Date is not correct</string>
+    <string name="mm_error">Month is not correct</string>
+    <string name="yy_error">Year is not correct</string>
+
+</resources>
