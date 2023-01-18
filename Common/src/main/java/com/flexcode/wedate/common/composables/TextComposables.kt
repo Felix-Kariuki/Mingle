@@ -12,6 +12,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.flexcode.wedate.common.R
@@ -22,13 +24,18 @@ import com.flexcode.wedate.common.theme.lightPink
 @Composable
 fun BasicText(
     @StringRes text: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color = Color.Black,
+    fontSize: TextUnit = 16.sp,
+    textAlign: TextAlign = TextAlign.Start,
+    fontWeight: FontWeight = FontWeight.Normal
 ) {
     Text(
         text = stringResource(text),
-        fontSize = 16.sp,
-        color = Color.Black,
-        fontWeight = FontWeight.Normal,
+        fontSize = fontSize,
+        color = color,
+        textAlign = textAlign,
+        fontWeight = fontWeight,
         modifier = modifier.textPadding()
     )
 }
@@ -36,13 +43,18 @@ fun BasicText(
 @Composable
 fun ExtraScreenText(
     @StringRes text: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color = Color.Black,
+    textAlign: TextAlign = TextAlign.Start,
+    fontWeight: FontWeight = FontWeight.SemiBold,
+    fontSize: TextUnit = 20.sp
 ) {
     Text(
         text = stringResource(text),
-        fontSize = 20.sp,
-        color = Color.Black,
-        fontWeight = FontWeight.SemiBold,
+        fontSize = fontSize,
+        color = color,
+        textAlign = textAlign,
+        fontWeight = fontWeight,
         modifier = modifier.textPadding(),
         fontFamily = FontFamily.Monospace,
     )
