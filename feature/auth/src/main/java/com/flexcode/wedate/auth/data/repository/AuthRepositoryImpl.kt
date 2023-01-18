@@ -14,6 +14,10 @@ class AuthRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
 ) : AuthRepository {
 
+
+    override val userIsAnonymous: Boolean
+        get() = auth.currentUser?.isAnonymous == true
+
     override val currentUserId: String
         get() = auth.currentUser?.uid.orEmpty()
 

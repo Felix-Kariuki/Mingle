@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface AuthRepository {
     val currentUserId: String
     val hasUser: Boolean
+    val userIsAnonymous: Boolean
     val currentUser: Flow<User>
 
     suspend fun createAnonymousAccount()
