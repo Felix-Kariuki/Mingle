@@ -123,6 +123,7 @@ fun AddImageToStorage(
         is Response.Failure -> LaunchedEffect(Unit) {
             print(addImageToStorageResponse.e)
         }
+        else -> {}
     }
 }
 

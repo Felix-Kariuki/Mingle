@@ -93,7 +93,6 @@ fun LoginScreen(
                 ) {
                     viewModel.onLoginClick(openAndPopUp)
                 }
-
             }
 
             BasicTextButton(
@@ -104,7 +103,6 @@ fun LoginScreen(
                 viewModel.onRegisterClicked(openScreen)
             }
         }
-
 
         LaunchedEffect(key1 = true){
             viewModel.onAppStart(openAndPopUp)

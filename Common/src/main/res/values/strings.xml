@@ -47,4 +47,9 @@
     <string name="mm_error">Month is not correct</string>
     <string name="yy_error">Year is not correct</string>
 
+    <string name="no_admirers">No admirers yet</string>
+
+    <string name="admirers">Admirers</string>
+    <string name="admirers_text">This is a list of all the secret admirers that have liked your profile, like them back and keep the fire burning </string>
+
 </resources>

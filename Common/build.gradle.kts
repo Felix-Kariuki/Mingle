@@ -21,8 +21,8 @@ android {
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
 
@@ -35,7 +35,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion  ="1.2.0-rc02"
+        kotlinCompilerExtensionVersion  ="1.3.2"
     }
     kotlinOptions {
         jvmTarget = "1.8"
