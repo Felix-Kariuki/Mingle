@@ -5,8 +5,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.flexcode.wedatecompose.common.utils.Constants.AUTH_PREFERENCES
-import com.flexcode.wedatecompose.data.local.datastore.AuthDataStore
+import com.flexcode.wedate.common.utils.Constants.AUTH_PREFERENCES
+import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
