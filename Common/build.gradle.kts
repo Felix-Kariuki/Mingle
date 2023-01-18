@@ -35,7 +35,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion  ="1.3.2"
+        kotlinCompilerExtensionVersion  ="1.4.0"
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -69,6 +69,7 @@ dependencies {
 
     //ui controller
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
+    implementation("androidx.core:core-ktx:+")
 
     testImplementation ("junit:junit:4.13.2")
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")
