@@ -49,7 +49,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion ="1.3.2"
+        kotlinCompilerExtensionVersion ="1.4.0"
     }
     packagingOptions {
         resources {
@@ -82,6 +82,7 @@ dependencies {
 
     implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation ("com.google.dagger:hilt-android:2.43.2")
+    implementation("androidx.core:core-ktx:+")
     kapt ("com.google.dagger:hilt-compiler:2.43.2")
 
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
