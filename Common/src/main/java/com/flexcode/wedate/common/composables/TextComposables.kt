@@ -76,14 +76,17 @@ fun ScreenTitlesText(
 }
 
 @Composable
-fun AppTitleText() {
+fun AppTitleText(
+    fontSize: TextUnit = 40.sp,
+    fontWeight: FontWeight = FontWeight.ExtraBold
+) {
     val offset = Offset(5.0f, 10.0f)
 
     Text(
         text = stringResource(id = R.string.app_name),
         modifier = Modifier.padding(top = 10.dp),
-        fontWeight = FontWeight.ExtraBold,
-        fontSize = 40.sp,
+        fontWeight = fontWeight,
+        fontSize = fontSize,
         color = Color.White,
         style = TextStyle(
             shadow = Shadow(

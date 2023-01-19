@@ -52,4 +52,11 @@
     <string name="admirers">Admirers</string>
     <string name="admirers_text">This is a list of all the secret admirers that have liked your profile, like them back and keep the fire burning </string>
 
+    <string name="dummy_text">Brandon,21</string>
+    <string name="single">Single</string>
+    <string name="unlock_distance">Unlock See Distance</string>
+    <string name="unlock_admirer">See Admirers</string>
+    <string name="subscriptions">Subscriptions</string>
+    <string name="calculator">Love Calculator</string>
+
 </resources>
