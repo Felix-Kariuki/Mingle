@@ -20,6 +20,7 @@ import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ExtraScreenText
 import com.flexcode.wedate.common.composables.LogoComposable
+import com.flexcode.wedate.common.composables.LogoComposableImage
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
 import com.flexcode.wedate.common.R.string as AppText
@@ -49,7 +50,7 @@ fun AdmirersScreen(
         ) {
             Spacer(modifier = modifier.padding(top = 20.dp))
 
-            LogoComposable()
+            LogoComposableImage()
 
             ExtraScreenText(
                 text = AppText.admirers,
@@ -61,7 +62,8 @@ fun AdmirersScreen(
             Column(
                 modifier = modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 NoResultFoundAnimation()
                 BasicText(
@@ -73,7 +75,6 @@ fun AdmirersScreen(
                 )
             }
         }
-
 
     }
 
