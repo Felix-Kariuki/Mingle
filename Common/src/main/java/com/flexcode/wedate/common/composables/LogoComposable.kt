@@ -12,11 +12,18 @@ import com.flexcode.wedate.common.R
 @Composable
 fun LogoComposable() {
 
+    LogoComposableImage()
+    AppTitleText()
+}
+
+
+@Composable
+fun LogoComposableImage() {
+
     Image(
         painter = painterResource( R.drawable.logo),
         contentDescription = stringResource(R.string.logo),
         modifier = Modifier.size(50.dp)
     )
-    AppTitleText()
 
 }
