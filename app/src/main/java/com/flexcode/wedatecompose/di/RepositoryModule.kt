@@ -6,6 +6,8 @@ import com.flexcode.wedate.auth.data.repository.AuthRepositoryImpl
 import com.flexcode.wedate.auth.data.repository.StoreRegistrationRepositoryImpl
 import com.flexcode.wedate.auth.domain.repository.AuthRepository
 import com.flexcode.wedate.auth.domain.repository.StoreRegistrationRepository
+import com.flexcode.wedate.lovecalculator.data.repository.CalculatorRepositoryImpl
+import com.flexcode.wedate.lovecalculator.domain.repository.CalculatorRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,5 +23,10 @@ abstract class RepositoryModule {
 
 
     @Binds abstract fun provideLogService(impl: LogServiceImpl): LogService
+
+    @Binds
+    abstract fun providesLoveCalculatorRepository(
+        impl: CalculatorRepositoryImpl
+    ): CalculatorRepository
 
 }
