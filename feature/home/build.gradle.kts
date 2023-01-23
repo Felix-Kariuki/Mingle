@@ -51,5 +51,6 @@ dependencies {
 
     implementation(project(":Common"))
     implementation("androidx.core:core-ktx:+")
+    implementation("androidx.core:core-ktx:+")
 
 }
