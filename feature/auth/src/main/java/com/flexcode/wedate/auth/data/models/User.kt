@@ -1,7 +1,9 @@
 package com.flexcode.wedate.auth.data.models
 
+import com.google.firebase.firestore.DocumentId
+
 data class User(
-    val id: String = "",
+    @DocumentId val id: String = "",
     val isAnonymous: Boolean = true,
     val firstName:String ="",
     val phoneNumber:String ="",
@@ -21,4 +23,5 @@ data class User(
     val profileImage5:String = "",
     val profileImage6:String = "",
     val isFree: Boolean = true,
+    val datingStatus:String = "Single"
 )

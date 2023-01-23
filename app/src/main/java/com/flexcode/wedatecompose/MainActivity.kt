@@ -3,7 +3,6 @@ package com.flexcode.wedatecompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.flexcode.wedate.common.navigation.WeDateApp
 import com.flexcode.wedate.common.theme.WedateComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
