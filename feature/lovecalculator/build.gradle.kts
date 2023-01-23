@@ -1,5 +1,3 @@
-import  com.flexcode.wedate.buildsrc.SDK
-
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -7,36 +5,31 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
+
 apply{
     from("$rootDir/compose-module.gradle")
 }
 
 android {
-    namespace = "com.flexcode.wedate.home"
-    compileSdk = SDK.max
+    namespace = "com.flexcode.wedate.lovecalculator"
+    compileSdk = 33
 
     defaultConfig {
-        minSdk = SDK.min
-        targetSdk = SDK.max
+        minSdk = 21
+        targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
-            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -48,10 +41,7 @@ android {
 }
 
 dependencies {
-
     implementation(project(":Common"))
-    implementation("androidx.core:core-ktx:+")
-    implementation("androidx.core:core-ktx:+")
-    implementation("androidx.core:core-ktx:+")
 
+    implementation("androidx.core:core-ktx:+")
 }

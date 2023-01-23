@@ -66,6 +66,7 @@ dependencies {
     implementation(project(":feature:account"))
     implementation(project(":feature:admirers"))
     implementation(project(":feature:matches"))
+    implementation(project(":feature:lovecalculator"))
 
     implementation ("androidx.core:core-ktx:1.9.0")
     implementation ("androidx.appcompat:appcompat:1.5.1")
@@ -82,6 +83,7 @@ dependencies {
 
     implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation ("com.google.dagger:hilt-android:2.43.2")
+    implementation("androidx.core:core-ktx:+")
     implementation("androidx.core:core-ktx:+")
     implementation("androidx.core:core-ktx:+")
     kapt ("com.google.dagger:hilt-compiler:2.43.2")
@@ -114,8 +116,10 @@ dependencies {
     // Preferences DataStore
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
 
-    //gson
+    //retrofit
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3")
 
     //coil
     implementation("io.coil-kt:coil-compose:2.2.2")

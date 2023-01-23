@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/feature/admirers" />
             <option value="$PROJECT_DIR$/feature/auth" />
             <option value="$PROJECT_DIR$/feature/home" />
+            <option value="$PROJECT_DIR$/feature/lovecalculator" />
             <option value="$PROJECT_DIR$/feature/matches" />
           </set>
         </option>
