@@ -1,4 +1,4 @@
-package com.flexcode.wedate.common.navigation
+package com.flexcode.wedatecompose
 
 import android.content.res.Resources
 import androidx.compose.foundation.layout.padding
@@ -23,9 +23,9 @@ import com.flexcode.wedate.auth.presentation.profile_images_screen.ProfileImages
 import com.flexcode.wedate.auth.presentation.register.RegisterScreen
 import com.flexcode.wedate.auth.presentation.searching_for_screen.SearchingForScreen
 import com.flexcode.wedate.auth.presentation.splash_screen.SplashScreen
+import com.flexcode.wedate.common.navigation.*
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.theme.WedateComposeTheme
-import com.flexcode.wedatecompose.HomeContentScreen
 import kotlinx.coroutines.CoroutineScope
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -66,14 +66,14 @@ fun WeDateApp() {
 
 @ExperimentalMaterialApi
 fun NavGraphBuilder.WeDateNavGraph(appState: WeDateAppState) {
-    composable(route = com.flexcode.wedate.common.navigation.SPLASH_SCREEN) {
+    composable(route = SPLASH_SCREEN) {
         SplashScreen(
             openAndPopUp = { route, popUp ->
                 appState.navigateAndPopUp(route = route, popUp = popUp)
             })
     }
 
-    composable(route = com.flexcode.wedate.common.navigation.LOGIN_SCREEN,
+    composable(route = LOGIN_SCREEN,
     arguments = listOf()
     ) {
         LoginScreen(openAndPopUp = { route, popup ->
@@ -83,7 +83,7 @@ fun NavGraphBuilder.WeDateNavGraph(appState: WeDateAppState) {
         })
     }
 
-    composable(route = com.flexcode.wedate.common.navigation.REGISTER_SCREEN) {
+    composable(route = REGISTER_SCREEN) {
         RegisterScreen(openAndPopUp = { route, popUp ->
             appState.navigateAndPopUp(route = route, popUp = popUp)
         }, openScreen = { route ->
@@ -91,29 +91,29 @@ fun NavGraphBuilder.WeDateNavGraph(appState: WeDateAppState) {
         })
     }
 
-    composable(route = com.flexcode.wedate.common.navigation.IDENTITY_SCREEN) {
+    composable(route = IDENTITY_SCREEN) {
         IdentityScreen(openScreen = { route ->
             appState.navigate(route = route)
         })
     }
 
-    composable(route = com.flexcode.wedate.common.navigation.INTERESTS_SCREEN) {
+    composable(route = INTERESTS_SCREEN) {
         InterestsScreen(openScreen = {route-> appState.navigate(route)})
     }
 
-    composable(route = com.flexcode.wedate.common.navigation.SEARCHING_FOR_SCREEN) {
+    composable(route = SEARCHING_FOR_SCREEN) {
         SearchingForScreen(openScreen = {route-> appState.navigate(route)})
     }
 
-    composable(route = com.flexcode.wedate.common.navigation.PROFILE_IMAGES_SCREEN) {
+    composable(route = PROFILE_IMAGES_SCREEN) {
         ProfileImagesScreen(openAndPopUp = {route,popUp-> appState.navigateAndPopUp(route,popUp)})
     }
 
-    composable(route = com.flexcode.wedate.common.navigation.FORGOT_PASSWORD_SCREEN) {
+    composable(route = FORGOT_PASSWORD_SCREEN) {
 
     }
 
-    composable(route = com.flexcode.wedate.common.navigation.HOME_SCREEN_CONTENT) {
+    composable(route = HOME_SCREEN_CONTENT) {
         HomeContentScreen()
     }
 }
