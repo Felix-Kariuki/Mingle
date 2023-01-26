@@ -7,3 +7,7 @@ A tinder mock dating application
  * jetpack compose
  * coroutines
  * firebase
+
+
+### Milestones and tasks to complete
+* accout screen
