@@ -3,6 +3,8 @@
     <string name="generic_error">Sorry Something went wrong</string>
     <string name="email">Email</string>
     <string name="first_name">First Name</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_crush_name">Crush\'s Name</string>
     <string name="last_name">Last Name</string>
     <string name="phone_number">PhoneNumber</string>
     <string name="email_error">Please enter a valid email</string>
@@ -58,5 +60,8 @@
     <string name="unlock_admirer">See Admirers</string>
     <string name="subscriptions">Subscriptions</string>
     <string name="calculator">Love Calculator</string>
+    <string name="calculator_desc">Love Calculator allows you to calculate the love percentage between you and your crush and tells you if you are a compatible match</string>
+    <string name="calculate">Calculate</string>
+    <string name="name_error">Either Names cannot be empty</string>
 
 </resources>

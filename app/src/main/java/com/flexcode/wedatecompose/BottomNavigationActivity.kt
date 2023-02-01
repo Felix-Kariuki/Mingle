@@ -13,9 +13,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.flexcode.wedate.account.AccountScreen
 import com.flexcode.wedate.admirers.AdmirersScreen
+import com.flexcode.wedate.common.navigation.ACCOUNT_SCREEN
 import com.flexcode.wedate.common.navigation.BottomNavItem
+import com.flexcode.wedate.common.navigation.LOVE_CALCULATOR_SCREEN
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.home.HomeScreen
+import com.flexcode.wedate.lovecalculator.presentation.LoveCalculatorScreen
 import com.flexcode.wedate.matches.MatchesScreen
 
 @Composable
@@ -31,7 +34,16 @@ fun NavigationGraph(navController: NavHostController) {
             MatchesScreen()
         }
         composable(BottomNavItem.Account.screen_route) {
-            AccountScreen()
+            AccountScreen(openScreen = {
+                navController.navigate(route = LOVE_CALCULATOR_SCREEN)
+            })
+        }
+        composable(route = LOVE_CALCULATOR_SCREEN){
+            LoveCalculatorScreen(openAndPopUp = {
+                navController.navigate(route = ACCOUNT_SCREEN){
+                    popUpTo(ACCOUNT_SCREEN)
+                }
+            })
         }
     }
 }

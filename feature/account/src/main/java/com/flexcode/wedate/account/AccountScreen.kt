@@ -44,7 +44,7 @@ import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun AccountScreen(
-    //openScreen: (String,) -> Unit,
+    openScreen: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: AccountScreenViewModel = hiltViewModel(),
 ) {
@@ -133,8 +133,7 @@ fun AccountScreen(
                         .height(50.dp)
                         .clip(RoundedCornerShape(10.dp))
                 ) {
-
-
+                    openScreen()
                 }
             }
         }

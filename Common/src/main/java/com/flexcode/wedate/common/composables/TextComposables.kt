@@ -41,6 +41,25 @@ fun BasicText(
 }
 
 @Composable
+fun ResultText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = Color.Black,
+    fontSize: TextUnit = 16.sp,
+    textAlign: TextAlign = TextAlign.Start,
+    fontWeight: FontWeight = FontWeight.Normal
+) {
+    Text(
+        text = text,
+        fontSize = fontSize,
+        color = color,
+        textAlign = textAlign,
+        fontWeight = fontWeight,
+        modifier = modifier.textPadding()
+    )
+}
+
+@Composable
 fun ExtraScreenText(
     @StringRes text: Int,
     modifier: Modifier = Modifier,
@@ -78,13 +97,15 @@ fun ScreenTitlesText(
 @Composable
 fun AppTitleText(
     fontSize: TextUnit = 40.sp,
-    fontWeight: FontWeight = FontWeight.ExtraBold
+    fontWeight: FontWeight = FontWeight.ExtraBold,
+    text: Int = R.string.app_name,
+    modifier: Modifier = Modifier,
 ) {
     val offset = Offset(5.0f, 10.0f)
 
     Text(
-        text = stringResource(id = R.string.app_name),
-        modifier = Modifier.padding(top = 10.dp),
+        text = stringResource(id = text),
+        modifier = modifier.padding(top = 10.dp),
         fontWeight = fontWeight,
         fontSize = fontSize,
         color = Color.White,
