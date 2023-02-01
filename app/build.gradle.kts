@@ -83,9 +83,6 @@ dependencies {
 
     implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation ("com.google.dagger:hilt-android:2.43.2")
-    implementation("androidx.core:core-ktx:+")
-    implementation("androidx.core:core-ktx:+")
-    implementation("androidx.core:core-ktx:+")
     kapt ("com.google.dagger:hilt-compiler:2.43.2")
 
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
@@ -129,9 +126,12 @@ dependencies {
 
     androidTestImplementation ("androidx.test.ext:junit:1.1.2")
     androidTestImplementation ("androidx.compose.ui:ui-test-junit4:1.1.1")
+    //androidTestImplementation ("junit:junit:4.12")
     androidTestImplementation ("com.google.dagger:hilt-android-testing:2.43.2")
     androidTestImplementation ("com.google.truth:truth:1.1.3")
     androidTestImplementation ("androidx.navigation:navigation-testing:2.5.3")
+    androidTestImplementation ("androidx.test:runner:1.2.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
     testImplementation("org.robolectric:robolectric:4.9")
     testImplementation ("androidx.compose.ui:ui-test-junit4:1.1.1")

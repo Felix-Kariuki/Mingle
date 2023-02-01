@@ -7,6 +7,7 @@ import com.flexcode.wedate.auth.domain.repository.StoreRegistrationRepository
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.ext.idFromParameter
+import com.flexcode.wedate.common.navigation.LOVE_CALCULATOR_SCREEN
 import com.flexcode.wedate.common.navigation.USER_DEFAULT_ID
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
@@ -27,5 +28,9 @@ class AccountScreenViewModel @Inject constructor(
     suspend fun getUserDetails(userId: String) {
         user.value = storeRegistrationRepository.getUserDetails(userId) ?: User()
         Timber.d("DETAILS:: ${storeRegistrationRepository.getUserDetails(userId)}")
+    }
+
+    fun onLoveCalculatorClick(openScreen: (String) -> Unit){
+        launchCatching { openScreen(LOVE_CALCULATOR_SCREEN) }
     }
 }

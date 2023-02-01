@@ -26,7 +26,7 @@ import com.flexcode.wedate.auth.presentation.splash_screen.SplashScreen
 import com.flexcode.wedate.common.navigation.*
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.theme.WedateComposeTheme
-import com.flexcode.wedate.lovecalculator.LoveCalculatorScreen
+import com.flexcode.wedate.lovecalculator.presentation.LoveCalculatorScreen
 import kotlinx.coroutines.CoroutineScope
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -116,10 +116,6 @@ fun NavGraphBuilder.WeDateNavGraph(appState: WeDateAppState) {
 
     composable(route = HOME_SCREEN_CONTENT) {
         HomeContentScreen()
-    }
-
-    composable(route = LOVE_CALCULATOR_SCREEN ){
-        LoveCalculatorScreen()
     }
 }
 

@@ -16,6 +16,10 @@ fun String.isValidEmail(): Boolean {
     return this.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
 
+fun String.isNameValid(): Boolean{
+    return this.isNotBlank()
+}
+
 fun String.isValidPassword(): Boolean {
     return this.isNotBlank() &&
             this.length >= Constants.MIN_PASS_LENGTH &&
