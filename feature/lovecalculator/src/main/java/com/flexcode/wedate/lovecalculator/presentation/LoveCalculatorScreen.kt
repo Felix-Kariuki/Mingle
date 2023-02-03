@@ -101,7 +101,7 @@ fun LoveCalculatorScreen(
 
             Spacer(modifier = modifier.height(10.dp))
             LovePercentageCircularIndicator(
-                percentage = (state.calculatorResponse?.percentage?.toFloat() ?: 10f),
+                percentage = (state.calculatorResponse?.percentage?.toFloat() ?: 0f),
                 modifier = modifier
                     .fillMaxWidth(0.17f)
             )

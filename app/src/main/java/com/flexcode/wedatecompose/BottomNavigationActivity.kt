@@ -19,7 +19,7 @@ import com.flexcode.wedate.common.navigation.LOVE_CALCULATOR_SCREEN
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.home.HomeScreen
 import com.flexcode.wedate.lovecalculator.presentation.LoveCalculatorScreen
-import com.flexcode.wedate.matches.MatchesScreen
+import com.flexcode.wedate.matches.presentation.MatchesScreen
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
