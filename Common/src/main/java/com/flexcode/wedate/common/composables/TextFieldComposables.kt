@@ -1,23 +1,28 @@
 package com.flexcode.wedate.common.composables
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.*
+import androidx.compose.runtime.R
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.R.string as AppText
@@ -66,8 +71,8 @@ fun EmailField(
 }
 
 @Composable
-fun PasswordField(value: String, onNewValue: (String) -> Unit, modifier: Modifier = Modifier){
-    PasswordField(value = value, placeholder = AppText.password, onNewValue =onNewValue,modifier)
+fun PasswordField(value: String, onNewValue: (String) -> Unit, modifier: Modifier = Modifier) {
+    PasswordField(value = value, placeholder = AppText.password, onNewValue = onNewValue, modifier)
 }
 
 @Composable
@@ -76,7 +81,12 @@ fun ConfirmPasswordField(
     onNewValue: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    PasswordField(value = value, placeholder = AppText.confirmPassword, onNewValue =onNewValue,modifier)
+    PasswordField(
+        value = value,
+        placeholder = AppText.confirmPassword,
+        onNewValue = onNewValue,
+        modifier
+    )
 }
 
 @Composable
@@ -85,7 +95,7 @@ private fun PasswordField(
     @StringRes placeholder: Int,
     onNewValue: (String) -> Unit,
     modifier: Modifier = Modifier
-){
+) {
     var isVisible by remember { mutableStateOf(false) }
 
     val icon =
@@ -100,9 +110,13 @@ private fun PasswordField(
         value = value,
         onValueChange = { onNewValue(it) },
         placeholder = { Text(text = stringResource(placeholder)) },
-        leadingIcon = { Icon(imageVector = Icons.Default.Lock, contentDescription = stringResource(
-            AppText.password_invisible
-        )) },
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Default.Lock, contentDescription = stringResource(
+                    AppText.password_invisible
+                )
+            )
+        },
         trailingIcon = {
             IconButton(onClick = { isVisible = !isVisible }) {
                 Icon(painter = icon, contentDescription = stringResource(AppText.password_visible))
@@ -112,4 +126,49 @@ private fun PasswordField(
         visualTransformation = visualTransformation,
         shape = RoundedCornerShape(10.dp)
     )
+}
+
+@Composable
+fun SearchTextField(
+    value: String,
+    leadingIcon: Int,
+    @StringRes placeholder: Int,
+    onNewValue: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    onSearch: () -> Unit
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = { onNewValue(it) },
+        placeholder = { Text(text = stringResource(placeholder)) },
+        modifier = modifier
+            .fillMaxWidth()
+            .background(
+                MaterialTheme.colors.background
+            ),
+        shape = RoundedCornerShape(10.dp),
+        keyboardOptions = KeyboardOptions(
+            capitalization = KeyboardCapitalization.None,
+            autoCorrect = false,
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Search
+        ),
+        keyboardActions = KeyboardActions(
+            onSearch = {
+                onSearch()
+            }
+        ),
+
+        maxLines = 1,
+        singleLine = true,
+        leadingIcon = {
+            Icon(
+                modifier = Modifier
+                    .size(24.dp),
+                painter = painterResource(id = leadingIcon),
+                contentDescription = stringResource(id = placeholder),
+                tint = MaterialTheme.colors.onBackground,
+                )
+        }
+        )
 }

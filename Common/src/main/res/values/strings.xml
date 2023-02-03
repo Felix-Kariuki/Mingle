@@ -64,4 +64,9 @@
     <string name="calculate">Calculate</string>
     <string name="name_error">Either Names cannot be empty</string>
 
+
+    <string name="search">Search</string>
+    <string name="matches">Matches</string>
+    <string name="chats">Chats</string>
+
 </resources>
