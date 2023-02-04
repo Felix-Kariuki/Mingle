@@ -8,13 +8,14 @@
     <string name="last_name">Last Name</string>
     <string name="phone_number">PhoneNumber</string>
     <string name="email_error">Please enter a valid email</string>
-    <string name="first_name_error">First Name cannot be Blank</string>
+    <string name="first_name_error">Your Name cannot be Blank</string>
     <string name="last_name_error">Last Name cannot be Blank</string>
     <string name="phone_error">Phone Number cannot be lesss than 10 digits</string>
     <string name="password_match_error">"Passwords don\'t match"</string>
     <string name="password">Password</string>
     <string name="password_error">Your password should have at least six digits and include one digit, one lower case letter and one upper case letter.</string>
     <string name="password_visible">Password Visible</string>
+    <string name="string_empty">Field Cannot be Blank</string>
     <string name="recovery_email_sent">Check your inbox for the recovery email.</string>
     <string name="password_invisible">Password Invisible</string>
     <string name="confirmPassword">Confirm Password</string>

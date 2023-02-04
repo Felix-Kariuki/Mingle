@@ -5,11 +5,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.ScreenTitlesText
@@ -19,7 +23,7 @@ import com.flexcode.wedate.common.ext.basicButton
 @Composable
 fun SearchingForScreen(
     modifier: Modifier = Modifier,
-    openScreen: (String) -> Unit,
+    openAndPopUp: (String,String) -> Unit,
     viewModel: SearchingForViewModel = hiltViewModel()
 ) {
 
@@ -55,7 +59,7 @@ fun SearchingForScreen(
                     .height(50.dp)
                     .clip(RoundedCornerShape(10.dp))
             ) {
-                viewModel.onContinueClicked(openScreen)
+                viewModel.registerUser(openAndPopUp)
             }
         }
 
@@ -93,4 +97,6 @@ fun SearchOptionsComponent(
         }
     }
 }
+
+
 

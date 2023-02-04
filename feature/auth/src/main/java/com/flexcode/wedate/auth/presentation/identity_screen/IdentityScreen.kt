@@ -14,6 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.ext.fieldModifier
+import java.util.Date
 import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
@@ -24,6 +25,7 @@ fun IdentityScreen(
 ) {
 
     val user by viewModel.user
+    val state by viewModel.state
 
     Column(
         modifier = modifier.fillMaxSize(),
@@ -55,20 +57,20 @@ fun IdentityScreen(
         ) {
             BasicField(
                 text = AppText.dd,
-                value = user.dateOfBirth,
+                value = state.dd,
                 onNewValue = viewModel::onDateOfBirthChange
             )
             Spacer(modifier = modifier.width(20.dp))
             BasicField(
                 text = AppText.mm,
-                value = user.monthOfBirth,
+                value = state.mm,
                 onNewValue = viewModel::onMonthOfBirthChange
             )
             Spacer(modifier = modifier.width(20.dp))
 
             BasicField(
                 text = AppText.yy,
-                value = user.yearOfBirth,
+                value = state.yy,
                 onNewValue = viewModel::onYearOfBirthChange
             )
         }

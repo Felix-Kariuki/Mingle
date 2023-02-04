@@ -7,9 +7,16 @@ import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
 import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
+import com.flexcode.wedate.common.ext.isDateValid
+import com.flexcode.wedate.common.ext.isMonthValid
+import com.flexcode.wedate.common.ext.isYearValid
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.navigation.INTERESTS_SCREEN
+import com.flexcode.wedate.common.snackbar.SnackBarManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,17 +26,20 @@ class IdentifyScreenViewModel @Inject constructor(
 ) : BaseViewModel(logService) {
 
     val user = mutableStateOf(User())
-    var uiState = mutableStateOf(IdentityUiState())
+
+    var state = mutableStateOf(IdentityState())
         private set
 
     private val dd
-     get() = uiState.value.dd
+        get() = state.value.dd
+
 
     private val mm
-        get() = uiState.value.mm
+        get() = state.value.mm
 
     private val yy
-        get() = uiState.value.yy
+        get() = state.value.yy
+
 
     private val _selectedGenderOption = mutableStateOf("Male")
     val selectedGenderOption: State<String> = _selectedGenderOption
@@ -45,39 +55,57 @@ class IdentifyScreenViewModel @Inject constructor(
     }
 
     fun onContinueClicked(openScreen: (String) -> Unit) {
-
-        //save year of birth
+        if (!dd.isDateValid()){
+            SnackBarManager.showMessage(AppText.dd_error)
+            return
+        }
+        if (!mm.isMonthValid()){
+            SnackBarManager.showMessage(AppText.mm_error)
+            return
+        }
+        if (!yy.isYearValid()){
+            SnackBarManager.showMessage(AppText.yy_error)
+            return
+        }
         val yob =
             user.value.dateOfBirth + "/" + user.value.monthOfBirth + "/" + user.value.yearOfBirth
 
-        launchCatching {
-            dataStore.saveYearOfBirth(year = yob)
-            openScreen(INTERESTS_SCREEN)
-        }
+        calculateAge(yob, openScreen)
+
     }
 
     fun onDateOfBirthChange(newValue: String) {
+        state.value = state.value.copy(dd = newValue)
         user.value = user.value.copy(dateOfBirth = newValue)
     }
 
     fun onYearOfBirthChange(newValue: String) {
+        state.value = state.value.copy(yy = newValue)
         user.value = user.value.copy(yearOfBirth = newValue)
     }
 
     fun onMonthOfBirthChange(newValue: String) {
+        state.value = state.value.copy(mm = newValue)
         user.value = user.value.copy(monthOfBirth = newValue)
     }
 
-    /*fun saveYearOfBirth() {
-        val yob =
-            user.value.dateOfBirth + "/" + user.value.monthOfBirth + "/" + user.value.yearOfBirth
-        if (!dd.isDateOfBirthValid()){
-            SnackBarManager.showMessage(AppText.dd_error)
-            return
+    private fun calculateAge(yob: String, openScreen: (String) -> Unit) {
+        val yearOfBirth = "$yob 00:00"
+        val today = Date()
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm")
+        val formattedYearOfBirth = sdf.parse(yearOfBirth)
+        val years = (today.time - formattedYearOfBirth.time) / 31536000000
+        if (years.toInt() >= 18) {
+            launchCatching {
+                dataStore.saveYearOfBirth(year = yob)
+                dataStore.saveAge(age = years.toString())
+                openScreen(INTERESTS_SCREEN)
+            }
+        } else {
+            //Do not show error at this point check age before actual registration then
+            // show error "Account creation failed, you cannot be less than 18 years"
+            SnackBarManager.showError("You are below the age of 18")
         }
+    }
 
-        launchCatching {
-            dataStore.saveYearOfBirth(year = yob)
-        }
-    }*/
 }

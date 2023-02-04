@@ -69,9 +69,10 @@ dependencies {
 
     //ui controller
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
-    implementation("androidx.core:core-ktx:+")
-    implementation("androidx.core:core-ktx:+")
-    implementation("androidx.core:core-ktx:+")
+
+
+    //lottie
+    implementation ("com.airbnb.android:lottie-compose:5.2.0")
 
     testImplementation ("junit:junit:4.13.2")
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")

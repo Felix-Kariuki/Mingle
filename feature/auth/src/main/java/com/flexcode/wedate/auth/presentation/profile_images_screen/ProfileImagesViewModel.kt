@@ -13,17 +13,23 @@ import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.auth.domain.model.Response
 import com.flexcode.wedate.auth.domain.model.Response.Success
 import com.flexcode.wedate.auth.domain.model.Response.Loading
+import com.flexcode.wedate.auth.domain.repository.AuthRepository
 import com.flexcode.wedate.auth.domain.repository.ProfileImageRepository
 import com.flexcode.wedate.common.data.LogService
+import com.flexcode.wedate.common.snackbar.SnackBarManager
+import com.flexcode.wedate.common.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileImagesViewModel @Inject constructor(
     logService: LogService,
     private val dataStore: AuthDataStore,
-    private val repository: ProfileImageRepository
+    private val repository: ProfileImageRepository,
+    private val authRepository: AuthRepository
 ): BaseViewModel(logService) {
 
     var addImageToStorageResponse by mutableStateOf<Response<Uri>>(Success(null))
@@ -41,9 +47,10 @@ class ProfileImagesViewModel @Inject constructor(
 
     }
 
-    fun addImageToFirestoreDatabase(downloadUrl: Uri,user: User) = viewModelScope.launch {
+    /*fun addImageToFirestoreDatabase(downloadUrl: Uri,user: User) = viewModelScope.launch {
         addImageToDatabaseResponse = Loading
         addImageToDatabaseResponse = repository.uploadImageUrlToFirestore(downloadUrl,user)
-    }
+    }*/
+
 
 }

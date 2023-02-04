@@ -96,6 +96,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-storage-ktx")
     implementation( "com.google.firebase:firebase-perf-ktx")
     implementation ("com.google.firebase:firebase-config-ktx")
+    implementation ("com.google.firebase:firebase-database-ktx")
 
     //material 3
     implementation("androidx.compose.material3:material3:1.0.1")

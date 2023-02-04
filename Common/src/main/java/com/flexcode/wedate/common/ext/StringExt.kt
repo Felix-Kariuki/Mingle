@@ -9,7 +9,7 @@ fun String.isFirstNameValid(): Boolean {
 }
 
 fun String.isPhoneNumberValid(): Boolean {
-    return this.isNotBlank()
+    return this.isNotBlank() && this.length == Constants.MIN_PHONE_LENGTH
 }
 
 fun String.isValidEmail(): Boolean {
@@ -30,6 +30,14 @@ fun String.passwordMatches(repeated: String): Boolean {
     return this == repeated
 }
 
-fun String.idFromParameter(): String {
-    return this.substring(1, this.length - 1)
+fun String.isDateValid(): Boolean{
+    return this.isNotBlank() && this.toInt() <= Constants.MAX_DATE && this.toInt() > 0
+}
+
+fun String.isMonthValid(): Boolean{
+    return this.isNotBlank()  && this.toInt() <= Constants.MAX_MONTH && this.toInt() > 0
+}
+
+fun String.isYearValid(): Boolean{
+    return this.isNotBlank()  && this.length == Constants.MIN_YEAR_LENGTH && this.toInt() > 0
 }

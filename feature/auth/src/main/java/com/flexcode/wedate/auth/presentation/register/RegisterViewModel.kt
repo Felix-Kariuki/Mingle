@@ -2,17 +2,16 @@ package com.flexcode.wedate.auth.presentation.register
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.common.ext.idFromParameter
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.navigation.IDENTITY_SCREEN
 import com.flexcode.wedate.common.navigation.LOGIN_SCREEN
 import com.flexcode.wedate.common.navigation.REGISTER_SCREEN
-import com.flexcode.wedate.common.navigation.USER_DEFAULT_ID
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
 import com.flexcode.wedate.auth.data.models.User
-import com.flexcode.wedate.auth.domain.repository.AuthRepository
-import com.flexcode.wedate.auth.domain.repository.StoreRegistrationRepository
 import com.flexcode.wedate.common.data.LogService
+import com.flexcode.wedate.common.ext.*
+import com.flexcode.wedate.common.snackbar.SnackBarManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,9 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     logService: LogService,
-    private val authRepository: AuthRepository,
     private val dataStore: AuthDataStore,
-    private val storeRegistrationRepository: StoreRegistrationRepository
 ) : BaseViewModel(logService) {
 
     var uiState = mutableStateOf(RegisterUiState())
@@ -41,12 +38,6 @@ class RegisterViewModel @Inject constructor(
 
     private val phoneNumber
         get() = uiState.value.phoneNumber
-
-    suspend fun getUserDetails(userId:String){
-        if (userId != USER_DEFAULT_ID){
-            user.value = storeRegistrationRepository.getUserDetails(userId.idFromParameter()) ?: User()
-        }
-    }
 
     fun onEmailChange(newValue: String) {
         uiState.value = uiState.value.copy(email = newValue)
@@ -77,12 +68,6 @@ class RegisterViewModel @Inject constructor(
     }
 
     fun onRegisterClick(openScreen: (String) -> Unit) {
-        saveUserInfoToDataStore()
-        /*if (!email.isValidEmail()) {
-            SnackBarManager.showMessage(AppText.email_error)
-            return
-        }
-
         if (!firstName.isFirstNameValid()){
             SnackBarManager.showMessage(AppText.first_name_error)
             return
@@ -93,6 +78,12 @@ class RegisterViewModel @Inject constructor(
             return
         }
 
+        if (!email.isValidEmail()) {
+            SnackBarManager.showMessage(AppText.email_error)
+            return
+        }
+
+
         if (!password.isValidPassword()) {
             SnackBarManager.showMessage(AppText.password_error)
             return
@@ -101,13 +92,10 @@ class RegisterViewModel @Inject constructor(
         if (!password.passwordMatches(uiState.value.confirmPassword)) {
             SnackBarManager.showMessage(AppText.password_match_error)
             return
-        }*/
+        }
 
+        saveUserInfoToDataStore()
         launchCatching {
-            //authRepository.register(email, password)
-            //save user info
-            val userInfo = user.value
-            //storeRegistrationRepository.saveUserDetails(userInfo)
             openScreen(IDENTITY_SCREEN)
         }
     }

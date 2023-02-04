@@ -81,8 +81,18 @@ class AuthDataStore(private val dataStore: DataStore<Preferences>, private val g
         (pref[Constants.Y_O_B_KEY]?: "01/01/2004").toString()
     }
 
+    suspend fun saveAge(age:String){
+        dataStore.edit {
+            it[Constants.AGE_KEY] = setOf(age)
+        }
+    }
 
-    //// research on how to save the entire user data as an object
+    val getUserAge: Flow<String> = dataStore.data.map { pref->
+        (pref[Constants.AGE_KEY]?: "").toString()
+    }
+
+
+    //// save the entire user data as an object
     suspend fun saveUserInfo(user: User){
         dataStore.edit { pref ->
             pref[Constants.USER_DATA] = setOf(gson.toJson(user))
