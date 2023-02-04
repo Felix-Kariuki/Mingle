@@ -100,7 +100,8 @@ fun ProfileImagesScreen(
         }
 
         AddImageToStorage(addImageToDatabase = {
-            viewModel.addImageToFirestoreDatabase(it, User())
+            //viewModel.addImageToFirestoreDatabase(it, User())
+//            viewModel.uploadProfileImage(it)
         })
 
     }

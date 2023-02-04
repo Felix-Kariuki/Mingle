@@ -9,8 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -70,15 +69,17 @@ fun RegisterScreen(
                     value = uiState.firstName,
                     icon = Icons.Default.Person,
                     onNewValue = viewModel::onFirstNameChange,
-                    Modifier.fieldModifier()
+                    Modifier.fieldModifier(),
+                    text = AppText.your_name
                 )
 
                 BasicText(text = AppText.phone_number)
-                EmailField(
+                PhoneField(
                     value = uiState.phoneNumber,
                     icon = Icons.Default.Person,
                     onNewValue = viewModel::onPhoneNumberChange,
-                    Modifier.fieldModifier()
+                    Modifier.fieldModifier(),
+                    text = AppText.phone_number
                 )
 
                 BasicText(text = AppText.email)

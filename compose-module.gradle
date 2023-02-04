@@ -18,6 +18,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-auth-ktx")
     implementation ("com.google.firebase:firebase-firestore-ktx")
     implementation ("com.google.firebase:firebase-storage-ktx")
+    implementation ("com.google.firebase:firebase-database-ktx")
 
     //timber
     implementation ("com.jakewharton.timber:timber:5.0.1")

@@ -1,7 +1,6 @@
 package com.flexcode.wedatecompose
 
 import com.flexcode.wedate.auth.data.models.User
-import com.flexcode.wedate.auth.domain.repository.StoreRegistrationRepository
 import com.google.common.truth.Truth.assertThat
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.testing.HiltAndroidRule

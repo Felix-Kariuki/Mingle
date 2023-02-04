@@ -17,4 +17,8 @@ object SnackBarManager {
     fun showMessage(message: SnackbarMessage){
         messages.value = message
     }
+
+    fun showError(error:String){
+        messages.value = SnackbarMessage.StringSnackbar(error)
+    }
 }

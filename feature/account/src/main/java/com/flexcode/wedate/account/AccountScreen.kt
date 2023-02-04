@@ -31,10 +31,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.flexcode.wedate.auth.domain.repository.AuthRepository
 import com.flexcode.wedate.common.R
-import com.flexcode.wedate.common.composables.AppTitleText
-import com.flexcode.wedate.common.composables.BasicButton
-import com.flexcode.wedate.common.composables.BasicText
-import com.flexcode.wedate.common.composables.ExtraScreenText
+import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
@@ -49,13 +46,9 @@ fun AccountScreen(
     viewModel: AccountScreenViewModel = hiltViewModel(),
 ) {
 
-    val user by viewModel.user
+    val state by viewModel.state
 
-    val userId = viewModel.getUserId()
-
-    LaunchedEffect(Unit) { viewModel.getUserDetails(userId) }
-
-    Timber.d("DETAILS::${user.firstName}")
+    LaunchedEffect(Unit) { viewModel.getUserDetails() }
 
     val gradient = Brush.verticalGradient(
         listOf(lightPurple, Color.White),
@@ -92,10 +85,11 @@ fun AccountScreen(
             }
 
             ProfileImage()
-            ExtraScreenText(
-                text = AppText.dummy_text,
+            ResultText(
+                text = "${state.userDetails?.firstName},${state.userDetails?.years}",
                 textAlign = TextAlign.Center, fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.background
+                color = MaterialTheme.colors.background,
+                fontSize = 20.sp
             )
 
             Row(
@@ -104,8 +98,14 @@ fun AccountScreen(
                 horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
 
-                UserInfoItemComposable(text = AppText.single, icon = AppIcon.ic_favourite_border)
-                UserInfoItemComposable(text = AppText.male, icon = AppIcon.ic_male)
+                UserInfoItemComposable(
+                    text = state.userDetails?.datingStatus.toString(),
+                    icon = AppIcon.ic_favourite_border
+                )
+                UserInfoItemComposable(
+                    text = state.userDetails?.gender.toString(),
+                    icon = AppIcon.ic_male
+                )
 
             }
 
@@ -139,6 +139,7 @@ fun AccountScreen(
         }
     }
 }
+
 @Composable
 fun SubscriptionsCard(
     text: Int,
@@ -173,7 +174,7 @@ fun SubscriptionsCard(
 @Composable
 fun UserInfoItemComposable(
     modifier: Modifier = Modifier,
-    text: Int,
+    text: String,
     icon: Int
 ) {
     Column(
@@ -187,10 +188,10 @@ fun UserInfoItemComposable(
             Image(
                 modifier = modifier.size(40.dp),
                 painter = painterResource(id = icon),
-                contentDescription = stringResource(id = text)
+                contentDescription = text
             )
         }
-        BasicText(text = text, textAlign = TextAlign.Center)
+        ResultText(text = text, textAlign = TextAlign.Center)
     }
 }
 

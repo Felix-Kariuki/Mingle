@@ -1,4 +1,4 @@
-package com.flexcode.wedatecompose.di
+package com.flexcode.wedate.lovecalculator.di
 
 import com.flexcode.wedate.lovecalculator.data.remote.CalculatorApiService
 import com.flexcode.wedate.lovecalculator.domain.repository.CalculatorRepository

@@ -1,7 +1,5 @@
 package com.flexcode.wedatecompose.di
 
-import com.flexcode.wedate.auth.data.repository.ProfileImageRepositoryImpl
-import com.flexcode.wedate.auth.domain.repository.ProfileImageRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore

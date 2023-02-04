@@ -47,26 +47,56 @@ fun BasicField(
 }
 
 @Composable
-fun EmailField(
+fun PhoneField(
     value: String,
     icon: ImageVector,
     onNewValue: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    text: Int = AppText.email
 ) {
     OutlinedTextField(
         singleLine = true,
         modifier = modifier,
         value = value,
         onValueChange = { onNewValue(it) },
-        placeholder = { Text(stringResource(AppText.email)) },
+        placeholder = { Text(stringResource(text)) },
         leadingIcon = {
             Icon(
-                imageVector = icon, contentDescription = stringResource(
-                    AppText.email
-                )
+                imageVector = icon, contentDescription = stringResource(text)
             )
         },
-        shape = RoundedCornerShape(10.dp)
+        shape = RoundedCornerShape(10.dp),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Phone,
+            imeAction = ImeAction.Done
+        )
+    )
+}
+
+@Composable
+fun EmailField(
+    value: String,
+    icon: ImageVector,
+    onNewValue: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    text: Int = AppText.email
+) {
+    OutlinedTextField(
+        singleLine = true,
+        modifier = modifier,
+        value = value,
+        onValueChange = { onNewValue(it) },
+        placeholder = { Text(stringResource(text)) },
+        leadingIcon = {
+            Icon(
+                imageVector = icon, contentDescription = stringResource(text)
+            )
+        },
+        shape = RoundedCornerShape(10.dp),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Email,
+            imeAction = ImeAction.Done
+        )
     )
 }
 

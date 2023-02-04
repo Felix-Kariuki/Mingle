@@ -66,13 +66,15 @@ fun LoginScreen(
                 EmailField(
                     value = uiState.email,
                     icon = Icons.Default.Email,
-                    onNewValue = viewModel::onEmailChange,
+                    onNewValue = viewModel::onEmailChange
+                                 ,
                     Modifier.fieldModifier()
                 )
 
                 BasicText(text = AppText.password)
                 PasswordField(
-                    value = uiState.password, onNewValue = viewModel::onPasswordChange,
+                    value = uiState.password, onNewValue = viewModel::onPasswordChange
+                    ,
                     Modifier.fieldModifier()
                 )
 
@@ -83,7 +85,7 @@ fun LoginScreen(
                 ) {
                     viewModel.onForgotPasswordClick()
                 }
-                
+
                 BasicButton(
                     text = AppText.login,
                     modifier = modifier
@@ -91,8 +93,11 @@ fun LoginScreen(
                         .height(50.dp)
                         .clip(RoundedCornerShape(10.dp))
                 ) {
-                    viewModel.onLoginClick(openAndPopUp)
+                    viewModel.login(uiState.email, uiState.password,openAndPopUp)
                 }
+            }
+            if (uiState.isLoading){
+                LoadingAnimation()
             }
 
             BasicTextButton(
@@ -104,7 +109,7 @@ fun LoginScreen(
             }
         }
 
-        LaunchedEffect(key1 = true){
+        LaunchedEffect(key1 = true) {
             viewModel.onAppStart(openAndPopUp)
         }
     }
