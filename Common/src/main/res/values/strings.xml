@@ -72,5 +72,11 @@
 
     <string name="online">Online</string>
     <string name="offline">Offline</string>
+    <string name="cancel">Cancel</string>
+    <string name="enable">Enable</string>
+    <string name="give_permission">Give Permission</string>
+    <string name="rationale_msg">To use this app\'s functionalities, you need to allow Location permission.</string>
+    <string name="turn_on_location">Turn On Location Service</string>
+    <string name="location_desc">WeDate requires an access to your location for better performance and to match you to any prospective matches around your area.\n\nApp won\'t work without location permission</string>
 
 </resources>

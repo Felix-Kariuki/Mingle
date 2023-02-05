@@ -1,6 +1,6 @@
 package com.flexcode.wedate.auth.data.models
 
-import com.google.firebase.firestore.DocumentId
+import androidx.compose.runtime.MutableState
 
 data class User(
     val id: String = "",
@@ -18,5 +18,8 @@ data class User(
     val searchingFor:String = "",
     val profileImage: ProfileImage? = null,
     val isFree: Boolean = true,
-    val datingStatus:String = "Single"
+    val datingStatus:String = "Single",
+    val locationName:String = "",
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
 )

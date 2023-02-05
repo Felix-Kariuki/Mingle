@@ -1,12 +1,11 @@
 package com.flexcode.wedate.auth.data.repository
 
-import android.net.Uri
+import androidx.compose.runtime.MutableState
 import com.flexcode.wedate.auth.data.models.ProfileImage
 import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.auth.domain.repository.AuthRepository
 import com.flexcode.wedate.common.utils.Resource
 import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
@@ -128,12 +127,31 @@ class AuthRepositoryImpl @Inject constructor(
             emit(Resource.Loading())
             try {
                 val uid = auth.uid!!
-                val currentUser =dbRef.child(USER_PATH).child(uid).get().await()
-                    .getValue(User::class.java)?: throw IllegalArgumentException()
+                val currentUser = dbRef.child(USER_PATH).child(uid).get().await()
+                    .getValue(User::class.java) ?: throw IllegalArgumentException()
                 emit(Resource.Success(currentUser))
             } catch (e: Exception) {
                 emit(Resource.Error(message = e.message.toString()))
             }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun updateUserProfileInfo(
+        longitude: MutableState<Double>,
+        latitude: MutableState<Double>,
+        locationName: String
+    ): Flow<Resource<Any>> {
+        return flow {
+            emit(Resource.Loading())
+            try {
+                val uid = auth.uid!!
+                dbRef.child(USER_PATH).child(uid).child("locationName").setValue(locationName).await()
+                emit(Resource.Success(Any()))
+            } catch (e: Exception) {
+                println(e)
+                emit(Resource.Error(message = e.message.toString()))
+            }
+
         }.flowOn(Dispatchers.IO)
     }
 
@@ -145,7 +163,7 @@ class AuthRepositoryImpl @Inject constructor(
         auth.currentUser!!.delete().await()
     }
 
-    companion object{
+    companion object {
         const val USER_PATH = "WeDateUsers"
     }
 }
