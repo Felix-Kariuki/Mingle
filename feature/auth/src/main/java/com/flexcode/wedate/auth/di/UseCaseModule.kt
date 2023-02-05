@@ -1,10 +1,7 @@
 package com.flexcode.wedate.auth.di
 
 import com.flexcode.wedate.auth.domain.repository.AuthRepository
-import com.flexcode.wedate.auth.domain.usecase.GetUserDetailsUseCase
-import com.flexcode.wedate.auth.domain.usecase.LoginUseCase
-import com.flexcode.wedate.auth.domain.usecase.RegisterUseCase
-import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
+import com.flexcode.wedate.auth.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,7 +20,8 @@ object UseCaseModule {
         return UseCaseContainer(
             loginUseCase = LoginUseCase(repository = authRepository),
             registerUseCase = RegisterUseCase(repository = authRepository),
-            getUserDetailsUseCase = GetUserDetailsUseCase(repository = authRepository)
+            getUserDetailsUseCase = GetUserDetailsUseCase(repository = authRepository),
+            updateUserProfileInfoUseCase = UpdateUserProfileInfoUseCase(authRepository)
         )
     }
 }

@@ -89,7 +89,7 @@ fun AccountScreen(
                 text = "${state.userDetails?.firstName},${state.userDetails?.years}",
                 textAlign = TextAlign.Center, fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colors.background,
-                fontSize = 20.sp
+                fontSize = 20.sp,
             )
 
             Row(

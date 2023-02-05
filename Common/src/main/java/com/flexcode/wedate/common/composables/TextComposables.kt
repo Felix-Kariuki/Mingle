@@ -1,7 +1,9 @@
 package com.flexcode.wedate.common.composables
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -47,7 +49,7 @@ fun ResultText(
     color: Color = Color.Black,
     fontSize: TextUnit = 16.sp,
     textAlign: TextAlign = TextAlign.Start,
-    fontWeight: FontWeight = FontWeight.Normal
+    fontWeight: FontWeight = FontWeight.Normal,
 ) {
     Text(
         text = text,
@@ -55,7 +57,7 @@ fun ResultText(
         color = color,
         textAlign = textAlign,
         fontWeight = fontWeight,
-        modifier = modifier.textPadding()
+        modifier = modifier.textPadding(),
     )
 }
 
@@ -96,10 +98,10 @@ fun ScreenTitlesText(
 
 @Composable
 fun AppTitleText(
+    modifier: Modifier = Modifier,
     fontSize: TextUnit = 40.sp,
     fontWeight: FontWeight = FontWeight.ExtraBold,
     text: Int = R.string.app_name,
-    modifier: Modifier = Modifier,
 ) {
     val offset = Offset(5.0f, 10.0f)
 

@@ -31,7 +31,7 @@ class FirebaseTest {
 
     @Test
     fun test() = runTest {
-        val newId = registrationRepository.saveUserDetails(User(id="FFggtks"))
+        val newId = registrationRepository.saveUserDetails(User(id ="FFggtks"))
         val result = registrationRepository.user.first()
         assertThat(result).containsExactly(User(id = newId))
     }
