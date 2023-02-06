@@ -26,6 +26,8 @@ interface AuthRepository {
     suspend fun getCurrentUserDetails(): Flow<Resource<User>>
 
     suspend fun updateUserProfileInfo(
-        longitude: MutableState<Double>, latitude: MutableState<Double>, locationName:String
+        longitude: String, latitude: String, locationName:String
     ): Flow<Resource<Any>>
+
+    suspend fun getAllUsers(): Flow<Resource<List<User>>>
 }

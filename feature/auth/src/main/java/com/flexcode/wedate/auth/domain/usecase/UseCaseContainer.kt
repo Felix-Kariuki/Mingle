@@ -4,5 +4,6 @@ data class UseCaseContainer(
     val loginUseCase: LoginUseCase,
     val registerUseCase: RegisterUseCase,
     val getUserDetailsUseCase: GetUserDetailsUseCase,
-    val updateUserProfileInfoUseCase: UpdateUserProfileInfoUseCase
+    val updateUserProfileInfoUseCase: UpdateUserProfileInfoUseCase,
+    val getAllUsersUseCase: GetAllUsersUseCase,
 )

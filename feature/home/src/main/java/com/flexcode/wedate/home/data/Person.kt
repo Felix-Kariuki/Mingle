@@ -37,7 +37,7 @@ val potentialMatches = mutableListOf(
     Person(
         url = "https://images.unsplash.com/photo-1539996663806-177cb1190504?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8YmVhdXRpZnVsJTIwYmxhY2slMjB3b21hbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
         description = "Musician, Photographer...",
-        name = "Dominic",
+        name = "Camile",
         age = "32",
         location = "Arusha,Tz",
         isOnline = true

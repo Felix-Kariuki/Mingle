@@ -108,7 +108,7 @@ class AuthRepositoryImpl @Inject constructor(
                     gender = gender,
                     interestedIn = interestedIn,
                     searchingFor = searchingFor,
-                    isFree = false,
+                    isFree = true,
                     datingStatus = "Single"
                 )
                 ref.child(uid).setValue(user).await()
@@ -137,8 +137,8 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateUserProfileInfo(
-        longitude: MutableState<Double>,
-        latitude: MutableState<Double>,
+        longitude: String,
+        latitude: String,
         locationName: String
     ): Flow<Resource<Any>> {
         return flow {
@@ -146,12 +146,32 @@ class AuthRepositoryImpl @Inject constructor(
             try {
                 val uid = auth.uid!!
                 dbRef.child(USER_PATH).child(uid).child("locationName").setValue(locationName).await()
+                dbRef.child(USER_PATH).child(uid).child("longitude").setValue(longitude).await()
+                dbRef.child(USER_PATH).child(uid).child("latitude").setValue(latitude).await()
                 emit(Resource.Success(Any()))
             } catch (e: Exception) {
                 println(e)
                 emit(Resource.Error(message = e.message.toString()))
             }
 
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getAllUsers(): Flow<Resource<List<User>>> {
+        return flow<Resource<List<User>>> {
+            emit(Resource.Loading())
+            try {
+                val allUserProfiles = ArrayList<User>()
+                val allUsers = dbRef.child(USER_PATH).get().await()
+
+                for (i in allUsers.children){
+                    val result = i.getValue(User::class.java)
+                    allUserProfiles.add(result!!)
+                }
+                emit(Resource.Success(allUserProfiles))
+            } catch (e: Exception) {
+                emit(Resource.Error(message = e.message.toString()))
+            }
         }.flowOn(Dispatchers.IO)
     }
 

@@ -9,8 +9,8 @@ class UpdateUserProfileInfoUseCase constructor(
     private val repository: AuthRepository
 ) {
     suspend operator fun invoke(
-        latitude: MutableState<Double>,
-        longitude: MutableState<Double>,
+        latitude: String,
+        longitude: String,
         locationName: String
     ): Flow<Resource<Any>> {
         return repository.updateUserProfileInfo(
