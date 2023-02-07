@@ -1,7 +1,5 @@
 package com.flexcode.wedate.auth.data.models
 
-import androidx.compose.runtime.MutableState
-
 data class User(
     val id: String = "",
     val isAnonymous: Boolean = true,
@@ -20,6 +18,8 @@ data class User(
     val isFree: Boolean = true,
     val datingStatus:String = "Single",
     val locationName:String = "",
-    val latitude: Double = 0.0,
-    val longitude: Double = 0.0,
+    val latitude: String = "0.0",
+    val longitude: String = "0.0",
+    val isOnline: Boolean = false,
+    val likedBy: HashMap<String,Any>? = null
 )

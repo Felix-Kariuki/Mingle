@@ -19,25 +19,29 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.AsyncImage
+import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.ext.moveTo
 import com.flexcode.wedate.common.ext.visible
+import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.onlineGreen
-import com.flexcode.wedate.home.data.Person
+import com.flexcode.wedate.home.presentation.HomeViewModel
+import timber.log.Timber
 import com.flexcode.wedate.common.R.string as AppText
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PersonsCardStack(
     modifier: Modifier = Modifier,
-    items: MutableList<Person>,
+    items: List<User>,
     thresholdConfig: (Float, Float) -> ThresholdConfig = { _, _ -> FractionalThreshold(0.2f) },
     velocityThreshold: Dp = 125.dp,
-    onSwipeLeft: (person: Person) -> Unit = {},
-    onSwipeRight: (person: Person) -> Unit = {},
-    onEmptyStack: (lastItem: Person) -> Unit = {}
+    onSwipeLeft: (person: User) -> Unit = {},
+    onSwipeRight: (person: User) -> Unit = {},
+    onEmptyStack: (lastItem: User) -> Unit = {},
+    viewModel: HomeViewModel
 ) {
 
     var i by remember {
@@ -48,13 +52,24 @@ fun PersonsCardStack(
         onEmptyStack(items.last())
     }
 
+
     val cardStackController = rememberCardStackController()
 
     cardStackController.onSwipeLeft = {
+        Timber.i("SWIPEDLEFT:: ${items.asReversed()[i].firstName}")
+        //save dislike
         onSwipeLeft(items[i])
         i--
     }
     cardStackController.onSwipeRight = {
+        //savelike
+        if (items.asReversed()[i].likedBy != null) {
+            if (!items.asReversed()[i].likedBy?.contains(viewModel.getUid())!!) {
+                viewModel.saveLikeToCrush(items.asReversed()[i].id)
+            }
+        } else if (items.asReversed()[i].likedBy == null) {
+            viewModel.saveLikeToCrush(items.asReversed()[i].id)
+        }
         onSwipeRight(items[i])
         i--
     }
@@ -110,23 +125,31 @@ fun PersonsCardStack(
 @Composable
 fun PersonCard(
     modifier: Modifier = Modifier,
-    person: Person,
+    person: User,
     cardStackController: CardStackController
 ) {
     Box(modifier = modifier) {
-        if (person.url != null) {
+        /*if (person.url != null) {
             AsyncImage(
-                model = person.url,
-                contentDescription = person.name,
+                model ="https://images.unsplash.com/photo-1623039497055-e79fcaebd4ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+                contentDescription = person.firstName,
                 contentScale = ContentScale.Crop,
                 modifier = modifier.fillMaxSize()
             )
-        }
+        }*/
+        AsyncImage(
+            model = "https://images.unsplash.com/photo-1621784563286-84f7646ef221?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGxhZHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+            contentDescription = person.firstName,
+            contentScale = ContentScale.Crop,
+            modifier = modifier.fillMaxSize()
+        )
 
-        Row(modifier = modifier
-            .wrapContentWidth()
-            .padding(10.dp),
-        horizontalArrangement = Arrangement.Start) {
+        Row(
+            modifier = modifier
+                .wrapContentWidth()
+                .padding(10.dp),
+            horizontalArrangement = Arrangement.Start
+        ) {
             StatusItem(
                 status = if (person.isOnline) AppText.offline else AppText.online,
                 backgroundColor = if (person.isOnline) deepBrown else onlineGreen
@@ -139,7 +162,7 @@ fun PersonCard(
                 .padding(10.dp)
         ) {
             ResultText(
-                text = "${person.name},${person.age}",
+                text = "${person.firstName},${person.years}",
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 25.sp,
@@ -147,7 +170,7 @@ fun PersonCard(
             )
 
             ResultText(
-                text = person.location,
+                text = person.locationName,
                 color = Color.White,
                 fontSize = 20.sp,
                 modifier = modifier.offset(x = ((-16).dp), y = 16.dp)
@@ -198,7 +221,7 @@ fun StatusItem(
         modifier = modifier
             .width(100.dp)
             .height(35.dp),
-        shape =  RoundedCornerShape(50.dp),
+        shape = RoundedCornerShape(50.dp),
         elevation = 10.dp,
         backgroundColor = backgroundColor
     ) {

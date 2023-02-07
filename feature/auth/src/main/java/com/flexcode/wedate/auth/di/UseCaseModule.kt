@@ -21,7 +21,6 @@ object UseCaseModule {
             loginUseCase = LoginUseCase(repository = authRepository),
             registerUseCase = RegisterUseCase(repository = authRepository),
             getUserDetailsUseCase = GetUserDetailsUseCase(repository = authRepository),
-            updateUserProfileInfoUseCase = UpdateUserProfileInfoUseCase(authRepository)
         )
     }
 }

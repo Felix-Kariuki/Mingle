@@ -1,6 +1,5 @@
 package com.flexcode.wedate.auth.domain.repository
 
-import androidx.compose.runtime.MutableState
 import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.utils.Resource
 import com.google.firebase.auth.AuthResult
@@ -25,7 +24,4 @@ interface AuthRepository {
 
     suspend fun getCurrentUserDetails(): Flow<Resource<User>>
 
-    suspend fun updateUserProfileInfo(
-        longitude: MutableState<Double>, latitude: MutableState<Double>, locationName:String
-    ): Flow<Resource<Any>>
 }

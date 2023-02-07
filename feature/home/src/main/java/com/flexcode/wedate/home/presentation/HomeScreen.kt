@@ -5,10 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -16,7 +13,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.home.PersonsCardStack
-import com.flexcode.wedate.home.data.potentialMatches
 import com.flexcode.wedate.home.location.GetCurrentLocation
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
@@ -29,8 +25,9 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
+
+    val state by viewModel.state
     val context = LocalContext.current
-    val isEmpty = remember { mutableStateOf(false) }
     val permissionState = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
     val fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(context)
@@ -45,20 +42,41 @@ fun HomeScreen(
         permissionState, context, fusedLocationClient, longitude, latitude, viewModel
     )
 
-
     Column(
         modifier = modifier
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        if (!isEmpty.value) {
-            PersonsCardStack(
-                items = potentialMatches,
-                onEmptyStack = {
-                    isEmpty.value = true
-                }
-            )
+        if (!state.isEmpty) {
+            if (state.interestedIn == "Everyone") {
+                PersonsCardStack(
+                    items = state.potentialMatches.filter { user ->
+                        user.id != viewModel.getUid()
+                    },
+                    onEmptyStack = {
+                        state.isEmpty = false
+                    },
+                    viewModel = viewModel
+                )
+            } else {
+                /*for (i in state.potentialMatches){
+                    i.likedBy?.forEach { n ->
+                        Timber.i("LIKED:: BY ${n.key}")
+                    }
+
+                }*/
+                PersonsCardStack(
+                    items = state.potentialMatches.filter { user ->
+                        user.id != viewModel.getUid() && user.gender == state.interestedIn
+                    },
+                    onEmptyStack = {
+                        state.isEmpty = false
+                    },
+                    viewModel = viewModel,
+                )
+
+            }
         } else {
             ResultText(
                 text = "No more People Within your range adjust settings..",

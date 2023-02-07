@@ -1,16 +1,15 @@
-package com.flexcode.wedate.auth.domain.usecase
+package com.flexcode.wedate.home.domain.use_cases
 
-import androidx.compose.runtime.MutableState
-import com.flexcode.wedate.auth.domain.repository.AuthRepository
 import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedate.home.domain.repository.HomeRepository
 import kotlinx.coroutines.flow.Flow
 
 class UpdateUserProfileInfoUseCase constructor(
-    private val repository: AuthRepository
+    private val repository: HomeRepository
 ) {
     suspend operator fun invoke(
-        latitude: MutableState<Double>,
-        longitude: MutableState<Double>,
+        latitude: String,
+        longitude: String,
         locationName: String
     ): Flow<Resource<Any>> {
         return repository.updateUserProfileInfo(
