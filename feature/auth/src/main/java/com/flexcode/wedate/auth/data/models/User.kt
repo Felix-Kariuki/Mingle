@@ -20,5 +20,6 @@ data class User(
     val locationName:String = "",
     val latitude: String = "0.0",
     val longitude: String = "0.0",
-    val isOnline: Boolean = false
+    val isOnline: Boolean = false,
+    val likedBy: HashMap<String,Any>? = null
 )

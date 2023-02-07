@@ -1,6 +1,5 @@
 package com.flexcode.wedate.auth.data.repository
 
-import androidx.compose.runtime.MutableState
 import com.flexcode.wedate.auth.data.models.ProfileImage
 import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.auth.domain.repository.AuthRepository
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 import java.lang.IllegalArgumentException
+import java.util.UUID
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -136,45 +136,6 @@ class AuthRepositoryImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun updateUserProfileInfo(
-        longitude: String,
-        latitude: String,
-        locationName: String
-    ): Flow<Resource<Any>> {
-        return flow {
-            emit(Resource.Loading())
-            try {
-                val uid = auth.uid!!
-                dbRef.child(USER_PATH).child(uid).child("locationName").setValue(locationName).await()
-                dbRef.child(USER_PATH).child(uid).child("longitude").setValue(longitude).await()
-                dbRef.child(USER_PATH).child(uid).child("latitude").setValue(latitude).await()
-                emit(Resource.Success(Any()))
-            } catch (e: Exception) {
-                println(e)
-                emit(Resource.Error(message = e.message.toString()))
-            }
-
-        }.flowOn(Dispatchers.IO)
-    }
-
-    override suspend fun getAllUsers(): Flow<Resource<List<User>>> {
-        return flow<Resource<List<User>>> {
-            emit(Resource.Loading())
-            try {
-                val allUserProfiles = ArrayList<User>()
-                val allUsers = dbRef.child(USER_PATH).get().await()
-
-                for (i in allUsers.children){
-                    val result = i.getValue(User::class.java)
-                    allUserProfiles.add(result!!)
-                }
-                emit(Resource.Success(allUserProfiles))
-            } catch (e: Exception) {
-                emit(Resource.Error(message = e.message.toString()))
-            }
-        }.flowOn(Dispatchers.IO)
-    }
-
     override suspend fun sendRecoveryEmail(email: String) {
         auth.sendPasswordResetEmail(email).await()
     }
@@ -185,5 +146,6 @@ class AuthRepositoryImpl @Inject constructor(
 
     companion object {
         const val USER_PATH = "WeDateUsers"
+        const val LIKES = "Likes"
     }
 }

@@ -13,14 +13,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.home.PersonsCardStack
-import com.flexcode.wedate.home.data.potentialMatches
 import com.flexcode.wedate.home.location.GetCurrentLocation
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalPermissionsApi::class)
 @Composable
@@ -28,9 +25,9 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
+
     val state by viewModel.state
     val context = LocalContext.current
-    val isEmpty = remember { mutableStateOf(true) }
     val permissionState = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
     val fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(context)
@@ -52,12 +49,34 @@ fun HomeScreen(
         verticalArrangement = Arrangement.Center
     ) {
         if (!state.isEmpty) {
-            PersonsCardStack(
-                items = state.potentialMatches,
-                onEmptyStack = {
-                    state.isEmpty = false
-                }
-            )
+            if (state.interestedIn == "Everyone") {
+                PersonsCardStack(
+                    items = state.potentialMatches.filter { user ->
+                        user.id != viewModel.getUid()
+                    },
+                    onEmptyStack = {
+                        state.isEmpty = false
+                    },
+                    viewModel = viewModel
+                )
+            } else {
+                /*for (i in state.potentialMatches){
+                    i.likedBy?.forEach { n ->
+                        Timber.i("LIKED:: BY ${n.key}")
+                    }
+
+                }*/
+                PersonsCardStack(
+                    items = state.potentialMatches.filter { user ->
+                        user.id != viewModel.getUid() && user.gender == state.interestedIn
+                    },
+                    onEmptyStack = {
+                        state.isEmpty = false
+                    },
+                    viewModel = viewModel,
+                )
+
+            }
         } else {
             ResultText(
                 text = "No more People Within your range adjust settings..",

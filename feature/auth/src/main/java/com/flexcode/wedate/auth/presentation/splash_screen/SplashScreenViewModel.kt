@@ -21,7 +21,7 @@ class SplashScreenViewModel @Inject constructor(
     fun onAppStart(openAndPopUp: (String,String) -> Unit){
         showError.value = false
         if (authRepository.hasUser) openAndPopUp(LOGIN_SCREEN, SPLASH_SCREEN)
-        else createAnonymousAccount(openAndPopUp)//openAndPopUp(LOGIN_SCREEN, SPLASH_SCREEN)//createAnonymousAccount(openAndPopUp)
+        else openAndPopUp(LOGIN_SCREEN, SPLASH_SCREEN)//openAndPopUp(LOGIN_SCREEN, SPLASH_SCREEN)//createAnonymousAccount(openAndPopUp)
     }
 
     private fun createAnonymousAccount(openAndPopUp: (String, String) -> Unit) {

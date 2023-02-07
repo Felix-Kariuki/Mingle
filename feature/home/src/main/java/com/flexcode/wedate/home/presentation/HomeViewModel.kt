@@ -12,6 +12,8 @@ import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedate.home.domain.use_cases.HomeUseCases
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -21,7 +23,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     logService: LogService,
-    private val useCaseContainer: UseCaseContainer
+    private val useCaseContainer: UseCaseContainer,
+    private val homeUseCases: HomeUseCases,
+    private val auth: FirebaseAuth,
 ) : BaseViewModel(logService) {
 
 
@@ -33,10 +37,15 @@ class HomeViewModel @Inject constructor(
         /** TODO
          * 1st no retrieving if location not allowed.
          * 2nd confirm user logged in
-         * validate that you show only interests
+         * validate that you show only interests --- done
+         *
+         * validate that user cannot be shown people he/she has liked previously
+         * delete liked by if the like has stayed for over a week... extend the time exponentially as userbase increases.
          *
          */
         getAllUsers()
+        getUserFilters()
+        //getLikedBy()
     }
 
     fun getLocationName(
@@ -44,14 +53,13 @@ class HomeViewModel @Inject constructor(
         latitude: MutableState<Double>,
         longitude: MutableState<Double>
     ): String {
-
         val geocoder = Geocoder(context, Locale.getDefault())
         val addresses = geocoder.getFromLocation(latitude.value, longitude.value, 1)
         var locationName = ""
         if (addresses != null && addresses.size > 0) {
             val address: Address = addresses[0]
             locationName = address.locality
-            if (locationName!=""){
+            if (locationName != "") {
                 updateUserLocation(
                     locationName,
                     latitude = latitude.value.toString(),
@@ -60,26 +68,20 @@ class HomeViewModel @Inject constructor(
             }
         }
         return locationName
-
     }
 
-    //update user profile.. pass lat long and location name
     private fun updateUserLocation(
         locationName: String, latitude: String, longitude: String
     ) {
         viewModelScope.launch {
-            useCaseContainer.updateUserProfileInfoUseCase.invoke(
+            homeUseCases.updateUserProfileInfoUseCase.invoke(
                 latitude = latitude,
                 longitude = longitude,
                 locationName = locationName
             ).collect { result ->
                 when (result) {
-                    is Resource.Success -> {
-
-                    }
-                    is Resource.Loading -> {
-
-                    }
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
                     is Resource.Error -> {
                         Timber.i("${result.message}")
                         SnackBarManager.showError("${result.message}")
@@ -88,27 +90,90 @@ class HomeViewModel @Inject constructor(
 
             }
         }
-
     }
 
-    fun getAllUsers(){
+    private fun getAllUsers() {
         viewModelScope.launch {
-            useCaseContainer.getAllUsersUseCase.invoke().collect{result ->
-                when(result){
+            homeUseCases.getAllUsersUseCase.invoke().collect { result ->
+                when (result) {
                     is Resource.Success -> {
-                        state.value = state.value.copy(potentialMatches = result.data as MutableList<User>)
+                        state.value =
+                            state.value.copy(potentialMatches = result.data as MutableList<User>)
                         state.value = state.value.copy(isEmpty = false)
-                        Timber.i("USERS:: ${result.data}")
+                        Timber.d("USERS ERROR::: ${result.data}")
+
                     }
-                    is Resource.Loading -> {
-                        Timber.i("Loading")
-                    }
+                    is Resource.Loading -> {}
                     is Resource.Error -> {
-                        Timber.e("ERROR :: ${result.message}")
+                        Timber.e("USERS ERROR::: ${result.message}")
                         SnackBarManager.showError("${result.message}")
                     }
                 }
             }
         }
     }
+
+    fun getUid(): String {
+        return auth.uid!!
+    }
+
+    private fun getUserFilters() {
+        viewModelScope.launch {
+            useCaseContainer.getUserDetailsUseCase.invoke().collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        when (result.data?.interestedIn) {
+                            "Men" -> {
+                                state.value = state.value.copy(interestedIn = "Male")
+                            }
+                            "Women" -> {
+                                state.value = state.value.copy(interestedIn = "Female")
+                            }
+                            else -> {
+                                state.value = state.value.copy(interestedIn = "Everyone")
+                            }
+                        }
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("INTERESTS IN ERROR::: ${result.message}")
+                    }
+                }
+
+            }
+        }
+    }
+
+    fun saveLikeToCrush(crushUserId: String) {
+        viewModelScope.launch {
+            homeUseCases.saveLikeUseCase.invoke(crushUserId).collect { result ->
+                when (result) {
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("SAVE CRUSH ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    /*fun getLikedBy(){
+        viewModelScope.launch {
+            useCaseContainer.getLikedByUseCase.invoke().collect{result->
+                when (result) {
+                    is Resource.Success -> {
+                        Timber.i("SUCCESS LIKES:: ${result.data}")
+                        //state.value  = state.value.copy(likedBy = result.data as MutableList<Likes>)
+
+                        Timber.i("SUCCESS LIKES:: ${(result.data)?.first()}")
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("GET LIKED BY ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }*/
 }

@@ -1,4 +1,4 @@
-package com.flexcode.wedate.home.data
+package com.flexcode.wedate.home.data.model
 
 data class Person(
     val url: String? = null,
