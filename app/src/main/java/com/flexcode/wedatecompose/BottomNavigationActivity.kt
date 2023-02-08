@@ -12,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.flexcode.wedate.account.AccountScreen
-import com.flexcode.wedate.admirers.AdmirersScreen
+import com.flexcode.wedate.admirers.presentation.AdmirersScreen
 import com.flexcode.wedate.common.navigation.ACCOUNT_SCREEN
 import com.flexcode.wedate.common.navigation.BottomNavItem
 import com.flexcode.wedate.common.navigation.LOVE_CALCULATOR_SCREEN

@@ -22,7 +22,10 @@ class AccountScreenViewModel @Inject constructor(
     var state = mutableStateOf(AccountState())
         private set
 
-    suspend fun getUserDetails() {
+    init {
+        getUserDetails()
+    }
+    private fun getUserDetails() {
 
         viewModelScope.launch {
             useCaseContainer.getUserDetailsUseCase().collect{result->

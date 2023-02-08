@@ -7,7 +7,10 @@ import kotlinx.coroutines.flow.Flow
 class SaveLikeUseCase constructor(
     private val repository: HomeRepository
 ) {
-    suspend operator fun invoke(crushUserId: String): Flow<Resource<Any>> {
-        return repository.saveLike(crushUserId)
+    suspend operator fun invoke(
+        crushUserId: String, firstName: String, locationName: String, years: String,
+        lat: String, long: String, profileImage: String
+    ): Flow<Resource<Any>> {
+        return repository.saveLike(crushUserId, firstName, locationName,years,lat, long, profileImage)
     }
 }

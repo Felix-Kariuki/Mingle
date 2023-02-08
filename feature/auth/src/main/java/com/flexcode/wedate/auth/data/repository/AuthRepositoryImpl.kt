@@ -94,6 +94,8 @@ class AuthRepositoryImpl @Inject constructor(
                 val result = auth.createUserWithEmailAndPassword(email, password).await()
                 //auth.currentUser?.sendEmailVerification()?.await()
                 val uid = result.user?.uid
+                val initialLike  = HashMap<String,Any>()
+                initialLike["idhsscsziiickkdi4"] = "nolikeyet"
                 val user = User(
                     id = uid!!,
                     isAnonymous = false,
@@ -109,7 +111,8 @@ class AuthRepositoryImpl @Inject constructor(
                     interestedIn = interestedIn,
                     searchingFor = searchingFor,
                     isFree = true,
-                    datingStatus = "Single"
+                    datingStatus = "Single",
+                    likedBy = initialLike
                 )
                 ref.child(uid).setValue(user).await()
                 val profileImage = ProfileImage()
@@ -146,6 +149,5 @@ class AuthRepositoryImpl @Inject constructor(
 
     companion object {
         const val USER_PATH = "WeDateUsers"
-        const val LIKES = "Likes"
     }
 }

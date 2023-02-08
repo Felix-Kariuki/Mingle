@@ -8,7 +8,6 @@ plugins {
     id ("com.google.firebase.crashlytics")
     id ("com.google.firebase.firebase-perf")
     id ("dagger.hilt.android.plugin")
-    id ("com.ncorti.ktfmt.gradle") version "0.10.0"
 }
 
 android {
@@ -143,8 +142,4 @@ dependencies {
 }
 kapt {
     correctErrorTypes = true
-}
-
-ktfmt {
-    googleStyle()
 }

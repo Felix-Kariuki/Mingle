@@ -1,4 +1,4 @@
-package com.flexcode.wedate.matches.data
+package com.flexcode.wedate.matches.data.model
 
 data class Chat(
     val name:String,

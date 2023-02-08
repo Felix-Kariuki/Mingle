@@ -14,11 +14,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.R
+import com.flexcode.wedate.matches.data.model.Matches
 
 @Composable
 fun MatchesItem(
-    image: String,
-    name: String
+    match:Matches,
 ) {
     Card(
         elevation = 5.dp,
@@ -27,11 +27,11 @@ fun MatchesItem(
         ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data(image)
+                .data("https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1021&q=80")
                 .crossfade(true)
                 .build(),
             placeholder = painterResource(R.drawable.sharon),
-            contentDescription = "match with $name",
+            contentDescription = "match with ${match.firstName}",
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .width(110.dp)

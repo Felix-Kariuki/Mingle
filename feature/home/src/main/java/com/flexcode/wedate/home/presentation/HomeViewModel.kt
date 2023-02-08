@@ -43,6 +43,7 @@ class HomeViewModel @Inject constructor(
          * delete liked by if the like has stayed for over a week... extend the time exponentially as userbase increases.
          *
          */
+        getUserFilters()
         getAllUsers()
         getUserFilters()
         //getLikedBy()
@@ -100,7 +101,6 @@ class HomeViewModel @Inject constructor(
                         state.value =
                             state.value.copy(potentialMatches = result.data as MutableList<User>)
                         state.value = state.value.copy(isEmpty = false)
-                        Timber.d("USERS ERROR::: ${result.data}")
 
                     }
                     is Resource.Loading -> {}
@@ -122,6 +122,7 @@ class HomeViewModel @Inject constructor(
             useCaseContainer.getUserDetailsUseCase.invoke().collect { result ->
                 when (result) {
                     is Resource.Success -> {
+                        state.value = state.value.copy(userDetails = result.data)
                         when (result.data?.interestedIn) {
                             "Men" -> {
                                 state.value = state.value.copy(interestedIn = "Male")
@@ -144,14 +145,54 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun saveLikeToCrush(crushUserId: String) {
+    fun saveLikeToCrush(
+        crushUserId: String, firstName: String, locationName: String, years: String,
+        lat: String, long: String, profileImage: String
+    ) {
         viewModelScope.launch {
-            homeUseCases.saveLikeUseCase.invoke(crushUserId).collect { result ->
+            homeUseCases.saveLikeUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
+                profileImage).collect { result ->
                 when (result) {
                     is Resource.Success -> {}
                     is Resource.Loading -> {}
                     is Resource.Error -> {
                         Timber.e("SAVE CRUSH ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    fun saveMatchToCrush(
+        crushUserId: String, firstName: String, locationName: String, years: String,
+        lat: String, long: String, profileImage: String
+    ){
+        viewModelScope.launch {
+            homeUseCases.saveMatchUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
+                profileImage).collect { result ->
+                when (result) {
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("SAVE MATCH ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    fun saveMatchToCurrentUser(
+        crushUserId: String, firstName: String, locationName: String, years: String,
+        lat: String, long: String, profileImage: String
+    ){
+        viewModelScope.launch {
+            homeUseCases.saveMatchToCurrentUserUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
+                profileImage).collect { result ->
+                when (result) {
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("SAVE MATCH ERROR::: ${result.message}")
                     }
                 }
             }

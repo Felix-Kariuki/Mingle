@@ -10,7 +10,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -29,13 +28,14 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import com.flexcode.wedate.auth.domain.repository.AuthRepository
 import com.flexcode.wedate.common.R
-import com.flexcode.wedate.common.composables.*
+import com.flexcode.wedate.common.composables.AppTitleText
+import com.flexcode.wedate.common.composables.BasicButton
+import com.flexcode.wedate.common.composables.BasicText
+import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
-import timber.log.Timber
 import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.R.string as AppText
 
@@ -47,8 +47,6 @@ fun AccountScreen(
 ) {
 
     val state by viewModel.state
-
-    LaunchedEffect(Unit) { viewModel.getUserDetails() }
 
     val gradient = Brush.verticalGradient(
         listOf(lightPurple, Color.White),

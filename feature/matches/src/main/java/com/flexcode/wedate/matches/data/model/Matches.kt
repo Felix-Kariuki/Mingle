@@ -1,6 +1,6 @@
-package com.flexcode.wedate.home.data.model
+package com.flexcode.wedate.matches.data.model
 
-data class Likes(
+data class Matches(
     val id: String = "",
     val date:Long? = null,
     val firstName:String = "",
