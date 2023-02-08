@@ -79,4 +79,20 @@
     <string name="turn_on_location">Turn On Location Service</string>
     <string name="location_desc">WeDate requires an access to your location for better performance and to match you to any prospective matches around your area.\n\nApp won\'t work without location permission</string>
 
+    <string name="log_out">Log Out</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="account">Account</string>
+    <string name="support">Support</string>
+    <string name="more">More</string>
+    <string name="name">Name</string>
+    <string name="birthday">Birthday</string>
+    <string name="location">Location</string>
+    <string name="help">Help</string>
+    <string name="ask_a_quiz">As a Question</string>
+    <string name="raise_a_concern">Raise a Concern</string>
+    <string name="contact_us">Contact us</string>
+    <string name="request_a_feature">Request a feature</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="term_of_service">Terms of service</string>
+
 </resources>

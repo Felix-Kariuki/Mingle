@@ -52,7 +52,7 @@ fun AdmirerItem(
             ) {
                 ResultText(
                     text = "${like.firstName},${like.years}",
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.Medium,
                     color = Color.White
                 )

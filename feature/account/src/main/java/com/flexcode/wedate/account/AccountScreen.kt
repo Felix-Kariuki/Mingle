@@ -9,6 +9,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -29,10 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.R
-import com.flexcode.wedate.common.composables.AppTitleText
-import com.flexcode.wedate.common.composables.BasicButton
-import com.flexcode.wedate.common.composables.BasicText
-import com.flexcode.wedate.common.composables.ResultText
+import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
@@ -42,6 +41,7 @@ import com.flexcode.wedate.common.R.string as AppText
 @Composable
 fun AccountScreen(
     openScreen: () -> Unit,
+    navigateToSettings: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: AccountScreenViewModel = hiltViewModel(),
 ) {
@@ -74,10 +74,12 @@ fun AccountScreen(
                     AppTitleText(fontWeight = FontWeight.Normal, fontSize = 20.sp)
 
                 }
-                Image(
-                    modifier = Modifier.padding(10.dp),
-                    painter = painterResource(id = AppIcon.ic_settings),
-                    contentDescription = "Settings"
+                SwipeRightLeftIcon(onClick = { navigateToSettings()},
+                    icon = Icons.Default.Settings,
+                    contentDesc = "Settings",
+                    height = 30.dp,
+                    width = 30.dp,
+                    paddingValues = PaddingValues(0.dp,end=10.dp)
                 )
 
             }

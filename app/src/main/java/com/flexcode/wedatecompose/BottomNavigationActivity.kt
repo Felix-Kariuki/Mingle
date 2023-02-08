@@ -16,10 +16,12 @@ import com.flexcode.wedate.admirers.presentation.AdmirersScreen
 import com.flexcode.wedate.common.navigation.ACCOUNT_SCREEN
 import com.flexcode.wedate.common.navigation.BottomNavItem
 import com.flexcode.wedate.common.navigation.LOVE_CALCULATOR_SCREEN
+import com.flexcode.wedate.common.navigation.SETTINGS_SCREEN
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.home.presentation.HomeScreen
 import com.flexcode.wedate.lovecalculator.presentation.LoveCalculatorScreen
 import com.flexcode.wedate.matches.presentation.MatchesScreen
+import com.flexcode.wedate.settings.SettingsScreen
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
@@ -36,6 +38,9 @@ fun NavigationGraph(navController: NavHostController) {
         composable(BottomNavItem.Account.screen_route) {
             AccountScreen(openScreen = {
                 navController.navigate(route = LOVE_CALCULATOR_SCREEN)
+            },
+            navigateToSettings = {
+                navController.navigate(route = SETTINGS_SCREEN)
             })
         }
         composable(route = LOVE_CALCULATOR_SCREEN){
@@ -44,6 +49,15 @@ fun NavigationGraph(navController: NavHostController) {
                     popUpTo(ACCOUNT_SCREEN)
                 }
             })
+        }
+        composable(route= SETTINGS_SCREEN){
+            SettingsScreen(
+                openAndPopUp = {
+                    navController.navigate(route = ACCOUNT_SCREEN){
+                        popUpTo(ACCOUNT_SCREEN)
+                    }
+                }
+            )
         }
     }
 }

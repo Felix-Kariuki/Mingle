@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/lovecalculator" />
             <option value="$PROJECT_DIR$/feature/matches" />
+            <option value="$PROJECT_DIR$/feature/settings" />
           </set>
         </option>
       </GradleProjectSettings>

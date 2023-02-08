@@ -50,7 +50,7 @@ class AuthRepositoryImpl @Inject constructor(
         auth.signInAnonymously().await()
     }
 
-    override suspend fun signOut() {
+    override fun signOut() {
         if (auth.currentUser!!.isAnonymous) {
             auth.currentUser!!.delete()
         }

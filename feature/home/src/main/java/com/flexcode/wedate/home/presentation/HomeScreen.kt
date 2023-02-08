@@ -52,9 +52,9 @@ fun HomeScreen(
         if (!state.isEmpty) {
             if (state.interestedIn == "Everyone") {
                 PersonsCardStack(
-                    items = state.potentialMatches.filter { user ->
+                    items = (state.potentialMatches.filter { user ->
                         user.id != viewModel.getUid() && !user.likedBy!!.contains(viewModel.getUid())
-                    },
+                    }).shuffled(),
                     onEmptyStack = {
                         state.isEmpty = false
                     },
@@ -65,7 +65,7 @@ fun HomeScreen(
                     items = state.potentialMatches.filter { user ->
                         user.id != viewModel.getUid() && user.gender == state.interestedIn &&
                                 !user.likedBy!!.contains(viewModel.getUid())
-                    },
+                    }.shuffled(),
                     onEmptyStack = {
                         state.isEmpty = false
                     },

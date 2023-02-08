@@ -12,7 +12,7 @@ interface AuthRepository {
     val currentUser: Flow<User>
 
     suspend fun createAnonymousAccount()
-    suspend fun signOut()
+     fun signOut()
     suspend fun login(email:String, password:String): Flow<Resource<AuthResult>>
 
     suspend fun register(firstName:String, phoneNumber:String, email:String, password: String, dateOfBirth:String,
