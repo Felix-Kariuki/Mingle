@@ -8,7 +8,6 @@ plugins {
     id ("com.google.firebase.crashlytics")
     id ("com.google.firebase.firebase-perf")
     id ("dagger.hilt.android.plugin")
-    id ("com.ncorti.ktfmt.gradle") version "0.10.0"
 }
 
 android {
@@ -67,6 +66,7 @@ dependencies {
     implementation(project(":feature:admirers"))
     implementation(project(":feature:matches"))
     implementation(project(":feature:lovecalculator"))
+    implementation(project(":feature:settings"))
 
     implementation ("androidx.core:core-ktx:1.9.0")
     implementation ("androidx.appcompat:appcompat:1.5.1")
@@ -143,8 +143,4 @@ dependencies {
 }
 kapt {
     correctErrorTypes = true
-}
-
-ktfmt {
-    googleStyle()
 }

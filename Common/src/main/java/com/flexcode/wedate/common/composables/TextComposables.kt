@@ -102,6 +102,8 @@ fun AppTitleText(
     fontSize: TextUnit = 40.sp,
     fontWeight: FontWeight = FontWeight.ExtraBold,
     text: Int = R.string.app_name,
+    color: Color = lightPink,
+    textColor: Color = Color.White
 ) {
     val offset = Offset(5.0f, 10.0f)
 
@@ -110,10 +112,10 @@ fun AppTitleText(
         modifier = modifier.padding(top = 10.dp),
         fontWeight = fontWeight,
         fontSize = fontSize,
-        color = Color.White,
+        color = textColor,
         style = TextStyle(
             shadow = Shadow(
-                color = lightPink,
+                color = color,
                 offset = offset,
                 blurRadius = 3f
             )

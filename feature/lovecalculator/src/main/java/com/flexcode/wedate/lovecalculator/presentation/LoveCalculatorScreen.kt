@@ -12,6 +12,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -65,12 +66,13 @@ fun LoveCalculatorScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBackIos,
-                    contentDescription = "Back",
-                    modifier = modifier
-                        .clickable { openAndPopUp() }
-                        .size(30.dp)
+                SwipeRightLeftIcon(onClick = { openAndPopUp() },
+                    icon = Icons.Default.ArrowBackIos,
+                    contentDesc = "Back",
+                    height = 30.dp,
+                    width = 30.dp,
+                    paddingValues = PaddingValues(0.dp),
+                    tint = Color.Black
                 )
                 AppTitleText(
                     fontSize = 23.sp,

@@ -22,6 +22,7 @@ import coil.compose.AsyncImage
 import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ResultText
+import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
 import com.flexcode.wedate.common.ext.moveTo
 import com.flexcode.wedate.common.ext.visible
 import com.flexcode.wedate.common.snackbar.SnackBarManager
@@ -51,7 +52,7 @@ fun PersonsCardStack(
     if (i == -1) {
         onEmptyStack(items.last())
     }
-
+    val state by viewModel.state
 
     val cardStackController = rememberCardStackController()
 
@@ -62,13 +63,61 @@ fun PersonsCardStack(
         i--
     }
     cardStackController.onSwipeRight = {
+        val currentShowingPersonOnStackLikedByDetail = items.asReversed()[i].likedBy
+        val currentLoggedInUserId = viewModel.getUid()
         //savelike
         if (items.asReversed()[i].likedBy != null) {
             if (!items.asReversed()[i].likedBy?.contains(viewModel.getUid())!!) {
-                viewModel.saveLikeToCrush(items.asReversed()[i].id)
+                viewModel.saveLikeToCrush(
+                    crushUserId = items.asReversed()[i].id,
+                    firstName = state.userDetails?.firstName.toString(),
+                    locationName = state.userDetails?.locationName.toString(),
+                    years = state.userDetails?.years.toString(),
+                    lat = state.userDetails?.latitude.toString(),
+                    long = state.userDetails?.longitude.toString(),
+                    profileImage = state.userDetails?.profileImage?.profileImage1.toString()
+                )
             }
         } else if (items.asReversed()[i].likedBy == null) {
-            viewModel.saveLikeToCrush(items.asReversed()[i].id)
+            viewModel.saveLikeToCrush(
+                crushUserId = items.asReversed()[i].id,
+                firstName = state.userDetails?.firstName.toString(),
+                locationName = state.userDetails?.locationName.toString(),
+                years = state.userDetails?.years.toString(),
+                lat = state.userDetails?.latitude.toString(),
+                long = state.userDetails?.longitude.toString(),
+                profileImage = state.userDetails?.profileImage?.profileImage1.toString()
+            )
+
+        }
+
+        //check match
+        val currentLoggedInUserLikedByDetail  = state.userDetails?.likedBy
+        val currentShowingPersonOnStackId = items.asReversed()[i].id
+        if (state.userDetails?.likedBy != null &&
+            state.userDetails?.likedBy?.contains(items.asReversed()[i].id)!!
+        ) {
+            SnackBarManager.showError("You Matched With ${items.asReversed()[i].firstName}")
+            Timber.i("ITS A MATCH")
+            //save match
+            viewModel.saveMatchToCrush(
+                crushUserId = items.asReversed()[i].id,
+                firstName = state.userDetails?.firstName.toString(),
+                locationName = state.userDetails?.locationName.toString(),
+                years = state.userDetails?.years.toString(),
+                lat = state.userDetails?.latitude.toString(),
+                long = state.userDetails?.longitude.toString(),
+                profileImage = state.userDetails?.profileImage?.profileImage1.toString()
+            )
+            viewModel.saveMatchToCurrentUser(
+                crushUserId = items.asReversed()[i].id,
+                firstName = items.asReversed()[i].firstName,
+                locationName = items.asReversed()[i].locationName,
+                years = items.asReversed()[i].years,
+                lat = items.asReversed()[i].latitude,
+                long = items.asReversed()[i].longitude,
+                profileImage = items.asReversed()[i].profileImage?.profileImage1.toString()
+            )
         }
         onSwipeRight(items[i])
         i--
@@ -177,33 +226,19 @@ fun PersonCard(
             )
 
             Row {
-                IconButton(
-                    modifier = modifier.padding(50.dp, 0.dp, 0.dp, 0.dp),
+                SwipeRightLeftIcon(
                     onClick = { cardStackController.swipeLeft() },
-                ) {
-                    Icon(
-                        Icons.Default.Close, contentDescription = "", tint = Color.White, modifier =
-                        modifier
-                            .height(50.dp)
-                            .width(50.dp)
-                    )
-                }
+                    icon = Icons.Default.Close,
+                    contentDesc = "Dislike${person.firstName}",
+                    paddingValues = PaddingValues(50.dp, 0.dp, 0.dp, 0.dp)
+                )
                 Spacer(modifier = Modifier.weight(1f))
 
-                IconButton(
-                    modifier = modifier.padding(0.dp, 0.dp, 50.dp, 0.dp),
-                    onClick = { cardStackController.swipeRight() }
-                ) {
-                    Icon(
-                        Icons.Default.FavoriteBorder,
-                        contentDescription = "",
-                        tint = Color.White,
-                        modifier =
-                        modifier
-                            .height(50.dp)
-                            .width(50.dp)
-                    )
-                }
+                SwipeRightLeftIcon(
+                    onClick = { cardStackController.swipeRight() },
+                    icon = Icons.Default.FavoriteBorder,
+                    contentDesc = "Like${person.firstName}"
+                )
             }
         }
 

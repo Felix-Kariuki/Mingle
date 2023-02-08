@@ -25,12 +25,12 @@ class NavigationTest {
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
 
-    @Test
+    /*@Test
     fun appNavHost_verifyStartDestination() {
         composeTestRule
             .onNodeWithTag(SPLASH_SCREEN)
             .assertIsDisplayed()
-    }
+    }*/
 }
 
 

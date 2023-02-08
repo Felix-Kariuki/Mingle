@@ -6,6 +6,8 @@ import com.flexcode.wedate.auth.data.repository.AuthRepositoryImpl
 import com.flexcode.wedate.auth.domain.repository.AuthRepository
 import com.flexcode.wedate.home.data.repository.HomeRepositoryImpl
 import com.flexcode.wedate.home.domain.repository.HomeRepository
+import com.flexcode.wedate.matches.data.repository.MatchesRepositoryImpl
+import com.flexcode.wedate.matches.domain.repository.MatchesRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,6 +22,10 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun providesHomeRepository(impl: HomeRepositoryImpl): HomeRepository
+
+    @Binds
+    abstract fun providesMatchesRepository(impl: MatchesRepositoryImpl): MatchesRepository
+
 
 
 }

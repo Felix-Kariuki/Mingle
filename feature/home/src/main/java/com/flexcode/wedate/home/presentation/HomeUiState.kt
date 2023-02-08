@@ -7,6 +7,7 @@ data class HomeUiState(
     val isLoading: Boolean = false,
     var isEmpty: Boolean = true,
     var interestedIn:String = "Everyone",
+    var userDetails: User? = null
     //val likedBy:MutableList<Likes> = arrayListOf()
 
 )

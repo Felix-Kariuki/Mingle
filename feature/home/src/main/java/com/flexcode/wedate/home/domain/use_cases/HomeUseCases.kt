@@ -4,4 +4,7 @@ data class HomeUseCases(
     val updateUserProfileInfoUseCase: UpdateUserProfileInfoUseCase,
     val getAllUsersUseCase: GetAllUsersUseCase,
     val saveLikeUseCase: SaveLikeUseCase,
+    val getAllLikedByUseCase: GetAllLikedByUseCase,
+    val saveMatchUseCase: SaveMatchUseCase,
+    val saveMatchToCurrentUserUseCase: SaveMatchToCurrentUserUseCase,
 )

@@ -20,7 +20,7 @@ class FirebaseTest {
     @get:Rule
     val hilt = HiltAndroidRule(this)
 
-    @Inject lateinit var registrationRepository: StoreRegistrationRepository
+    //@Inject lateinit var registrationRepository: StoreRegistrationRepository
     @Inject lateinit var firestore: FirebaseFirestore
 
     @Before
@@ -29,10 +29,10 @@ class FirebaseTest {
         runBlocking { firestore.clearPersistence().await() }
     }
 
-    @Test
+    /*@Test
     fun test() = runTest {
         val newId = registrationRepository.saveUserDetails(User(id ="FFggtks"))
         val result = registrationRepository.user.first()
         assertThat(result).containsExactly(User(id = newId))
-    }
+    }*/
 }

@@ -13,6 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.home.PersonsCardStack
+import com.flexcode.wedate.home.data.model.Likes
 import com.flexcode.wedate.home.location.GetCurrentLocation
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
@@ -51,25 +52,20 @@ fun HomeScreen(
         if (!state.isEmpty) {
             if (state.interestedIn == "Everyone") {
                 PersonsCardStack(
-                    items = state.potentialMatches.filter { user ->
-                        user.id != viewModel.getUid()
-                    },
+                    items = (state.potentialMatches.filter { user ->
+                        user.id != viewModel.getUid() && !user.likedBy!!.contains(viewModel.getUid())
+                    }).shuffled(),
                     onEmptyStack = {
                         state.isEmpty = false
                     },
                     viewModel = viewModel
                 )
             } else {
-                /*for (i in state.potentialMatches){
-                    i.likedBy?.forEach { n ->
-                        Timber.i("LIKED:: BY ${n.key}")
-                    }
-
-                }*/
                 PersonsCardStack(
                     items = state.potentialMatches.filter { user ->
-                        user.id != viewModel.getUid() && user.gender == state.interestedIn
-                    },
+                        user.id != viewModel.getUid() && user.gender == state.interestedIn &&
+                                !user.likedBy!!.contains(viewModel.getUid())
+                    }.shuffled(),
                     onEmptyStack = {
                         state.isEmpty = false
                     },
