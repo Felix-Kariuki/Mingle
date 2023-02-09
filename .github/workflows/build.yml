@@ -24,7 +24,7 @@ jobs:
       - name: Create google json
         run: cat /home/runner/work/WeDate/WeDate/app/google-services.json | base64
         
-      - name: Putting data
+      - name: 📖 Read data from secrets and Putting data to json
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo $DATA > /home/runner/work/WeDate/WeDate/app/google-services.json
@@ -45,6 +45,14 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      - name: Create google json
+        run: cat /home/runner/work/WeDate/WeDate/app/google-services.json | base64
+        
+      - name: 📖 Read data from secrets and Putting data to json
+        env:
+          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $DATA > /home/runner/work/WeDate/WeDate/app/google-services.json
 
       - name: Lint check
         run: ./gradlew lint
@@ -63,6 +71,14 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      - name: Create google json
+        run: cat /home/runner/work/WeDate/WeDate/app/google-services.json | base64
+        
+      - name: 📖 Read data from secrets and Putting data to json
+        env:
+          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $DATA > /home/runner/work/WeDate/WeDate/app/google-services.json
 
       - name: Execute unit tests
         run: ./gradlew test --stacktrace
