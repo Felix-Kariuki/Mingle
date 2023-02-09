@@ -76,7 +76,7 @@ class SearchingForViewModel @Inject constructor(
         }
     }
 
-    private val _selectSearchForOption = mutableStateOf("Relationship")
+    private val _selectSearchForOption = mutableStateOf("[Relationship]")
     val selectSearchForOption: State<String> = _selectSearchForOption
     fun setSelectSearchForOption(value: String) {
         _selectSearchForOption.value = value

@@ -8,5 +8,6 @@ data class Likes(
     val years:String = "",
     val lat:String = "",
     val long: String = "",
-    val profileImage:String = ""
+    val profileImage:String = "",
+    val matched:Boolean = false
 )

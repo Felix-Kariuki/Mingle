@@ -50,29 +50,29 @@ fun HomeScreen(
         verticalArrangement = Arrangement.Center
     ) {
         if (!state.isEmpty) {
-            if (state.interestedIn == "Everyone") {
-                PersonsCardStack(
-                    items = (state.potentialMatches.filter { user ->
-                        user.id != viewModel.getUid() && !user.likedBy!!.contains(viewModel.getUid())
-                    }).shuffled(),
-                    onEmptyStack = {
-                        state.isEmpty = false
-                    },
-                    viewModel = viewModel
-                )
-            } else {
-                PersonsCardStack(
-                    items = state.potentialMatches.filter { user ->
-                        user.id != viewModel.getUid() && user.gender == state.interestedIn &&
-                                !user.likedBy!!.contains(viewModel.getUid())
-                    }.shuffled(),
-                    onEmptyStack = {
-                        state.isEmpty = false
-                    },
-                    viewModel = viewModel,
-                )
+                if (state.interestedIn == "Everyone") {
+                    PersonsCardStack(
+                        items = (state.potentialMatches.filter { user ->
+                            user.id != viewModel.getUid() && !user.likedBy!!.contains(viewModel.getUid())
+                        }).shuffled(),
+                        onEmptyStack = {
+                            state.isEmpty = false
+                        },
+                        viewModel = viewModel
+                    )
+                } else {
+                    PersonsCardStack(
+                        items = state.potentialMatches.filter { user ->
+                            user.id != viewModel.getUid() && user.gender == state.interestedIn &&
+                                    !user.likedBy!!.contains(viewModel.getUid())
+                        }.shuffled(),
+                        onEmptyStack = {
+                            state.isEmpty = false
+                        },
+                        viewModel = viewModel,
+                    )
 
-            }
+                }
         } else {
             ResultText(
                 text = "No more People Within your range adjust settings..",

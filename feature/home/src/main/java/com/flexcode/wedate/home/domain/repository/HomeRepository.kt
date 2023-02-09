@@ -15,7 +15,7 @@ interface HomeRepository {
 
     suspend fun saveLike(
         crushUserId: String, firstName: String, locationName: String, years: String,
-        lat: String, long: String, profileImage: String
+        lat: String, long: String, profileImage: String,matched:Boolean
     ): Flow<Resource<Any>>
 
     suspend fun getAllLikedBy(currentUserId:String) : Flow<Resource<List<Likes>>>

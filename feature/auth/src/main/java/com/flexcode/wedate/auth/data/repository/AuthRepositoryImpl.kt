@@ -46,9 +46,6 @@ class AuthRepositoryImpl @Inject constructor(
             awaitClose { auth.removeAuthStateListener(listener) }
         }
 
-    override suspend fun createAnonymousAccount() {
-        auth.signInAnonymously().await()
-    }
 
     override fun signOut() {
         if (auth.currentUser!!.isAnonymous) {

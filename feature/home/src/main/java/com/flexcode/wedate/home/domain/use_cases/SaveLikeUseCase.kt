@@ -9,8 +9,8 @@ class SaveLikeUseCase constructor(
 ) {
     suspend operator fun invoke(
         crushUserId: String, firstName: String, locationName: String, years: String,
-        lat: String, long: String, profileImage: String
+        lat: String, long: String, profileImage: String, matched:Boolean
     ): Flow<Resource<Any>> {
-        return repository.saveLike(crushUserId, firstName, locationName,years,lat, long, profileImage)
+        return repository.saveLike(crushUserId, firstName, locationName,years,lat, long, profileImage,matched)
     }
 }

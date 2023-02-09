@@ -48,7 +48,8 @@ class HomeRepositoryImpl @Inject constructor(
         years: String,
         lat: String,
         long: String,
-        profileImage: String
+        profileImage: String,
+        matched:Boolean
     ): Flow<Resource<Any>> {
         return flow {
             emit(Resource.Loading())
@@ -64,6 +65,7 @@ class HomeRepositoryImpl @Inject constructor(
                     lat = lat,
                     long = long,
                     profileImage = profileImage,
+                    matched = matched
                 )
                 dbRef.child(LIKES).child(crushUserId).child(currentUid).setValue(likes).await()
                 dbRef.child(USER_PATH).child(crushUserId).child("likedBy").child(currentUid).setValue(likes).await()
@@ -97,6 +99,7 @@ class HomeRepositoryImpl @Inject constructor(
                     lat = lat,
                     long = long,
                     profileImage = profileImage,
+                    matched = true
                 )
                 dbRef.child(MATCHES).child(crushUserId).child(currentUid).setValue(match).await()
                 emit(Resource.Success(Any()))
@@ -114,7 +117,7 @@ class HomeRepositoryImpl @Inject constructor(
         years: String,
         lat: String,
         long: String,
-        profileImage: String
+        profileImage: String,
     ): Flow<Resource<Any>> {
         return flow {
             emit(Resource.Loading())
@@ -129,6 +132,7 @@ class HomeRepositoryImpl @Inject constructor(
                     lat = lat,
                     long = long,
                     profileImage = profileImage,
+                    matched = true
                 )
                 dbRef.child(MATCHES).child(currentUid).child(crushUserId).setValue(match).await()
                 emit(Resource.Success(Any()))

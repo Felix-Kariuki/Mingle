@@ -48,7 +48,7 @@ class AuthDataStore(private val dataStore: DataStore<Preferences>, private val g
     }
 
     val getUserGender: Flow<String>  = dataStore.data.map { pref ->
-        (pref[Constants.GENDER_KEY]?: "Male").toString()
+        (pref[Constants.GENDER_KEY]?: "[Male]").toString()
     }
 
     suspend fun saveInterestIn(interestedIn:String){
@@ -58,7 +58,7 @@ class AuthDataStore(private val dataStore: DataStore<Preferences>, private val g
     }
 
     val getUserInterest: Flow<String> =dataStore.data.map { pref->
-        (pref[Constants.INTEREST_KEY]?: "Women").toString()
+        (pref[Constants.INTEREST_KEY]?: "[Women]").toString()
     }
 
     suspend fun saveUserPwd(searchingFor:String){
