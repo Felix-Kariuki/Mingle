@@ -25,9 +25,9 @@ jobs:
         run: cat /home/runner/work/WeDate/WeDate/app/google-services.json | base64
         
       - name: Putting data
-          env:
-            DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: echo $DATA > /home/runner/work/<Project-Name>/<Project-Name>/app/google-services.json
+        env:
+          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $DATA > /home/runner/work/WeDate/WeDate/app/google-services.json
 
       - name: Build with gradle
         run: ./gradlew build --stacktrace
