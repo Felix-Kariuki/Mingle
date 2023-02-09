@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.auth.presentation.profile_images_screen
 
 import android.net.Uri
@@ -20,7 +35,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.auth.domain.model.Response
 import com.flexcode.wedate.auth.domain.model.Response.Success
 import com.flexcode.wedate.common.R
@@ -32,15 +46,13 @@ import com.flexcode.wedate.common.ext.fieldModifier
 @Composable
 fun ProfileImagesScreen(
     modifier: Modifier = Modifier,
-    openAndPopUp: (String,String) -> Unit,
+    openAndPopUp: (String, String) -> Unit,
     viewModel: ProfileImagesViewModel = hiltViewModel()
 ) {
-
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         ScreenTitlesText(
             text = R.string.profile_image,
             modifier = modifier.align(Alignment.CenterHorizontally)
@@ -52,14 +64,14 @@ fun ProfileImagesScreen(
                 .fieldModifier(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            for (i in 0..2){
+            for (i in 0..2) {
                 val clicked = "profileImage1"
-                when(i){
+                when (i) {
                     0 -> "profileImage1"
                     1 -> "profileImage2"
                     2 -> "profileImage3"
                 }
-                ClickableToGalleryImage(clicked,viewModel)
+                ClickableToGalleryImage(clicked, viewModel)
             }
         }
 
@@ -69,18 +81,16 @@ fun ProfileImagesScreen(
                 .fieldModifier(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            for (i in 0..2){
+            for (i in 0..2) {
                 val clicked = "profileImage4"
-                when(i){
+                when (i) {
                     0 -> "profileImage4"
                     1 -> "profileImage5"
                     2 -> "profileImage6"
                 }
-                ClickableToGalleryImage(clicked,viewModel)
-
+                ClickableToGalleryImage(clicked, viewModel)
             }
         }
-
 
         Row(
             modifier = modifier
@@ -100,22 +110,19 @@ fun ProfileImagesScreen(
         }
 
         AddImageToStorage(addImageToDatabase = {
-            //viewModel.addImageToFirestoreDatabase(it, User())
+            // viewModel.addImageToFirestoreDatabase(it, User())
 //            viewModel.uploadProfileImage(it)
         })
-
     }
-
 }
-
 
 @Composable
 fun AddImageToStorage(
     viewModel: ProfileImagesViewModel = hiltViewModel(),
     addImageToDatabase: (downloadUrl: Uri) -> Unit
 ) {
-    when(val addImageToStorageResponse = viewModel.addImageToStorageResponse) {
-        //is Loading -> ProgressBar()
+    when (val addImageToStorageResponse = viewModel.addImageToStorageResponse) {
+        // is Loading -> ProgressBar()
         is Success -> addImageToStorageResponse.data?.let { downloadUrl ->
             LaunchedEffect(downloadUrl) {
                 addImageToDatabase(downloadUrl)
@@ -138,7 +145,7 @@ fun ClickableToGalleryImage(clicked: String, viewModel: ProfileImagesViewModel) 
     ) { uri: Uri? ->
         println(imageUri)
         imageUri = uri
-        imageUri?.let { viewModel.addImageToStorage(it,clicked) }
+        imageUri?.let { viewModel.addImageToStorage(it, clicked) }
     }
     Box(
         modifier = Modifier.clip(shape = CircleShape)
@@ -161,4 +168,3 @@ fun ClickableToGalleryImage(clicked: String, viewModel: ProfileImagesViewModel) 
         )
     }
 }
-

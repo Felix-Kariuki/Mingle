@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.auth.presentation.searching_for_screen
 
 import androidx.compose.runtime.State
@@ -12,10 +27,9 @@ import com.flexcode.wedate.common.navigation.SEARCHING_FOR_SCREEN
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
-import javax.inject.Inject
 
 @HiltViewModel
 class SearchingForViewModel @Inject constructor(
@@ -70,8 +84,8 @@ class SearchingForViewModel @Inject constructor(
             }
         }
         viewModelScope.launch {
-            dataStore.getUserAge.collect{
-                age = it.substring(1,it.length -1)
+            dataStore.getUserAge.collect {
+                age = it.substring(1, it.length - 1)
             }
         }
     }
@@ -80,10 +94,9 @@ class SearchingForViewModel @Inject constructor(
     val selectSearchForOption: State<String> = _selectSearchForOption
     fun setSelectSearchForOption(value: String) {
         _selectSearchForOption.value = value
-
     }
 
-    fun registerUser(openAndPoUp: (String,String) -> Unit) {
+    fun registerUser(openAndPoUp: (String, String) -> Unit) {
         viewModelScope.launch {
             useCase.registerUseCase(
                 firstName = firstName,
@@ -98,15 +111,14 @@ class SearchingForViewModel @Inject constructor(
                 interestedIn = interest,
                 searchingFor = selectSearchForOption.value
 
-            ).collect {result->
-                when(result){
+            ).collect { result ->
+                when (result) {
                     is Resource.Success -> {
                         launchCatching {
                             openAndPoUp(PROFILE_IMAGES_SCREEN, SEARCHING_FOR_SCREEN)
                         }
                     }
                     is Resource.Loading -> {
-
                     }
 
                     is Resource.Error -> {

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.auth.presentation.login
 
 import androidx.compose.foundation.background
@@ -16,11 +31,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.ext.fieldModifier
 import com.flexcode.wedate.common.theme.lightPurple
-import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun LoginScreen(
@@ -29,7 +44,6 @@ fun LoginScreen(
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
-
     val uiState by viewModel.uiState
 
     val gradient = Brush.verticalGradient(
@@ -42,9 +56,8 @@ fun LoginScreen(
         modifier = modifier
             .fillMaxSize()
             .background(brush = gradient),
-        contentAlignment = Alignment.Center,
+        contentAlignment = Alignment.Center
     ) {
-
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = modifier.fillMaxSize()
@@ -61,27 +74,25 @@ fun LoginScreen(
                     .width(370.dp)
                     .height(500.dp)
             ) {
-
                 BasicText(text = AppText.email)
                 EmailField(
                     value = uiState.email,
                     icon = Icons.Default.Email,
-                    onNewValue = viewModel::onEmailChange
-                                 ,
+                    onNewValue = viewModel::onEmailChange,
                     Modifier.fieldModifier()
                 )
 
                 BasicText(text = AppText.password)
                 PasswordField(
-                    value = uiState.password, onNewValue = viewModel::onPasswordChange
-                    ,
+                    value = uiState.password,
+                    onNewValue = viewModel::onPasswordChange,
                     Modifier.fieldModifier()
                 )
 
                 BasicTextButton(
                     text = AppText.forgotPassword,
                     modifier = modifier.basicButton(),
-                    color = MaterialTheme.colors.onBackground,
+                    color = MaterialTheme.colors.onBackground
                 ) {
                     viewModel.onForgotPasswordClick()
                 }
@@ -93,17 +104,17 @@ fun LoginScreen(
                         .height(50.dp)
                         .clip(RoundedCornerShape(10.dp))
                 ) {
-                    viewModel.login(uiState.email, uiState.password,openAndPopUp)
+                    viewModel.login(uiState.email, uiState.password, openAndPopUp)
                 }
             }
-            if (uiState.isLoading){
+            if (uiState.isLoading) {
                 LoadingAnimation()
             }
 
             BasicTextButton(
                 text = AppText.no_account,
                 modifier = modifier.basicButton(),
-                color = MaterialTheme.colors.onBackground,
+                color = MaterialTheme.colors.onBackground
             ) {
                 viewModel.onRegisterClicked(openScreen)
             }
@@ -113,7 +124,4 @@ fun LoginScreen(
             viewModel.onAppStart(openAndPopUp)
         }
     }
-
 }
-
-

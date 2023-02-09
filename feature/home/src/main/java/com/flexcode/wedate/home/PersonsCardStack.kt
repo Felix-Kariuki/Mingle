@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.home
 
 import androidx.compose.foundation.layout.*
@@ -20,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.AsyncImage
 import com.flexcode.wedate.auth.data.models.User
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
@@ -30,7 +46,6 @@ import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.onlineGreen
 import com.flexcode.wedate.home.presentation.HomeViewModel
 import timber.log.Timber
-import com.flexcode.wedate.common.R.string as AppText
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -44,7 +59,6 @@ fun PersonsCardStack(
     onEmptyStack: (lastItem: User) -> Unit = {},
     viewModel: HomeViewModel
 ) {
-
     var i by remember {
         mutableStateOf(items.size - 1)
     }
@@ -58,14 +72,14 @@ fun PersonsCardStack(
 
     cardStackController.onSwipeLeft = {
         Timber.i("SWIPEDLEFT:: ${items.asReversed()[i].firstName}")
-        //save dislike
+        // save dislike
         onSwipeLeft(items[i])
         i--
     }
     cardStackController.onSwipeRight = {
         val currentShowingPersonOnStackLikedByDetail = items.asReversed()[i].likedBy
         val currentLoggedInUserId = viewModel.getUid()
-        //savelike
+        // savelike
         if (items.asReversed()[i].likedBy != null) {
             if (!items.asReversed()[i].likedBy?.contains(viewModel.getUid())!!) {
                 viewModel.saveLikeToCrush(
@@ -91,11 +105,10 @@ fun PersonsCardStack(
                 profileImage = state.userDetails?.profileImage?.profileImage1.toString(),
                 matched = false
             )
-
         }
 
-        //check match
-        val currentLoggedInUserLikedByDetail  = state.userDetails?.likedBy
+        // check match
+        val currentLoggedInUserLikedByDetail = state.userDetails?.likedBy
         val currentShowingPersonOnStackId = items.asReversed()[i].id
         if (state.userDetails?.likedBy != null &&
             state.userDetails?.likedBy?.contains(items.asReversed()[i].id)!!
@@ -112,7 +125,7 @@ fun PersonsCardStack(
                 profileImage = state.userDetails?.profileImage?.profileImage1.toString(),
                 matched = true
             )
-            //save match
+            // save match
             viewModel.saveMatchToCrush(
                 crushUserId = items.asReversed()[i].id,
                 firstName = state.userDetails?.firstName.toString(),
@@ -142,8 +155,10 @@ fun PersonsCardStack(
             .padding(bottom = 60.dp, top = 10.dp, start = 10.dp, end = 10.dp)
             .clip(
                 shape = RoundedCornerShape(
-                    topEnd = 130.dp, bottomEnd = 25.dp,
-                    topStart = 25.dp, bottomStart = 25.dp
+                    topEnd = 130.dp,
+                    bottomEnd = 25.dp,
+                    topStart = 25.dp,
+                    bottomStart = 25.dp
                 )
             )
     ) {
@@ -175,13 +190,11 @@ fun PersonsCardStack(
                             scaleY = if (index < i) cardStackController.scale.value else 1f
                         ),
                     item,
-                    cardStackController,
+                    cardStackController
                 )
             }
         }
     }
-
-
 }
 
 @Composable
@@ -254,8 +267,6 @@ fun PersonCard(
                 )
             }
         }
-
-
     }
 }
 

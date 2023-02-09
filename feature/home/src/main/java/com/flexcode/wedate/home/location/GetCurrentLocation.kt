@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.home.location
 
 import android.Manifest
@@ -19,6 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.flexcode.wedate.common.R
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.home.presentation.HomeViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -29,8 +45,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import timber.log.Timber
-import com.flexcode.wedate.common.R.string as AppText
-
 
 @SuppressLint("MissingPermission")
 @OptIn(ExperimentalPermissionsApi::class)
@@ -43,7 +57,8 @@ fun GetCurrentLocation(
     latitude: MutableState<Double>,
     viewModel: HomeViewModel
 ) {
-    HandleRequest(permissionState = permissionState,
+    HandleRequest(
+        permissionState = permissionState,
         deniedContent = { shouldShowRationale ->
             PermissionDeniedContent(
                 rationaleMessage = R.string.rationale_msg,
@@ -51,7 +66,6 @@ fun GetCurrentLocation(
             ) {
                 permissionState.launchPermissionRequest()
             }
-
         },
         content = {
             if (ContextCompat.checkSelfPermission(
@@ -59,9 +73,9 @@ fun GetCurrentLocation(
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) == PackageManager.PERMISSION_GRANTED ||
                 ContextCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
+                        context,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
             ) {
                 try {
                     val locationResult = fusedLocationClient.getCurrentLocation(
@@ -124,9 +138,7 @@ fun PermissionDeniedContent(
     shouldShowRationale: Boolean,
     onRequestPermission: () -> Unit
 ) {
-
     if (shouldShowRationale) {
-
         AlertDialog(
             onDismissRequest = {},
             title = {
@@ -147,9 +159,7 @@ fun PermissionDeniedContent(
                 }
             }
         )
-
     } else {
         Content(onClick = onRequestPermission)
     }
-
 }

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.home.location
 
 import androidx.annotation.StringRes
@@ -23,16 +38,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.flexcode.wedate.common.R.drawable as AppIcon
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.BasicTextButton
 import com.flexcode.wedate.common.ext.basicButton
-import com.flexcode.wedate.common.R.drawable as AppIcon
-import com.flexcode.wedate.common.R.string as AppText
-
 
 @Composable
 fun CustomDialogLocation(
-    @StringRes title:Int,
+    @StringRes title: Int,
     @StringRes desc: Int,
     enableLocation: MutableState<Boolean>,
     onClick: () -> Unit
@@ -62,8 +76,8 @@ fun CustomDialogLocation(
                     modifier = Modifier
                         .padding(top = 5.dp)
                         .height(320.dp)
-                        .fillMaxWidth(),
-                    )
+                        .fillMaxWidth()
+                )
                 Text(
                     text = stringResource(id = title),
                     textAlign = TextAlign.Center,
@@ -73,7 +87,7 @@ fun CustomDialogLocation(
                     letterSpacing = 2.sp,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.h5,
-                    color = MaterialTheme.colors.onBackground,
+                    color = MaterialTheme.colors.onBackground
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
@@ -84,7 +98,7 @@ fun CustomDialogLocation(
                         .fillMaxWidth(),
                     letterSpacing = 1.sp,
                     style = MaterialTheme.typography.body2,
-                    color = MaterialTheme.colors.onBackground,
+                    color = MaterialTheme.colors.onBackground
                 )
                 Spacer(modifier = Modifier.height(24.dp))
 
@@ -101,7 +115,7 @@ fun CustomDialogLocation(
                 BasicTextButton(
                     text = AppText.cancel,
                     modifier = Modifier.basicButton(),
-                    color = MaterialTheme.colors.onBackground,
+                    color = MaterialTheme.colors.onBackground
                 ) {
                     /** close app **/
                     enableLocation.value = true
@@ -110,5 +124,4 @@ fun CustomDialogLocation(
             }
         }
     }
-
 }

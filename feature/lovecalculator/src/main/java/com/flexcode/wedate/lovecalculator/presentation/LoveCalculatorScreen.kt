@@ -1,18 +1,30 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.lovecalculator.presentation
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,12 +40,12 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.ext.fieldModifier
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
-import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun LoveCalculatorScreen(
@@ -66,7 +78,8 @@ fun LoveCalculatorScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
-                SwipeRightLeftIcon(onClick = { openAndPopUp() },
+                SwipeRightLeftIcon(
+                    onClick = { openAndPopUp() },
                     icon = Icons.Default.ArrowBackIos,
                     contentDesc = "Back",
                     height = 30.dp,
@@ -109,8 +122,10 @@ fun LoveCalculatorScreen(
             )
 
             ResultText(
-                text = state.calculatorResponse?.result ?: "", textAlign = TextAlign.Center,
-                fontSize = 25.sp, color = deepBrown
+                text = state.calculatorResponse?.result ?: "",
+                textAlign = TextAlign.Center,
+                fontSize = 25.sp,
+                color = deepBrown
             )
 
             BasicButton(
@@ -122,10 +137,8 @@ fun LoveCalculatorScreen(
             ) {
                 viewModel.getLovePercentage()
             }
-
         }
     }
-
 }
 
 @Composable

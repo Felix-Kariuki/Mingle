@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.home.presentation
 
 import android.content.Context
@@ -15,25 +30,24 @@ import com.flexcode.wedate.common.utils.Resource
 import com.flexcode.wedate.home.domain.use_cases.HomeUseCases
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     logService: LogService,
     private val useCaseContainer: UseCaseContainer,
     private val homeUseCases: HomeUseCases,
-    private val auth: FirebaseAuth,
+    private val auth: FirebaseAuth
 ) : BaseViewModel(logService) {
-
 
     var state = mutableStateOf(HomeUiState())
         private set
 
     init {
-        //perform validations:
+        // perform validations:
         /** TODO
          * 1st no retrieving if location not allowed.
          * 2nd confirm user logged in
@@ -46,7 +60,7 @@ class HomeViewModel @Inject constructor(
         getUserFilters()
         getAllUsers()
         getUserFilters()
-        //getLikedBy()
+        // getLikedBy()
     }
 
     fun getLocationName(
@@ -64,7 +78,7 @@ class HomeViewModel @Inject constructor(
                 updateUserLocation(
                     locationName,
                     latitude = latitude.value.toString(),
-                    longitude = longitude.value.toString(),
+                    longitude = longitude.value.toString()
                 )
             }
         }
@@ -72,7 +86,9 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun updateUserLocation(
-        locationName: String, latitude: String, longitude: String
+        locationName: String,
+        latitude: String,
+        longitude: String
     ) {
         viewModelScope.launch {
             homeUseCases.updateUserProfileInfoUseCase.invoke(
@@ -88,7 +104,6 @@ class HomeViewModel @Inject constructor(
                         SnackBarManager.showError("${result.message}")
                     }
                 }
-
             }
         }
     }
@@ -101,7 +116,6 @@ class HomeViewModel @Inject constructor(
                         state.value =
                             state.value.copy(potentialMatches = result.data as MutableList<User>)
                         state.value = state.value.copy(isEmpty = false)
-
                     }
                     is Resource.Loading -> {}
                     is Resource.Error -> {
@@ -140,18 +154,31 @@ class HomeViewModel @Inject constructor(
                         Timber.e("INTERESTS IN ERROR::: ${result.message}")
                     }
                 }
-
             }
         }
     }
 
     fun saveLikeToCrush(
-        crushUserId: String, firstName: String, locationName: String, years: String,
-        lat: String, long: String, profileImage: String, matched:Boolean
+        crushUserId: String,
+        firstName: String,
+        locationName: String,
+        years: String,
+        lat: String,
+        long: String,
+        profileImage: String,
+        matched: Boolean
     ) {
         viewModelScope.launch {
-            homeUseCases.saveLikeUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
-                profileImage,matched).collect { result ->
+            homeUseCases.saveLikeUseCase.invoke(
+                crushUserId,
+                firstName,
+                locationName,
+                years,
+                lat,
+                long,
+                profileImage,
+                matched
+            ).collect { result ->
                 when (result) {
                     is Resource.Success -> {}
                     is Resource.Loading -> {}
@@ -164,12 +191,24 @@ class HomeViewModel @Inject constructor(
     }
 
     fun saveMatchToCrush(
-        crushUserId: String, firstName: String, locationName: String, years: String,
-        lat: String, long: String, profileImage: String
-    ){
+        crushUserId: String,
+        firstName: String,
+        locationName: String,
+        years: String,
+        lat: String,
+        long: String,
+        profileImage: String
+    ) {
         viewModelScope.launch {
-            homeUseCases.saveMatchUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
-                profileImage).collect { result ->
+            homeUseCases.saveMatchUseCase.invoke(
+                crushUserId,
+                firstName,
+                locationName,
+                years,
+                lat,
+                long,
+                profileImage
+            ).collect { result ->
                 when (result) {
                     is Resource.Success -> {}
                     is Resource.Loading -> {}
@@ -182,12 +221,24 @@ class HomeViewModel @Inject constructor(
     }
 
     fun saveMatchToCurrentUser(
-        crushUserId: String, firstName: String, locationName: String, years: String,
-        lat: String, long: String, profileImage: String
-    ){
+        crushUserId: String,
+        firstName: String,
+        locationName: String,
+        years: String,
+        lat: String,
+        long: String,
+        profileImage: String
+    ) {
         viewModelScope.launch {
-            homeUseCases.saveMatchToCurrentUserUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
-                profileImage).collect { result ->
+            homeUseCases.saveMatchToCurrentUserUseCase.invoke(
+                crushUserId,
+                firstName,
+                locationName,
+                years,
+                lat,
+                long,
+                profileImage
+            ).collect { result ->
                 when (result) {
                     is Resource.Success -> {}
                     is Resource.Loading -> {}
