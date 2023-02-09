@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.common.ext
 
 import android.util.Patterns
@@ -16,28 +31,28 @@ fun String.isValidEmail(): Boolean {
     return this.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
 
-fun String.isNameValid(): Boolean{
+fun String.isNameValid(): Boolean {
     return this.isNotBlank()
 }
 
 fun String.isValidPassword(): Boolean {
     return this.isNotBlank() &&
-            this.length >= Constants.MIN_PASS_LENGTH &&
-            Pattern.compile(Constants.PASS_PATTERN).matcher(this).matches()
+        this.length >= Constants.MIN_PASS_LENGTH &&
+        Pattern.compile(Constants.PASS_PATTERN).matcher(this).matches()
 }
 
 fun String.passwordMatches(repeated: String): Boolean {
     return this == repeated
 }
 
-fun String.isDateValid(): Boolean{
+fun String.isDateValid(): Boolean {
     return this.isNotBlank() && this.toInt() <= Constants.MAX_DATE && this.toInt() > 0
 }
 
-fun String.isMonthValid(): Boolean{
-    return this.isNotBlank()  && this.toInt() <= Constants.MAX_MONTH && this.toInt() > 0
+fun String.isMonthValid(): Boolean {
+    return this.isNotBlank() && this.toInt() <= Constants.MAX_MONTH && this.toInt() > 0
 }
 
-fun String.isYearValid(): Boolean{
-    return this.isNotBlank()  && this.length == Constants.MIN_YEAR_LENGTH && this.toInt() > 0
+fun String.isYearValid(): Boolean {
+    return this.isNotBlank() && this.length == Constants.MIN_YEAR_LENGTH && this.toInt() > 0
 }

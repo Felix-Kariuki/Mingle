@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.account
 
 import androidx.compose.foundation.Image
@@ -31,21 +46,20 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.R
+import com.flexcode.wedate.common.R.drawable as AppIcon
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
-import com.flexcode.wedate.common.R.drawable as AppIcon
-import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun AccountScreen(
     openScreen: () -> Unit,
     navigateToSettings: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: AccountScreenViewModel = hiltViewModel(),
+    viewModel: AccountScreenViewModel = hiltViewModel()
 ) {
-
     val state by viewModel.state
 
     val gradient = Brush.verticalGradient(
@@ -69,35 +83,34 @@ fun AccountScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Row(
-                    modifier = modifier.offset(x = (16).dp, y = (-10).dp),
+                    modifier = modifier.offset(x = (16).dp, y = (-10).dp)
                 ) {
                     AppTitleText(fontWeight = FontWeight.Normal, fontSize = 20.sp)
-
                 }
-                SwipeRightLeftIcon(onClick = { navigateToSettings()},
+                SwipeRightLeftIcon(
+                    onClick = { navigateToSettings() },
                     icon = Icons.Default.Settings,
                     contentDesc = "Settings",
                     height = 30.dp,
                     width = 30.dp,
-                    paddingValues = PaddingValues(0.dp,end=10.dp)
+                    paddingValues = PaddingValues(0.dp, end = 10.dp)
                 )
-
             }
 
             ProfileImage()
             ResultText(
                 text = "${state.userDetails?.firstName},${state.userDetails?.years}",
-                textAlign = TextAlign.Center, fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colors.background,
-                fontSize = 20.sp,
+                fontSize = 20.sp
             )
 
             Row(
                 modifier = modifier
                     .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-
                 UserInfoItemComposable(
                     text = state.userDetails?.datingStatus.toString(),
                     icon = AppIcon.ic_favourite_border
@@ -106,7 +119,6 @@ fun AccountScreen(
                     text = state.userDetails?.gender.toString(),
                     icon = AppIcon.ic_male
                 )
-
             }
 
             Row(
@@ -143,7 +155,7 @@ fun AccountScreen(
 @Composable
 fun SubscriptionsCard(
     text: Int,
-    icon: Int,
+    icon: Int
 ) {
     Card(
         shape = RoundedCornerShape(10.dp),
@@ -152,7 +164,6 @@ fun SubscriptionsCard(
             .height(135.dp)
     ) {
         Column {
-
             Image(
                 modifier = Modifier
                     .padding(10.dp)
@@ -164,7 +175,8 @@ fun SubscriptionsCard(
 
             Spacer(modifier = Modifier.weight(1f))
             BasicText(
-                text = text, fontSize = 14.sp,
+                text = text,
+                fontSize = 14.sp,
                 textAlign = TextAlign.Center
             )
         }
@@ -204,14 +216,15 @@ fun ProfileImage() {
             painter = rememberAsyncImagePainter(
                 ImageRequest
                     .Builder(LocalContext.current)
-                    .data(data = "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1021&q=80")
+                    .data(
+                        data = "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1021&q=80"
+                    )
                     .placeholder(AppIcon.logo)
                     .build()
             ),
             contentDescription = null,
             modifier = Modifier
                 .clickable {
-
                 }
                 .size(100.dp)
                 .clip(CircleShape)

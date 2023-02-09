@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.admirers.presentation
 
 import androidx.compose.foundation.background
@@ -22,20 +37,19 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.flexcode.wedate.common.R
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ExtraScreenText
 import com.flexcode.wedate.common.composables.LogoComposableImage
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
-import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun AdmirersScreen(
-    //openScreen: (String,) -> Unit,
+    // openScreen: (String,) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: AdmirersViewModel = hiltViewModel()
 ) {
-
     val state by viewModel.state
     var admirers = state.admirers
 
@@ -51,7 +65,6 @@ fun AdmirersScreen(
             .background(brush = gradient),
         contentAlignment = Alignment.Center
     ) {
-
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = modifier.fillMaxSize()
@@ -63,7 +76,8 @@ fun AdmirersScreen(
             ExtraScreenText(
                 text = AppText.admirers,
                 color = MaterialTheme.colors.background,
-                fontSize = 25.sp, fontWeight = FontWeight.Bold
+                fontSize = 25.sp,
+                fontWeight = FontWeight.Bold
             )
             BasicText(text = AppText.admirers_text, color = MaterialTheme.colors.background)
 
@@ -82,9 +96,9 @@ fun AdmirersScreen(
                         fontWeight = FontWeight.SemiBold,
                         color = deepBrown
                     )
-                }else{
-                    LazyVerticalGrid(columns = GridCells.Fixed(2)){
-                        items(state.admirers.size) { i->
+                } else {
+                    LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+                        items(state.admirers.size) { i ->
                             val like = state.admirers[i]
                             AdmirerItem(
                                 modifier = modifier.clip(
@@ -103,13 +117,18 @@ fun AdmirersScreen(
                 }
             }
         }
-
     }
-
 }
 
 @Composable
 fun NoResultFoundAnimation() {
-    val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.noresult))
-    LottieAnimation(composition = composition, iterations = 2, modifier = Modifier.size(300.dp), alignment = Alignment.Center)
+    val composition by rememberLottieComposition(
+        spec = LottieCompositionSpec.RawRes(R.raw.noresult)
+    )
+    LottieAnimation(
+        composition = composition,
+        iterations = 2,
+        modifier = Modifier.size(300.dp),
+        alignment = Alignment.Center
+    )
 }

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.admirers.presentation
 
 import androidx.compose.foundation.layout.*
@@ -37,8 +52,10 @@ fun AdmirerItem(
                 .padding(10.dp)
                 .clip(
                     shape = RoundedCornerShape(
-                        topStart = 8.dp, topEnd = 30.dp,
-                        bottomStart = 8.dp, bottomEnd = 8.dp
+                        topStart = 8.dp,
+                        topEnd = 30.dp,
+                        bottomStart = 8.dp,
+                        bottomEnd = 8.dp
                     )
                 )
                 .height(200.dp)
@@ -81,7 +98,7 @@ fun AdmirerItem(
 
             SwipeRightLeftIcon(
                 onClick = {
-                          Timber.i("LIKED:: ${like.id}")
+                    Timber.i("LIKED:: ${like.id}")
                     viewModel.saveLikeToCrush(
                         crushUserId = like.id,
                         firstName = state.userDetails?.firstName.toString(),

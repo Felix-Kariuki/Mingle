@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.auth.presentation.identity_screen
 
 import androidx.compose.runtime.State
@@ -6,18 +21,18 @@ import androidx.lifecycle.viewModelScope
 import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
 import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.BaseViewModel
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.ext.isDateValid
 import com.flexcode.wedate.common.ext.isMonthValid
 import com.flexcode.wedate.common.ext.isYearValid
-import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.navigation.INTERESTS_SCREEN
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class IdentifyScreenViewModel @Inject constructor(
@@ -33,13 +48,11 @@ class IdentifyScreenViewModel @Inject constructor(
     private val dd
         get() = state.value.dd
 
-
     private val mm
         get() = state.value.mm
 
     private val yy
         get() = state.value.yy
-
 
     private val _selectedGenderOption = mutableStateOf("[Male]")
     val selectedGenderOption: State<String> = _selectedGenderOption
@@ -55,15 +68,15 @@ class IdentifyScreenViewModel @Inject constructor(
     }
 
     fun onContinueClicked(openScreen: (String) -> Unit) {
-        if (!dd.isDateValid()){
+        if (!dd.isDateValid()) {
             SnackBarManager.showMessage(AppText.dd_error)
             return
         }
-        if (!mm.isMonthValid()){
+        if (!mm.isMonthValid()) {
             SnackBarManager.showMessage(AppText.mm_error)
             return
         }
-        if (!yy.isYearValid()){
+        if (!yy.isYearValid()) {
             SnackBarManager.showMessage(AppText.yy_error)
             return
         }
@@ -71,7 +84,6 @@ class IdentifyScreenViewModel @Inject constructor(
             user.value.dateOfBirth + "/" + user.value.monthOfBirth + "/" + user.value.yearOfBirth
 
         calculateAge(yob, openScreen)
-
     }
 
     fun onDateOfBirthChange(newValue: String) {
@@ -102,10 +114,9 @@ class IdentifyScreenViewModel @Inject constructor(
                 openScreen(INTERESTS_SCREEN)
             }
         } else {
-            //Do not show error at this point check age before actual registration then
+            // Do not show error at this point check age before actual registration then
             // show error "Account creation failed, you cannot be less than 18 years"
             SnackBarManager.showError("You are below the age of 18")
         }
     }
-
 }

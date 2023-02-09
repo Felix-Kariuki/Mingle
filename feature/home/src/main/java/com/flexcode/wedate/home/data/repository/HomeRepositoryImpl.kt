@@ -1,23 +1,38 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.home.data.repository
 
-import com.flexcode.wedate.home.data.model.Likes
 import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedate.home.data.model.Likes
 import com.flexcode.wedate.home.domain.repository.HomeRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.util.*
+import javax.inject.Inject
+import kotlin.collections.ArrayList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
-import java.util.*
-import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class HomeRepositoryImpl @Inject constructor(
-    private val auth: FirebaseAuth,
-) : HomeRepository{
+    private val auth: FirebaseAuth
+) : HomeRepository {
     private val dbRef = FirebaseDatabase.getInstance().reference
 
     override suspend fun updateUserProfileInfo(
@@ -37,7 +52,6 @@ class HomeRepositoryImpl @Inject constructor(
                 println(e)
                 emit(Resource.Error(message = e.message.toString()))
             }
-
         }.flowOn(Dispatchers.IO)
     }
 
@@ -49,7 +63,7 @@ class HomeRepositoryImpl @Inject constructor(
         lat: String,
         long: String,
         profileImage: String,
-        matched:Boolean
+        matched: Boolean
     ): Flow<Resource<Any>> {
         return flow {
             emit(Resource.Loading())
@@ -68,7 +82,9 @@ class HomeRepositoryImpl @Inject constructor(
                     matched = matched
                 )
                 dbRef.child(LIKES).child(crushUserId).child(currentUid).setValue(likes).await()
-                dbRef.child(USER_PATH).child(crushUserId).child("likedBy").child(currentUid).setValue(likes).await()
+                dbRef.child(USER_PATH).child(crushUserId).child("likedBy").child(currentUid).setValue(
+                    likes
+                ).await()
                 emit(Resource.Success(Any()))
             } catch (e: Exception) {
                 println(e)
@@ -117,7 +133,7 @@ class HomeRepositoryImpl @Inject constructor(
         years: String,
         lat: String,
         long: String,
-        profileImage: String,
+        profileImage: String
     ): Flow<Resource<Any>> {
         return flow {
             emit(Resource.Loading())
@@ -150,7 +166,7 @@ class HomeRepositoryImpl @Inject constructor(
                 val allUserProfiles = ArrayList<User>()
                 val allUsers = dbRef.child(USER_PATH).get().await()
 
-                for (i in allUsers.children){
+                for (i in allUsers.children) {
                     val result = i.getValue(User::class.java)
                     allUserProfiles.add(result!!)
                 }
@@ -168,7 +184,7 @@ class HomeRepositoryImpl @Inject constructor(
                 val allUserLikedBy = ArrayList<Likes>()
                 val allLikes = dbRef.child(LIKES).child(currentUserId).get().await()
 
-                for (i in allLikes.children){
+                for (i in allLikes.children) {
                     val result = i.getValue(Likes::class.java)
                     allUserLikedBy.add(result!!)
                 }
@@ -178,7 +194,6 @@ class HomeRepositoryImpl @Inject constructor(
             }
         }.flowOn(Dispatchers.IO)
     }
-
 
     companion object {
         const val USER_PATH = "WeDateUsers"

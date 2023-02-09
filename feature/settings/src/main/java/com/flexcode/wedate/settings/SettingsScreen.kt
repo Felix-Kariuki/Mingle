@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.settings
 
 import android.content.ComponentName
@@ -27,6 +42,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
@@ -34,8 +50,6 @@ import com.flexcode.wedate.common.theme.deepLightPurple
 import com.flexcode.wedate.common.theme.purpleGrey
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import com.flexcode.wedate.common.R.string as AppText
-
 
 @Composable
 fun SettingsScreen(
@@ -43,7 +57,6 @@ fun SettingsScreen(
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
-
     val scrollState = rememberScrollState()
     val state by viewModel.state
 
@@ -73,10 +86,8 @@ fun SettingsScreen(
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             val context = LocalContext.current
             val scope = rememberCoroutineScope()
-
 
             BasicText(
                 text = AppText.account,
@@ -136,7 +147,6 @@ fun SettingsScreen(
 
             InfoColumn(AppText.term_of_service, "")
 
-
             Button(
                 onClick = {
                     viewModel.signOut()
@@ -152,14 +162,15 @@ fun SettingsScreen(
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = purpleGrey,
                     contentColor = MaterialTheme.colors.onPrimary
-                ),
+                )
             ) {
                 Text(text = stringResource(AppText.log_out), fontSize = 16.sp)
             }
 
             BasicTextButton(
                 text = AppText.delete_account,
-                modifier = modifier.height(50.dp), color = MaterialTheme.colors.onBackground
+                modifier = modifier.height(50.dp),
+                color = MaterialTheme.colors.onBackground
             ) {
                 /** delete account*/
             }
@@ -182,17 +193,14 @@ fun SettingsScreen(
                     .padding(start = 8.dp)
             )
             Spacer(modifier = Modifier.height(80.dp))
-
         }
-
-
     }
-
 }
 
 @Composable
 fun InfoColumn(
-    @StringRes text1: Int, text2: String,
+    @StringRes text1: Int,
+    text2: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -205,7 +213,7 @@ fun InfoColumn(
             text = stringResource(id = text1),
             fontSize = 16.sp,
             textAlign = TextAlign.Start,
-            modifier = modifier.padding(16.dp, 8.dp),
+            modifier = modifier.padding(16.dp, 8.dp)
         )
         Text(
             text = text2,

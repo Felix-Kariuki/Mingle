@@ -1,4 +1,4 @@
-import  com.flexcode.wedate.buildsrc.SDK
+import com.flexcode.wedate.buildsrc.SDK
 
 plugins {
     id("com.android.library")
@@ -7,7 +7,7 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
-apply{
+apply {
     from("$rootDir/compose-module.gradle")
 }
 
@@ -51,5 +51,4 @@ dependencies {
     implementation(project(":Common"))
     implementation(project(":feature:home"))
     implementation(project(":feature:auth"))
-
 }

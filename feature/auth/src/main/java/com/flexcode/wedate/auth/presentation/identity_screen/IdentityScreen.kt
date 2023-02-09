@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.auth.presentation.identity_screen
 
 import androidx.compose.foundation.layout.*
@@ -11,11 +26,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.ext.fieldModifier
-import java.util.Date
-import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun IdentityScreen(
@@ -23,7 +37,6 @@ fun IdentityScreen(
     openScreen: (String) -> Unit,
     viewModel: IdentifyScreenViewModel = hiltViewModel()
 ) {
-
     val user by viewModel.user
     val state by viewModel.state
 
@@ -31,18 +44,15 @@ fun IdentityScreen(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         ScreenTitlesText(
             text = AppText.identify,
             modifier = modifier.align(Alignment.CenterHorizontally)
         )
 
-
         ExtraScreenText(text = AppText.gender)
         GenderSelector(
             onSearchOptionClick = { option ->
                 viewModel.setSelectedGenderOption(option)
-
             },
             isSelected = { option ->
                 viewModel.selectedGenderOption.value == option
@@ -53,7 +63,7 @@ fun IdentityScreen(
             modifier = modifier
                 .fillMaxWidth()
                 .offset(y = (-40).dp)
-                .fieldModifier(),
+                .fieldModifier()
         ) {
             BasicField(
                 text = AppText.dd,
@@ -75,7 +85,6 @@ fun IdentityScreen(
             )
         }
 
-
         Row(
             modifier = modifier
                 .weight(1f)
@@ -90,19 +99,16 @@ fun IdentityScreen(
                     .clip(RoundedCornerShape(10.dp))
             ) {
                 viewModel.onContinueClicked(openScreen)
-                //viewModel.saveYearOfBirth()
+                // viewModel.saveYearOfBirth()
             }
         }
-
-
     }
-
 }
 
 @Composable
 fun GenderSelector(
     onSearchOptionClick: (String) -> Unit,
-    isSelected: (String) -> Boolean,
+    isSelected: (String) -> Boolean
 ) {
     GenderOptionsComponent(
         options = genderOptions,

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.home
 
 import androidx.compose.animation.core.Animatable
@@ -17,13 +32,13 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.sign
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 open class CardStackController(
-    val scope:CoroutineScope,
+    val scope: CoroutineScope,
     private val screenWidth: Float,
     internal val animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec
 ) {
@@ -41,7 +56,6 @@ open class CardStackController(
 
     var onSwipeLeft: () -> Unit = {}
     var onSwipeRight: () -> Unit = {}
-
 
     fun swipeLeft() {
         scope.apply {
@@ -103,7 +117,6 @@ open class CardStackController(
         }
     }
 
-
     fun returnCenter() {
         scope.apply {
             launch {
@@ -123,7 +136,6 @@ open class CardStackController(
             }
         }
     }
-
 }
 
 @Composable
@@ -213,18 +225,17 @@ fun Modifier.draggableStack(
     }
 }
 
-
 private fun normalize(
-    min:Float,
-    max:Float,
-    v:Float,
-    startRange:Float = 0f,
-    endRange:Float = 1f
-):Float {
-    require(startRange < endRange){
-        //start range should be greater than end range
+    min: Float,
+    max: Float,
+    v: Float,
+    startRange: Float = 0f,
+    endRange: Float = 1f
+): Float {
+    require(startRange < endRange) {
+        // start range should be greater than end range
     }
-    val value = v.coerceIn(min,max)
+    val value = v.coerceIn(min, max)
 
     return (value - min) / (max - min) * (endRange + startRange) + startRange
 }

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.admirers.presentation
 
 import androidx.compose.runtime.mutableStateOf
@@ -9,16 +24,16 @@ import com.flexcode.wedate.common.utils.Resource
 import com.flexcode.wedate.home.domain.use_cases.HomeUseCases
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
 @HiltViewModel
 class AdmirersViewModel @Inject constructor(
     logService: LogService,
     private val homeUseCases: HomeUseCases,
     private val useCases: UseCaseContainer,
-    private val auth: FirebaseAuth,
+    private val auth: FirebaseAuth
 ) : BaseViewModel(logService) {
 
     var state = mutableStateOf(AdmirersState())
@@ -29,7 +44,6 @@ class AdmirersViewModel @Inject constructor(
         getUserDetails()
     }
 
-
     private fun getAllLikedBy(currentUserId: String) {
         viewModelScope.launch {
             homeUseCases.getAllLikedByUseCase.invoke(currentUserId).collect { result ->
@@ -38,7 +52,7 @@ class AdmirersViewModel @Inject constructor(
                         state.value = result.data?.filter { !it.matched }
                             ?.let { state.value.copy(admirers = it) }!!
                         Timber.i("LIKED: ${result.data} ")
-                        //state.value = result.data?.let { state.value.copy(admirers = it) }!!
+                        // state.value = result.data?.let { state.value.copy(admirers = it) }!!
                     }
                     is Resource.Loading -> {}
                     is Resource.Error -> {
@@ -59,25 +73,37 @@ class AdmirersViewModel @Inject constructor(
                 when (result) {
                     is Resource.Success -> {
                         state.value = state.value.copy(userDetails = result.data)
-
                     }
                     is Resource.Loading -> {}
                     is Resource.Error -> {
                         Timber.e("INTERESTS IN ERROR::: ${result.message}")
                     }
                 }
-
             }
         }
     }
 
     fun saveLikeToCrush(
-        crushUserId: String, firstName: String, locationName: String, years: String,
-        lat: String, long: String, profileImage: String, matched:Boolean
+        crushUserId: String,
+        firstName: String,
+        locationName: String,
+        years: String,
+        lat: String,
+        long: String,
+        profileImage: String,
+        matched: Boolean
     ) {
         viewModelScope.launch {
-            homeUseCases.saveLikeUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
-                profileImage,matched).collect { result ->
+            homeUseCases.saveLikeUseCase.invoke(
+                crushUserId,
+                firstName,
+                locationName,
+                years,
+                lat,
+                long,
+                profileImage,
+                matched
+            ).collect { result ->
                 when (result) {
                     is Resource.Success -> {}
                     is Resource.Loading -> {}
@@ -90,12 +116,24 @@ class AdmirersViewModel @Inject constructor(
     }
 
     fun saveMatchToCrush(
-        crushUserId: String, firstName: String, locationName: String, years: String,
-        lat: String, long: String, profileImage: String
-    ){
+        crushUserId: String,
+        firstName: String,
+        locationName: String,
+        years: String,
+        lat: String,
+        long: String,
+        profileImage: String
+    ) {
         viewModelScope.launch {
-            homeUseCases.saveMatchUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
-                profileImage).collect { result ->
+            homeUseCases.saveMatchUseCase.invoke(
+                crushUserId,
+                firstName,
+                locationName,
+                years,
+                lat,
+                long,
+                profileImage
+            ).collect { result ->
                 when (result) {
                     is Resource.Success -> {}
                     is Resource.Loading -> {}
@@ -108,12 +146,24 @@ class AdmirersViewModel @Inject constructor(
     }
 
     fun saveMatchToCurrentUser(
-        crushUserId: String, firstName: String, locationName: String, years: String,
-        lat: String, long: String, profileImage: String
-    ){
+        crushUserId: String,
+        firstName: String,
+        locationName: String,
+        years: String,
+        lat: String,
+        long: String,
+        profileImage: String
+    ) {
         viewModelScope.launch {
-            homeUseCases.saveMatchToCurrentUserUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
-                profileImage).collect { result ->
+            homeUseCases.saveMatchToCurrentUserUseCase.invoke(
+                crushUserId,
+                firstName,
+                locationName,
+                years,
+                lat,
+                long,
+                profileImage
+            ).collect { result ->
                 when (result) {
                     is Resource.Success -> {}
                     is Resource.Loading -> {}
@@ -140,5 +190,4 @@ class AdmirersViewModel @Inject constructor(
             }
         }
     }*/
-
 }

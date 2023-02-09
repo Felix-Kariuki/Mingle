@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedatecompose
 
 import android.content.res.Resources
@@ -70,11 +85,13 @@ fun NavGraphBuilder.WeDateNavGraph(appState: WeDateAppState) {
         SplashScreen(
             openAndPopUp = { route, popUp ->
                 appState.navigateAndPopUp(route = route, popUp = popUp)
-            })
+            }
+        )
     }
 
-    composable(route = LOGIN_SCREEN,
-    arguments = listOf()
+    composable(
+        route = LOGIN_SCREEN,
+        arguments = listOf()
     ) {
         LoginScreen(openAndPopUp = { route, popup ->
             appState.navigateAndPopUp(route = route, popUp = popup)
@@ -98,28 +115,31 @@ fun NavGraphBuilder.WeDateNavGraph(appState: WeDateAppState) {
     }
 
     composable(route = INTERESTS_SCREEN) {
-        InterestsScreen(openScreen = {route-> appState.navigate(route)})
+        InterestsScreen(openScreen = { route -> appState.navigate(route) })
     }
 
     composable(route = SEARCHING_FOR_SCREEN) {
-        SearchingForScreen(openAndPopUp = {
-                route,popup-> appState.navigateAndPopUp(route,popup)}
+        SearchingForScreen(
+            openAndPopUp = {
+                route, popup ->
+                appState.navigateAndPopUp(route, popup)
+            }
         )
     }
 
     composable(route = PROFILE_IMAGES_SCREEN) {
-        ProfileImagesScreen(openAndPopUp = {route,popUp-> appState.navigateAndPopUp(route,popUp)})
+        ProfileImagesScreen(
+            openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) }
+        )
     }
 
     composable(route = FORGOT_PASSWORD_SCREEN) {
-
     }
 
     composable(route = HOME_SCREEN_CONTENT) {
         HomeContentScreen()
     }
 }
-
 
 @Composable
 fun rememberAppState(

@@ -1,27 +1,34 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.common.composables
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.runtime.*
-import androidx.compose.runtime.R
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import com.flexcode.wedate.common.R.drawable as AppIcon
@@ -34,7 +41,6 @@ fun BasicField(
     onNewValue: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-
     OutlinedTextField(
         singleLine = true,
         modifier = modifier.width(66.dp),
@@ -43,7 +49,6 @@ fun BasicField(
         placeholder = { Text(text = stringResource(text)) },
         shape = RoundedCornerShape(10.dp)
     )
-
 }
 
 @Composable
@@ -62,7 +67,8 @@ fun PhoneField(
         placeholder = { Text(stringResource(text)) },
         leadingIcon = {
             Icon(
-                imageVector = icon, contentDescription = stringResource(text)
+                imageVector = icon,
+                contentDescription = stringResource(text)
             )
         },
         shape = RoundedCornerShape(10.dp),
@@ -89,7 +95,8 @@ fun EmailField(
         placeholder = { Text(stringResource(text)) },
         leadingIcon = {
             Icon(
-                imageVector = icon, contentDescription = stringResource(text)
+                imageVector = icon,
+                contentDescription = stringResource(text)
             )
         },
         shape = RoundedCornerShape(10.dp),
@@ -142,7 +149,8 @@ private fun PasswordField(
         placeholder = { Text(text = stringResource(placeholder)) },
         leadingIcon = {
             Icon(
-                imageVector = Icons.Default.Lock, contentDescription = stringResource(
+                imageVector = Icons.Default.Lock,
+                contentDescription = stringResource(
                     AppText.password_invisible
                 )
             )
@@ -197,8 +205,8 @@ fun SearchTextField(
                     .size(24.dp),
                 painter = painterResource(id = leadingIcon),
                 contentDescription = stringResource(id = placeholder),
-                tint = MaterialTheme.colors.onBackground,
-                )
+                tint = MaterialTheme.colors.onBackground
+            )
         }
-        )
+    )
 }

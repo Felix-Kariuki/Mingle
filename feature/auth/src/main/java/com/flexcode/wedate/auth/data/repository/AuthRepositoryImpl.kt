@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.auth.data.repository
 
 import com.flexcode.wedate.auth.data.models.ProfileImage
@@ -7,6 +22,8 @@ import com.flexcode.wedate.common.utils.Resource
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.lang.IllegalArgumentException
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -14,12 +31,9 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
-import java.lang.IllegalArgumentException
-import java.util.UUID
-import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-    private val auth: FirebaseAuth,
+    private val auth: FirebaseAuth
 ) : AuthRepository {
 
     private val ref = FirebaseDatabase.getInstance().reference.child(USER_PATH)
@@ -38,25 +52,25 @@ class AuthRepositoryImpl @Inject constructor(
         get() = callbackFlow {
             val listener =
                 FirebaseAuth.AuthStateListener { auth ->
-                    this.trySend(auth.currentUser?.let {
-                        User(id = it.uid, isAnonymous = it.isAnonymous)
-                    } ?: User())
+                    this.trySend(
+                        auth.currentUser?.let {
+                            User(id = it.uid, isAnonymous = it.isAnonymous)
+                        } ?: User()
+                    )
                 }
             auth.addAuthStateListener(listener)
             awaitClose { auth.removeAuthStateListener(listener) }
         }
-
 
     override fun signOut() {
         if (auth.currentUser!!.isAnonymous) {
             auth.currentUser!!.delete()
         }
         auth.signOut()
-        //createAnonymousAccount()
+        // createAnonymousAccount()
     }
 
     override suspend fun login(email: String, password: String): Flow<Resource<AuthResult>> {
-
         return flow {
             emit(Resource.Loading())
 
@@ -67,9 +81,7 @@ class AuthRepositoryImpl @Inject constructor(
                 emit(Resource.Error(message = e.message.toString()))
             }
         }.flowOn(Dispatchers.IO)
-
     }
-
 
     override suspend fun register(
         firstName: String,
@@ -89,9 +101,9 @@ class AuthRepositoryImpl @Inject constructor(
 
             try {
                 val result = auth.createUserWithEmailAndPassword(email, password).await()
-                //auth.currentUser?.sendEmailVerification()?.await()
+                // auth.currentUser?.sendEmailVerification()?.await()
                 val uid = result.user?.uid
-                val initialLike  = HashMap<String,Any>()
+                val initialLike = HashMap<String, Any>()
                 initialLike["idhsscsziiickkdi4"] = "nolikeyet"
                 val user = User(
                     id = uid!!,
@@ -115,7 +127,6 @@ class AuthRepositoryImpl @Inject constructor(
                 val profileImage = ProfileImage()
                 ref.child(uid).child("profileImage").setValue(profileImage)
                 emit(Resource.Success(result))
-
             } catch (e: Exception) {
                 emit(Resource.Error(message = e.message.toString()))
             }
