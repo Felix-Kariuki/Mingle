@@ -11,7 +11,6 @@ interface AuthRepository {
     val userIsAnonymous: Boolean
     val currentUser: Flow<User>
 
-    suspend fun createAnonymousAccount()
      fun signOut()
     suspend fun login(email:String, password:String): Flow<Resource<AuthResult>>
 

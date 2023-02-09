@@ -19,7 +19,7 @@ android {
         minSdk = SDK.min
         targetSdk = SDK.max
         versionCode = 1
-        versionName  = "1.0"
+        versionName  = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -35,6 +35,18 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+    }
+    flavorDimensions("environment")
+    productFlavors {
+        create("dev"){
+            //applicationIdSuffix = ".dev"
+        }
+        create("staging"){
+            //applicationIdSuffix = ".staging"
+        }
+        create("production"){
+
         }
     }
     compileOptions {

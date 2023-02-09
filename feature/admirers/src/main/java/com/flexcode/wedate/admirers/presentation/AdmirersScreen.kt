@@ -37,7 +37,7 @@ fun AdmirersScreen(
 ) {
 
     val state by viewModel.state
-    val admirers = state.admirers
+    var admirers = state.admirers
 
     val gradient = Brush.verticalGradient(
         listOf(lightPurple, Color.White),
@@ -95,7 +95,8 @@ fun AdmirersScreen(
                                         bottomEnd = 8.dp
                                     )
                                 ),
-                                like = like
+                                like = like,
+                                viewModel = viewModel
                             )
                         }
                     }

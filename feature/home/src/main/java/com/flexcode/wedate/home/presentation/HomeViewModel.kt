@@ -147,11 +147,11 @@ class HomeViewModel @Inject constructor(
 
     fun saveLikeToCrush(
         crushUserId: String, firstName: String, locationName: String, years: String,
-        lat: String, long: String, profileImage: String
+        lat: String, long: String, profileImage: String, matched:Boolean
     ) {
         viewModelScope.launch {
             homeUseCases.saveLikeUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
-                profileImage).collect { result ->
+                profileImage,matched).collect { result ->
                 when (result) {
                     is Resource.Success -> {}
                     is Resource.Loading -> {}

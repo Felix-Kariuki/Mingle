@@ -75,10 +75,12 @@ fun PersonsCardStack(
                     years = state.userDetails?.years.toString(),
                     lat = state.userDetails?.latitude.toString(),
                     long = state.userDetails?.longitude.toString(),
-                    profileImage = state.userDetails?.profileImage?.profileImage1.toString()
+                    profileImage = state.userDetails?.profileImage?.profileImage1.toString(),
+                    matched = false
                 )
             }
         } else if (items.asReversed()[i].likedBy == null) {
+            /**remove no longer necessary**/
             viewModel.saveLikeToCrush(
                 crushUserId = items.asReversed()[i].id,
                 firstName = state.userDetails?.firstName.toString(),
@@ -86,7 +88,8 @@ fun PersonsCardStack(
                 years = state.userDetails?.years.toString(),
                 lat = state.userDetails?.latitude.toString(),
                 long = state.userDetails?.longitude.toString(),
-                profileImage = state.userDetails?.profileImage?.profileImage1.toString()
+                profileImage = state.userDetails?.profileImage?.profileImage1.toString(),
+                matched = false
             )
 
         }
@@ -98,7 +101,17 @@ fun PersonsCardStack(
             state.userDetails?.likedBy?.contains(items.asReversed()[i].id)!!
         ) {
             SnackBarManager.showError("You Matched With ${items.asReversed()[i].firstName}")
-            Timber.i("ITS A MATCH")
+            /*test**/
+            viewModel.saveLikeToCrush(
+                crushUserId = items.asReversed()[i].id,
+                firstName = state.userDetails?.firstName.toString(),
+                locationName = state.userDetails?.locationName.toString(),
+                years = state.userDetails?.years.toString(),
+                lat = state.userDetails?.latitude.toString(),
+                long = state.userDetails?.longitude.toString(),
+                profileImage = state.userDetails?.profileImage?.profileImage1.toString(),
+                matched = true
+            )
             //save match
             viewModel.saveMatchToCrush(
                 crushUserId = items.asReversed()[i].id,

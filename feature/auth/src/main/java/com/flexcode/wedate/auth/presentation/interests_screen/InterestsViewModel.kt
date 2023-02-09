@@ -21,7 +21,7 @@ class InterestsViewModel @Inject constructor(
         launchCatching { openScreen(SEARCHING_FOR_SCREEN) }
     }
 
-    private val _selectedInterestsOption = mutableStateOf("Women")
+    private val _selectedInterestsOption = mutableStateOf("[Women]")
     val selectedInterestsOption: State<String> = _selectedInterestsOption
     fun setSelectedInterestsOption(value: String) {
         _selectedInterestsOption.value = value

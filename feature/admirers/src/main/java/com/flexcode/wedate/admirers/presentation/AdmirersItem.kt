@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -18,14 +19,18 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
+import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.home.data.model.Likes
+import timber.log.Timber
 
 @Composable
 fun AdmirerItem(
     like: Likes,
-    modifier: Modifier
+    modifier: Modifier,
+    viewModel: AdmirersViewModel
 ) {
+    val state by viewModel.state
     Column {
         Box(
             modifier = modifier
@@ -75,7 +80,45 @@ fun AdmirerItem(
             )
 
             SwipeRightLeftIcon(
-                onClick = { /*TODO*/ },
+                onClick = {
+                          Timber.i("LIKED:: ${like.id}")
+                    viewModel.saveLikeToCrush(
+                        crushUserId = like.id,
+                        firstName = state.userDetails?.firstName.toString(),
+                        locationName = state.userDetails?.locationName.toString(),
+                        years = state.userDetails?.years.toString(),
+                        lat = state.userDetails?.latitude.toString(),
+                        long = state.userDetails?.longitude.toString(),
+                        profileImage = state.userDetails?.profileImage?.profileImage1.toString(),
+                        matched = true
+
+                    )
+                    if (state.userDetails?.likedBy != null && state.userDetails?.likedBy!!.contains(
+                            like.id
+                        )
+                    ) {
+                        SnackBarManager.showError("You Matched With ${like.firstName}")
+
+                        viewModel.saveMatchToCrush(
+                            crushUserId = like.id,
+                            firstName = state.userDetails?.firstName.toString(),
+                            locationName = state.userDetails?.locationName.toString(),
+                            years = state.userDetails?.years.toString(),
+                            lat = state.userDetails?.latitude.toString(),
+                            long = state.userDetails?.longitude.toString(),
+                            profileImage = state.userDetails?.profileImage?.profileImage1.toString()
+                        )
+                        viewModel.saveMatchToCurrentUser(
+                            crushUserId = like.id,
+                            firstName = like.firstName,
+                            locationName = like.locationName,
+                            years = like.years,
+                            lat = like.lat,
+                            long = like.long,
+                            profileImage = like.profileImage
+                        )
+                    }
+                },
                 icon = Icons.Default.FavoriteBorder,
                 contentDesc = "Like ${like.firstName}",
                 tint = deepBrown,

@@ -2,6 +2,7 @@ package com.flexcode.wedate.admirers.presentation
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
+import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.utils.Resource
@@ -16,25 +17,31 @@ import javax.inject.Inject
 class AdmirersViewModel @Inject constructor(
     logService: LogService,
     private val homeUseCases: HomeUseCases,
+    private val useCases: UseCaseContainer,
     private val auth: FirebaseAuth,
 ) : BaseViewModel(logService) {
 
     var state = mutableStateOf(AdmirersState())
-    private set
+        private set
 
     init {
         getAllLikedBy(getUid())
+        getUserDetails()
     }
 
-    private fun getAllLikedBy(currentUserId:String) {
+
+    private fun getAllLikedBy(currentUserId: String) {
         viewModelScope.launch {
-            homeUseCases.getAllLikedByUseCase.invoke(currentUserId).collect {result->
-                when(result){
+            homeUseCases.getAllLikedByUseCase.invoke(currentUserId).collect { result ->
+                when (result) {
                     is Resource.Success -> {
-                        state.value = result.data?.let { state.value.copy(admirers = it) }!!
+                        state.value = result.data?.filter { !it.matched }
+                            ?.let { state.value.copy(admirers = it) }!!
+                        Timber.i("LIKED: ${result.data} ")
+                        //state.value = result.data?.let { state.value.copy(admirers = it) }!!
                     }
                     is Resource.Loading -> {}
-                    is Resource.Error ->{
+                    is Resource.Error -> {
                         Timber.e("LIKES ERROR::: ${result.message}")
                     }
                 }
@@ -44,6 +51,78 @@ class AdmirersViewModel @Inject constructor(
 
     fun getUid(): String {
         return auth.uid!!
+    }
+
+    private fun getUserDetails() {
+        viewModelScope.launch {
+            useCases.getUserDetailsUseCase.invoke().collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        state.value = state.value.copy(userDetails = result.data)
+
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("INTERESTS IN ERROR::: ${result.message}")
+                    }
+                }
+
+            }
+        }
+    }
+
+    fun saveLikeToCrush(
+        crushUserId: String, firstName: String, locationName: String, years: String,
+        lat: String, long: String, profileImage: String, matched:Boolean
+    ) {
+        viewModelScope.launch {
+            homeUseCases.saveLikeUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
+                profileImage,matched).collect { result ->
+                when (result) {
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("SAVE CRUSH ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    fun saveMatchToCrush(
+        crushUserId: String, firstName: String, locationName: String, years: String,
+        lat: String, long: String, profileImage: String
+    ){
+        viewModelScope.launch {
+            homeUseCases.saveMatchUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
+                profileImage).collect { result ->
+                when (result) {
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("SAVE MATCH ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    fun saveMatchToCurrentUser(
+        crushUserId: String, firstName: String, locationName: String, years: String,
+        lat: String, long: String, profileImage: String
+    ){
+        viewModelScope.launch {
+            homeUseCases.saveMatchToCurrentUserUseCase.invoke(crushUserId,firstName,locationName,years,lat,long,
+                profileImage).collect { result ->
+                when (result) {
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("SAVE MATCH ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
     }
 
     /*private fun getAdmirers() {

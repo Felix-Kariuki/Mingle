@@ -41,7 +41,7 @@ class IdentifyScreenViewModel @Inject constructor(
         get() = state.value.yy
 
 
-    private val _selectedGenderOption = mutableStateOf("Male")
+    private val _selectedGenderOption = mutableStateOf("[Male]")
     val selectedGenderOption: State<String> = _selectedGenderOption
     fun setSelectedGenderOption(value: String) {
         _selectedGenderOption.value = value
