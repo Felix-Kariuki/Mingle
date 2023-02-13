@@ -31,6 +31,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.flexcode.wedate.common.R
+import com.flexcode.wedate.common.composables.LottieAnimationLove
 import com.flexcode.wedate.common.navigation.SPLASH_SCREEN
 import com.flexcode.wedate.common.utils.Constants
 import kotlinx.coroutines.delay
@@ -63,10 +64,3 @@ fun SplashScreen(
     }
 }
 
-@Composable
-fun LottieAnimationLove() {
-    val composition by rememberLottieComposition(
-        spec = LottieCompositionSpec.RawRes(R.raw.loveanimation)
-    )
-    LottieAnimation(composition = composition, iterations = 2)
-}

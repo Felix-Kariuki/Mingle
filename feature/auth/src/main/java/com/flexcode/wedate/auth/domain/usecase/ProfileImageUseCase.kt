@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.auth.domain.model
+package com.flexcode.wedate.auth.domain.usecase
 
-sealed class Response<out T> {
-    object Loading : Response<Nothing>()
+import android.net.Uri
+import com.flexcode.wedate.auth.domain.repository.ProfileImageRepository
+import com.flexcode.wedate.common.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
-    data class Success<out T>(
-        val data: T?
-    ) : Response<T>()
-
-    data class Failure(
-        val e: Exception
-    ) : Response<Nothing>()
+class ProfileImageUseCase constructor(
+    private val repository: ProfileImageRepository
+) {
+    suspend operator fun invoke(imageUri: Uri,imageNumber:String): Flow<Resource<Any>> {
+        return repository.uploadImageToFirebaseStorage(
+            imageUri = imageUri, imageNumber = imageNumber
+        )
+    }
 }

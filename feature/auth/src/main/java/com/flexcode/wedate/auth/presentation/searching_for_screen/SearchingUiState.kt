@@ -13,12 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.auth.domain.usecase
+package com.flexcode.wedate.auth.presentation.searching_for_screen
 
-data class UseCaseContainer(
-    val loginUseCase: LoginUseCase,
-    val registerUseCase: RegisterUseCase,
-    val getUserDetailsUseCase: GetUserDetailsUseCase,
-    val profileImageUseCase: ProfileImageUseCase,
-    val updateProfileImageUseCase: UpdateProfileImageUseCase,
+data class SearchingUiState(
+    val isLoading: String = "false",
 )

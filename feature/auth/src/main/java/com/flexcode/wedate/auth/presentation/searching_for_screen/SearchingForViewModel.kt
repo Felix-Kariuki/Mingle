@@ -20,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
 import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
+import com.flexcode.wedate.auth.presentation.profile_images_screen.ProfileImageState
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.navigation.PROFILE_IMAGES_SCREEN
@@ -37,6 +38,9 @@ class SearchingForViewModel @Inject constructor(
     private val dataStore: AuthDataStore,
     private val useCase: UseCaseContainer
 ) : BaseViewModel(logService) {
+
+    var state = mutableStateOf(SearchingUiState())
+        private set
 
     var email = ""
     var firstName = ""
@@ -114,14 +118,17 @@ class SearchingForViewModel @Inject constructor(
             ).collect { result ->
                 when (result) {
                     is Resource.Success -> {
+                        state.value = state.value.copy(isLoading = "false")
                         launchCatching {
                             openAndPoUp(PROFILE_IMAGES_SCREEN, SEARCHING_FOR_SCREEN)
                         }
                     }
                     is Resource.Loading -> {
+                        state.value = state.value.copy(isLoading = "true")
                     }
 
                     is Resource.Error -> {
+                        state.value = state.value.copy(isLoading = "false")
                         SnackBarManager.showError(result.message.toString())
                     }
                 }

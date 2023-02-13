@@ -16,48 +16,94 @@
 package com.flexcode.wedate.auth.presentation.profile_images_screen
 
 import android.net.Uri
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
-import com.flexcode.wedate.auth.domain.model.Response
-import com.flexcode.wedate.auth.domain.model.Response.Loading
-import com.flexcode.wedate.auth.domain.model.Response.Success
-import com.flexcode.wedate.auth.domain.repository.AuthRepository
-import com.flexcode.wedate.auth.domain.repository.ProfileImageRepository
+import com.flexcode.wedate.common.R
+import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.navigation.HOME_SCREEN_CONTENT
 import com.flexcode.wedate.common.navigation.PROFILE_IMAGES_SCREEN
+import com.flexcode.wedate.common.snackbar.SnackBarManager
+import com.flexcode.wedate.common.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class ProfileImagesViewModel @Inject constructor(
+    private val useCaseContainer: UseCaseContainer,
     logService: LogService,
-    private val dataStore: AuthDataStore,
-    private val repository: ProfileImageRepository,
-    private val authRepository: AuthRepository
 ) : BaseViewModel(logService) {
 
-    var addImageToStorageResponse by mutableStateOf<Response<Uri>>(Success(null))
-        private set
-    var addImageToDatabaseResponse by mutableStateOf<Response<Boolean>>(Success(null))
+    var state = mutableStateOf(ProfileImageState())
         private set
 
+    init {
+        getUserDetails()
+    }
+     private fun getUserDetails() {
+        viewModelScope.launch {
+            useCaseContainer.getUserDetailsUseCase().collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        state.value = state.value.copy(
+                            userDetails = result.data
+                        )
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {}
+                }
+            }
+        }
+    }
+
     fun onContinueClicked(openAndPopUp: (String, String) -> Unit) {
+
+        if (state.value.userDetails?.profileImage?.profileImage1 == "" ||
+            state.value.userDetails?.profileImage?.profileImage2 == ""
+        ) {
+            SnackBarManager.showMessage(R.string.profile_image_error)
+            return
+        }
         launchCatching { openAndPopUp(HOME_SCREEN_CONTENT, PROFILE_IMAGES_SCREEN) }
     }
 
-    fun addImageToStorage(imageUri: Uri, imageNumber: String) = viewModelScope.launch {
-        addImageToStorageResponse = Loading
-        addImageToStorageResponse = repository.uploadImageToFirebaseStorage(imageUri, imageNumber)
-    }
 
-    /*fun addImageToFirestoreDatabase(downloadUrl: Uri,user: User) = viewModelScope.launch {
-        addImageToDatabaseResponse = Loading
-        addImageToDatabaseResponse = repository.uploadImageUrlToFirestore(downloadUrl,user)
-    }*/
+    fun addImageToFirebaseStorage(imageUri: Uri, imageNumber: String) {
+        viewModelScope.launch {
+            useCaseContainer.profileImageUseCase.invoke(imageUri, imageNumber).collect { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        state.value = state.value.copy(isLoading = "true")
+                    }
+                    is Resource.Success -> {
+                        state.value = state.value.copy(isLoading = "false")
+                        val imageUrl = result.data.toString()
+                        viewModelScope.launch {
+                            useCaseContainer.updateProfileImageUseCase.invoke(imageUrl, imageNumber)
+                                .collect { result ->
+                                    when (result) {
+                                        is Resource.Loading -> {
+                                            state.value = state.value.copy(isLoading = "true")
+                                        }
+                                        is Resource.Success -> {
+                                            SnackBarManager.showError("$imageNumber Uploaded Successfully")
+                                            getUserDetails()
+                                            state.value = state.value.copy(isLoading = "false")
+                                        }
+                                        is Resource.Error -> {
+                                            SnackBarManager.showError("${result.message}")
+                                        }
+                                    }
+                                }
+                        }
+                    }
+                    is Resource.Error -> {
+                        SnackBarManager.showError("${result.message}")
+                    }
+                }
+            }
+        }
+    }
 }

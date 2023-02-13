@@ -204,21 +204,12 @@ fun PersonCard(
     cardStackController: CardStackController
 ) {
     Box(modifier = modifier) {
-        /*if (person.url != null) {
-            AsyncImage(
-                model ="https://images.unsplash.com/photo-1623039497055-e79fcaebd4ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-                contentDescription = person.firstName,
-                contentScale = ContentScale.Crop,
-                modifier = modifier.fillMaxSize()
-            )
-        }*/
         AsyncImage(
-            model = "https://images.unsplash.com/photo-1621784563286-84f7646ef221?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGxhZHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+            model = person.profileImage?.profileImage1,
             contentDescription = person.firstName,
             contentScale = ContentScale.Crop,
             modifier = modifier.fillMaxSize()
         )
-
         Row(
             modifier = modifier
                 .wrapContentWidth()

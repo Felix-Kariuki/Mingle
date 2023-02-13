@@ -31,15 +31,19 @@ import com.flexcode.wedate.common.R
 
 @Composable
 fun LoadingAnimation() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(modifier = Modifier.size(100.dp)) {
-            val composition by rememberLottieComposition(
-                spec = LottieCompositionSpec.RawRes(R.raw.loveloading)
-            )
-            LottieAnimation(composition = composition)
-        }
+    Column(modifier = Modifier.size(100.dp)) {
+        val composition by rememberLottieComposition(
+            spec = LottieCompositionSpec.RawRes(R.raw.loveloading)
+        )
+        LottieAnimation(composition = composition)
     }
+
+}
+
+@Composable
+fun LottieAnimationLove() {
+    val composition by rememberLottieComposition(
+        spec = LottieCompositionSpec.RawRes(R.raw.loveanimation)
+    )
+    LottieAnimation(composition = composition, iterations = 2)
 }

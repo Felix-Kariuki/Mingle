@@ -46,12 +46,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.R
-import com.flexcode.wedate.common.R.drawable as AppIcon
-import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
+import com.flexcode.wedate.common.R.drawable as AppIcon
+import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun AccountScreen(
@@ -97,7 +97,7 @@ fun AccountScreen(
                 )
             }
 
-            ProfileImage()
+            ProfileImage(state)
             ResultText(
                 text = "${state.userDetails?.firstName},${state.userDetails?.years}",
                 textAlign = TextAlign.Center,
@@ -208,7 +208,9 @@ fun UserInfoItemComposable(
 }
 
 @Composable
-fun ProfileImage() {
+fun ProfileImage(
+    state: AccountState
+) {
     Box(
         modifier = Modifier.clip(shape = CircleShape)
     ) {
@@ -217,14 +219,15 @@ fun ProfileImage() {
                 ImageRequest
                     .Builder(LocalContext.current)
                     .data(
-                        data = "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1021&q=80"
+                        data = state.userDetails?.profileImage?.profileImage1
                     )
                     .placeholder(AppIcon.logo)
                     .build()
             ),
-            contentDescription = null,
+            contentDescription = "profile image",
             modifier = Modifier
                 .clickable {
+                    //Navigate to profile image settings
                 }
                 .size(100.dp)
                 .clip(CircleShape)

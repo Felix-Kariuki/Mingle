@@ -13,27 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedatecompose.di
+package com.flexcode.wedate.auth.domain.usecase
 
-import com.flexcode.wedate.auth.data.repository.ProfileImageRepositoryImpl
 import com.flexcode.wedate.auth.domain.repository.ProfileImageRepository
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.FirebaseStorage
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import com.flexcode.wedate.common.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
-@Module
-@InstallIn(SingletonComponent::class)
-object ProfileImageModule {
+class UpdateProfileImageUseCase constructor(
+    private val repository: ProfileImageRepository
+) {
 
-    @Provides
-    fun provideProfileImageRepository(
-        storage: FirebaseStorage,
-        auth: FirebaseAuth
-    ): ProfileImageRepository = ProfileImageRepositoryImpl(
-        storage = storage,
-        auth = auth
-    )
+    suspend operator fun invoke(imageUrl:String,imageNumber: String): Flow<Resource<Boolean>>{
+        return repository.uploadImageUrlToFirebaseDatabase(imageUrl, imageNumber)
+    }
 }
