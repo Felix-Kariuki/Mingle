@@ -57,6 +57,7 @@ import com.flexcode.wedate.common.R.string as AppText
 fun AccountScreen(
     openScreen: () -> Unit,
     navigateToSettings: () -> Unit,
+    navigateToProfileDetails: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: AccountScreenViewModel = hiltViewModel()
 ) {
@@ -97,7 +98,7 @@ fun AccountScreen(
                 )
             }
 
-            ProfileImage(state)
+            ProfileImage(state,navigateToProfileDetails)
             ResultText(
                 text = "${state.userDetails?.firstName},${state.userDetails?.years}",
                 textAlign = TextAlign.Center,
@@ -209,7 +210,8 @@ fun UserInfoItemComposable(
 
 @Composable
 fun ProfileImage(
-    state: AccountState
+    state: AccountState,
+    navigateToProfileDetails: () -> Unit
 ) {
     Box(
         modifier = Modifier.clip(shape = CircleShape)
@@ -227,7 +229,7 @@ fun ProfileImage(
             contentDescription = "profile image",
             modifier = Modifier
                 .clickable {
-                    //Navigate to profile image settings
+                    navigateToProfileDetails()
                 }
                 .size(100.dp)
                 .clip(CircleShape)
