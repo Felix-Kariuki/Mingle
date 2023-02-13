@@ -45,7 +45,7 @@ subprojects {
         ignoreFailures.set(true)
         enableExperimentalRules.set(true)
         // reintroduce after removing hard coded urls
-        /*disabledRules.set(setOf("no-wildcard-imports", "filename"))
+        disabledRules.set(setOf("no-wildcard-imports", "filename", "experimental:package-name"))
         reporters {
             reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
             reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
@@ -53,7 +53,7 @@ subprojects {
         }
         kotlinScriptAdditionalPaths {
             include(fileTree("scripts/"))
-        }*/
+        }
         filter {
             exclude { element -> element.file.path.contains("generated/") }
         }

@@ -16,14 +16,18 @@
 package com.flexcode.wedate.auth.domain.repository
 
 import android.net.Uri
-import com.flexcode.wedate.auth.data.models.User
-import com.flexcode.wedate.auth.domain.model.Response
+import com.flexcode.wedate.common.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
 interface ProfileImageRepository {
 
-    suspend fun uploadImageToFirebaseStorage(imageUri: Uri, imageNumber: String): Response<Uri>
+    suspend fun uploadImageToFirebaseStorage(
+        imageUri: Uri,
+        imageNumber: String
+    ): Flow<Resource<Any>>
 
-    suspend fun uploadImageUrlToFirestore(downloadUrl: Uri, user: User): Response<Boolean>
-
-    /*suspend fun getImageUrlFromFirestore(): Response<String>*/
+    suspend fun uploadImageUrlToFirebaseDatabase(
+        imageUrl: String,
+        imageNumber: String
+    ): Flow<Resource<Boolean>>
 }

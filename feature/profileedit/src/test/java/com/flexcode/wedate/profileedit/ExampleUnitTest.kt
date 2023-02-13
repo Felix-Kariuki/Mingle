@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.auth.domain.model
+package com.flexcode.wedate.profileedit
 
-sealed class Response<out T> {
-    object Loading : Response<Nothing>()
+import org.junit.Assert.*
+import org.junit.Test
 
-    data class Success<out T>(
-        val data: T?
-    ) : Response<T>()
-
-    data class Failure(
-        val e: Exception
-    ) : Response<Nothing>()
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+class ExampleUnitTest {
+    @Test
+    fun addition_isCorrect() {
+        assertEquals(4, 2 + 2)
+    }
 }

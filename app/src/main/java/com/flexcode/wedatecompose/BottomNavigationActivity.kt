@@ -28,14 +28,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.flexcode.wedate.account.AccountScreen
 import com.flexcode.wedate.admirers.presentation.AdmirersScreen
-import com.flexcode.wedate.common.navigation.ACCOUNT_SCREEN
-import com.flexcode.wedate.common.navigation.BottomNavItem
-import com.flexcode.wedate.common.navigation.LOVE_CALCULATOR_SCREEN
-import com.flexcode.wedate.common.navigation.SETTINGS_SCREEN
+import com.flexcode.wedate.common.navigation.*
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.home.presentation.HomeScreen
 import com.flexcode.wedate.lovecalculator.presentation.LoveCalculatorScreen
 import com.flexcode.wedate.matches.presentation.MatchesScreen
+import com.flexcode.wedate.profiledetails.ProfileDetailsScreen
+import com.flexcode.wedate.profileedit.EditProfileScreen
 import com.flexcode.wedate.settings.SettingsScreen
 
 @Composable
@@ -57,6 +56,9 @@ fun NavigationGraph(navController: NavHostController) {
                 },
                 navigateToSettings = {
                     navController.navigate(route = SETTINGS_SCREEN)
+                },
+                navigateToProfileDetails = {
+                    navController.navigate(route = PROFILE_DETAILS_SCREEN)
                 }
             )
         }
@@ -72,6 +74,28 @@ fun NavigationGraph(navController: NavHostController) {
                 openAndPopUp = {
                     navController.navigate(route = ACCOUNT_SCREEN) {
                         popUpTo(ACCOUNT_SCREEN)
+                    }
+                }
+            )
+        }
+        composable(route = PROFILE_DETAILS_SCREEN) {
+            ProfileDetailsScreen(
+                navigateToEditProfile = {
+                    navController.navigate(route = EDIT_PROFILE_SCREEN)
+                },
+                navigateToAccountScreen = {
+                    navController.navigate(route = ACCOUNT_SCREEN) {
+                        popUpTo(ACCOUNT_SCREEN)
+                    }
+                }
+            )
+        }
+
+        composable(route = EDIT_PROFILE_SCREEN) {
+            EditProfileScreen(
+                navigateToProfileDetails = {
+                    navController.navigate(PROFILE_DETAILS_SCREEN) {
+                        popUpTo(PROFILE_DETAILS_SCREEN)
                     }
                 }
             )

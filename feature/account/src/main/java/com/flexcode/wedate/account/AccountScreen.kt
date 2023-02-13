@@ -57,6 +57,7 @@ import com.flexcode.wedate.common.theme.lightPurple
 fun AccountScreen(
     openScreen: () -> Unit,
     navigateToSettings: () -> Unit,
+    navigateToProfileDetails: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: AccountScreenViewModel = hiltViewModel()
 ) {
@@ -97,7 +98,7 @@ fun AccountScreen(
                 )
             }
 
-            ProfileImage()
+            ProfileImage(state, navigateToProfileDetails)
             ResultText(
                 text = "${state.userDetails?.firstName},${state.userDetails?.years}",
                 textAlign = TextAlign.Center,
@@ -208,7 +209,10 @@ fun UserInfoItemComposable(
 }
 
 @Composable
-fun ProfileImage() {
+fun ProfileImage(
+    state: AccountState,
+    navigateToProfileDetails: () -> Unit
+) {
     Box(
         modifier = Modifier.clip(shape = CircleShape)
     ) {
@@ -217,14 +221,15 @@ fun ProfileImage() {
                 ImageRequest
                     .Builder(LocalContext.current)
                     .data(
-                        data = "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1021&q=80"
+                        data = state.userDetails?.profileImage?.profileImage1
                     )
                     .placeholder(AppIcon.logo)
                     .build()
             ),
-            contentDescription = null,
+            contentDescription = "profile image",
             modifier = Modifier
                 .clickable {
+                    navigateToProfileDetails()
                 }
                 .size(100.dp)
                 .clip(CircleShape)

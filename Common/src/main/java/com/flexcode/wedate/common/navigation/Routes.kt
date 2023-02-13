@@ -31,5 +31,5 @@ const val ADMIRERS_SCREEN = "AdmirersScreen"
 const val FORGOT_PASSWORD_SCREEN = "HomeScreen"
 
 const val LOVE_CALCULATOR_SCREEN = "LoveScreen"
-
-const val USER_DEFAULT_ID = "-1"
+const val PROFILE_DETAILS_SCREEN = "ProfileDetailsScreen"
+const val EDIT_PROFILE_SCREEN = "EditProfileScreen"

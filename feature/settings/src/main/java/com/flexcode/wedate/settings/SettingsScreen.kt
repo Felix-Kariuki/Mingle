@@ -76,7 +76,7 @@ fun SettingsScreen(
                 tint = Color.Black
             )
             Row(horizontalArrangement = Arrangement.Center, modifier = modifier.fillMaxWidth()) {
-                ResultText(text = "Settings", fontSize = 18.sp)
+                ResultText(text = "Settings", fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
             }
         }
 
@@ -207,7 +207,7 @@ fun InfoColumn(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = modifier
             .fillMaxWidth()
-            .padding(end = 10.dp, top = 5.dp)
+            .padding(end = 10.dp, top = 10.dp)
     ) {
         Text(
             text = stringResource(id = text1),

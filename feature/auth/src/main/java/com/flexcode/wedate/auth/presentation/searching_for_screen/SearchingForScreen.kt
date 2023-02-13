@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.BasicButton
+import com.flexcode.wedate.common.composables.LoadingAnimation
 import com.flexcode.wedate.common.composables.ScreenTitlesText
 import com.flexcode.wedate.common.composables.SelectOption
 import com.flexcode.wedate.common.ext.basicButton
@@ -38,39 +39,52 @@ fun SearchingForScreen(
     openAndPopUp: (String, String) -> Unit,
     viewModel: SearchingForViewModel = hiltViewModel()
 ) {
-    Column(
+    val state by viewModel.state
+    val visible: String = if (state.isLoading == "true") {
+        "true"
+    } else {
+        "false"
+    }
+    Box(
         modifier = modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        contentAlignment = Alignment.Center
     ) {
-        ScreenTitlesText(
-            text = R.string.searching_for,
-            modifier = modifier.align(Alignment.CenterHorizontally)
-        )
-
-        SearchingForSelector(
-            onSearchOptionClick = { option ->
-                viewModel.setSelectSearchForOption(option)
-            },
-            isSelected = { option ->
-                viewModel.selectSearchForOption.value == option
-            }
-        )
-
-        Row(
-            modifier = modifier
-                .weight(1f)
-                .padding(bottom = 30.dp),
-            verticalAlignment = Alignment.Bottom
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BasicButton(
-                text = R.string.next,
+            ScreenTitlesText(
+                text = R.string.searching_for,
+                modifier = modifier.align(Alignment.CenterHorizontally)
+            )
+
+            SearchingForSelector(
+                onSearchOptionClick = { option ->
+                    viewModel.setSelectSearchForOption(option)
+                },
+                isSelected = { option ->
+                    viewModel.selectSearchForOption.value == option
+                }
+            )
+
+            Row(
                 modifier = modifier
-                    .basicButton()
-                    .height(50.dp)
-                    .clip(RoundedCornerShape(10.dp))
+                    .weight(1f)
+                    .padding(bottom = 30.dp),
+                verticalAlignment = Alignment.Bottom
             ) {
-                viewModel.registerUser(openAndPopUp)
+                BasicButton(
+                    text = R.string.next,
+                    modifier = modifier
+                        .basicButton()
+                        .height(50.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                ) {
+                    viewModel.registerUser(openAndPopUp)
+                }
             }
+        }
+        if (visible == "true") {
+            LoadingAnimation()
         }
     }
 }

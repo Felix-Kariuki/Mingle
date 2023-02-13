@@ -56,10 +56,9 @@ class LoginViewModel @Inject constructor(
     }
 
     fun onAppStart(openAndPopUp: (String, String) -> Unit) {
-        if (authRepository.hasUser && !authRepository.userIsAnonymous) openAndPopUp(
-            HOME_SCREEN_CONTENT,
-            LOGIN_SCREEN
-        )
+        if (authRepository.hasUser && !authRepository.userIsAnonymous) {
+            openAndPopUp(HOME_SCREEN_CONTENT, LOGIN_SCREEN)
+        }
     }
 
     fun onLoginClick(openAndPopUp: (String, String) -> Unit) {

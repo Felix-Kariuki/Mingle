@@ -20,7 +20,6 @@ import androidx.lifecycle.viewModelScope
 import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
-import com.flexcode.wedate.common.navigation.LOVE_CALCULATOR_SCREEN
 import com.flexcode.wedate.common.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -56,9 +55,5 @@ class AccountScreenViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    fun onLoveCalculatorClick(openScreen: (String) -> Unit) {
-        launchCatching { openScreen(LOVE_CALCULATOR_SCREEN) }
     }
 }

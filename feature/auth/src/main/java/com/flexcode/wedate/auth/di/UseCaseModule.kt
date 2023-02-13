@@ -16,6 +16,7 @@
 package com.flexcode.wedate.auth.di
 
 import com.flexcode.wedate.auth.domain.repository.AuthRepository
+import com.flexcode.wedate.auth.domain.repository.ProfileImageRepository
 import com.flexcode.wedate.auth.domain.usecase.*
 import dagger.Module
 import dagger.Provides
@@ -30,12 +31,15 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun providesUseCaseContainer(
-        authRepository: AuthRepository
+        authRepository: AuthRepository,
+        repository: ProfileImageRepository
     ): UseCaseContainer {
         return UseCaseContainer(
             loginUseCase = LoginUseCase(repository = authRepository),
             registerUseCase = RegisterUseCase(repository = authRepository),
-            getUserDetailsUseCase = GetUserDetailsUseCase(repository = authRepository)
+            getUserDetailsUseCase = GetUserDetailsUseCase(repository = authRepository),
+            profileImageUseCase = ProfileImageUseCase(repository = repository),
+            updateProfileImageUseCase = UpdateProfileImageUseCase(repository = repository)
         )
     }
 }

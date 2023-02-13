@@ -23,7 +23,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
@@ -34,7 +35,7 @@ import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.SearchTextField
-import com.flexcode.wedate.common.ext.fieldModifier
+import com.flexcode.wedate.common.ext.textPadding
 import com.flexcode.wedate.common.ext.visible
 import com.flexcode.wedate.matches.composables.ChatItem
 import com.flexcode.wedate.matches.composables.MatchesItem
@@ -52,7 +53,7 @@ fun MatchesScreen(
 
     Column {
         SearchTextField(
-            modifier = modifier.fieldModifier(),
+            modifier = modifier.textPadding(),
             value = state.searchValue,
             leadingIcon = AppIcon.ic_search,
             placeholder = AppText.search,

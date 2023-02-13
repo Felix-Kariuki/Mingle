@@ -38,6 +38,9 @@ class SearchingForViewModel @Inject constructor(
     private val useCase: UseCaseContainer
 ) : BaseViewModel(logService) {
 
+    var state = mutableStateOf(SearchingUiState())
+        private set
+
     var email = ""
     var firstName = ""
     var phone = ""
@@ -114,14 +117,17 @@ class SearchingForViewModel @Inject constructor(
             ).collect { result ->
                 when (result) {
                     is Resource.Success -> {
+                        state.value = state.value.copy(isLoading = "false")
                         launchCatching {
                             openAndPoUp(PROFILE_IMAGES_SCREEN, SEARCHING_FOR_SCREEN)
                         }
                     }
                     is Resource.Loading -> {
+                        state.value = state.value.copy(isLoading = "true")
                     }
 
                     is Resource.Error -> {
+                        state.value = state.value.copy(isLoading = "false")
                         SnackBarManager.showError(result.message.toString())
                     }
                 }
