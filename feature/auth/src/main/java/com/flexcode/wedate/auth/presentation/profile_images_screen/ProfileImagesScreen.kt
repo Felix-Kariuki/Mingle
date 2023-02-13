@@ -49,9 +49,9 @@ fun ProfileImagesScreen(
     viewModel: ProfileImagesViewModel = hiltViewModel()
 ) {
     val state by viewModel.state
-    val visible: String = if (state.isLoading == "true"){
+    val visible: String = if (state.isLoading == "true") {
         "true"
-    }else{
+    } else {
         "false"
     }
 
@@ -120,11 +120,10 @@ fun ProfileImagesScreen(
             }
         }
 
-        if (visible == "true"){
+        if (visible == "true") {
             LoadingAnimation()
         }
     }
-
 }
 
 @Composable

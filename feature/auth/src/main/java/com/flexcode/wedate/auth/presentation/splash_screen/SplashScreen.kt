@@ -27,9 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.rememberLottieComposition
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.LottieAnimationLove
 import com.flexcode.wedate.common.navigation.SPLASH_SCREEN
@@ -63,4 +60,3 @@ fun SplashScreen(
         viewModel.onAppStart(openAndPopUp)
     }
 }
-

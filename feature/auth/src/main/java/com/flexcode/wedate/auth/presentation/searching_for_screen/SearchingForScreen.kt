@@ -40,9 +40,9 @@ fun SearchingForScreen(
     viewModel: SearchingForViewModel = hiltViewModel()
 ) {
     val state by viewModel.state
-    val visible: String = if (state.isLoading == "true"){
+    val visible: String = if (state.isLoading == "true") {
         "true"
-    }else{
+    } else {
         "false"
     }
     Box(
@@ -83,7 +83,7 @@ fun SearchingForScreen(
                 }
             }
         }
-        if (visible == "true"){
+        if (visible == "true") {
             LoadingAnimation()
         }
     }

@@ -18,22 +18,22 @@ package com.flexcode.wedate.auth.presentation.profile_images_screen
 import android.net.Uri
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.common.R
 import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
+import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.navigation.HOME_SCREEN_CONTENT
 import com.flexcode.wedate.common.navigation.PROFILE_IMAGES_SCREEN
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ProfileImagesViewModel @Inject constructor(
     private val useCaseContainer: UseCaseContainer,
-    logService: LogService,
+    logService: LogService
 ) : BaseViewModel(logService) {
 
     var state = mutableStateOf(ProfileImageState())
@@ -42,7 +42,7 @@ class ProfileImagesViewModel @Inject constructor(
     init {
         getUserDetails()
     }
-     private fun getUserDetails() {
+    private fun getUserDetails() {
         viewModelScope.launch {
             useCaseContainer.getUserDetailsUseCase().collect { result ->
                 when (result) {
@@ -59,7 +59,6 @@ class ProfileImagesViewModel @Inject constructor(
     }
 
     fun onContinueClicked(openAndPopUp: (String, String) -> Unit) {
-
         if (state.value.userDetails?.profileImage?.profileImage1 == "" ||
             state.value.userDetails?.profileImage?.profileImage2 == ""
         ) {
@@ -68,7 +67,6 @@ class ProfileImagesViewModel @Inject constructor(
         }
         launchCatching { openAndPopUp(HOME_SCREEN_CONTENT, PROFILE_IMAGES_SCREEN) }
     }
-
 
     fun addImageToFirebaseStorage(imageUri: Uri, imageNumber: String) {
         viewModelScope.launch {
@@ -88,7 +86,9 @@ class ProfileImagesViewModel @Inject constructor(
                                             state.value = state.value.copy(isLoading = "true")
                                         }
                                         is Resource.Success -> {
-                                            SnackBarManager.showError("$imageNumber Uploaded Successfully")
+                                            SnackBarManager.showError(
+                                                "$imageNumber Uploaded Successfully"
+                                            )
                                             getUserDetails()
                                             state.value = state.value.copy(isLoading = "false")
                                         }

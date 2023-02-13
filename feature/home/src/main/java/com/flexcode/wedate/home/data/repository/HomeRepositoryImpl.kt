@@ -44,9 +44,12 @@ class HomeRepositoryImpl @Inject constructor(
             emit(Resource.Loading())
             try {
                 val uid = auth.uid!!
-                dbRef.child(USER_PATH).child(uid).child("locationName").setValue(locationName).await()
-                dbRef.child(USER_PATH).child(uid).child("longitude").setValue(longitude).await()
-                dbRef.child(USER_PATH).child(uid).child("latitude").setValue(latitude).await()
+                dbRef.child(USER_PATH).child(uid).child("locationName")
+                    .setValue(locationName).await()
+                dbRef.child(USER_PATH).child(uid).child("longitude")
+                    .setValue(longitude).await()
+                dbRef.child(USER_PATH).child(uid).child("latitude")
+                    .setValue(latitude).await()
                 emit(Resource.Success(Any()))
             } catch (e: Exception) {
                 println(e)
@@ -82,9 +85,8 @@ class HomeRepositoryImpl @Inject constructor(
                     matched = matched
                 )
                 dbRef.child(LIKES).child(crushUserId).child(currentUid).setValue(likes).await()
-                dbRef.child(USER_PATH).child(crushUserId).child("likedBy").child(currentUid).setValue(
-                    likes
-                ).await()
+                dbRef.child(USER_PATH).child(crushUserId).child("likedBy")
+                    .child(currentUid).setValue(likes).await()
                 emit(Resource.Success(Any()))
             } catch (e: Exception) {
                 println(e)

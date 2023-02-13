@@ -46,12 +46,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.R
+import com.flexcode.wedate.common.R.drawable as AppIcon
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
-import com.flexcode.wedate.common.R.drawable as AppIcon
-import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun AccountScreen(
@@ -98,7 +98,7 @@ fun AccountScreen(
                 )
             }
 
-            ProfileImage(state,navigateToProfileDetails)
+            ProfileImage(state, navigateToProfileDetails)
             ResultText(
                 text = "${state.userDetails?.firstName},${state.userDetails?.years}",
                 textAlign = TextAlign.Center,

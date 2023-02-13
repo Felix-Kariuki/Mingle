@@ -16,5 +16,5 @@
 package com.flexcode.wedate.auth.presentation.searching_for_screen
 
 data class SearchingUiState(
-    val isLoading: String = "false",
+    val isLoading: String = "false"
 )

@@ -23,7 +23,7 @@ class UpdateProfileImageUseCase constructor(
     private val repository: ProfileImageRepository
 ) {
 
-    suspend operator fun invoke(imageUrl:String,imageNumber: String): Flow<Resource<Boolean>>{
+    suspend operator fun invoke(imageUrl: String, imageNumber: String): Flow<Resource<Boolean>> {
         return repository.uploadImageUrlToFirebaseDatabase(imageUrl, imageNumber)
     }
 }

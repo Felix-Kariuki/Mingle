@@ -31,6 +31,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flexcode.wedate.common.R.drawable as AppIcon
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.SearchTextField
 import com.flexcode.wedate.common.ext.textPadding
@@ -39,8 +41,6 @@ import com.flexcode.wedate.matches.composables.ChatItem
 import com.flexcode.wedate.matches.composables.MatchesItem
 import com.flexcode.wedate.matches.data.model.Chat
 import com.flexcode.wedate.matches.data.model.chats
-import com.flexcode.wedate.common.R.drawable as AppIcon
-import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun MatchesScreen(

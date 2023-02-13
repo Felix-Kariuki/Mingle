@@ -23,9 +23,10 @@ import kotlinx.coroutines.flow.Flow
 class ProfileImageUseCase constructor(
     private val repository: ProfileImageRepository
 ) {
-    suspend operator fun invoke(imageUri: Uri,imageNumber:String): Flow<Resource<Any>> {
+    suspend operator fun invoke(imageUri: Uri, imageNumber: String): Flow<Resource<Any>> {
         return repository.uploadImageToFirebaseStorage(
-            imageUri = imageUri, imageNumber = imageNumber
+            imageUri = imageUri,
+            imageNumber = imageNumber
         )
     }
 }

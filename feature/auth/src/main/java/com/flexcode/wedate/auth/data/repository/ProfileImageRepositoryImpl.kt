@@ -21,16 +21,15 @@ import com.flexcode.wedate.common.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
-import javax.inject.Inject
 
 class ProfileImageRepositoryImpl @Inject constructor(
     private val storage: FirebaseStorage,
     private val auth: FirebaseAuth
 ) : ProfileImageRepository {
-
 
     private val dbRef = FirebaseDatabase.getInstance().reference
     override suspend fun uploadImageToFirebaseStorage(
@@ -52,7 +51,6 @@ class ProfileImageRepositoryImpl @Inject constructor(
             }
         }
     }
-
 
     override suspend fun uploadImageUrlToFirebaseDatabase(
         imageUrl: String,

@@ -21,8 +21,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProfileImageRepository {
 
-    suspend fun uploadImageToFirebaseStorage(imageUri: Uri, imageNumber: String): Flow<Resource<Any>>
+    suspend fun uploadImageToFirebaseStorage(
+        imageUri: Uri,
+        imageNumber: String
+    ): Flow<Resource<Any>>
 
-    suspend fun uploadImageUrlToFirebaseDatabase(imageUrl: String, imageNumber: String): Flow<Resource<Boolean>>
-
+    suspend fun uploadImageUrlToFirebaseDatabase(
+        imageUrl: String,
+        imageNumber: String
+    ): Flow<Resource<Boolean>>
 }

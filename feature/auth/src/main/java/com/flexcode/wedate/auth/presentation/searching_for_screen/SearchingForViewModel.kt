@@ -20,7 +20,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
 import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
-import com.flexcode.wedate.auth.presentation.profile_images_screen.ProfileImageState
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.navigation.PROFILE_IMAGES_SCREEN
