@@ -96,4 +96,8 @@
     <string name="privacy_policy">Privacy policy</string>
     <string name="term_of_service">Terms of service</string>
 
+    <string name="about_me">About Me</string>
+    <string name="my_basics">Basics</string>
+    <string name="interests">Interests</string>
+
 </resources>

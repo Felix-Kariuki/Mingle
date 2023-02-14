@@ -33,3 +33,5 @@ const val FORGOT_PASSWORD_SCREEN = "HomeScreen"
 const val LOVE_CALCULATOR_SCREEN = "LoveScreen"
 const val PROFILE_DETAILS_SCREEN = "ProfileDetailsScreen"
 const val EDIT_PROFILE_SCREEN = "EditProfileScreen"
+
+const val CHATS_SCREEN = "ChatsScreen"

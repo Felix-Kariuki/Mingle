@@ -44,7 +44,7 @@ class AdmirersViewModel @Inject constructor(
         getUserDetails()
     }
 
-    private fun getAllLikedBy(currentUserId: String) {
+    fun getAllLikedBy(currentUserId: String) {
         viewModelScope.launch {
             homeUseCases.getAllLikedByUseCase.invoke(currentUserId).collect { result ->
                 when (result) {

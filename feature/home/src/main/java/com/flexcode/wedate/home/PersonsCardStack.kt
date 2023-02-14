@@ -217,8 +217,8 @@ fun PersonCard(
             horizontalArrangement = Arrangement.Start
         ) {
             StatusItem(
-                status = if (person.isOnline) AppText.offline else AppText.online,
-                backgroundColor = if (person.isOnline) deepBrown else onlineGreen
+                status = if (person.online == false) { AppText.offline } else { AppText.online },
+                backgroundColor = if (person.online == false) { deepBrown } else { onlineGreen }
             )
         }
 

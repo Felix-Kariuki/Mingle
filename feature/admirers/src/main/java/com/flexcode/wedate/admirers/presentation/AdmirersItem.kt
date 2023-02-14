@@ -115,6 +115,7 @@ fun AdmirerItem(
                         )
                     ) {
                         SnackBarManager.showError("You Matched With ${like.firstName}")
+                        viewModel.getAllLikedBy(viewModel.getUid())
 
                         viewModel.saveMatchToCrush(
                             crushUserId = like.id,

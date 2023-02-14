@@ -54,7 +54,7 @@ class AuthRepositoryImpl @Inject constructor(
                 FirebaseAuth.AuthStateListener { auth ->
                     this.trySend(
                         auth.currentUser?.let {
-                            User(id = it.uid, isAnonymous = it.isAnonymous)
+                            User(id = it.uid, anonymous = it.isAnonymous)
                         } ?: User()
                     )
                 }
@@ -107,7 +107,7 @@ class AuthRepositoryImpl @Inject constructor(
                 initialLike["idhsscsziiickkdi4"] = "nolikeyet"
                 val user = User(
                     id = uid!!,
-                    isAnonymous = false,
+                    anonymous = false,
                     firstName = firstName,
                     phoneNumber = phoneNumber,
                     email = email,
@@ -119,7 +119,7 @@ class AuthRepositoryImpl @Inject constructor(
                     gender = gender,
                     interestedIn = interestedIn,
                     searchingFor = searchingFor,
-                    isFree = true,
+                    free = true,
                     datingStatus = "Single",
                     likedBy = initialLike
                 )

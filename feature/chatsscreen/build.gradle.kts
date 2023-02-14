@@ -7,8 +7,9 @@ plugins {
 apply {
     from("$rootDir/compose-module.gradle")
 }
+
 android {
-    namespace = "com.flexcode.wedate.profileedit"
+    namespace = "com.flexcode.wedate.chatsscreen"
     compileSdk = 33
 
     defaultConfig {
@@ -16,7 +17,6 @@ android {
         targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -45,6 +45,4 @@ android {
 
 dependencies {
     implementation(project(":Common"))
-    implementation(project(":feature:profiledetails"))
-    implementation(project(":feature:auth"))
 }

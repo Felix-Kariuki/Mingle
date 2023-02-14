@@ -100,18 +100,20 @@ fun AdmirersScreen(
                     LazyVerticalGrid(columns = GridCells.Fixed(2)) {
                         items(state.admirers.size) { i ->
                             val like = state.admirers[i]
-                            AdmirerItem(
-                                modifier = modifier.clip(
-                                    shape = RoundedCornerShape(
-                                        topStart = 8.dp,
-                                        topEnd = 30.dp,
-                                        bottomStart = 8.dp,
-                                        bottomEnd = 8.dp
-                                    )
-                                ),
-                                like = like,
-                                viewModel = viewModel
-                            )
+                            if (!like.matched) {
+                                AdmirerItem(
+                                    modifier = modifier.clip(
+                                        shape = RoundedCornerShape(
+                                            topStart = 8.dp,
+                                            topEnd = 30.dp,
+                                            bottomStart = 8.dp,
+                                            bottomEnd = 8.dp
+                                        )
+                                    ),
+                                    like = like,
+                                    viewModel = viewModel
+                                )
+                            }
                         }
                     }
                 }

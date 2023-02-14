@@ -15,6 +15,7 @@
  */
 package com.flexcode.wedate.matches.composables
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -33,7 +34,8 @@ import com.flexcode.wedate.matches.data.model.Matches
 
 @Composable
 fun MatchesItem(
-    match: Matches
+    match: Matches,
+    navigateToChats: () -> Unit
 ) {
     Card(
         elevation = 5.dp,
@@ -56,6 +58,7 @@ fun MatchesItem(
             modifier = Modifier
                 .width(110.dp)
                 .height(130.dp)
+                .clickable { navigateToChats() }
         )
     }
 }
