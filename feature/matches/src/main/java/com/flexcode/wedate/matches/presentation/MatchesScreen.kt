@@ -44,6 +44,7 @@ import com.flexcode.wedate.matches.data.model.chats
 
 @Composable
 fun MatchesScreen(
+    navigateToChats: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MatchesViewModel = hiltViewModel()
 ) {
@@ -74,7 +75,7 @@ fun MatchesScreen(
             fontWeight = FontWeight.SemiBold,
             modifier = modifier.visible(visible)
         )
-        MatchesComposable(state)
+        MatchesComposable(state, navigateToChats)
 
         BasicText(text = AppText.chats, fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
         ChatsComposable(chats = chats)
@@ -95,14 +96,14 @@ fun ChatsComposable(chats: List<Chat>) {
 }
 
 @Composable
-fun MatchesComposable(state: MatchesState) {
+fun MatchesComposable(state: MatchesState, navigateToChats: () -> Unit) {
     LazyRow(
         Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(start = 6.dp)
     ) {
         items(state.matches.size) { i ->
             val match = state.matches[i]
-            MatchesItem(match = match)
+            MatchesItem(match = match, navigateToChats)
         }
     }
 }

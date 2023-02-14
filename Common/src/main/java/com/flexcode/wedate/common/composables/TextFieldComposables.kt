@@ -33,6 +33,7 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.R.string as AppText
+import com.flexcode.wedate.common.ext.textPadding
 
 @Composable
 fun BasicField(
@@ -80,15 +81,39 @@ fun PhoneField(
 }
 
 @Composable
+fun BioField(
+    value: String,
+    onNewValue: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    text: Int = AppText.about_me,
+    singleLine: Boolean = false
+) {
+    OutlinedTextField(
+        singleLine = singleLine,
+        modifier = modifier.height(100.dp).textPadding(),
+        value = value,
+        onValueChange = { onNewValue(it) },
+        placeholder = { Text(stringResource(text)) },
+        shape = RoundedCornerShape(10.dp),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Email,
+            imeAction = ImeAction.Done
+        ),
+        maxLines = 15
+    )
+}
+
+@Composable
 fun EmailField(
     value: String,
     icon: ImageVector,
     onNewValue: (String) -> Unit,
     modifier: Modifier = Modifier,
-    text: Int = AppText.email
+    text: Int = AppText.email,
+    singleLine: Boolean = true
 ) {
     OutlinedTextField(
-        singleLine = true,
+        singleLine = singleLine,
         modifier = modifier,
         value = value,
         onValueChange = { onNewValue(it) },

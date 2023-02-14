@@ -153,6 +153,7 @@ class HomeRepositoryImpl @Inject constructor(
                     matched = true
                 )
                 dbRef.child(MATCHES).child(currentUid).child(crushUserId).setValue(match).await()
+                dbRef.child(LIKES).child(currentUid).child(crushUserId).setValue(match).await()
                 emit(Resource.Success(Any()))
             } catch (e: Exception) {
                 println(e)

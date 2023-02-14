@@ -138,6 +138,11 @@ fun ClickableToGalleryImage(clicked: String, viewModel: ProfileImagesViewModel) 
         imageUri = uri
         imageUri?.let { viewModel.addImageToFirebaseStorage(it, clicked) }
     }
+    val data = if (imageUri != null) {
+        imageUri
+    } else {
+        R.drawable.ic_add
+    }
     Box(
         modifier = Modifier.clip(shape = CircleShape)
     ) {
@@ -145,7 +150,7 @@ fun ClickableToGalleryImage(clicked: String, viewModel: ProfileImagesViewModel) 
             painter = rememberAsyncImagePainter(
                 ImageRequest
                     .Builder(LocalContext.current)
-                    .data(data = imageUri)
+                    .data(data = data)
                     .placeholder(R.drawable.ic_add)
                     .build()
             ),

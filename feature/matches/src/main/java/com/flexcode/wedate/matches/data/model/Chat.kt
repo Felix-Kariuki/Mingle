@@ -23,7 +23,8 @@ data class Chat(
 val chats = listOf(
     Chat(
         name = "Mary",
-        image = "https://www.pngfind.com/pngs/m/38-386087_png-image-indian-girl-transparent-png.png",
+        image =
+        "https://www.pngfind.com/pngs/m/38-386087_png-image-indian-girl-transparent-png.png",
         message = "Lorem Ipsium"
     ),
     Chat(

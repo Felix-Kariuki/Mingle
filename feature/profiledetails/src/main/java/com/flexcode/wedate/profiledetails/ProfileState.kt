@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.profileedit
+package com.flexcode.wedate.profiledetails
 
-import androidx.compose.runtime.Composable
+import com.flexcode.wedate.auth.data.models.User
 
-@Composable
-fun EditProfileScreen(
-    navigateToProfileDetails: () -> Unit
-) {
-}
+data class ProfileState(
+    var isLoading: Boolean = false,
+    var userDetails: User? = null
+)

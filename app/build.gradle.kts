@@ -82,6 +82,7 @@ dependencies {
     implementation(project(":feature:settings"))
     implementation(project(":feature:profiledetails"))
     implementation(project(":feature:profileedit"))
+    implementation(project(":feature:chatsscreen"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
