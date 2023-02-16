@@ -52,9 +52,9 @@
     <string name="profile_image_error">You have to add at least the first and second image</string>
 
     <string name="no_admirers">No admirers yet</string>
-
     <string name="admirers">Admirers</string>
     <string name="admirers_text">This is a list of all the secret admirers that have liked your profile, like them back and keep the fire burning </string>
+    <string name="view_on_map">See admirers on Map</string>
 
     <string name="dummy_text">Brandon,21</string>
     <string name="single">Single</string>
@@ -99,5 +99,8 @@
     <string name="about_me">About Me</string>
     <string name="my_basics">Basics</string>
     <string name="interests">Interests</string>
+
+
+    <string name="type_msg">Type Message</string>
 
 </resources>

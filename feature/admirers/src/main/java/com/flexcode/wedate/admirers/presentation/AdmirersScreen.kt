@@ -38,9 +38,11 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.R.string as AppText
+import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ExtraScreenText
 import com.flexcode.wedate.common.composables.LogoComposableImage
+import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
 
@@ -51,7 +53,6 @@ fun AdmirersScreen(
     viewModel: AdmirersViewModel = hiltViewModel()
 ) {
     val state by viewModel.state
-    var admirers = state.admirers
 
     val gradient = Brush.verticalGradient(
         listOf(lightPurple, Color.White),
@@ -117,6 +118,17 @@ fun AdmirersScreen(
                         }
                     }
                 }
+            }
+        }
+
+        Row(modifier = modifier.padding(bottom = 60.dp).align(Alignment.BottomCenter)) {
+            BasicButton(
+                text = R.string.view_on_map,
+                modifier = modifier
+                    .basicButton()
+                    .height(50.dp)
+                    .clip(RoundedCornerShape(10.dp))
+            ) {
             }
         }
     }

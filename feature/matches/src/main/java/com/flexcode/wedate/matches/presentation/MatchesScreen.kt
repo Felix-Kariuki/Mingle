@@ -96,7 +96,10 @@ fun ChatsComposable(chats: List<Chat>) {
 }
 
 @Composable
-fun MatchesComposable(state: MatchesState, navigateToChats: () -> Unit) {
+fun MatchesComposable(
+    state: MatchesState,
+    navigateToChats: () -> Unit
+) {
     LazyRow(
         Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(start = 6.dp)

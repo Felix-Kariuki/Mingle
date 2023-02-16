@@ -18,8 +18,8 @@ package com.flexcode.wedatecompose
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.Image
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -34,7 +34,7 @@ import com.flexcode.wedate.account.AccountScreen
 import com.flexcode.wedate.admirers.presentation.AdmirersScreen
 import com.flexcode.wedate.chatsscreen.ChatsScreen
 import com.flexcode.wedate.common.navigation.*
-import com.flexcode.wedate.common.theme.deepBrown
+import com.flexcode.wedate.common.theme.purple
 import com.flexcode.wedate.home.presentation.HomeScreen
 import com.flexcode.wedate.lovecalculator.presentation.LoveCalculatorScreen
 import com.flexcode.wedate.matches.presentation.MatchesScreen
@@ -59,7 +59,11 @@ fun NavigationGraph(navController: NavHostController) {
             )
         }
         composable(route = CHATS_SCREEN) {
-            ChatsScreen()
+            ChatsScreen(
+                navigateToMatchScreen = {
+                    navController.popBackStack()
+                }
+            )
         }
         composable(BottomNavItem.Account.screen_route) {
             AccountScreen(
@@ -76,17 +80,13 @@ fun NavigationGraph(navController: NavHostController) {
         }
         composable(route = LOVE_CALCULATOR_SCREEN) {
             LoveCalculatorScreen(openAndPopUp = {
-                navController.navigate(route = ACCOUNT_SCREEN) {
-                    popUpTo(ACCOUNT_SCREEN)
-                }
+                navController.popBackStack()
             })
         }
         composable(route = SETTINGS_SCREEN) {
             SettingsScreen(
                 openAndPopUp = {
-                    navController.navigate(route = ACCOUNT_SCREEN) {
-                        popUpTo(ACCOUNT_SCREEN)
-                    }
+                    navController.popBackStack()
                 }
             )
         }
@@ -96,18 +96,14 @@ fun NavigationGraph(navController: NavHostController) {
                     navController.navigate(route = EDIT_PROFILE_SCREEN)
                 },
                 navigateToAccountScreen = {
-                    navController.navigate(route = ACCOUNT_SCREEN) {
-                        popUpTo(ACCOUNT_SCREEN)
-                    }
+                    navController.popBackStack()
                 }
             )
         }
         composable(route = EDIT_PROFILE_SCREEN) {
             EditProfileScreen(
                 navigateToProfileDetails = {
-                    navController.navigate(PROFILE_DETAILS_SCREEN) {
-                        popUpTo(PROFILE_DETAILS_SCREEN)
-                    }
+                    navController.popBackStack()
                 }
             )
         }
@@ -138,9 +134,9 @@ fun BottomNavigation(
                 val currentRoute = navBackStackEntry?.destination?.route
                 items.forEach { item ->
                     BottomNavigationItem(
-                        icon = { Image(imageVector = item.icon, contentDescription = "") },
-                        selectedContentColor = deepBrown,
-                        unselectedContentColor = Color.Black.copy(0.4f),
+                        icon = { Icon(imageVector = item.icon, contentDescription = "") },
+                        selectedContentColor = purple,
+                        unselectedContentColor = Color.Black.copy(0.8f),
                         alwaysShowLabel = true,
                         selected = currentRoute == item.screen_route,
                         onClick = {
