@@ -37,6 +37,7 @@ import com.flexcode.wedate.common.navigation.*
 import com.flexcode.wedate.common.theme.purple
 import com.flexcode.wedate.home.presentation.HomeScreen
 import com.flexcode.wedate.lovecalculator.presentation.LoveCalculatorScreen
+import com.flexcode.wedate.maps.MapsScreen
 import com.flexcode.wedate.matches.presentation.MatchesScreen
 import com.flexcode.wedate.profiledetails.ProfileDetailsScreen
 import com.flexcode.wedate.profileedit.EditProfileScreen
@@ -49,7 +50,11 @@ fun NavigationGraph(navController: NavHostController) {
             HomeScreen()
         }
         composable(BottomNavItem.Admirers.screen_route) {
-            AdmirersScreen()
+            AdmirersScreen(
+                navigateToAdmirersMaps = {
+                    navController.navigate(route = MAPS_SCREEN)
+                }
+            )
         }
         composable(BottomNavItem.Matches.screen_route) {
             MatchesScreen(
@@ -103,6 +108,13 @@ fun NavigationGraph(navController: NavHostController) {
         composable(route = EDIT_PROFILE_SCREEN) {
             EditProfileScreen(
                 navigateToProfileDetails = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable(route = MAPS_SCREEN) {
+            MapsScreen(
+                navigateBack = {
                     navController.popBackStack()
                 }
             )

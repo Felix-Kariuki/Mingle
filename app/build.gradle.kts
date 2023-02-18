@@ -8,6 +8,7 @@ plugins {
     id("com.google.firebase.crashlytics")
     id("com.google.firebase.firebase-perf")
     id("dagger.hilt.android.plugin")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -83,6 +84,7 @@ dependencies {
     implementation(project(":feature:profiledetails"))
     implementation(project(":feature:profileedit"))
     implementation(project(":feature:chatsscreen"))
+    implementation(project(":feature:maps"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
@@ -138,6 +140,10 @@ dependencies {
     // coil
     implementation("io.coil-kt:coil-compose:2.2.2")
 
+    // maps
+    implementation("com.google.maps.android:maps-compose:2.10.0")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
+
     testImplementation("junit:junit:4.+")
 
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
@@ -155,7 +161,4 @@ dependencies {
     kaptAndroidTest("com.google.dagger:hilt-compiler:2.43.2")
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.1.1")
-}
-kapt {
-    correctErrorTypes = true
 }
