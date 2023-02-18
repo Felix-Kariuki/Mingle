@@ -15,11 +15,197 @@
  */
 package com.flexcode.wedate.chatsscreen
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.flexcode.wedate.common.R
+import com.flexcode.wedate.common.composables.ResultText
+import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
+import com.flexcode.wedate.common.theme.deepLightPurple
+import com.flexcode.wedate.common.theme.lightPurple
 
 @Composable
 fun ChatsScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navigateToMatchScreen: () -> Unit
 ) {
+    Scaffold(
+        topBar = {
+            TopBar(modifier, navigateToMatchScreen)
+        }
+    ) { paddingValues ->
+        Box(
+            modifier = modifier
+                .padding(paddingValues)
+                .fillMaxSize()
+        ) {
+            CustomTextField(
+                text = "",
+                onValueChange = {},
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 16.dp)
+                    .align(Alignment.BottomCenter)
+            )
+        }
+    }
+}
+
+@Composable
+fun CustomTextField(
+    text: String,
+    modifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit
+) {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        elevation = 0.dp,
+        shape = RoundedCornerShape(10.dp),
+        border = BorderStroke(1.dp, lightPurple)
+    ) {
+        TextField(
+            value = text,
+            onValueChange = { onValueChange(it) },
+            placeholder = {
+                Text(
+                    text = stringResource(id = R.string.type_msg),
+                    style = TextStyle(
+                        fontSize = 15.sp,
+                        color = Color.Gray
+                    ),
+                    textAlign = TextAlign.Center
+                )
+            },
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent
+            ),
+            leadingIcon = { CommonIconButton(imageVector = Icons.Default.FileUpload) },
+            trailingIcon = { CommonIconButton(imageVector = Icons.Default.Send) }
+
+        )
+    }
+}
+
+@Composable
+fun CommonIconButton(
+    imageVector: ImageVector
+) {
+    Box(
+        modifier = Modifier
+            .size(43.dp)
+            .clip(CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                imageVector = imageVector,
+                contentDescription = "",
+                tint = Color.Black,
+                modifier = Modifier.size(25.dp)
+            )
+        }
+    }
+}
+
+@Composable
+fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit) {
+    val gradient = Brush.horizontalGradient(
+        listOf(lightPurple, deepLightPurple),
+        startX = 500.0f,
+        endX = 1330.0f
+    )
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(85.dp)
+            .background(brush = gradient),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        SwipeRightLeftIcon(
+            onClick = { navigateToMatchScreen() },
+            icon = Icons.Default.ArrowBackIos,
+            contentDesc = "Back",
+            height = 30.dp,
+            width = 30.dp,
+            paddingValues = PaddingValues(start = 10.dp, 0.dp),
+            tint = Color.Black
+        )
+        Spacer(modifier = modifier.width(5.dp))
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data("https://www.pngmart.com/files/1/Girl-PNG.png")
+                .crossfade(true)
+                .build(),
+            placeholder = painterResource(R.drawable.sharon),
+            contentDescription = "Chat with $",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .clip(CircleShape)
+                .size(60.dp)
+        )
+        Column(
+            modifier = modifier.weight(0.8f)
+        ) {
+            ResultText(
+                text = "Penolope",
+                color = MaterialTheme.colors.background,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+            ResultText(
+                text = "Online",
+                color = Color.Black,
+                modifier = modifier.offset(y = (-16).dp),
+                fontSize = 14.sp
+            )
+        }
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(end = 16.dp)
+                .weight(1f),
+            horizontalArrangement = Arrangement.End
+        ) {
+            TopBarIcons(icon = Icons.Default.VideoCall)
+            TopBarIcons(icon = Icons.Default.Call)
+            TopBarIcons(icon = Icons.Default.More)
+        }
+    }
+}
+
+@Composable
+fun TopBarIcons(icon: ImageVector) {
+    SwipeRightLeftIcon(
+        onClick = { /**TODO*/ },
+        icon = icon,
+        contentDesc = "More",
+        height = 20.dp,
+        width = 20.dp,
+        paddingValues = PaddingValues(start = 5.dp, 0.dp),
+        tint = Color.Black
+    )
 }

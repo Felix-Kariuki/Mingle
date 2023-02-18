@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.home.presentation
+package com.flexcode.wedate.maps
 
-import com.flexcode.wedate.auth.data.models.User
+import org.junit.Test
 
-data class HomeUiState(
-    val potentialMatches: MutableList<User> = arrayListOf(),
-    val isLoading: Boolean = false,
-    var isEmpty: Boolean = true,
-    var interestedIn: String = "Everyone",
-    var userDetails: User? = null
-    // val likedBy:MutableList<Likes> = arrayListOf()
-)
+import org.junit.Assert.*
+
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+class ExampleUnitTest {
+    @Test
+    fun addition_isCorrect() {
+        assertEquals(4, 2 + 2)
+    }
+}

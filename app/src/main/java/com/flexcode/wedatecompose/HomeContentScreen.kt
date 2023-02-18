@@ -46,6 +46,9 @@ fun HomeContentScreen() {
         CHATS_SCREEN -> {
             bottomBarState.value = false
         }
+        MAPS_SCREEN -> {
+            bottomBarState.value = false
+        }
         else -> {
             bottomBarState.value = true
         }

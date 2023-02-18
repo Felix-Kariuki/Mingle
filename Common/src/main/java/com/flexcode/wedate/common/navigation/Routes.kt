@@ -35,3 +35,4 @@ const val PROFILE_DETAILS_SCREEN = "ProfileDetailsScreen"
 const val EDIT_PROFILE_SCREEN = "EditProfileScreen"
 
 const val CHATS_SCREEN = "ChatsScreen"
+const val MAPS_SCREEN = "MapsScreen"

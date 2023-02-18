@@ -1,11 +1,10 @@
 buildscript {
-    val kotlin_version by extra("1.8.0")
     dependencies {
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.43.2")
         classpath("com.google.gms:google-services:4.3.13")
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.1")
         classpath("com.google.firebase:perf-plugin:1.4.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
     }
     repositories {
         mavenCentral()
@@ -17,6 +16,7 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.8.0" apply false
     id("org.jlleitschuh.gradle.ktlint") version ("11.0.0")
     id("com.diffplug.spotless") version ("5.17.1")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version ("2.0.0") apply false
 }
 
 subprojects {
@@ -44,7 +44,6 @@ subprojects {
         outputColorName.set("RED")
         ignoreFailures.set(true)
         enableExperimentalRules.set(true)
-        // reintroduce after removing hard coded urls
         disabledRules.set(setOf("no-wildcard-imports", "filename", "experimental:package-name"))
         reporters {
             reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)

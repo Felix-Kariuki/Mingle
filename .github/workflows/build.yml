@@ -28,6 +28,11 @@ jobs:
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo $DATA > /home/runner/work/WeDate/WeDate/app/google-services.json
+        
+      - name: Get Maps Api Key
+        env:
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+        run: echo MAPS_API_KEY="$MAPS_API_KEY" > ./local.properties
 
       - name: Build with gradle
         run: ./gradlew build --stacktrace
@@ -53,6 +58,11 @@ jobs:
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo $DATA > /home/runner/work/WeDate/WeDate/app/google-services.json
+        
+      - name: Get Maps Api Key
+        env:
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+        run: echo MAPS_API_KEY="$MAPS_API_KEY" > ./local.properties
 
       - name: Lint check
         run: ./gradlew lint
@@ -79,6 +89,11 @@ jobs:
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo $DATA > /home/runner/work/WeDate/WeDate/app/google-services.json
+        
+      - name: Get Maps Api Key
+        env:
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+        run: echo MAPS_API_KEY="$MAPS_API_KEY" > ./local.properties
 
       - name: Execute unit tests
         run: ./gradlew test --stacktrace
