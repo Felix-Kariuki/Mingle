@@ -47,4 +47,6 @@ android {
 
 dependencies {
     implementation(project(":Common"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:admirers"))
 }
