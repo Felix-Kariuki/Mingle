@@ -32,7 +32,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.flexcode.wedate.account.AccountScreen
 import com.flexcode.wedate.admirers.presentation.AdmirersScreen
-import com.flexcode.wedate.chatsscreen.ChatsScreen
+import com.flexcode.wedate.chatsscreen.presentation.ChatsScreen
 import com.flexcode.wedate.common.navigation.*
 import com.flexcode.wedate.common.theme.purple
 import com.flexcode.wedate.home.presentation.HomeScreen

@@ -65,6 +65,8 @@ dependencies {
     //leak canary
     debugImplementation ("com.squareup.leakcanary:leakcanary-android:2.10")
 
+    //compileOnly("com.google.android:android:4.0.1.2")
+
 
     testImplementation ("junit:junit:4.13.2")
     androidTestImplementation ("androidx.test.ext:junit:1.1.5")

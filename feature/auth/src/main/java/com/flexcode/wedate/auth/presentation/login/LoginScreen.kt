@@ -107,9 +107,6 @@ fun LoginScreen(
                     viewModel.login(uiState.email, uiState.password, openAndPopUp)
                 }
             }
-            if (uiState.isLoading) {
-                LoadingAnimation()
-            }
 
             BasicTextButton(
                 text = AppText.no_account,
@@ -118,6 +115,10 @@ fun LoginScreen(
             ) {
                 viewModel.onRegisterClicked(openScreen)
             }
+        }
+
+        if (uiState.isLoading) {
+            LoadingAnimation()
         }
 
         LaunchedEffect(key1 = true) {

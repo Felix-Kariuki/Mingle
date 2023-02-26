@@ -17,6 +17,8 @@ package com.flexcode.wedatecompose.di
 
 import com.flexcode.wedate.auth.data.repository.AuthRepositoryImpl
 import com.flexcode.wedate.auth.domain.repository.AuthRepository
+import com.flexcode.wedate.chatsscreen.data.repository.SaveChatRepositoryImpl
+import com.flexcode.wedate.chatsscreen.domain.repository.SaveChatRepository
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.data.LogServiceImpl
 import com.flexcode.wedate.home.data.repository.HomeRepositoryImpl
@@ -40,4 +42,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun providesMatchesRepository(impl: MatchesRepositoryImpl): MatchesRepository
+
+    @Binds
+    abstract fun providesSaveChatsRepository(impl: SaveChatRepositoryImpl): SaveChatRepository
 }

@@ -49,7 +49,7 @@ import com.flexcode.wedate.common.theme.lightPurple
 @Composable
 fun AdmirersScreen(
     // openScreen: (String,) -> Unit,
-    navigateToAdmirersMaps : () -> Unit,
+    navigateToAdmirersMaps: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: AdmirersViewModel = hiltViewModel()
 ) {

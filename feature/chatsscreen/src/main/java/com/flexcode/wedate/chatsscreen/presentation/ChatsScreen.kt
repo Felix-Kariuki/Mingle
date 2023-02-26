@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.chatsscreen
+package com.flexcode.wedate.chatsscreen.presentation
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
