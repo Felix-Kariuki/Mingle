@@ -27,9 +27,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.navArgument
 import com.flexcode.wedate.account.AccountScreen
 import com.flexcode.wedate.admirers.presentation.AdmirersScreen
 import com.flexcode.wedate.chatsscreen.presentation.ChatsScreen
@@ -58,16 +60,24 @@ fun NavigationGraph(navController: NavHostController) {
         }
         composable(BottomNavItem.Matches.screen_route) {
             MatchesScreen(
-                navigateToChats = {
-                    navController.navigate(route = CHATS_SCREEN)
+                navigateToChats = { match ->
+                    navController.navigate(
+                        route = "$CHATS_SCREEN/${match.id}"
+                    )
                 }
             )
         }
-        composable(route = CHATS_SCREEN) {
+        composable(
+            route = "$CHATS_SCREEN/{data}",
+            arguments = listOf(
+                navArgument("data") { type = NavType.StringType }
+            )
+        ) { navBackStackEntry ->
             ChatsScreen(
                 navigateToMatchScreen = {
                     navController.popBackStack()
-                }
+                },
+                data = navBackStackEntry.arguments?.getString("data")
             )
         }
         composable(BottomNavItem.Account.screen_route) {

@@ -26,6 +26,7 @@ import com.flexcode.wedate.common.navigation.HOME_SCREEN_CONTENT
 import com.flexcode.wedate.common.navigation.PROFILE_IMAGES_SCREEN
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -33,6 +34,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class ProfileImagesViewModel @Inject constructor(
     private val useCaseContainer: UseCaseContainer,
+    private val auth: FirebaseAuth,
     logService: LogService
 ) : BaseViewModel(logService) {
 
@@ -44,7 +46,7 @@ class ProfileImagesViewModel @Inject constructor(
     }
     private fun getUserDetails() {
         viewModelScope.launch {
-            useCaseContainer.getUserDetailsUseCase().collect { result ->
+            useCaseContainer.getUserDetailsUseCase(auth.uid!!).collect { result ->
                 when (result) {
                     is Resource.Success -> {
                         state.value = state.value.copy(

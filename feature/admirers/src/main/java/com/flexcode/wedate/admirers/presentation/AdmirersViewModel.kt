@@ -69,7 +69,7 @@ class AdmirersViewModel @Inject constructor(
 
     private fun getUserDetails() {
         viewModelScope.launch {
-            useCases.getUserDetailsUseCase.invoke().collect { result ->
+            useCases.getUserDetailsUseCase.invoke(getUid()).collect { result ->
                 when (result) {
                     is Resource.Success -> {
                         state.value = state.value.copy(userDetails = result.data)

@@ -24,6 +24,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.R
@@ -50,8 +53,12 @@ import com.flexcode.wedate.common.theme.lightPurple
 @Composable
 fun ChatsScreen(
     modifier: Modifier = Modifier,
-    navigateToMatchScreen: () -> Unit
+    navigateToMatchScreen: () -> Unit,
+    data:String?,
+    viewModel: ChatScreenViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state
+
     Scaffold(
         topBar = {
             TopBar(modifier, navigateToMatchScreen)
@@ -69,6 +76,10 @@ fun ChatsScreen(
                     .padding(horizontal = 16.dp, vertical = 16.dp)
                     .align(Alignment.BottomCenter)
             )
+        }
+
+        LaunchedEffect(key1 = state.userDetails){
+            viewModel.getUserDetails("$data")
         }
     }
 }

@@ -22,6 +22,7 @@ import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.utils.Resource
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -30,7 +31,8 @@ import kotlinx.coroutines.launch
 class SettingsViewModel @Inject constructor(
     logService: LogService,
     private val authRepository: AuthRepository,
-    private val useCaseContainer: UseCaseContainer
+    private val useCaseContainer: UseCaseContainer,
+    private val auth: FirebaseAuth
 ) : BaseViewModel(logService) {
 
     var state = mutableStateOf(SettingsState())
@@ -46,7 +48,7 @@ class SettingsViewModel @Inject constructor(
 
     private fun getUserDetails() {
         viewModelScope.launch {
-            useCaseContainer.getUserDetailsUseCase().collect { result ->
+            useCaseContainer.getUserDetailsUseCase(auth.uid!!).collect { result ->
                 when (result) {
                     is Resource.Success -> {
                         state.value = state.value.copy(

@@ -133,7 +133,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getUserFilters() {
         viewModelScope.launch {
-            useCaseContainer.getUserDetailsUseCase.invoke().collect { result ->
+            useCaseContainer.getUserDetailsUseCase.invoke(getUid()).collect { result ->
                 when (result) {
                     is Resource.Success -> {
                         state.value = state.value.copy(userDetails = result.data)
