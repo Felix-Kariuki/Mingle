@@ -40,11 +40,12 @@ import com.flexcode.wedate.common.ext.visible
 import com.flexcode.wedate.matches.composables.ChatItem
 import com.flexcode.wedate.matches.composables.MatchesItem
 import com.flexcode.wedate.matches.data.model.Chat
+import com.flexcode.wedate.matches.data.model.Matches
 import com.flexcode.wedate.matches.data.model.chats
 
 @Composable
 fun MatchesScreen(
-    navigateToChats: () -> Unit,
+    navigateToChats: (Matches) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MatchesViewModel = hiltViewModel()
 ) {
@@ -98,7 +99,7 @@ fun ChatsComposable(chats: List<Chat>) {
 @Composable
 fun MatchesComposable(
     state: MatchesState,
-    navigateToChats: () -> Unit
+    navigateToChats: (Matches) -> Unit
 ) {
     LazyRow(
         Modifier.fillMaxWidth(),

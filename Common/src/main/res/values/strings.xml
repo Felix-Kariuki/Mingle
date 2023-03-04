@@ -102,5 +102,6 @@
 
 
     <string name="type_msg">Type Message</string>
+    <string name="msg_error">Message can\'t be blank</string>
 
 </resources>

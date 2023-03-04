@@ -35,7 +35,7 @@ import com.flexcode.wedate.matches.data.model.Matches
 @Composable
 fun MatchesItem(
     match: Matches,
-    navigateToChats: () -> Unit
+    navigateToChats: (Matches) -> Unit
 ) {
     Card(
         elevation = 5.dp,
@@ -58,7 +58,7 @@ fun MatchesItem(
             modifier = Modifier
                 .width(110.dp)
                 .height(130.dp)
-                .clickable { navigateToChats() }
+                .clickable { navigateToChats(match) }
         )
     }
 }

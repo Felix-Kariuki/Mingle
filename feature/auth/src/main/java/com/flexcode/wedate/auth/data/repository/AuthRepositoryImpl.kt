@@ -133,11 +133,10 @@ class AuthRepositoryImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun getCurrentUserDetails(): Flow<Resource<User>> {
+    override suspend fun getCurrentUserDetails(uid: String): Flow<Resource<User>> {
         return flow {
             emit(Resource.Loading())
             try {
-                val uid = auth.uid!!
                 val currentUser = dbRef.child(USER_PATH).child(uid).get().await()
                     .getValue(User::class.java) ?: throw IllegalArgumentException()
                 emit(Resource.Success(currentUser))

@@ -24,6 +24,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -39,6 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.R
@@ -46,15 +49,20 @@ import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
 import com.flexcode.wedate.common.theme.deepLightPurple
 import com.flexcode.wedate.common.theme.lightPurple
+import com.flexcode.wedate.common.theme.onlineGreen
 
 @Composable
 fun ChatsScreen(
     modifier: Modifier = Modifier,
-    navigateToMatchScreen: () -> Unit
+    navigateToMatchScreen: () -> Unit,
+    data: String?,
+    viewModel: ChatScreenViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state
+
     Scaffold(
         topBar = {
-            TopBar(modifier, navigateToMatchScreen)
+            TopBar(modifier, navigateToMatchScreen, state)
         }
     ) { paddingValues ->
         Box(
@@ -63,12 +71,18 @@ fun ChatsScreen(
                 .fillMaxSize()
         ) {
             CustomTextField(
-                text = "",
-                onValueChange = {},
+                text = state.message,
+                onValueChange = viewModel::onMessageChange,
+                viewModel = viewModel,
+                state = state,
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 16.dp)
                     .align(Alignment.BottomCenter)
             )
+        }
+
+        LaunchedEffect(key1 = state.userDetails) {
+            viewModel.getUserDetails("$data")
         }
     }
 }
@@ -77,7 +91,9 @@ fun ChatsScreen(
 fun CustomTextField(
     text: String,
     modifier: Modifier = Modifier,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    viewModel: ChatScreenViewModel,
+    state: ChatScreenState
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -103,8 +119,20 @@ fun CustomTextField(
                 unfocusedIndicatorColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent
             ),
-            leadingIcon = { CommonIconButton(imageVector = Icons.Default.FileUpload) },
-            trailingIcon = { CommonIconButton(imageVector = Icons.Default.Send) }
+            leadingIcon = {
+                CommonIconButton(imageVector = Icons.Default.FileUpload, onClick = {})
+            },
+            trailingIcon = {
+                CommonIconButton(imageVector = Icons.Default.Send, onClick = {
+                    viewModel.sendMessage(
+                        message = state.message,
+                        messageSenderId = viewModel.getUid(),
+                        messageTimeStamp = System.currentTimeMillis(),
+                        lastMsgTime = System.currentTimeMillis(),
+                        matchId = state.userDetails?.id.toString()
+                    )
+                })
+            }
 
         )
     }
@@ -112,7 +140,8 @@ fun CustomTextField(
 
 @Composable
 fun CommonIconButton(
-    imageVector: ImageVector
+    imageVector: ImageVector,
+    onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -120,7 +149,7 @@ fun CommonIconButton(
             .clip(CircleShape),
         contentAlignment = Alignment.Center
     ) {
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = { onClick() }) {
             Icon(
                 imageVector = imageVector,
                 contentDescription = "",
@@ -132,7 +161,7 @@ fun CommonIconButton(
 }
 
 @Composable
-fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit) {
+fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit, state: ChatScreenState) {
     val gradient = Brush.horizontalGradient(
         listOf(lightPurple, deepLightPurple),
         startX = 500.0f,
@@ -157,11 +186,11 @@ fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit) {
         Spacer(modifier = modifier.width(5.dp))
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data("https://www.pngmart.com/files/1/Girl-PNG.png")
+                .data("${state.userDetails?.profileImage?.profileImage1}")
                 .crossfade(true)
                 .build(),
             placeholder = painterResource(R.drawable.sharon),
-            contentDescription = "Chat with $",
+            contentDescription = "Chat with ${state.userDetails?.firstName}",
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .clip(CircleShape)
@@ -171,14 +200,14 @@ fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit) {
             modifier = modifier.weight(0.8f)
         ) {
             ResultText(
-                text = "Penolope",
+                text = "${state.userDetails?.firstName}",
                 color = MaterialTheme.colors.background,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold
             )
             ResultText(
                 text = "Online",
-                color = Color.Black,
+                color = onlineGreen,
                 modifier = modifier.offset(y = (-16).dp),
                 fontSize = 14.sp
             )

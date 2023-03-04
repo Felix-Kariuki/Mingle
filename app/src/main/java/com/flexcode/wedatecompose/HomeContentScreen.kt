@@ -43,7 +43,7 @@ fun HomeContentScreen() {
         LOVE_CALCULATOR_SCREEN -> {
             bottomBarState.value = false
         }
-        CHATS_SCREEN -> {
+        "$CHATS_SCREEN/{data}" -> {
             bottomBarState.value = false
         }
         MAPS_SCREEN -> {

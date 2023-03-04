@@ -15,4 +15,9 @@
  */
 package com.flexcode.wedate.chatsscreen.presentation
 
-class ChatScreenState
+import com.flexcode.wedate.auth.data.models.User
+
+data class ChatScreenState(
+    var userDetails: User? = null,
+    val message: String = ""
+)

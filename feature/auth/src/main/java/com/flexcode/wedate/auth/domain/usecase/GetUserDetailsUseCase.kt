@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.Flow
 class GetUserDetailsUseCase constructor(
     private val repository: AuthRepository
 ) {
-    suspend operator fun invoke(): Flow<Resource<User>> {
-        return repository.getCurrentUserDetails()
+    suspend operator fun invoke(uid: String): Flow<Resource<User>> {
+        return repository.getCurrentUserDetails(uid)
     }
 }
