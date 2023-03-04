@@ -38,7 +38,6 @@ class AccountScreenViewModel @Inject constructor(
 
     init {
         getUserDetails()
-
     }
     private fun getUserDetails() {
         viewModelScope.launch {

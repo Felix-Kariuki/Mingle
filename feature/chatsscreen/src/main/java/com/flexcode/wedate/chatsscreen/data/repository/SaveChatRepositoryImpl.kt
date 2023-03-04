@@ -35,7 +35,7 @@ class SaveChatRepositoryImpl @Inject constructor(
     override suspend fun saveChat(
         matchId: String,
         lastMsg: String,
-        lastMsgTime: String,
+        lastMsgTime: Long,
         message: String,
         messageTime: Long,
         messageSenderId: String
@@ -69,7 +69,7 @@ class SaveChatRepositoryImpl @Inject constructor(
     override suspend fun saveChatToMatch(
         matchId: String,
         lastMsg: String,
-        lastMsgTime: String,
+        lastMsgTime: Long,
         message: String,
         messageTime: Long,
         messageSenderId: String

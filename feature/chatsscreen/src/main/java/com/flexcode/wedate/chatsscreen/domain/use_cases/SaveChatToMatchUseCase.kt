@@ -25,7 +25,7 @@ class SaveChatToMatchUseCase constructor(
     suspend operator fun invoke(
         matchId: String,
         lastMsg: String,
-        lastMsgTime: String,
+        lastMsgTime: Long,
         message: String,
         messageTime: Long,
         messageSenderId: String
