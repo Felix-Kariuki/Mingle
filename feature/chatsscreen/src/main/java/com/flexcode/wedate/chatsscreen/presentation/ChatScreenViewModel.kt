@@ -49,6 +49,10 @@ class ChatScreenViewModel @Inject constructor(
         state.value = state.value.copy(message = value)
     }
 
+    init {
+        getCurrentUserDetails(getUid())
+    }
+
     fun sendMessage(
         message: String,
         messageSenderId: String,
@@ -70,12 +74,8 @@ class ChatScreenViewModel @Inject constructor(
                 messageSenderId = messageSenderId
             ).collect { result ->
                 when (result) {
-                    is Resource.Loading -> {
-                        Timber.i("Loading ,, Sending message....")
-                    }
-                    is Resource.Success -> {
-                        Timber.i("SUCCESS ,, message sent")
-                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {}
                     is Resource.Error -> {
                         Timber.i("ERROR ,, ${result.message}")
                     }
@@ -93,12 +93,8 @@ class ChatScreenViewModel @Inject constructor(
                 messageSenderId = messageSenderId
             ).collect { result ->
                 when (result) {
-                    is Resource.Loading -> {
-                        Timber.i("Loading ,, Sending message....")
-                    }
-                    is Resource.Success -> {
-                        Timber.i("SUCCESS ,, message sent")
-                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {}
                     is Resource.Error -> {
                         Timber.i("ERROR ,, ${result.message}")
                     }
@@ -116,6 +112,24 @@ class ChatScreenViewModel @Inject constructor(
                             userDetails = result.data
                         )
                     }
+
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {}
+                }
+            }
+        }
+    }
+
+    fun getCurrentUserDetails(id: String) {
+        viewModelScope.launch {
+            useCaseContainer.getUserDetailsUseCase(uid = id).collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        state.value = state.value.copy(
+                            currentUserDetails = result.data
+                        )
+                    }
+
                     is Resource.Loading -> {}
                     is Resource.Error -> {}
                 }
@@ -142,6 +156,51 @@ class ChatScreenViewModel @Inject constructor(
             }
         }
     }
+
+    fun saveChatProfileToCrush(
+        crushUserId: String,
+        firstName: String,
+        profileImage: String,
+        lastMsgTime: Long,
+        lastMsg: String
+    ) {
+        viewModelScope.launch {
+            chatsUseCaseContainer.saveChatProfileToCrushUseCase.invoke(
+                crushUserId, firstName, profileImage, lastMsgTime, lastMsg
+            ).collect { result ->
+                when (result) {
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("SAVE CHAT PROFILE ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    fun saveChatProfileToCurrentUser(
+        crushUserId: String,
+        firstName: String,
+        profileImage: String,
+        lastMsgTime: Long,
+        lastMsg: String
+    ) {
+        viewModelScope.launch {
+            chatsUseCaseContainer.saveChatProfileToCurrentUserUseCase.invoke(
+                crushUserId, firstName, profileImage, lastMsgTime, lastMsg
+            ).collect { result ->
+                when (result) {
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("SAVE CHAT PROFILE ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }
+
 
     fun getUid(): String {
         return auth.uid!!

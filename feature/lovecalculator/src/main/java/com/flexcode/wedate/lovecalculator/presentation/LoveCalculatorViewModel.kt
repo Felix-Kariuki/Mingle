@@ -62,7 +62,6 @@ class LoveCalculatorViewModel @Inject constructor(
                 when (result) {
                     is Resource.Success -> {
                         state.value = LoveState(calculatorResponse = result.data)
-                        Timber.d("RESULTSS:: ${result.data}")
                     }
                     is Resource.Loading -> {
                         state.value = LoveState(isLoading = true)

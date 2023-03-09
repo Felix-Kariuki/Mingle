@@ -61,18 +61,17 @@ fun ChatsScreen(
 ) {
     val state by viewModel.state
 
-    Scaffold(
-        topBar = {
-            TopBar(modifier, navigateToMatchScreen, state)
-        }
-    ) { paddingValues ->
+    Scaffold(topBar = {
+        TopBar(modifier, navigateToMatchScreen, state)
+    }) { paddingValues ->
         Box(
             modifier = modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
             LazyColumn(
-                modifier = modifier.fillMaxSize()
+                modifier = modifier
+                    .fillMaxSize()
                     .padding(bottom = 75.dp)
             ) {
                 items(state.messages.size) { i ->
@@ -120,54 +119,57 @@ fun CustomTextField(
         shape = RoundedCornerShape(10.dp),
         border = BorderStroke(1.dp, lightPurple)
     ) {
-        TextField(
-            value = text,
-            onValueChange = { onValueChange(it) },
-            placeholder = {
-                Text(
-                    text = stringResource(id = R.string.type_msg),
-                    style = TextStyle(
-                        fontSize = 15.sp,
-                        color = Color.Gray
-                    ),
-                    textAlign = TextAlign.Center
+        TextField(value = text, onValueChange = { onValueChange(it) }, placeholder = {
+            Text(
+                text = stringResource(id = R.string.type_msg), style = TextStyle(
+                    fontSize = 15.sp, color = Color.Gray
+                ), textAlign = TextAlign.Center
+            )
+        }, colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent
+        ), leadingIcon = {
+            CommonIconButton(imageVector = Icons.Default.FileUpload, onClick = {})
+        }, trailingIcon = {
+            CommonIconButton(imageVector = Icons.Default.Send, onClick = {
+                viewModel.sendMessage(
+                    message = state.message,
+                    messageSenderId = viewModel.getUid(),
+                    messageTimeStamp = System.currentTimeMillis(),
+                    lastMsgTime = System.currentTimeMillis(),
+                    matchId = state.userDetails?.id.toString()
                 )
-            },
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent
-            ),
-            leadingIcon = {
-                CommonIconButton(imageVector = Icons.Default.FileUpload, onClick = {})
-            },
-            trailingIcon = {
-                CommonIconButton(imageVector = Icons.Default.Send, onClick = {
-                    viewModel.sendMessage(
-                        message = state.message,
-                        messageSenderId = viewModel.getUid(),
-                        messageTimeStamp = System.currentTimeMillis(),
-                        lastMsgTime = System.currentTimeMillis(),
-                        matchId = state.userDetails?.id.toString()
-                    )
-                    viewModel.getAllMessages(messagesId = "${viewModel.getUid()}$userId")
-                })
-            }
-
+                viewModel.getAllMessages(messagesId = "${viewModel.getUid()}$userId")// workmanager
+                viewModel.saveChatProfileToCurrentUser(
+                    crushUserId = userId,
+                    firstName = state.userDetails?.firstName.toString(),
+                    profileImage = state.userDetails?.profileImage?.profileImage1.toString(),
+                    lastMsgTime = System.currentTimeMillis(),
+                    lastMsg = state.message
+                )
+                viewModel.saveChatProfileToCrush(
+                    crushUserId = userId,
+                    firstName = state.currentUserDetails?.firstName.toString(),
+                    profileImage = state.currentUserDetails?.profileImage?.profileImage1.toString(),
+                    lastMsgTime = System.currentTimeMillis(),
+                    lastMsg = state.message
+                )
+                state.message = ""
+            })
+        }
         )
     }
 }
 
 @Composable
 fun CommonIconButton(
-    imageVector: ImageVector,
-    onClick: () -> Unit
+    imageVector: ImageVector, onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
             .size(43.dp)
-            .clip(CircleShape),
-        contentAlignment = Alignment.Center
+            .clip(CircleShape), contentAlignment = Alignment.Center
     ) {
         IconButton(onClick = { onClick() }) {
             Icon(
@@ -183,14 +185,12 @@ fun CommonIconButton(
 @Composable
 fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit, state: ChatScreenState) {
     val gradient = Brush.horizontalGradient(
-        listOf(lightPurple, deepLightPurple),
-        startX = 500.0f,
-        endX = 1330.0f
+        listOf(lightPurple, deepLightPurple), startX = 500.0f, endX = 1330.0f
     )
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(85.dp)
+            .height(75.dp)
             .background(brush = gradient),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -198,17 +198,15 @@ fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit, state: ChatScr
             onClick = { navigateToMatchScreen() },
             icon = Icons.Default.ArrowBackIos,
             contentDesc = "Back",
-            height = 30.dp,
-            width = 30.dp,
+            height = 20.dp,
+            width = 20.dp,
             paddingValues = PaddingValues(start = 10.dp, 0.dp),
             tint = Color.Black
         )
         Spacer(modifier = modifier.width(5.dp))
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data("${state.userDetails?.profileImage?.profileImage1}")
-                .crossfade(true)
-                .build(),
+                .data("${state.userDetails?.profileImage?.profileImage1}").crossfade(true).build(),
             placeholder = painterResource(R.drawable.sharon),
             contentDescription = "Chat with ${state.userDetails?.firstName}",
             contentScale = ContentScale.Crop,

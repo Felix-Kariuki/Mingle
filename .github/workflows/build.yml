@@ -40,66 +40,69 @@ jobs:
       - name: Run Testts
         run: ./gradlew test
 
-      - name: Build Project
-        run: ./gradlew assemble
-
-  lint-check:
-    name: 🔍 Lint
-    runs-on: ubuntu-latest
-    steps:
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Create google json
-        run: cat /home/runner/work/WeDate/WeDate/app/google-services.json | base64
-        
-      - name: 📖 Read data from secrets and Putting data to json
-        env:
-          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: echo $DATA > /home/runner/work/WeDate/WeDate/app/google-services.json
-        
-      - name: Get Maps Api Key
-        env:
-          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
-        run: echo MAPS_API_KEY="$MAPS_API_KEY" > ./local.properties
-
       - name: Lint check
         run: ./gradlew lint
 
-      - name: Generate lint report
-        uses: actions/upload-artifact@v2
-        with:
-          name: lint_report.html
-          path: app/build/reports/lint-results-debug.html
+      - name: Build Project
+        run: ./gradlew assemble
 
-  unit-tests:
-    name: 🧪 Unit Tests
-    needs: [ lint-check ]
-    runs-on: ubuntu-latest
-    steps:
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Create google json
-        run: cat /home/runner/work/WeDate/WeDate/app/google-services.json | base64
-        
-      - name: 📖 Read data from secrets and Putting data to json
-        env:
-          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: echo $DATA > /home/runner/work/WeDate/WeDate/app/google-services.json
-        
-      - name: Get Maps Api Key
-        env:
-          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
-        run: echo MAPS_API_KEY="$MAPS_API_KEY" > ./local.properties
-
-      - name: Execute unit tests
-        run: ./gradlew test --stacktrace
-
-      - name: Generate test report
-        uses: actions/upload-artifact@v2
-        with:
-          name: unit_tests_report.html
-          path: app/build/reports/tests/testDebugUnitTest/
+#  lint-check:
+#    name: 🔍 Lint
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Create google json
+#        run: cat /home/runner/work/WeDate/WeDate/app/google-services.json | base64
+#
+#      - name: 📖 Read data from secrets and Putting data to json
+#        env:
+#          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+#        run: echo $DATA > /home/runner/work/WeDate/WeDate/app/google-services.json
+#
+#      - name: Get Maps Api Key
+#        env:
+#          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+#        run: echo MAPS_API_KEY="$MAPS_API_KEY" > ./local.properties
+#
+#      - name: Lint check
+#        run: ./gradlew lint
+#
+#      - name: Generate lint report
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: lint_report.html
+#          path: app/build/reports/lint-results-debug.html
+#
+#  unit-tests:
+#    name: 🧪 Unit Tests
+#    needs: [ lint-check ]
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Create google json
+#        run: cat /home/runner/work/WeDate/WeDate/app/google-services.json | base64
+#
+#      - name: 📖 Read data from secrets and Putting data to json
+#        env:
+#          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+#        run: echo $DATA > /home/runner/work/WeDate/WeDate/app/google-services.json
+#
+#      - name: Get Maps Api Key
+#        env:
+#          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+#        run: echo MAPS_API_KEY="$MAPS_API_KEY" > ./local.properties
+#
+#      - name: Execute unit tests
+#        run: ./gradlew test --stacktrace
+#
+#      - name: Generate test report
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: unit_tests_report.html
+#          path: app/build/reports/tests/testDebugUnitTest/

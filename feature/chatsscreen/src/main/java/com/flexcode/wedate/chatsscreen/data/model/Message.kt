@@ -20,9 +20,3 @@ data class Messsage(
     val timeStamp: Long = 0L,
     val messageSenderId: String = ""
 )
-
-data class MessageBody(
-    val messages: List<Messsage>,
-    val lastMsg: String,
-    val lastMsgTime: Long
-)

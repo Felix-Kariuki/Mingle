@@ -18,6 +18,8 @@ package com.flexcode.wedate.chatsscreen.di
 import com.flexcode.wedate.chatsscreen.domain.repository.SaveChatRepository
 import com.flexcode.wedate.chatsscreen.domain.use_cases.ChatsUseCaseContainer
 import com.flexcode.wedate.chatsscreen.domain.use_cases.GetMessagesUseCase
+import com.flexcode.wedate.chatsscreen.domain.use_cases.SaveChatProfileToCrushUseCase
+import com.flexcode.wedate.chatsscreen.domain.use_cases.SaveChatProfileToCurrentUserUseCase
 import com.flexcode.wedate.chatsscreen.domain.use_cases.SaveChatToCurrentUserUseCase
 import com.flexcode.wedate.chatsscreen.domain.use_cases.SaveChatToMatchUseCase
 import dagger.Module
@@ -38,7 +40,9 @@ object ChatScreenUseCaseModule {
         return ChatsUseCaseContainer(
             saveChatToCurrentUserUseCase = SaveChatToCurrentUserUseCase(repository = repository),
             saveChatToMatchUseCase = SaveChatToMatchUseCase(repository = repository),
-            getMessagesUseCase = GetMessagesUseCase(repository = repository)
+            getMessagesUseCase = GetMessagesUseCase(repository = repository),
+            saveChatProfileToCrushUseCase =  SaveChatProfileToCrushUseCase(repository),
+            saveChatProfileToCurrentUserUseCase = SaveChatProfileToCurrentUserUseCase(repository),
         )
     }
 }

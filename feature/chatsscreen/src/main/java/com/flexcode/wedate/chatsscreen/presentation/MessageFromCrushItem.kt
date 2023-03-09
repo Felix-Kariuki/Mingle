@@ -36,7 +36,7 @@ fun MessageFromCrushItem(message: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(start=16.dp,top = 4.dp ,bottom = 2.dp)
     ) {
         Box(
             modifier = Modifier
@@ -48,7 +48,7 @@ fun MessageFromCrushItem(message: String) {
                 fontSize = 16.sp,
                 color = MaterialTheme.colors.onPrimary,
                 modifier = Modifier
-                    .padding(top = 4.dp, bottom = 4.dp, start = 8.dp, end = 8.dp)
+                    .padding(top = 8.dp, bottom = 8.dp, start = 8.dp, end = 8.dp)
                     .widthIn(0.dp, 250.dp)
             )
         }

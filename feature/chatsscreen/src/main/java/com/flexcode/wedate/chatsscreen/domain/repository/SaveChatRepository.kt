@@ -40,4 +40,20 @@ interface SaveChatRepository {
     ): Flow<Resource<Any>>
 
     suspend fun getAllMessages(messagesId: String): Flow<Resource<List<Messsage>>>
+
+    suspend fun saveChatProfileToCurrentUser(
+        crushUserId:String,
+        firstName: String,
+        profileImage: String,
+        lastMsgTime:Long,
+        lastMsg:String,
+    ):Flow<Resource<Any>>
+
+    suspend fun saveChatProfileToCrush(
+        crushUserId:String,
+        firstName: String,
+        profileImage: String,
+        lastMsgTime:Long,
+        lastMsg:String,
+    ):Flow<Resource<Any>>
 }
