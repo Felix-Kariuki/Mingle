@@ -20,6 +20,7 @@ import com.flexcode.wedate.chatsscreen.domain.repository.SaveChatRepository
 import com.flexcode.wedate.common.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.util.UUID
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -31,6 +32,23 @@ class SaveChatRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth
 ) : SaveChatRepository {
     private val dbRef = FirebaseDatabase.getInstance().reference
+
+    override suspend fun getAllMessages(messagesId: String): Flow<Resource<List<Messsage>>> {
+        return flow<Resource<List<Messsage>>> {
+            emit(Resource.Loading())
+            val allMessages = ArrayList<Messsage>()
+            val msgs = dbRef.child(CHATS_PATH).child(messagesId).child(MESSAGES).get().await()
+            for (i in msgs.children) {
+                val result = i.getValue(Messsage::class.java)
+                allMessages.add(result!!)
+            }
+            try {
+                emit(Resource.Success(allMessages))
+            } catch (e: Exception) {
+                emit(Resource.Error(message = e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 
     override suspend fun saveChat(
         matchId: String,
@@ -44,6 +62,7 @@ class SaveChatRepositoryImpl @Inject constructor(
             emit(Resource.Loading())
 
             try {
+                val messageId = UUID.randomUUID().toString()
                 val currentUid = auth.uid!!
                 val currentUserChatId = currentUid + matchId
 
@@ -53,12 +72,12 @@ class SaveChatRepositoryImpl @Inject constructor(
                     messageSenderId = messageSenderId
                 )
 
-                dbRef.child(CHATS_PATH).child(currentUserChatId).child(MESSAGES).setValue(messsage)
-                    .await()
-                dbRef.child(CHATS_PATH).child(currentUserChatId).child("lastMsg")
+                dbRef.child(CHATS_PATH).child(currentUserChatId).child(MESSAGES).child(messageId)
+                    .setValue(messsage).await()
+                /*dbRef.child(CHATS_PATH).child(currentUserChatId).child("lastMsg")
                     .setValue(lastMsg).await()
                 dbRef.child(CHATS_PATH).child(currentUserChatId).child("lastMsgTime")
-                    .setValue(lastMsgTime).await()
+                    .setValue(lastMsgTime).await()*/
             } catch (e: Exception) {
                 println(e)
                 emit(Resource.Error(message = e.message.toString()))
@@ -80,19 +99,19 @@ class SaveChatRepositoryImpl @Inject constructor(
             try {
                 val currentUid = auth.uid!!
                 val matchIdChatId = matchId + currentUid
-
+                val messageId = UUID.randomUUID().toString()
                 val messsage = Messsage(
                     message = message,
                     timeStamp = messageTime,
                     messageSenderId = messageSenderId
                 )
 
-                dbRef.child(CHATS_PATH).child(matchIdChatId).child(MESSAGES).setValue(messsage)
-                    .await()
-                dbRef.child(CHATS_PATH).child(matchIdChatId).child("lastMsg")
+                dbRef.child(CHATS_PATH).child(matchIdChatId).child(MESSAGES).child(messageId)
+                    .setValue(messsage).await()
+                /*dbRef.child(CHATS_PATH).child(matchIdChatId).child("lastMsg")
                     .setValue(lastMsg).await()
                 dbRef.child(CHATS_PATH).child(matchIdChatId).child("lastMsgTime")
-                    .setValue(lastMsgTime).await()
+                    .setValue(lastMsgTime).await()*/
             } catch (e: Exception) {
                 println(e)
                 emit(Resource.Error(message = e.message.toString()))

@@ -123,6 +123,26 @@ class ChatScreenViewModel @Inject constructor(
         }
     }
 
+    fun getAllMessages(messagesId: String) {
+        viewModelScope.launch {
+            chatsUseCaseContainer.getMessagesUseCase(messagesId).collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        state.value = result.data?.let {
+                            state.value.copy(
+                                messages = it
+                            )
+                        }!!
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.i("SUCCESS_ERROR:: ${result.data}")
+                    }
+                }
+            }
+        }
+    }
+
     fun getUid(): String {
         return auth.uid!!
     }

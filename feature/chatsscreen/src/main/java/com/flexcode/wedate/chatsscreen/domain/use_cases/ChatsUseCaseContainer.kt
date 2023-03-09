@@ -17,5 +17,6 @@ package com.flexcode.wedate.chatsscreen.domain.use_cases
 
 data class ChatsUseCaseContainer(
     val saveChatToCurrentUserUseCase: SaveChatToCurrentUserUseCase,
-    val saveChatToMatchUseCase: SaveChatToMatchUseCase
+    val saveChatToMatchUseCase: SaveChatToMatchUseCase,
+    val getMessagesUseCase: GetMessagesUseCase
 )
