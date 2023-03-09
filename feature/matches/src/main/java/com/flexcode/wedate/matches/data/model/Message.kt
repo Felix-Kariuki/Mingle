@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.chatsscreen.data.model
+package com.flexcode.wedate.matches.data.model
 
 data class Messsage(
-    val message: String = "",
-    val timeStamp: Long = 0L,
-    val messageSenderId: String = ""
+    val message: String,
+    val timeStamp: Long,
+    val messageSenderId: String
 )
 
 data class MessageBody(
-    val messages: List<Messsage>,
+    val Messages: List<Messsage>,
     val lastMsg: String,
-    val lastMsgTime: Long
+    val latMsgTime: Long
 )

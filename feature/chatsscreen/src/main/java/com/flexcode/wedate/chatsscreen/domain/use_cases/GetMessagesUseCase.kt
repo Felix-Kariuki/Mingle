@@ -13,31 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.chatsscreen.domain.repository
+package com.flexcode.wedate.chatsscreen.domain.use_cases
 
 import com.flexcode.wedate.chatsscreen.data.model.Messsage
+import com.flexcode.wedate.chatsscreen.domain.repository.SaveChatRepository
 import com.flexcode.wedate.common.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
-interface SaveChatRepository {
+class GetMessagesUseCase constructor(
+    private val repository: SaveChatRepository
+) {
 
-    suspend fun saveChat(
-        matchId: String,
-        lastMsg: String,
-        lastMsgTime: Long,
-        message: String,
-        messageTime: Long,
-        messageSenderId: String
-    ): Flow<Resource<Any>>
-
-    suspend fun saveChatToMatch(
-        matchId: String,
-        lastMsg: String,
-        lastMsgTime: Long,
-        message: String,
-        messageTime: Long,
-        messageSenderId: String
-    ): Flow<Resource<Any>>
-
-    suspend fun getAllMessages(messagesId: String): Flow<Resource<List<Messsage>>>
+    suspend operator fun invoke(messagesId: String): Flow<Resource<List<Messsage>>> {
+        return repository.getAllMessages(messagesId)
+    }
 }

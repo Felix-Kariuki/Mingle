@@ -18,6 +18,7 @@ package com.flexcode.wedate.chatsscreen.presentation
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -67,9 +68,24 @@ fun ChatsScreen(
     ) { paddingValues ->
         Box(
             modifier = modifier
-                .padding(paddingValues)
                 .fillMaxSize()
+                .padding(paddingValues)
         ) {
+            LazyColumn(
+                modifier = modifier.fillMaxSize()
+                    .padding(bottom = 75.dp)
+            ) {
+                items(state.messages.size) { i ->
+                    val msg = state.messages.sortedBy { it.timeStamp }[i]
+                    val currentUid = viewModel.getUid()
+                    if (msg.messageSenderId == currentUid) {
+                        MessageByMeItem(msg.message)
+                    } else {
+                        MessageFromCrushItem(msg.message)
+                    }
+                }
+            }
+
             CustomTextField(
                 text = state.message,
                 onValueChange = viewModel::onMessageChange,
@@ -77,12 +93,14 @@ fun ChatsScreen(
                 state = state,
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 16.dp)
-                    .align(Alignment.BottomCenter)
+                    .align(Alignment.BottomCenter),
+                userId = data!!
             )
         }
 
         LaunchedEffect(key1 = state.userDetails) {
             viewModel.getUserDetails("$data")
+            viewModel.getAllMessages(messagesId = "${viewModel.getUid()}$data")
         }
     }
 }
@@ -93,7 +111,8 @@ fun CustomTextField(
     modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit,
     viewModel: ChatScreenViewModel,
-    state: ChatScreenState
+    state: ChatScreenState,
+    userId: String
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -131,6 +150,7 @@ fun CustomTextField(
                         lastMsgTime = System.currentTimeMillis(),
                         matchId = state.userDetails?.id.toString()
                     )
+                    viewModel.getAllMessages(messagesId = "${viewModel.getUid()}$userId")
                 })
             }
 

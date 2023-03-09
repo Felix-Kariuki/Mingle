@@ -47,6 +47,4 @@ android {
 
 dependencies {
     implementation(project(":Common"))
-
-    implementation("androidx.core:core-ktx:+")
 }
