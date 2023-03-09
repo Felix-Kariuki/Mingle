@@ -21,27 +21,26 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.flexcode.wedate.common.R.drawable as AppIcon
-import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
+import com.flexcode.wedate.common.composables.NoResultFoundAnimation
 import com.flexcode.wedate.common.composables.SearchTextField
 import com.flexcode.wedate.common.ext.textPadding
-import com.flexcode.wedate.common.ext.visible
+import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.matches.composables.ChatItem
 import com.flexcode.wedate.matches.composables.MatchesItem
-import com.flexcode.wedate.matches.data.model.Chat
 import com.flexcode.wedate.matches.data.model.Matches
-import com.flexcode.wedate.matches.data.model.chats
+import com.flexcode.wedate.common.R.drawable as AppIcon
+import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun MatchesScreen(
@@ -65,32 +64,35 @@ fun MatchesScreen(
             }
         )
 
-        var visible = true
-        if (state.matches.isEmpty()) {
-            visible = false
+        if (state.matches.isEmpty()){
+            NoResultFoundAnimation()
+            ErrorMessage(text = AppText.no_matches)
+        }else if (state.matches.isNotEmpty() && state.chatProfiles.isEmpty()){
+            BasicText(text = AppText.matches, fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+            MatchesComposable(state, navigateToChats)
+            NoResultFoundAnimation()
+            ErrorMessage(text = AppText.no_chats)
+        }else {
+            BasicText(text = AppText.matches, fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+            MatchesComposable(state, navigateToChats)
+            BasicText(text = AppText.chats, fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+            ChatsComposable(state)
         }
 
-        BasicText(
-            text = AppText.matches,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.SemiBold,
-            modifier = modifier.visible(visible)
-        )
-        MatchesComposable(state, navigateToChats)
-
-        BasicText(text = AppText.chats, fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
-        ChatsComposable(chats = chats)
     }
 }
 
 @Composable
-fun ChatsComposable(chats: List<Chat>) {
+fun ChatsComposable(
+    state: MatchesState
+) {
     LazyColumn(
         Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(16.dp)
     ) {
-        items(chats) { chat ->
-            ChatItem(name = chat.name, image = chat.image, message = chat.message)
+        items(state.chatProfiles.size) { chat ->
+            val chatProfile = state.chatProfiles[chat]
+            ChatItem(chatProfile = chatProfile)
             Divider(modifier = Modifier.padding(horizontal = 16.dp))
         }
     }
@@ -110,4 +112,17 @@ fun MatchesComposable(
             MatchesItem(match = match, navigateToChats)
         }
     }
+}
+
+@Composable
+fun ErrorMessage(
+    text:Int
+) {
+    BasicText(
+        text = text,
+        fontSize = 18.sp,
+        textAlign = TextAlign.Center,
+        fontWeight = FontWeight.SemiBold,
+        color = deepBrown
+    )
 }
