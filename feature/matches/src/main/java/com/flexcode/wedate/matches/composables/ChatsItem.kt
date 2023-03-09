@@ -15,6 +15,7 @@
  */
 package com.flexcode.wedate.matches.composables
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
@@ -40,12 +41,14 @@ import com.flexcode.wedate.matches.data.model.ChatProfile
 @Composable
 fun ChatItem(
     chatProfile: ChatProfile,
+    navigateToChats: (String) -> Unit
 ) {
     Row(
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
             .wrapContentHeight()
+            .clickable { navigateToChats(chatProfile.id) }
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)

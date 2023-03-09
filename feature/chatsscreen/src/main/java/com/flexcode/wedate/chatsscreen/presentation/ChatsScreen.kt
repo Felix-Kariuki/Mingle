@@ -119,57 +119,70 @@ fun CustomTextField(
         shape = RoundedCornerShape(10.dp),
         border = BorderStroke(1.dp, lightPurple)
     ) {
-        TextField(value = text, onValueChange = { onValueChange(it) }, placeholder = {
-            Text(
-                text = stringResource(id = R.string.type_msg), style = TextStyle(
-                    fontSize = 15.sp, color = Color.Gray
-                ), textAlign = TextAlign.Center
-            )
-        }, colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent
-        ), leadingIcon = {
-            CommonIconButton(imageVector = Icons.Default.FileUpload, onClick = {})
-        }, trailingIcon = {
-            CommonIconButton(imageVector = Icons.Default.Send, onClick = {
-                viewModel.sendMessage(
-                    message = state.message,
-                    messageSenderId = viewModel.getUid(),
-                    messageTimeStamp = System.currentTimeMillis(),
-                    lastMsgTime = System.currentTimeMillis(),
-                    matchId = state.userDetails?.id.toString()
+        TextField(
+            value = text,
+            onValueChange = { onValueChange(it) },
+            placeholder = {
+                Text(
+                    text = stringResource(id = R.string.type_msg),
+                    style = TextStyle(
+                        fontSize = 15.sp,
+                        color = Color.Gray
+                    ),
+                    textAlign = TextAlign.Center
                 )
-                viewModel.getAllMessages(messagesId = "${viewModel.getUid()}$userId")// workmanager
-                viewModel.saveChatProfileToCurrentUser(
-                    crushUserId = userId,
-                    firstName = state.userDetails?.firstName.toString(),
-                    profileImage = state.userDetails?.profileImage?.profileImage1.toString(),
-                    lastMsgTime = System.currentTimeMillis(),
-                    lastMsg = state.message
-                )
-                viewModel.saveChatProfileToCrush(
-                    crushUserId = userId,
-                    firstName = state.currentUserDetails?.firstName.toString(),
-                    profileImage = state.currentUserDetails?.profileImage?.profileImage1.toString(),
-                    lastMsgTime = System.currentTimeMillis(),
-                    lastMsg = state.message
-                )
-                state.message = ""
-            })
-        }
+            },
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent
+            ),
+            leadingIcon = {
+                CommonIconButton(imageVector = Icons.Default.FileUpload, onClick = {})
+            },
+            trailingIcon = {
+                CommonIconButton(imageVector = Icons.Default.Send, onClick = {
+                    viewModel.sendMessage(
+                        message = state.message,
+                        messageSenderId = viewModel.getUid(),
+                        messageTimeStamp = System.currentTimeMillis(),
+                        lastMsgTime = System.currentTimeMillis(),
+                        matchId = state.userDetails?.id.toString()
+                    )
+                    viewModel.getAllMessages(messagesId = "${viewModel.getUid()}$userId")
+                    // workmanager
+                    viewModel.saveChatProfileToCurrentUser(
+                        crushUserId = userId,
+                        firstName = state.userDetails?.firstName.toString(),
+                        profileImage = state.userDetails?.profileImage?.profileImage1.toString(),
+                        lastMsgTime = System.currentTimeMillis(),
+                        lastMsg = state.message
+                    )
+                    viewModel.saveChatProfileToCrush(
+                        crushUserId = userId,
+                        firstName = state.currentUserDetails?.firstName.toString(),
+                        profileImage =
+                        state.currentUserDetails?.profileImage?.profileImage1.toString(),
+                        lastMsgTime = System.currentTimeMillis(),
+                        lastMsg = state.message
+                    )
+                    state.message = ""
+                })
+            }
         )
     }
 }
 
 @Composable
 fun CommonIconButton(
-    imageVector: ImageVector, onClick: () -> Unit
+    imageVector: ImageVector,
+    onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
             .size(43.dp)
-            .clip(CircleShape), contentAlignment = Alignment.Center
+            .clip(CircleShape),
+        contentAlignment = Alignment.Center
     ) {
         IconButton(onClick = { onClick() }) {
             Icon(
@@ -185,7 +198,9 @@ fun CommonIconButton(
 @Composable
 fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit, state: ChatScreenState) {
     val gradient = Brush.horizontalGradient(
-        listOf(lightPurple, deepLightPurple), startX = 500.0f, endX = 1330.0f
+        listOf(lightPurple, deepLightPurple),
+        startX = 500.0f,
+        endX = 1330.0f
     )
     Row(
         modifier = modifier
@@ -224,7 +239,7 @@ fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit, state: ChatScr
                 fontWeight = FontWeight.SemiBold
             )
             ResultText(
-                text = "Online",
+                text = "", // online/offline
                 color = onlineGreen,
                 modifier = modifier.offset(y = (-16).dp),
                 fontSize = 14.sp

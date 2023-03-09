@@ -13,12 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.chatsscreen.domain.use_cases
+package com.flexcode.wedate.profileedit.domain.use_case
 
-data class ChatsUseCaseContainer(
-    val saveChatToCurrentUserUseCase: SaveChatToCurrentUserUseCase,
-    val saveChatToMatchUseCase: SaveChatToMatchUseCase,
-    val getMessagesUseCase: GetMessagesUseCase,
-    val saveChatProfileToCrushUseCase: SaveChatProfileToCrushUseCase,
-    val saveChatProfileToCurrentUserUseCase: SaveChatProfileToCurrentUserUseCase
-)
+import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedate.profileedit.domain.repository.EditProfileRepository
+import kotlinx.coroutines.flow.Flow
+
+class EditProfileUseCase(private val repository: EditProfileRepository) {
+
+    suspend operator fun invoke(userBio: String): Flow<Resource<Any>> {
+        return repository.updateUserProfileInfo(userBio)
+    }
+}

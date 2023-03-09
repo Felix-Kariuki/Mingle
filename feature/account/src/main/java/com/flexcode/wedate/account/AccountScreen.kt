@@ -25,6 +25,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -52,6 +53,7 @@ import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
+import com.flexcode.wedate.common.theme.purple
 
 @Composable
 fun AccountScreen(
@@ -104,7 +106,8 @@ fun AccountScreen(
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colors.background,
-                fontSize = 20.sp
+                fontSize = 20.sp,
+                modifier = modifier.offset(y = (-8).dp)
             )
 
             Row(
@@ -214,8 +217,23 @@ fun ProfileImage(
     navigateToProfileDetails: () -> Unit
 ) {
     Box(
-        modifier = Modifier.clip(shape = CircleShape)
+        modifier = Modifier.size(115.dp)
     ) {
+        Card(
+            modifier = Modifier
+                .clip(CircleShape)
+                .align(Alignment.BottomEnd)
+                .clickable {
+                    navigateToProfileDetails()
+                },
+            backgroundColor = purple
+        ) {
+            Image(
+                modifier = Modifier.size(40.dp).padding(8.dp),
+                imageVector = Icons.Default.Edit,
+                contentDescription = "edit profile"
+            )
+        }
         Image(
             painter = rememberAsyncImagePainter(
                 ImageRequest
@@ -228,9 +246,6 @@ fun ProfileImage(
             ),
             contentDescription = "profile image",
             modifier = Modifier
-                .clickable {
-                    navigateToProfileDetails()
-                }
                 .size(100.dp)
                 .clip(CircleShape)
                 .border(1.dp, deepBrown, CircleShape),

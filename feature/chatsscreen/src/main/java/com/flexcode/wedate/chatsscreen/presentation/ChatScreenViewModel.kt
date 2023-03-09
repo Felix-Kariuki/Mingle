@@ -166,7 +166,11 @@ class ChatScreenViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             chatsUseCaseContainer.saveChatProfileToCrushUseCase.invoke(
-                crushUserId, firstName, profileImage, lastMsgTime, lastMsg
+                crushUserId,
+                firstName,
+                profileImage,
+                lastMsgTime,
+                lastMsg
             ).collect { result ->
                 when (result) {
                     is Resource.Success -> {}
@@ -188,7 +192,11 @@ class ChatScreenViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             chatsUseCaseContainer.saveChatProfileToCurrentUserUseCase.invoke(
-                crushUserId, firstName, profileImage, lastMsgTime, lastMsg
+                crushUserId,
+                firstName,
+                profileImage,
+                lastMsgTime,
+                lastMsg
             ).collect { result ->
                 when (result) {
                     is Resource.Success -> {}
@@ -200,7 +208,6 @@ class ChatScreenViewModel @Inject constructor(
             }
         }
     }
-
 
     fun getUid(): String {
         return auth.uid!!

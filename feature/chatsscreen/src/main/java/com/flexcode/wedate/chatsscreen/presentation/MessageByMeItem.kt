@@ -37,7 +37,7 @@ fun MessageByMeItem(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(end=16.dp, top = 4.dp ,bottom = 2.dp)
+            .padding(end = 16.dp, top = 4.dp, bottom = 2.dp)
     ) {
         Box(
             modifier = Modifier

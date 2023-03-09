@@ -31,6 +31,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flexcode.wedate.common.R.drawable as AppIcon
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.NoResultFoundAnimation
 import com.flexcode.wedate.common.composables.SearchTextField
@@ -38,13 +40,10 @@ import com.flexcode.wedate.common.ext.textPadding
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.matches.composables.ChatItem
 import com.flexcode.wedate.matches.composables.MatchesItem
-import com.flexcode.wedate.matches.data.model.Matches
-import com.flexcode.wedate.common.R.drawable as AppIcon
-import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun MatchesScreen(
-    navigateToChats: (Matches) -> Unit,
+    navigateToChats: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MatchesViewModel = hiltViewModel()
 ) {
@@ -64,27 +63,27 @@ fun MatchesScreen(
             }
         )
 
-        if (state.matches.isEmpty()){
+        if (state.matches.isEmpty()) {
             NoResultFoundAnimation()
             ErrorMessage(text = AppText.no_matches)
-        }else if (state.matches.isNotEmpty() && state.chatProfiles.isEmpty()){
+        } else if (state.matches.isNotEmpty() && state.chatProfiles.isEmpty()) {
             BasicText(text = AppText.matches, fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
             MatchesComposable(state, navigateToChats)
             NoResultFoundAnimation()
             ErrorMessage(text = AppText.no_chats)
-        }else {
+        } else {
             BasicText(text = AppText.matches, fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
             MatchesComposable(state, navigateToChats)
             BasicText(text = AppText.chats, fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
-            ChatsComposable(state)
+            ChatsComposable(state, navigateToChats)
         }
-
     }
 }
 
 @Composable
 fun ChatsComposable(
-    state: MatchesState
+    state: MatchesState,
+    navigateToChats: (String) -> Unit
 ) {
     LazyColumn(
         Modifier.fillMaxWidth(),
@@ -92,7 +91,7 @@ fun ChatsComposable(
     ) {
         items(state.chatProfiles.size) { chat ->
             val chatProfile = state.chatProfiles[chat]
-            ChatItem(chatProfile = chatProfile)
+            ChatItem(chatProfile = chatProfile, navigateToChats)
             Divider(modifier = Modifier.padding(horizontal = 16.dp))
         }
     }
@@ -101,7 +100,7 @@ fun ChatsComposable(
 @Composable
 fun MatchesComposable(
     state: MatchesState,
-    navigateToChats: (Matches) -> Unit
+    navigateToChats: (String) -> Unit
 ) {
     LazyRow(
         Modifier.fillMaxWidth(),
@@ -116,7 +115,7 @@ fun MatchesComposable(
 
 @Composable
 fun ErrorMessage(
-    text:Int
+    text: Int
 ) {
     BasicText(
         text = text,

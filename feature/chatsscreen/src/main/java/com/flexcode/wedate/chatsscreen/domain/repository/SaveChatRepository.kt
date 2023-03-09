@@ -42,18 +42,18 @@ interface SaveChatRepository {
     suspend fun getAllMessages(messagesId: String): Flow<Resource<List<Messsage>>>
 
     suspend fun saveChatProfileToCurrentUser(
-        crushUserId:String,
+        crushUserId: String,
         firstName: String,
         profileImage: String,
-        lastMsgTime:Long,
-        lastMsg:String,
-    ):Flow<Resource<Any>>
+        lastMsgTime: Long,
+        lastMsg: String
+    ): Flow<Resource<Any>>
 
     suspend fun saveChatProfileToCrush(
-        crushUserId:String,
+        crushUserId: String,
         firstName: String,
         profileImage: String,
-        lastMsgTime:Long,
-        lastMsg:String,
-    ):Flow<Resource<Any>>
+        lastMsgTime: Long,
+        lastMsg: String
+    ): Flow<Resource<Any>>
 }

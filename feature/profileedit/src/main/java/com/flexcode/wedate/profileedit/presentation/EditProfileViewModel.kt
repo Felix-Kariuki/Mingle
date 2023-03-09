@@ -13,60 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.lovecalculator.presentation
+package com.flexcode.wedate.profileedit.presentation
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.flexcode.wedate.common.BaseViewModel
-import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.data.LogService
-import com.flexcode.wedate.common.ext.isNameValid
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
-import com.flexcode.wedate.lovecalculator.domain.usecases.CalculatorUseCases
+import com.flexcode.wedate.profileedit.domain.use_case.EditUseCaseContainer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class LoveCalculatorViewModel @Inject constructor(
-    private val calculatorUseCases: CalculatorUseCases,
+class EditProfileViewModel @Inject constructor(
+    private val editProfileUseCaseContainer: EditUseCaseContainer,
     logService: LogService
 ) : BaseViewModel(logService) {
 
-    var state = mutableStateOf(LoveState())
+    var state = mutableStateOf(EditProfileState())
         private set
 
-    private val yourName
-        get() = state.value.yourName
-
-    private val crushName
-        get() = state.value.crushName
-
-    fun onYourNameChange(value: String) {
-        state.value = state.value.copy(yourName = value)
+    fun onUserBioChange(value: String) {
+        state.value = state.value.copy(userBio = value)
     }
 
-    fun onCrushNameChange(value: String) {
-        state.value = state.value.copy(crushName = value)
-    }
-
-    fun getLovePercentage() {
-        if (!yourName.isNameValid() || !crushName.isNameValid()) {
-            SnackBarManager.showMessage(AppText.name_error)
-            return
-        }
+    fun updateUserProfile(userBio: String) {
         viewModelScope.launch {
-            calculatorUseCases.invoke(crushName, yourName).collect { result ->
+            editProfileUseCaseContainer.editProfileUseCase.invoke(userBio).collect { result ->
                 when (result) {
                     is Resource.Success -> {
-                        state.value = LoveState(calculatorResponse = result.data)
+                        SnackBarManager.showError("Updated Successfully")
                     }
-                    is Resource.Loading -> {
-                        state.value = LoveState(isLoading = true)
-                    }
+                    is Resource.Loading -> {}
+
                     is Resource.Error -> {
-                        state.value = LoveState(calculatorResponse = result.data)
+                        SnackBarManager.showError(result.message.toString())
                     }
                 }
             }

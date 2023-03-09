@@ -41,8 +41,8 @@ object ChatScreenUseCaseModule {
             saveChatToCurrentUserUseCase = SaveChatToCurrentUserUseCase(repository = repository),
             saveChatToMatchUseCase = SaveChatToMatchUseCase(repository = repository),
             getMessagesUseCase = GetMessagesUseCase(repository = repository),
-            saveChatProfileToCrushUseCase =  SaveChatProfileToCrushUseCase(repository),
-            saveChatProfileToCurrentUserUseCase = SaveChatProfileToCurrentUserUseCase(repository),
+            saveChatProfileToCrushUseCase = SaveChatProfileToCrushUseCase(repository),
+            saveChatProfileToCurrentUserUseCase = SaveChatProfileToCurrentUserUseCase(repository)
         )
     }
 }

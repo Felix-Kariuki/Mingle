@@ -42,7 +42,7 @@ import com.flexcode.wedate.lovecalculator.presentation.LoveCalculatorScreen
 import com.flexcode.wedate.maps.MapsScreen
 import com.flexcode.wedate.matches.presentation.MatchesScreen
 import com.flexcode.wedate.profiledetails.ProfileDetailsScreen
-import com.flexcode.wedate.profileedit.EditProfileScreen
+import com.flexcode.wedate.profileedit.presentation.EditProfileScreen
 import com.flexcode.wedate.settings.SettingsScreen
 
 @Composable
@@ -60,9 +60,9 @@ fun NavigationGraph(navController: NavHostController) {
         }
         composable(BottomNavItem.Matches.screen_route) {
             MatchesScreen(
-                navigateToChats = { match ->
+                navigateToChats = { userId ->
                     navController.navigate(
-                        route = "$CHATS_SCREEN/${match.id}"
+                        route = "$CHATS_SCREEN/$userId"
                     )
                 }
             )

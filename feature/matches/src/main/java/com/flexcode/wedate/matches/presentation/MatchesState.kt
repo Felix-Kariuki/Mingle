@@ -22,5 +22,5 @@ data class MatchesState(
     val isLoading: Boolean = true,
     val searchValue: String = "",
     val matches: List<Matches> = emptyList(),
-    val chatProfiles: List<ChatProfile> = emptyList(),
+    val chatProfiles: List<ChatProfile> = emptyList()
 )

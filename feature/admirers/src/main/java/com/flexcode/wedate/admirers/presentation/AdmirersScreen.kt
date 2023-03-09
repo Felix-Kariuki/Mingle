@@ -33,9 +33,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.rememberLottieComposition
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicButton
@@ -134,4 +131,3 @@ fun AdmirersScreen(
         }
     }
 }
-

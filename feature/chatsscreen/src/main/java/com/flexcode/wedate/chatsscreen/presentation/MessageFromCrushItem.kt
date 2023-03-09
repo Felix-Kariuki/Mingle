@@ -36,7 +36,7 @@ fun MessageFromCrushItem(message: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start=16.dp,top = 4.dp ,bottom = 2.dp)
+            .padding(start = 16.dp, top = 4.dp, bottom = 2.dp)
     ) {
         Box(
             modifier = Modifier
