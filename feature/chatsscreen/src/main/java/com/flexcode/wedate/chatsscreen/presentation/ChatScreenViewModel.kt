@@ -148,6 +148,7 @@ class ChatScreenViewModel @Inject constructor(
                             )
                         }!!
                     }
+
                     is Resource.Loading -> {}
                     is Resource.Error -> {
                         Timber.i("SUCCESS_ERROR:: ${result.data}")

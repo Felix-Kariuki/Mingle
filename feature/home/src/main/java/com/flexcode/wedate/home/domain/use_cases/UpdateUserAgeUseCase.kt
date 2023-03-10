@@ -15,12 +15,14 @@
  */
 package com.flexcode.wedate.home.domain.use_cases
 
-data class HomeUseCases(
-    val updateUserProfileInfoUseCase: UpdateUserProfileInfoUseCase,
-    val getAllUsersUseCase: GetAllUsersUseCase,
-    val saveLikeUseCase: SaveLikeUseCase,
-    val getAllLikedByUseCase: GetAllLikedByUseCase,
-    val saveMatchUseCase: SaveMatchUseCase,
-    val saveMatchToCurrentUserUseCase: SaveMatchToCurrentUserUseCase,
-    val updateUserAgeUseCase: UpdateUserAgeUseCase
-)
+import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedate.home.domain.repository.HomeRepository
+import kotlinx.coroutines.flow.Flow
+
+class UpdateUserAgeUseCase constructor(
+    private val repository: HomeRepository
+) {
+    suspend operator fun invoke(year: String): Flow<Resource<Any>> {
+        return repository.updateUserAge(year)
+    }
+}

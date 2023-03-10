@@ -30,6 +30,7 @@ import com.flexcode.wedate.common.utils.Resource
 import com.flexcode.wedate.home.domain.use_cases.HomeUseCases
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -54,7 +55,8 @@ class HomeViewModel @Inject constructor(
          * validate that you show only interests --- done
          *
          * validate that user cannot be shown people he/she has liked previously
-         * delete liked by if the like has stayed for over a week... extend the time exponentially as userbase increases.
+         * delete liked by if the like has stayed for over a week... extend the time
+         * exponentially as userbase increases.
          *
          */
         getUserFilters()
@@ -141,17 +143,48 @@ class HomeViewModel @Inject constructor(
                             "Men" -> {
                                 state.value = state.value.copy(interestedIn = "Male")
                             }
+
                             "Women" -> {
                                 state.value = state.value.copy(interestedIn = "Female")
                             }
+
                             else -> {
                                 state.value = state.value.copy(interestedIn = "Everyone")
                             }
                         }
+                        val userAge = result.data?.years
+                        val yob = result.data?.dateOfBirth
+                        calculateAge(userAge, yob)
                     }
+
                     is Resource.Loading -> {}
                     is Resource.Error -> {
                         Timber.e("INTERESTS IN ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun calculateAge(userAge: String?, yob: String?) {
+        val yearOfBirth = "$yob 00:00"
+        val today = Date()
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm")
+        val formattedYearOfBirth = sdf.parse(yearOfBirth)
+        val years = (today.time - formattedYearOfBirth.time) / 31536000000
+        if (years.toInt() > userAge.toString().toInt()) {
+            updateUserAge(years.toInt())
+        }
+    }
+
+    private fun updateUserAge(years: Int) {
+        viewModelScope.launch {
+            homeUseCases.updateUserAgeUseCase.invoke(years.toString()).collect { result ->
+                when (result) {
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("Update User Age ERROR::: ${result.message}")
                     }
                 }
             }

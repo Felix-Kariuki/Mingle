@@ -58,6 +58,20 @@ class HomeRepositoryImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun updateUserAge(years: String): Flow<Resource<Any>> {
+        return flow {
+            emit(Resource.Loading())
+            try {
+                val uid = auth.uid!!
+                dbRef.child(USER_PATH).child(uid).child("years").setValue(years).await()
+                emit(Resource.Success(Any()))
+            } catch (e: Exception) {
+                println(e)
+                emit(Resource.Error(message = e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
     override suspend fun saveLike(
         crushUserId: String,
         firstName: String,
