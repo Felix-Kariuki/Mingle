@@ -28,6 +28,8 @@ interface HomeRepository {
         locationName: String
     ): Flow<Resource<Any>>
 
+    suspend fun updateUserAge(years: String): Flow<Resource<Any>>
+
     suspend fun getAllUsers(): Flow<Resource<List<User>>>
 
     suspend fun saveLike(
