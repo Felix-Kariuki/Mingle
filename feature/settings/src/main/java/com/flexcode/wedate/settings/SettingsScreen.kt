@@ -167,7 +167,7 @@ fun SettingsScreen(
                 Text(text = stringResource(AppText.log_out), fontSize = 16.sp)
             }
 
-            //enable this button at 1000 users
+            // enable this button at 1000 users
             /*BasicTextButton(
                 text = AppText.delete_account,
                 modifier = modifier.height(50.dp),

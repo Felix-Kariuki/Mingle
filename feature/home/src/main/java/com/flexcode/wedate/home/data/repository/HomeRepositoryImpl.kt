@@ -148,13 +148,11 @@ class HomeRepositoryImpl @Inject constructor(
             emit(Resource.Loading())
 
             try {
-
                 val currentUid = auth.uid!!
                 dbRef.child(USER_PATH).child(currentUid).child("likedBy")
                     .child(userLikeId).removeValue()
                 emit(Resource.Success(Any()))
-
-            }catch (e: Exception) {
+            } catch (e: Exception) {
                 println(e)
                 emit(Resource.Error(message = e.message.toString()))
             }
@@ -230,7 +228,6 @@ class HomeRepositoryImpl @Inject constructor(
             }
         }.flowOn(Dispatchers.IO)
     }
-
 
     companion object {
         const val USER_PATH = "WeDateUsers"

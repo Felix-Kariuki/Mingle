@@ -45,7 +45,7 @@ interface AuthRepository {
         searchingFor: String
     ): Flow<Resource<AuthResult>>
     suspend fun sendRecoveryEmail(email: String)
-    suspend fun deleteAccount(accountStatus:String): Flow<Resource<Any>>
+    suspend fun deleteAccount(accountStatus: String): Flow<Resource<Any>>
 
     suspend fun getCurrentUserDetails(uid: String): Flow<Resource<User>>
 }

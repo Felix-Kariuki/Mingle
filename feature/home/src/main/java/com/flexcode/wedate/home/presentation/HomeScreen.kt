@@ -20,7 +20,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -33,7 +37,6 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalPermissionsApi::class)
 @Composable
@@ -81,19 +84,21 @@ fun HomeScreen(
                     onEmptyStack = {
                         state.isEmpty = false
                     },
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    context = context
                 )
             } else {
                 PersonsCardStack(
                     items = state.potentialMatches.filter { user ->
                         user.id != viewModel.getUid() && user.gender == state.interestedIn &&
                             !user.likedBy!!.contains(viewModel.getUid()) &&
-                                user.accountStatus != "DELETED"
+                            user.accountStatus != "DELETED"
                     }.shuffled(),
                     onEmptyStack = {
                         state.isEmpty = false
                     },
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    context = context
                 )
             }
         } else {

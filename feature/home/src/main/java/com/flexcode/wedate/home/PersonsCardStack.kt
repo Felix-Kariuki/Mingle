@@ -15,6 +15,7 @@
  */
 package com.flexcode.wedate.home
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -43,7 +44,6 @@ import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
 import com.flexcode.wedate.common.ext.moveTo
 import com.flexcode.wedate.common.ext.visible
-import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.onlineGreen
 import com.flexcode.wedate.home.presentation.HomeViewModel
@@ -59,7 +59,8 @@ fun PersonsCardStack(
     onSwipeLeft: (person: User) -> Unit = {},
     onSwipeRight: (person: User) -> Unit = {},
     onEmptyStack: (lastItem: User) -> Unit = {},
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel,
+    context: Context
 ) {
     var i by remember {
         mutableStateOf(items.size - 1)
@@ -72,7 +73,7 @@ fun PersonsCardStack(
     }
     val state by viewModel.state
 
-    if (items.isEmpty()){
+    if (items.isEmpty()) {
         Box(
             modifier = modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
@@ -91,7 +92,6 @@ fun PersonsCardStack(
                     color = deepBrown
                 )
             }
-
         }
     }
 
@@ -140,7 +140,9 @@ fun PersonsCardStack(
         if (state.userDetails?.likedBy != null &&
             state.userDetails?.likedBy?.contains(items.asReversed()[i].id)!!
         ) {
-            SnackBarManager.showError("You Matched With ${items.asReversed()[i].firstName}")
+            // SnackBarManager.showError("You Matched With ${items.asReversed()[i].firstName}")
+            val service = MatchNotificationService(context.applicationContext)
+            service.showNotification(items.asReversed()[i].firstName)
             /*test**/
             viewModel.saveLikeToCrush(
                 crushUserId = items.asReversed()[i].id,
@@ -171,7 +173,7 @@ fun PersonsCardStack(
                 long = items.asReversed()[i].longitude,
                 profileImage = items.asReversed()[i].profileImage?.profileImage1.toString()
             )
-            //delete on dislike
+            // delete on dislike
             viewModel.deleteLikedByFromMe(
                 userLikeId = items.asReversed()[i].id
             )

@@ -26,7 +26,6 @@ import java.lang.IllegalArgumentException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
@@ -162,7 +161,6 @@ class AuthRepositoryImpl @Inject constructor(
                     .setValue(accountStatus).await()
 
                 emit(Resource.Success(Any()))
-
             } catch (e: Exception) {
                 emit(Resource.Error(message = e.message.toString()))
             }

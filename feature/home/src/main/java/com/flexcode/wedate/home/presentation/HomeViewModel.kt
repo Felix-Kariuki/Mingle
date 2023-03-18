@@ -62,7 +62,6 @@ class HomeViewModel @Inject constructor(
          *
          */
 
-
         getUserFilters()
         getAllUsers()
         // getLikedBy()
@@ -286,9 +285,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun deleteLikedByFromMe(userLikeId:String){
+    fun deleteLikedByFromMe(userLikeId: String) {
         viewModelScope.launch {
-            homeUseCases.deleteLikedByFromUseCase.invoke(userLikeId).collect{result ->
+            homeUseCases.deleteLikedByFromUseCase.invoke(userLikeId).collect { result ->
                 when (result) {
                     is Resource.Success -> {}
                     is Resource.Loading -> {}

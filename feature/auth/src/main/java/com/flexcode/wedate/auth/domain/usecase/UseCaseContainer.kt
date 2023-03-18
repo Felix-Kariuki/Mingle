@@ -21,5 +21,5 @@ data class UseCaseContainer(
     val getUserDetailsUseCase: GetUserDetailsUseCase,
     val profileImageUseCase: ProfileImageUseCase,
     val updateProfileImageUseCase: UpdateProfileImageUseCase,
-    val deleteAccountUseCase: DeleteAccountUseCase,
+    val deleteAccountUseCase: DeleteAccountUseCase
 )

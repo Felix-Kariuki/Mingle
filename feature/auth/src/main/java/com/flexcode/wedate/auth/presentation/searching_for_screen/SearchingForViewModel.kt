@@ -100,35 +100,41 @@ class SearchingForViewModel @Inject constructor(
     }
 
     fun registerUser(openAndPoUp: (String, String) -> Unit) {
-        viewModelScope.launch {
-            useCase.registerUseCase(
-                firstName = firstName,
-                phoneNumber = phone,
-                email = email,
-                password = password,
-                dateOfBirth = yearBirth,
-                monthOfBirth = "",
-                yearOfBirth = "",
-                years = age,
-                gender = gender,
-                interestedIn = interest,
-                searchingFor = selectSearchForOption.value
+        if (_selectSearchForOption.value == "[Relationship]") {
+            SnackBarManager.showError("Please select what you're searching for")
+            return
+        } else {
+            viewModelScope.launch {
+                useCase.registerUseCase(
+                    firstName = firstName,
+                    phoneNumber = phone,
+                    email = email,
+                    password = password,
+                    dateOfBirth = yearBirth,
+                    monthOfBirth = "",
+                    yearOfBirth = "",
+                    years = age,
+                    gender = gender,
+                    interestedIn = interest,
+                    searchingFor = selectSearchForOption.value
 
-            ).collect { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        state.value = state.value.copy(isLoading = "false")
-                        launchCatching {
-                            openAndPoUp(PROFILE_IMAGES_SCREEN, SEARCHING_FOR_SCREEN)
+                ).collect { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            state.value = state.value.copy(isLoading = "false")
+                            launchCatching {
+                                openAndPoUp(PROFILE_IMAGES_SCREEN, SEARCHING_FOR_SCREEN)
+                            }
                         }
-                    }
-                    is Resource.Loading -> {
-                        state.value = state.value.copy(isLoading = "true")
-                    }
 
-                    is Resource.Error -> {
-                        state.value = state.value.copy(isLoading = "false")
-                        SnackBarManager.showError(result.message.toString())
+                        is Resource.Loading -> {
+                            state.value = state.value.copy(isLoading = "true")
+                        }
+
+                        is Resource.Error -> {
+                            state.value = state.value.copy(isLoading = "false")
+                            SnackBarManager.showError(result.message.toString())
+                        }
                     }
                 }
             }

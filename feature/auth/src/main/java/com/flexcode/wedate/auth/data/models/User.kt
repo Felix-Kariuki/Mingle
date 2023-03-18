@@ -38,5 +38,5 @@ data class User(
     val online: Boolean = true,
     val likedBy: HashMap<String, Any>? = null,
     val userBio: String = "",
-    val accountStatus: String = ""
+    val accountStatus: String = "ACTIVE"
 )

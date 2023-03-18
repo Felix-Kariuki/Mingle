@@ -1,10 +1,11 @@
 buildscript {
     dependencies {
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.43.2")
-        classpath("com.google.gms:google-services:4.3.13")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.1")
-        classpath("com.google.firebase:perf-plugin:1.4.1")
+        classpath("com.google.gms:google-services:4.3.15")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.4")
+        classpath("com.google.firebase:perf-plugin:1.4.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
+        classpath("com.android.tools.build:gradle:3.4.0")
     }
     repositories {
         mavenCentral()
@@ -30,6 +31,12 @@ subprojects {
             )
         }
     }
+
+    /*configure<com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension> {
+           mappingFileUploadEnabled = false
+           nativeSymbolUploadEnabled = true
+           unstrippedNativeLibsDir = "path/to/libs"
+       }*/
 
     repositories {
         mavenCentral()

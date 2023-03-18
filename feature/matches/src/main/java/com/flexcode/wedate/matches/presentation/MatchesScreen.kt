@@ -67,7 +67,7 @@ fun MatchesScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(brush = gradient),
+            .background(brush = gradient)
     ) {
         SearchTextField(
             modifier = modifier.textPadding(),

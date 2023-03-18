@@ -27,9 +27,9 @@ import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.NonCancellable.isActive
 import kotlinx.coroutines.delay
-import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
 

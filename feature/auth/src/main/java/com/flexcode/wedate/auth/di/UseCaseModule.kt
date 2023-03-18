@@ -40,7 +40,7 @@ object UseCaseModule {
             getUserDetailsUseCase = GetUserDetailsUseCase(repository = authRepository),
             profileImageUseCase = ProfileImageUseCase(repository = repository),
             updateProfileImageUseCase = UpdateProfileImageUseCase(repository = repository),
-            deleteAccountUseCase = DeleteAccountUseCase(repository = authRepository),
+            deleteAccountUseCase = DeleteAccountUseCase(repository = authRepository)
         )
     }
 }

@@ -1,3 +1,5 @@
+import com.flexcode.wedate.buildsrc.SDK
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -10,18 +12,19 @@ apply {
 
 android {
     namespace = "com.flexcode.wedate.profiledetails"
-    compileSdk = 33
+    compileSdk = SDK.max
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 33
+        minSdk = SDK.min
+        targetSdk = SDK.max
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

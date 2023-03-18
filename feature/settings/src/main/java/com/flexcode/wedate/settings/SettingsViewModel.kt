@@ -24,8 +24,8 @@ import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -44,7 +44,7 @@ class SettingsViewModel @Inject constructor(
         authRepository.signOut()
     }
 
-    private fun deleteUser(){
+    private fun deleteUser() {
         authRepository.deleteUser()
     }
 
@@ -68,10 +68,10 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun deleteUserAccount(accountStatus:String){
-        viewModelScope.launch{
-            useCaseContainer.deleteAccountUseCase.invoke(accountStatus).collect{result->
-                when(result){
+    fun deleteUserAccount(accountStatus: String) {
+        viewModelScope.launch {
+            useCaseContainer.deleteAccountUseCase.invoke(accountStatus).collect { result ->
+                when (result) {
                     is Resource.Success -> {
                         Timber.i("SUCCESS DELETE ACCOUNT")
                         deleteUser()
