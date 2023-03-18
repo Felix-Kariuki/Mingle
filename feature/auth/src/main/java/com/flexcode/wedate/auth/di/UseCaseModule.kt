@@ -39,7 +39,8 @@ object UseCaseModule {
             registerUseCase = RegisterUseCase(repository = authRepository),
             getUserDetailsUseCase = GetUserDetailsUseCase(repository = authRepository),
             profileImageUseCase = ProfileImageUseCase(repository = repository),
-            updateProfileImageUseCase = UpdateProfileImageUseCase(repository = repository)
+            updateProfileImageUseCase = UpdateProfileImageUseCase(repository = repository),
+            deleteAccountUseCase = DeleteAccountUseCase(repository = authRepository),
         )
     }
 }

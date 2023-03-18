@@ -133,9 +133,28 @@ class HomeRepositoryImpl @Inject constructor(
                     profileImage = profileImage,
                     matched = true
                 )
-                dbRef.child(MATCHES).child(crushUserId).child(currentUid).setValue(match).await()
+                dbRef.child(USER_PATH).child(crushUserId).child("likedBy")
+                    .child(currentUid).removeValue().await()
                 emit(Resource.Success(Any()))
             } catch (e: Exception) {
+                println(e)
+                emit(Resource.Error(message = e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun deleteLikedByFromMe(userLikeId: String): Flow<Resource<Any>> {
+        return flow {
+            emit(Resource.Loading())
+
+            try {
+
+                val currentUid = auth.uid!!
+                dbRef.child(USER_PATH).child(currentUid).child("likedBy")
+                    .child(userLikeId).removeValue()
+                emit(Resource.Success(Any()))
+
+            }catch (e: Exception) {
                 println(e)
                 emit(Resource.Error(message = e.message.toString()))
             }
@@ -211,6 +230,7 @@ class HomeRepositoryImpl @Inject constructor(
             }
         }.flowOn(Dispatchers.IO)
     }
+
 
     companion object {
         const val USER_PATH = "WeDateUsers"

@@ -37,5 +37,6 @@ data class User(
     val longitude: String = "0.0",
     val online: Boolean = true,
     val likedBy: HashMap<String, Any>? = null,
-    val userBio: String = ""
+    val userBio: String = "",
+    val accountStatus: String = ""
 )

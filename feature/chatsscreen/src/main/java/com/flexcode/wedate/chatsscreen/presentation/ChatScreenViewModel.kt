@@ -27,6 +27,8 @@ import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.NonCancellable.isActive
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -139,20 +141,23 @@ class ChatScreenViewModel @Inject constructor(
 
     fun getAllMessages(messagesId: String) {
         viewModelScope.launch {
-            chatsUseCaseContainer.getMessagesUseCase(messagesId).collect { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        state.value = result.data?.let {
-                            state.value.copy(
-                                messages = it
-                            )
-                        }!!
-                    }
+            while (isActive) {
+                chatsUseCaseContainer.getMessagesUseCase(messagesId).collect { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            state.value = result.data?.let {
+                                state.value.copy(
+                                    messages = it
+                                )
+                            }!!
+                        }
 
-                    is Resource.Loading -> {}
-                    is Resource.Error -> {
-                        Timber.i("SUCCESS_ERROR:: ${result.data}")
+                        is Resource.Loading -> {}
+                        is Resource.Error -> {
+                            Timber.i("SUCCESS_ERROR:: ${result.data}")
+                        }
                     }
+                    delay(3000)
                 }
             }
         }

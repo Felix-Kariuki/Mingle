@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,6 +38,7 @@ import coil.compose.AsyncImage
 import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
+import com.flexcode.wedate.common.composables.NoResultFoundAnimation
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
 import com.flexcode.wedate.common.ext.moveTo
@@ -64,9 +66,34 @@ fun PersonsCardStack(
     }
 
     if (i == -1) {
-        onEmptyStack(items.last())
+        if (items.isNotEmpty()) {
+            onEmptyStack(items.last())
+        }
     }
     val state by viewModel.state
+
+    if (items.isEmpty()){
+        Box(
+            modifier = modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                modifier = modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                NoResultFoundAnimation()
+                BasicText(
+                    text = AppText.no_potential_matches,
+                    fontSize = 18.sp,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.SemiBold,
+                    color = deepBrown
+                )
+            }
+
+        }
+    }
 
     val cardStackController = rememberCardStackController()
 
@@ -143,6 +170,10 @@ fun PersonsCardStack(
                 lat = items.asReversed()[i].latitude,
                 long = items.asReversed()[i].longitude,
                 profileImage = items.asReversed()[i].profileImage?.profileImage1.toString()
+            )
+            //delete on dislike
+            viewModel.deleteLikedByFromMe(
+                userLikeId = items.asReversed()[i].id
             )
         }
         onSwipeRight(items[i])

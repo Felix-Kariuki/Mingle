@@ -33,6 +33,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalPermissionsApi::class)
 @Composable
@@ -74,7 +75,7 @@ fun HomeScreen(
                         state.potentialMatches.filter { user ->
                             user.id != viewModel.getUid() && !user.likedBy!!.contains(
                                 viewModel.getUid()
-                            )
+                            ) && user.accountStatus != "DELETED"
                         }
                         ).shuffled(),
                     onEmptyStack = {
@@ -86,7 +87,8 @@ fun HomeScreen(
                 PersonsCardStack(
                     items = state.potentialMatches.filter { user ->
                         user.id != viewModel.getUid() && user.gender == state.interestedIn &&
-                            !user.likedBy!!.contains(viewModel.getUid())
+                            !user.likedBy!!.contains(viewModel.getUid()) &&
+                                user.accountStatus != "DELETED"
                     }.shuffled(),
                     onEmptyStack = {
                         state.isEmpty = false
@@ -96,7 +98,7 @@ fun HomeScreen(
             }
         } else {
             ResultText(
-                text = "No more People Within your range adjust settings..",
+                text = "No more People to match with at this time",
                 fontWeight = FontWeight.Bold
             )
         }

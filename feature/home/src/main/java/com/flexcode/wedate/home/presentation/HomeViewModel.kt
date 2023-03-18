@@ -58,10 +58,13 @@ class HomeViewModel @Inject constructor(
          * delete liked by if the like has stayed for over a week... extend the time
          * exponentially as userbase increases.
          *
+         * calculate liked by and show user, delete liked by
+         *
          */
+
+
         getUserFilters()
         getAllUsers()
-        getUserFilters()
         // getLikedBy()
     }
 
@@ -277,6 +280,20 @@ class HomeViewModel @Inject constructor(
                     is Resource.Loading -> {}
                     is Resource.Error -> {
                         Timber.e("SAVE MATCH ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    fun deleteLikedByFromMe(userLikeId:String){
+        viewModelScope.launch {
+            homeUseCases.deleteLikedByFromUseCase.invoke(userLikeId).collect{result ->
+                when (result) {
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("DELETE LIKEDBy ERROR::: ${result.message}")
                     }
                 }
             }

@@ -26,6 +26,7 @@ import java.lang.IllegalArgumentException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
@@ -68,6 +69,10 @@ class AuthRepositoryImpl @Inject constructor(
         }
         auth.signOut()
         // createAnonymousAccount()
+    }
+
+    override fun deleteUser() {
+        auth.currentUser!!.delete()
     }
 
     override suspend fun login(email: String, password: String): Flow<Resource<AuthResult>> {
@@ -150,8 +155,18 @@ class AuthRepositoryImpl @Inject constructor(
         auth.sendPasswordResetEmail(email).await()
     }
 
-    override suspend fun deleteAccount() {
-        auth.currentUser!!.delete().await()
+    override suspend fun deleteAccount(accountStatus: String): Flow<Resource<Any>> {
+        return flow {
+            try {
+                ref.child(auth.uid!!).child("accountStatus")
+                    .setValue(accountStatus).await()
+
+                emit(Resource.Success(Any()))
+
+            } catch (e: Exception) {
+                emit(Resource.Error(message = e.message.toString()))
+            }
+        }
     }
 
     companion object {

@@ -52,6 +52,7 @@
     <string name="profile_image_error">You have to add at least the first and second image</string>
 
     <string name="no_admirers">No admirers yet</string>
+    <string name="no_potential_matches">No more people to match with</string>
     <string name="no_matches">No Matches yet</string>
     <string name="no_chats">No chats found start a conversation with your matches</string>
     <string name="admirers">Admirers</string>

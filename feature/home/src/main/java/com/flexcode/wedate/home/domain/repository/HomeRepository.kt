@@ -64,4 +64,6 @@ interface HomeRepository {
         long: String,
         profileImage: String
     ): Flow<Resource<Any>>
+
+    suspend fun deleteLikedByFromMe(userLikeId:String): Flow<Resource<Any>>
 }

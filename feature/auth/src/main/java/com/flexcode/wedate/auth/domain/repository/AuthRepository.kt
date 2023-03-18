@@ -29,6 +29,8 @@ interface AuthRepository {
     fun signOut()
     suspend fun login(email: String, password: String): Flow<Resource<AuthResult>>
 
+    fun deleteUser()
+
     suspend fun register(
         firstName: String,
         phoneNumber: String,
@@ -43,7 +45,7 @@ interface AuthRepository {
         searchingFor: String
     ): Flow<Resource<AuthResult>>
     suspend fun sendRecoveryEmail(email: String)
-    suspend fun deleteAccount()
+    suspend fun deleteAccount(accountStatus:String): Flow<Resource<Any>>
 
     suspend fun getCurrentUserDetails(uid: String): Flow<Resource<User>>
 }
