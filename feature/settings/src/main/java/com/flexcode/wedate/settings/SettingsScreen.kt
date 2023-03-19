@@ -167,13 +167,18 @@ fun SettingsScreen(
                 Text(text = stringResource(AppText.log_out), fontSize = 16.sp)
             }
 
-            BasicTextButton(
+            // enable this button at 1000 users
+            /*BasicTextButton(
                 text = AppText.delete_account,
                 modifier = modifier.height(50.dp),
                 color = MaterialTheme.colors.onBackground
             ) {
-                /** delete account*/
-            }
+                viewModel.deleteUserAccount("DELETED")
+                scope.launch {
+                    delay(1000)
+                    restartApp(context)
+                }
+            }*/
             Spacer(modifier = Modifier.height(10.dp))
             LogoComposableImage()
             AppTitleText(

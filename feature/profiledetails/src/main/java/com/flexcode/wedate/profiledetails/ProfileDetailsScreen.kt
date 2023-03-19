@@ -143,7 +143,7 @@ fun ProfileDetailsScreen(
                     fontSize = 18.sp
                 )
                 ResultText(
-                    text = "Lorem ipsium, lorem ipsium lorem ipsium lorem ipsiun",
+                    text = "${state.userDetails?.userBio}",
                     color = Color.Gray,
                     fontWeight = FontWeight.Light,
                     modifier = modifier.offset(y = (-8).dp)

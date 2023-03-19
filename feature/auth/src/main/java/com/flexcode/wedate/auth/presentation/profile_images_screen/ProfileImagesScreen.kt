@@ -15,7 +15,10 @@
  */
 package com.flexcode.wedate.auth.presentation.profile_images_screen
 
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -32,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
@@ -76,9 +80,17 @@ fun ProfileImagesScreen(
                 for (i in 0..2) {
                     var clicked = "profileImage"
                     when (i) {
-                        0 -> { clicked += "1" }
-                        1 -> { clicked += "2" }
-                        2 -> { clicked += "3" }
+                        0 -> {
+                            clicked += "1"
+                        }
+
+                        1 -> {
+                            clicked += "2"
+                        }
+
+                        2 -> {
+                            clicked += "3"
+                        }
                     }
 
                     ClickableToGalleryImage(clicked, viewModel)
@@ -94,9 +106,17 @@ fun ProfileImagesScreen(
                 for (i in 0..2) {
                     var clicked = "profileImage"
                     when (i) {
-                        0 -> { clicked += "4" }
-                        1 -> { clicked += "5" }
-                        2 -> { clicked += "6" }
+                        0 -> {
+                            clicked += "4"
+                        }
+
+                        1 -> {
+                            clicked += "5"
+                        }
+
+                        2 -> {
+                            clicked += "6"
+                        }
                     }
                     ClickableToGalleryImage(clicked, viewModel)
                 }
@@ -138,6 +158,32 @@ fun ClickableToGalleryImage(clicked: String, viewModel: ProfileImagesViewModel) 
         imageUri = uri
         imageUri?.let { viewModel.addImageToFirebaseStorage(it, clicked) }
     }
+
+    val context = LocalContext.current
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) {
+        if (it) {
+            launcher.launch("image/*")
+            Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    val permissionCheckResult = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        ContextCompat.checkSelfPermission(
+            context,
+            android.Manifest.permission.READ_MEDIA_IMAGES
+        )
+    } else {
+        ContextCompat.checkSelfPermission(
+            context,
+            android.Manifest.permission.READ_EXTERNAL_STORAGE
+        )
+    }
+
     val data = if (imageUri != null) {
         imageUri
     } else {
@@ -157,7 +203,17 @@ fun ClickableToGalleryImage(clicked: String, viewModel: ProfileImagesViewModel) 
             contentDescription = "add $clicked",
             modifier = Modifier
                 .clickable {
-                    launcher.launch("image/*")
+                    if (permissionCheckResult == PackageManager.PERMISSION_GRANTED) {
+                        launcher.launch("image/*")
+                    } else {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            permissionLauncher.launch(android.Manifest.permission.READ_MEDIA_IMAGES)
+                        } else {
+                            permissionLauncher.launch(
+                                android.Manifest.permission.READ_EXTERNAL_STORAGE
+                            )
+                        }
+                    }
                 }
                 .size(100.dp)
                 .clip(CircleShape)

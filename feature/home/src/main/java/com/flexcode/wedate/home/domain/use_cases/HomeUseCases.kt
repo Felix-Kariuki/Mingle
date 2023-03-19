@@ -21,5 +21,7 @@ data class HomeUseCases(
     val saveLikeUseCase: SaveLikeUseCase,
     val getAllLikedByUseCase: GetAllLikedByUseCase,
     val saveMatchUseCase: SaveMatchUseCase,
-    val saveMatchToCurrentUserUseCase: SaveMatchToCurrentUserUseCase
+    val saveMatchToCurrentUserUseCase: SaveMatchToCurrentUserUseCase,
+    val updateUserAgeUseCase: UpdateUserAgeUseCase,
+    val deleteLikedByFromUseCase: DeleteLikedByFromUseCase
 )

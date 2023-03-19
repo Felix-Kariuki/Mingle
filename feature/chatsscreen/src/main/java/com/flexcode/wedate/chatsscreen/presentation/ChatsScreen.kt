@@ -61,18 +61,17 @@ fun ChatsScreen(
 ) {
     val state by viewModel.state
 
-    Scaffold(
-        topBar = {
-            TopBar(modifier, navigateToMatchScreen, state)
-        }
-    ) { paddingValues ->
+    Scaffold(topBar = {
+        TopBar(modifier, navigateToMatchScreen, state)
+    }) { paddingValues ->
         Box(
             modifier = modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
             LazyColumn(
-                modifier = modifier.fillMaxSize()
+                modifier = modifier
+                    .fillMaxSize()
                     .padding(bottom = 75.dp)
             ) {
                 items(state.messages.size) { i ->
@@ -151,9 +150,25 @@ fun CustomTextField(
                         matchId = state.userDetails?.id.toString()
                     )
                     viewModel.getAllMessages(messagesId = "${viewModel.getUid()}$userId")
+                    // workmanager
+                    viewModel.saveChatProfileToCurrentUser(
+                        crushUserId = userId,
+                        firstName = state.userDetails?.firstName.toString(),
+                        profileImage = state.userDetails?.profileImage?.profileImage1.toString(),
+                        lastMsgTime = System.currentTimeMillis(),
+                        lastMsg = state.message
+                    )
+                    viewModel.saveChatProfileToCrush(
+                        crushUserId = userId,
+                        firstName = state.currentUserDetails?.firstName.toString(),
+                        profileImage =
+                        state.currentUserDetails?.profileImage?.profileImage1.toString(),
+                        lastMsgTime = System.currentTimeMillis(),
+                        lastMsg = state.message
+                    )
+                    state.message = ""
                 })
             }
-
         )
     }
 }
@@ -190,7 +205,7 @@ fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit, state: ChatScr
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(85.dp)
+            .height(75.dp)
             .background(brush = gradient),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -198,17 +213,15 @@ fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit, state: ChatScr
             onClick = { navigateToMatchScreen() },
             icon = Icons.Default.ArrowBackIos,
             contentDesc = "Back",
-            height = 30.dp,
-            width = 30.dp,
+            height = 20.dp,
+            width = 20.dp,
             paddingValues = PaddingValues(start = 10.dp, 0.dp),
             tint = Color.Black
         )
         Spacer(modifier = modifier.width(5.dp))
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data("${state.userDetails?.profileImage?.profileImage1}")
-                .crossfade(true)
-                .build(),
+                .data("${state.userDetails?.profileImage?.profileImage1}").crossfade(true).build(),
             placeholder = painterResource(R.drawable.sharon),
             contentDescription = "Chat with ${state.userDetails?.firstName}",
             contentScale = ContentScale.Crop,
@@ -226,7 +239,7 @@ fun TopBar(modifier: Modifier, navigateToMatchScreen: () -> Unit, state: ChatScr
                 fontWeight = FontWeight.SemiBold
             )
             ResultText(
-                text = "Online",
+                text = "", // online/offline
                 color = onlineGreen,
                 modifier = modifier.offset(y = (-16).dp),
                 fontSize = 14.sp

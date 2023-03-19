@@ -16,7 +16,14 @@
 package com.flexcode.wedatecompose
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
+import com.flexcode.wedate.common.utils.Constants
 import com.flexcode.wedatecompose.crashlyics.CrashlyticsTree
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -26,7 +33,23 @@ class WeDateHiltApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initTimber()
-        // Firebase.database.setPersistenceEnabled(true)
+        createNotificationChannel()
+        Firebase.database.setPersistenceEnabled(true)
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                Constants.MATCH_CHANNEL_ID,
+                "Matches",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            channel.description = "Used to show when you match with someone notification"
+
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as
+                NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 
     private fun initTimber() = when {

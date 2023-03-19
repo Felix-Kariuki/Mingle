@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.ext.textPadding
+import com.flexcode.wedate.common.theme.lightPurple
 
 @Composable
 fun BasicField(
@@ -207,7 +208,7 @@ fun SearchTextField(
         modifier = modifier
             .fillMaxWidth()
             .background(
-                MaterialTheme.colors.background
+                lightPurple
             ),
         shape = RoundedCornerShape(10.dp),
         keyboardOptions = KeyboardOptions(

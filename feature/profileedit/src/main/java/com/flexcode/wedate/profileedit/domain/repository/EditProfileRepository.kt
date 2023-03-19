@@ -13,16 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.profileedit
+package com.flexcode.wedate.profileedit.domain.repository
 
-import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
-import com.flexcode.wedate.common.BaseViewModel
-import com.flexcode.wedate.common.data.LogService
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import com.flexcode.wedate.common.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
-@HiltViewModel
-class EditProfileViewModel @Inject constructor(
-    private val useCaseContainer: UseCaseContainer,
-    logService: LogService
-) : BaseViewModel(logService)
+interface EditProfileRepository {
+
+    suspend fun updateUserProfileInfo(userBio: String): Flow<Resource<Any>>
+}

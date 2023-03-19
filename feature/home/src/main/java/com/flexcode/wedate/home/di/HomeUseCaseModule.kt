@@ -38,7 +38,9 @@ object HomeUseCaseModule {
             saveLikeUseCase = SaveLikeUseCase(repository = repository),
             getAllLikedByUseCase = GetAllLikedByUseCase(repository = repository),
             saveMatchUseCase = SaveMatchUseCase(repository = repository),
-            saveMatchToCurrentUserUseCase = SaveMatchToCurrentUserUseCase(repository = repository)
+            saveMatchToCurrentUserUseCase = SaveMatchToCurrentUserUseCase(repository = repository),
+            updateUserAgeUseCase = UpdateUserAgeUseCase(repository = repository),
+            deleteLikedByFromUseCase = DeleteLikedByFromUseCase(homeRepository = repository)
         )
     }
 }

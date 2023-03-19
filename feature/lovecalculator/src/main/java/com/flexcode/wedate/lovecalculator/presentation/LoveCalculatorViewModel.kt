@@ -27,7 +27,6 @@ import com.flexcode.wedate.lovecalculator.domain.usecases.CalculatorUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @HiltViewModel
 class LoveCalculatorViewModel @Inject constructor(
@@ -62,7 +61,6 @@ class LoveCalculatorViewModel @Inject constructor(
                 when (result) {
                     is Resource.Success -> {
                         state.value = LoveState(calculatorResponse = result.data)
-                        Timber.d("RESULTSS:: ${result.data}")
                     }
                     is Resource.Loading -> {
                         state.value = LoveState(isLoading = true)

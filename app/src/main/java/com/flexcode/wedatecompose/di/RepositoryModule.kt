@@ -25,6 +25,8 @@ import com.flexcode.wedate.home.data.repository.HomeRepositoryImpl
 import com.flexcode.wedate.home.domain.repository.HomeRepository
 import com.flexcode.wedate.matches.data.repository.MatchesRepositoryImpl
 import com.flexcode.wedate.matches.domain.repository.MatchesRepository
+import com.flexcode.wedate.profileedit.data.repository.EditProfileRepositoryImpl
+import com.flexcode.wedate.profileedit.domain.repository.EditProfileRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -33,9 +35,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-    @Binds abstract fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository
+    @Binds
+    abstract fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository
 
-    @Binds abstract fun provideLogService(impl: LogServiceImpl): LogService
+    @Binds
+    abstract fun provideLogService(impl: LogServiceImpl): LogService
 
     @Binds
     abstract fun providesHomeRepository(impl: HomeRepositoryImpl): HomeRepository
@@ -45,4 +49,8 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun providesSaveChatsRepository(impl: SaveChatRepositoryImpl): SaveChatRepository
+
+    @Binds
+    abstract fun providesEditProfileRepository(impl: EditProfileRepositoryImpl):
+        EditProfileRepository
 }

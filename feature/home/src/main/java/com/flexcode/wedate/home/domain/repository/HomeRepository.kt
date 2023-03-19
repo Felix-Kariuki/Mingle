@@ -28,6 +28,8 @@ interface HomeRepository {
         locationName: String
     ): Flow<Resource<Any>>
 
+    suspend fun updateUserAge(years: String): Flow<Resource<Any>>
+
     suspend fun getAllUsers(): Flow<Resource<List<User>>>
 
     suspend fun saveLike(
@@ -62,4 +64,6 @@ interface HomeRepository {
         long: String,
         profileImage: String
     ): Flow<Resource<Any>>
+
+    suspend fun deleteLikedByFromMe(userLikeId: String): Flow<Resource<Any>>
 }

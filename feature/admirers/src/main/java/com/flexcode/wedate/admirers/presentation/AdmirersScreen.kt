@@ -33,15 +33,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.rememberLottieComposition
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ExtraScreenText
 import com.flexcode.wedate.common.composables.LogoComposableImage
+import com.flexcode.wedate.common.composables.NoResultFoundAnimation
 import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
@@ -132,17 +130,4 @@ fun AdmirersScreen(
             ) { navigateToAdmirersMaps() }
         }
     }
-}
-
-@Composable
-fun NoResultFoundAnimation() {
-    val composition by rememberLottieComposition(
-        spec = LottieCompositionSpec.RawRes(R.raw.noresult)
-    )
-    LottieAnimation(
-        composition = composition,
-        iterations = 2,
-        modifier = Modifier.size(300.dp),
-        alignment = Alignment.Center
-    )
 }

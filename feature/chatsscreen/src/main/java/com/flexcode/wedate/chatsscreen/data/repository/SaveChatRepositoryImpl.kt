@@ -15,6 +15,7 @@
  */
 package com.flexcode.wedate.chatsscreen.data.repository
 
+import com.flexcode.wedate.chatsscreen.data.model.ChatProfile
 import com.flexcode.wedate.chatsscreen.data.model.Messsage
 import com.flexcode.wedate.chatsscreen.domain.repository.SaveChatRepository
 import com.flexcode.wedate.common.utils.Resource
@@ -119,8 +120,68 @@ class SaveChatRepositoryImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun saveChatProfileToCurrentUser(
+        crushUserId: String,
+        firstName: String,
+        profileImage: String,
+        lastMsgTime: Long,
+        lastMsg: String
+    ): Flow<Resource<Any>> {
+        return flow {
+            emit(Resource.Loading())
+
+            try {
+                val currentUid = auth.uid!!
+                val chatProfile = ChatProfile(
+                    id = crushUserId,
+                    firstName = firstName,
+                    profileImage = profileImage,
+                    lastMsgTime = System.currentTimeMillis(),
+                    lastMsg = lastMsg
+                )
+
+                dbRef.child(CHATS_PATH_PROFILE).child(currentUid).child(crushUserId)
+                    .setValue(chatProfile).await()
+                emit(Resource.Success(Any()))
+            } catch (e: Exception) {
+                println(e)
+                emit(Resource.Error(message = e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun saveChatProfileToCrush(
+        crushUserId: String,
+        firstName: String,
+        profileImage: String,
+        lastMsgTime: Long,
+        lastMsg: String
+    ): Flow<Resource<Any>> {
+        return flow {
+            emit(Resource.Loading())
+
+            try {
+                val currentUid = auth.uid!!
+                val chatProfile = ChatProfile(
+                    id = currentUid,
+                    firstName = firstName,
+                    profileImage = profileImage,
+                    lastMsgTime = System.currentTimeMillis(),
+                    lastMsg = lastMsg
+                )
+                dbRef.child(CHATS_PATH_PROFILE).child(crushUserId).child(currentUid)
+                    .setValue(chatProfile).await()
+                emit(Resource.Success(Any()))
+            } catch (e: Exception) {
+                println(e)
+                emit(Resource.Error(message = e.message.toString()))
+            }
+        }
+    }
+
     companion object {
         const val CHATS_PATH = "WeDateChats"
+        const val CHATS_PATH_PROFILE = "WeDateChatsProfiles"
         const val MESSAGES = "Messages"
     }
 }

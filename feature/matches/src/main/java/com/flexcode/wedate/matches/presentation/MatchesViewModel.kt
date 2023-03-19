@@ -45,6 +45,7 @@ class MatchesViewModel @Inject constructor(
 
     init {
         getMatches()
+        getChatProfiles()
     }
 
     private fun getMatches() {
@@ -57,6 +58,22 @@ class MatchesViewModel @Inject constructor(
                     is Resource.Loading -> {}
                     is Resource.Error -> {
                         Timber.e("MATCHES ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getChatProfiles() {
+        viewModelScope.launch {
+            useCases.getChatProfilesUseCase.invoke().collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        state.value = result.data?.let { state.value.copy(chatProfiles = it) }!!
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("CHAT PROFILE ERROR::: ${result.message}")
                     }
                 }
             }

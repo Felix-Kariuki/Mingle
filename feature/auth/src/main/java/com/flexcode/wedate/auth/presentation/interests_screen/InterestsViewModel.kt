@@ -22,6 +22,7 @@ import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.navigation.SEARCHING_FOR_SCREEN
+import com.flexcode.wedate.common.snackbar.SnackBarManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -33,6 +34,10 @@ class InterestsViewModel @Inject constructor(
 ) : BaseViewModel(logService) {
 
     fun onContinueClicked(openScreen: (String) -> Unit) {
+        if (_selectedInterestsOption.value == "[Women]") {
+            SnackBarManager.showError("Please select your interest")
+            return
+        }
         launchCatching { openScreen(SEARCHING_FOR_SCREEN) }
     }
 

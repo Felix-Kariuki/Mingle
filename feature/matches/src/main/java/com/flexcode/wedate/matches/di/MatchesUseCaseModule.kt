@@ -17,6 +17,7 @@ package com.flexcode.wedate.matches.di
 
 import com.flexcode.wedate.matches.domain.repository.MatchesRepository
 import com.flexcode.wedate.matches.domain.use_case.GetAllUserMatchesUseCase
+import com.flexcode.wedate.matches.domain.use_case.GetChatProfilesUseCase
 import com.flexcode.wedate.matches.domain.use_case.UseCaseContainer
 import dagger.Module
 import dagger.Provides
@@ -34,7 +35,8 @@ object MatchesUseCaseModule {
         repository: MatchesRepository
     ): UseCaseContainer {
         return UseCaseContainer(
-            getAllUserMatchesUseCase = GetAllUserMatchesUseCase(repository = repository)
+            getAllUserMatchesUseCase = GetAllUserMatchesUseCase(repository = repository),
+            getChatProfilesUseCase = GetChatProfilesUseCase(repository = repository)
         )
     }
 }

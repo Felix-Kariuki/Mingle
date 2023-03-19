@@ -23,6 +23,8 @@ object Constants {
     const val MIN_PHONE_LENGTH = 10
     const val PASS_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$"
 
+    const val MATCH_CHANNEL_ID = "match_channel"
+
     const val MAX_DATE = 31
     const val MAX_MONTH = 12
     const val MIN_YEAR_LENGTH = 4

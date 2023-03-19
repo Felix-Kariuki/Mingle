@@ -49,9 +49,13 @@
     <string name="dd_error">Date is not correct</string>
     <string name="mm_error">Month is not correct</string>
     <string name="yy_error">Year is not correct</string>
+    <string name="gender_error">Please select your gender</string>
     <string name="profile_image_error">You have to add at least the first and second image</string>
 
     <string name="no_admirers">No admirers yet</string>
+    <string name="no_potential_matches">No more people to match with</string>
+    <string name="no_matches">No Matches yet</string>
+    <string name="no_chats">No chats found start a conversation with your matches</string>
     <string name="admirers">Admirers</string>
     <string name="admirers_text">This is a list of all the secret admirers that have liked your profile, like them back and keep the fire burning </string>
     <string name="view_on_map">See admirers on Map</string>

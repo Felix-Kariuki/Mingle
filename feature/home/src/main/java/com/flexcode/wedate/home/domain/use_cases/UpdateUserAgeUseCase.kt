@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.matches.data.model
+package com.flexcode.wedate.home.domain.use_cases
 
-data class Messsage(
-    val message: String,
-    val timeStamp: Long,
-    val messageSenderId: String
-)
+import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedate.home.domain.repository.HomeRepository
+import kotlinx.coroutines.flow.Flow
 
-data class MessageBody(
-    val Messages: List<Messsage>,
-    val lastMsg: String,
-    val latMsgTime: Long
-)
+class UpdateUserAgeUseCase constructor(
+    private val repository: HomeRepository
+) {
+    suspend operator fun invoke(year: String): Flow<Resource<Any>> {
+        return repository.updateUserAge(year)
+    }
+}

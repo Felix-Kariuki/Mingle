@@ -28,6 +28,8 @@ import com.flexcode.wedate.common.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.NonCancellable.isActive
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -47,6 +49,10 @@ class ChatScreenViewModel @Inject constructor(
 
     fun onMessageChange(value: String) {
         state.value = state.value.copy(message = value)
+    }
+
+    init {
+        getCurrentUserDetails(getUid())
     }
 
     fun sendMessage(
@@ -70,12 +76,8 @@ class ChatScreenViewModel @Inject constructor(
                 messageSenderId = messageSenderId
             ).collect { result ->
                 when (result) {
-                    is Resource.Loading -> {
-                        Timber.i("Loading ,, Sending message....")
-                    }
-                    is Resource.Success -> {
-                        Timber.i("SUCCESS ,, message sent")
-                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {}
                     is Resource.Error -> {
                         Timber.i("ERROR ,, ${result.message}")
                     }
@@ -93,12 +95,8 @@ class ChatScreenViewModel @Inject constructor(
                 messageSenderId = messageSenderId
             ).collect { result ->
                 when (result) {
-                    is Resource.Loading -> {
-                        Timber.i("Loading ,, Sending message....")
-                    }
-                    is Resource.Success -> {
-                        Timber.i("SUCCESS ,, message sent")
-                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {}
                     is Resource.Error -> {
                         Timber.i("ERROR ,, ${result.message}")
                     }
@@ -116,6 +114,24 @@ class ChatScreenViewModel @Inject constructor(
                             userDetails = result.data
                         )
                     }
+
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {}
+                }
+            }
+        }
+    }
+
+    fun getCurrentUserDetails(id: String) {
+        viewModelScope.launch {
+            useCaseContainer.getUserDetailsUseCase(uid = id).collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        state.value = state.value.copy(
+                            currentUserDetails = result.data
+                        )
+                    }
+
                     is Resource.Loading -> {}
                     is Resource.Error -> {}
                 }
@@ -125,18 +141,74 @@ class ChatScreenViewModel @Inject constructor(
 
     fun getAllMessages(messagesId: String) {
         viewModelScope.launch {
-            chatsUseCaseContainer.getMessagesUseCase(messagesId).collect { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        state.value = result.data?.let {
-                            state.value.copy(
-                                messages = it
-                            )
-                        }!!
+            while (isActive) {
+                chatsUseCaseContainer.getMessagesUseCase(messagesId).collect { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            state.value = result.data?.let {
+                                state.value.copy(
+                                    messages = it
+                                )
+                            }!!
+                        }
+
+                        is Resource.Loading -> {}
+                        is Resource.Error -> {
+                            Timber.i("SUCCESS_ERROR:: ${result.data}")
+                        }
                     }
+                    delay(3000)
+                }
+            }
+        }
+    }
+
+    fun saveChatProfileToCrush(
+        crushUserId: String,
+        firstName: String,
+        profileImage: String,
+        lastMsgTime: Long,
+        lastMsg: String
+    ) {
+        viewModelScope.launch {
+            chatsUseCaseContainer.saveChatProfileToCrushUseCase.invoke(
+                crushUserId,
+                firstName,
+                profileImage,
+                lastMsgTime,
+                lastMsg
+            ).collect { result ->
+                when (result) {
+                    is Resource.Success -> {}
                     is Resource.Loading -> {}
                     is Resource.Error -> {
-                        Timber.i("SUCCESS_ERROR:: ${result.data}")
+                        Timber.e("SAVE CHAT PROFILE ERROR::: ${result.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    fun saveChatProfileToCurrentUser(
+        crushUserId: String,
+        firstName: String,
+        profileImage: String,
+        lastMsgTime: Long,
+        lastMsg: String
+    ) {
+        viewModelScope.launch {
+            chatsUseCaseContainer.saveChatProfileToCurrentUserUseCase.invoke(
+                crushUserId,
+                firstName,
+                profileImage,
+                lastMsgTime,
+                lastMsg
+            ).collect { result ->
+                when (result) {
+                    is Resource.Success -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("SAVE CHAT PROFILE ERROR::: ${result.message}")
                     }
                 }
             }

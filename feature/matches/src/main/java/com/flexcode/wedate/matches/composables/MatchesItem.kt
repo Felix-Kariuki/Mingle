@@ -35,7 +35,7 @@ import com.flexcode.wedate.matches.data.model.Matches
 @Composable
 fun MatchesItem(
     match: Matches,
-    navigateToChats: (Matches) -> Unit
+    navigateToChats: (String) -> Unit
 ) {
     Card(
         elevation = 5.dp,
@@ -53,12 +53,12 @@ fun MatchesItem(
                 .crossfade(true)
                 .build(),
             placeholder = painterResource(R.drawable.sharon),
-            contentDescription = "match with ${match.firstName}",
+            contentDescription = "chat with ${match.firstName}",
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .width(110.dp)
                 .height(130.dp)
-                .clickable { navigateToChats(match) }
+                .clickable { navigateToChats(match.id) }
         )
     }
 }

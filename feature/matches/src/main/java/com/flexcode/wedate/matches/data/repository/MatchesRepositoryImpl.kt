@@ -16,6 +16,7 @@
 package com.flexcode.wedate.matches.data.repository
 
 import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedate.matches.data.model.ChatProfile
 import com.flexcode.wedate.matches.data.model.Matches
 import com.flexcode.wedate.matches.domain.repository.MatchesRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -51,7 +52,27 @@ class MatchesRepositoryImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
+    override suspend fun getAllChatProfiles(): Flow<Resource<List<ChatProfile>>> {
+        return flow<Resource<List<ChatProfile>>> {
+            emit(Resource.Loading())
+            try {
+                val currentUserId = auth.uid!!
+                val allUserMatches = ArrayList<ChatProfile>()
+                val allMatches = dbRef.child(CHATS_PATH_PROFILE).child(currentUserId).get().await()
+
+                for (i in allMatches.children) {
+                    val result = i.getValue(ChatProfile::class.java)
+                    allUserMatches.add(result!!)
+                }
+                emit(Resource.Success(allUserMatches))
+            } catch (e: Exception) {
+                emit(Resource.Error(message = e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
     companion object {
         const val MATCHES = "Matches"
+        const val CHATS_PATH_PROFILE = "WeDateChatsProfiles"
     }
 }

@@ -20,7 +20,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -74,29 +78,32 @@ fun HomeScreen(
                         state.potentialMatches.filter { user ->
                             user.id != viewModel.getUid() && !user.likedBy!!.contains(
                                 viewModel.getUid()
-                            )
+                            ) && user.accountStatus != "DELETED"
                         }
                         ).shuffled(),
                     onEmptyStack = {
                         state.isEmpty = false
                     },
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    context = context
                 )
             } else {
                 PersonsCardStack(
                     items = state.potentialMatches.filter { user ->
                         user.id != viewModel.getUid() && user.gender == state.interestedIn &&
-                            !user.likedBy!!.contains(viewModel.getUid())
+                            !user.likedBy!!.contains(viewModel.getUid()) &&
+                            user.accountStatus != "DELETED"
                     }.shuffled(),
                     onEmptyStack = {
                         state.isEmpty = false
                     },
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    context = context
                 )
             }
         } else {
             ResultText(
-                text = "No more People Within your range adjust settings..",
+                text = "No more People to match with at this time",
                 fontWeight = FontWeight.Bold
             )
         }

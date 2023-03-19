@@ -80,6 +80,7 @@ class IdentifyScreenViewModel @Inject constructor(
             SnackBarManager.showMessage(AppText.yy_error)
             return
         }
+
         val yob =
             user.value.dateOfBirth + "/" + user.value.monthOfBirth + "/" + user.value.yearOfBirth
 
@@ -108,6 +109,10 @@ class IdentifyScreenViewModel @Inject constructor(
         val formattedYearOfBirth = sdf.parse(yearOfBirth)
         val years = (today.time - formattedYearOfBirth.time) / 31536000000
         if (years.toInt() >= 18) {
+            if (_selectedGenderOption.value == "[Male]") {
+                SnackBarManager.showMessage(AppText.gender_error)
+                return
+            }
             launchCatching {
                 dataStore.saveYearOfBirth(year = yob)
                 dataStore.saveAge(age = years.toString())

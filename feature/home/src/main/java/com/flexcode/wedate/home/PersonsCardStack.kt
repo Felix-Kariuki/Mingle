@@ -15,6 +15,7 @@
  */
 package com.flexcode.wedate.home
 
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -29,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -37,11 +39,11 @@ import coil.compose.AsyncImage
 import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
+import com.flexcode.wedate.common.composables.NoResultFoundAnimation
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
 import com.flexcode.wedate.common.ext.moveTo
 import com.flexcode.wedate.common.ext.visible
-import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.onlineGreen
 import com.flexcode.wedate.home.presentation.HomeViewModel
@@ -57,16 +59,41 @@ fun PersonsCardStack(
     onSwipeLeft: (person: User) -> Unit = {},
     onSwipeRight: (person: User) -> Unit = {},
     onEmptyStack: (lastItem: User) -> Unit = {},
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel,
+    context: Context
 ) {
     var i by remember {
         mutableStateOf(items.size - 1)
     }
 
     if (i == -1) {
-        onEmptyStack(items.last())
+        if (items.isNotEmpty()) {
+            onEmptyStack(items.last())
+        }
     }
     val state by viewModel.state
+
+    if (items.isEmpty()) {
+        Box(
+            modifier = modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                modifier = modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                NoResultFoundAnimation()
+                BasicText(
+                    text = AppText.no_potential_matches,
+                    fontSize = 18.sp,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.SemiBold,
+                    color = deepBrown
+                )
+            }
+        }
+    }
 
     val cardStackController = rememberCardStackController()
 
@@ -113,7 +140,9 @@ fun PersonsCardStack(
         if (state.userDetails?.likedBy != null &&
             state.userDetails?.likedBy?.contains(items.asReversed()[i].id)!!
         ) {
-            SnackBarManager.showError("You Matched With ${items.asReversed()[i].firstName}")
+            // SnackBarManager.showError("You Matched With ${items.asReversed()[i].firstName}")
+            val service = MatchNotificationService(context.applicationContext)
+            service.showNotification(items.asReversed()[i].firstName)
             /*test**/
             viewModel.saveLikeToCrush(
                 crushUserId = items.asReversed()[i].id,
@@ -143,6 +172,10 @@ fun PersonsCardStack(
                 lat = items.asReversed()[i].latitude,
                 long = items.asReversed()[i].longitude,
                 profileImage = items.asReversed()[i].profileImage?.profileImage1.toString()
+            )
+            // delete on dislike
+            viewModel.deleteLikedByFromMe(
+                userLikeId = items.asReversed()[i].id
             )
         }
         onSwipeRight(items[i])
