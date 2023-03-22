@@ -23,6 +23,8 @@ import com.flexcode.wedate.common.utils.Resource
 import com.flexcode.wedate.matches.domain.use_case.UseCaseContainer
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -50,15 +52,20 @@ class MatchesViewModel @Inject constructor(
 
     private fun getMatches() {
         viewModelScope.launch {
-            useCases.getAllUserMatchesUseCase.invoke().collect { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        state.value = result.data?.let { state.value.copy(matches = it) }!!
+            while (isActive) {
+                useCases.getAllUserMatchesUseCase.invoke().collect { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            Timber.i("MATCHES:: ${result.data}")
+                            state.value = result.data?.let { state.value.copy(matches = it) }!!
+                        }
+
+                        is Resource.Loading -> {}
+                        is Resource.Error -> {
+                            Timber.e("MATCHES ERROR::: ${result.message}")
+                        }
                     }
-                    is Resource.Loading -> {}
-                    is Resource.Error -> {
-                        Timber.e("MATCHES ERROR::: ${result.message}")
-                    }
+                    delay(2500)
                 }
             }
         }

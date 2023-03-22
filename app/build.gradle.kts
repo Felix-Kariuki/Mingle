@@ -19,8 +19,8 @@ android {
         applicationId = "com.flexcode.wedatecompose"
         minSdk = SDK.min
         targetSdk = SDK.max
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -105,8 +105,8 @@ dependencies {
     implementation("androidx.preference:preference-ktx:1.2.0")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    implementation("com.google.dagger:hilt-android:2.43.2")
-    kapt("com.google.dagger:hilt-compiler:2.43.2")
+    implementation("com.google.dagger:hilt-android:2.44.2")
+    kapt("com.google.dagger:hilt-compiler:2.44.2")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
 
