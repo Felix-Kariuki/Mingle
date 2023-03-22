@@ -24,7 +24,7 @@ fun String.isFirstNameValid(): Boolean {
 }
 
 fun String.isPhoneNumberValid(): Boolean {
-    return this.isNotBlank() && this.length == Constants.MIN_PHONE_LENGTH
+    return this.isNotBlank() //&& this.length == Constants.MIN_PHONE_LENGTH
 }
 
 fun String.isValidEmail(): Boolean {
@@ -37,8 +37,8 @@ fun String.isNameValid(): Boolean {
 
 fun String.isValidPassword(): Boolean {
     return this.isNotBlank() &&
-        this.length >= Constants.MIN_PASS_LENGTH &&
-        Pattern.compile(Constants.PASS_PATTERN).matcher(this).matches()
+        this.length >= Constants.MIN_PASS_LENGTH //&&
+        //Pattern.compile(Constants.PASS_PATTERN).matcher(this).matches()
 }
 
 fun String.passwordMatches(repeated: String): Boolean {

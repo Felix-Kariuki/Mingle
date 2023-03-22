@@ -24,6 +24,8 @@ import com.flexcode.wedate.common.utils.Resource
 import com.flexcode.wedate.home.domain.use_cases.HomeUseCases
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -46,18 +48,22 @@ class AdmirersViewModel @Inject constructor(
 
     fun getAllLikedBy(currentUserId: String) {
         viewModelScope.launch {
-            homeUseCases.getAllLikedByUseCase.invoke(currentUserId).collect { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        state.value = result.data?.filter { !it.matched }
-                            ?.let { state.value.copy(admirers = it) }!!
-                        Timber.i("LIKED: ${result.data} ")
-                        // state.value = result.data?.let { state.value.copy(admirers = it) }!!
+            while (isActive) {
+                homeUseCases.getAllLikedByUseCase.invoke(currentUserId).collect { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            state.value = result.data?.filter { !it.matched }
+                                ?.let { state.value.copy(admirers = it) }!!
+                            Timber.i("LIKED: ${result.data} ")
+                            // state.value = result.data?.let { state.value.copy(admirers = it) }!!
+                        }
+
+                        is Resource.Loading -> {}
+                        is Resource.Error -> {
+                            Timber.e("LIKES ERROR::: ${result.message}")
+                        }
                     }
-                    is Resource.Loading -> {}
-                    is Resource.Error -> {
-                        Timber.e("LIKES ERROR::: ${result.message}")
-                    }
+                    delay(2500)
                 }
             }
         }

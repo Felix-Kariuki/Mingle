@@ -159,9 +159,9 @@ fun ErrorMessage(
 ) {
     BasicText(
         text = text,
-        fontSize = 18.sp,
+        fontSize = 15.sp,
         textAlign = TextAlign.Center,
-        fontWeight = FontWeight.SemiBold,
+        fontWeight = FontWeight.Normal,
         color = deepBrown
     )
 }

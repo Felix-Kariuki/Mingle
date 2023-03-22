@@ -30,6 +30,8 @@ import com.flexcode.wedate.common.utils.Resource
 import com.flexcode.wedate.home.domain.use_cases.HomeUseCases
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -114,18 +116,22 @@ class HomeViewModel @Inject constructor(
 
     private fun getAllUsers() {
         viewModelScope.launch {
-            homeUseCases.getAllUsersUseCase.invoke().collect { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        state.value =
-                            state.value.copy(potentialMatches = result.data as MutableList<User>)
-                        state.value = state.value.copy(isEmpty = false)
+            while (isActive) {
+                homeUseCases.getAllUsersUseCase.invoke().collect { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            state.value =
+                                state.value.copy(potentialMatches = result.data as MutableList<User>)
+                            state.value = state.value.copy(isEmpty = false)
+                        }
+
+                        is Resource.Loading -> {}
+                        is Resource.Error -> {
+                            Timber.e("USERS ERROR::: ${result.message}")
+                            SnackBarManager.showError("${result.message}")
+                        }
                     }
-                    is Resource.Loading -> {}
-                    is Resource.Error -> {
-                        Timber.e("USERS ERROR::: ${result.message}")
-                        SnackBarManager.showError("${result.message}")
-                    }
+                    delay(6000)
                 }
             }
         }
