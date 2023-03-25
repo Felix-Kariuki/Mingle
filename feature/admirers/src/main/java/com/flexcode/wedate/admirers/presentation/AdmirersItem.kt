@@ -28,14 +28,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
-import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.theme.deepBrown
+import com.flexcode.wedate.home.MatchNotificationService
 import com.flexcode.wedate.home.data.model.Likes
 import timber.log.Timber
 
@@ -46,6 +47,7 @@ fun AdmirerItem(
     viewModel: AdmirersViewModel
 ) {
     val state by viewModel.state
+    val context = LocalContext.current
     Column {
         Box(
             modifier = modifier
@@ -114,8 +116,9 @@ fun AdmirerItem(
                             like.id
                         )
                     ) {
-                        SnackBarManager.showError("You Matched With ${like.firstName}")
                         viewModel.getAllLikedBy(viewModel.getUid())
+                        val service = MatchNotificationService(context.applicationContext)
+                        service.showNotification(like.firstName)
 
                         viewModel.saveMatchToCrush(
                             crushUserId = like.id,
