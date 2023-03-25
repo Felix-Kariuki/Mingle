@@ -17,6 +17,7 @@ package com.flexcode.wedate.home.presentation
 
 import android.Manifest
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
@@ -28,9 +29,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.flexcode.wedate.common.composables.ResultText
+import com.flexcode.wedate.common.R
+import com.flexcode.wedate.common.composables.BasicText
+import com.flexcode.wedate.common.composables.SearchingPotentialMatches
+import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.home.PersonsCardStack
 import com.flexcode.wedate.home.location.GetCurrentLocation
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -102,10 +107,24 @@ fun HomeScreen(
                 )
             }
         } else {
-            ResultText(
-                text = "No more People to match with at this time",
-                fontWeight = FontWeight.Bold
-            )
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    modifier = modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    SearchingPotentialMatches()
+                    BasicText(
+                        text = R.string.searching_potential_matches,
+                        fontSize = 15.sp,
+                        textAlign = TextAlign.Center,
+                        color = deepBrown
+                    )
+                }
+            }
         }
     }
 }

@@ -23,6 +23,7 @@ import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.ext.isValidEmail
+import com.flexcode.wedate.common.navigation.FORGOT_PASSWORD_SCREEN
 import com.flexcode.wedate.common.navigation.HOME_SCREEN_CONTENT
 import com.flexcode.wedate.common.navigation.LOGIN_SCREEN
 import com.flexcode.wedate.common.navigation.REGISTER_SCREEN
@@ -111,7 +112,11 @@ class LoginViewModel @Inject constructor(
         launchCatching { openScreen(REGISTER_SCREEN) }
     }
 
-    fun onForgotPasswordClick() {
+    fun navigateToForgotPassword(openScreen: (String) -> Unit) {
+        launchCatching { openScreen(FORGOT_PASSWORD_SCREEN) }
+    }
+
+    fun onForgotPasswordClick(openAndPopUp: (String, String) -> Unit) {
         if (!email.isValidEmail()) {
             SnackBarManager.showMessage(AppText.email_error)
             return
@@ -120,6 +125,7 @@ class LoginViewModel @Inject constructor(
         launchCatching {
             authRepository.sendRecoveryEmail(email)
             SnackBarManager.showMessage(AppText.recovery_email_sent)
+            openAndPopUp(LOGIN_SCREEN, FORGOT_PASSWORD_SCREEN)
         }
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">We Date</string>
+    <string name="app_name">Mingle</string>
     <string name="generic_error">Sorry Something went wrong</string>
     <string name="email">Email</string>
     <string name="first_name">First Name</string>
@@ -16,7 +16,7 @@
     <string name="password_error">Your password should have at least six digits and include one digit, one lower case letter and one upper case letter.</string>
     <string name="password_visible">Password Visible</string>
     <string name="string_empty">Field Cannot be Blank</string>
-    <string name="recovery_email_sent">Check your inbox for the recovery email.</string>
+    <string name="recovery_email_sent">Check your inbox for the reset email.</string>
     <string name="password_invisible">Password Invisible</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="forgotPassword">Forgot Password</string>
@@ -24,11 +24,13 @@
     <string name="have_account">Already have an account?, Login</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="update">Update</string>
     <string name="logo">Logo</string>
 
     <string name="next">Continue</string>
     <string name="identify">Identify Yourself</string>
     <string name="interest">Who are you \n interested in</string>
+    <string name="interested_in">Interested in</string>
     <string name="searching_for">What are you \n searching for</string>
     <string name="profile_image">Add your \n profile</string>
     <string name="gender">Gender</string>
@@ -53,7 +55,8 @@
     <string name="profile_image_error">You have to add at least the first and second image</string>
 
     <string name="no_admirers">No admirers yet</string>
-    <string name="no_potential_matches">No more people to match with</string>
+    <string name="no_potential_matches">No more Singles to mingle with</string>
+    <string name="searching_potential_matches">Searching for potential singles to mingle with</string>
     <string name="no_matches">No Matches yet</string>
     <string name="no_chats">No chats found start a conversation with your matches</string>
     <string name="admirers">Admirers</string>
@@ -82,7 +85,7 @@
     <string name="give_permission">Give Permission</string>
     <string name="rationale_msg">To use this app\'s functionalities, you need to allow Location permission.</string>
     <string name="turn_on_location">Turn On Location Service</string>
-    <string name="location_desc">WeDate requires an access to your location for better performance and to match you to any prospective matches around your area.\n\nApp won\'t work without location permission</string>
+    <string name="location_desc">Mingle requires an access to your location for better performance and to match you to any prospective matches around your area.\n\nApp won\'t work without location permission</string>
 
     <string name="log_out">Log Out</string>
     <string name="delete_account">Delete Account</string>
@@ -107,5 +110,7 @@
 
     <string name="type_msg">Type Message</string>
     <string name="msg_error">Message can\'t be blank</string>
+    <string name="profile_images_desc">Add at least two images (first and second)</string>
+
 
 </resources>

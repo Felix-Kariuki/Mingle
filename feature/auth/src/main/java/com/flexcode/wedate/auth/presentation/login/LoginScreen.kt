@@ -94,7 +94,7 @@ fun LoginScreen(
                     modifier = modifier.basicButton(),
                     color = MaterialTheme.colors.onBackground
                 ) {
-                    viewModel.onForgotPasswordClick()
+                    viewModel.navigateToForgotPassword(openScreen)
                 }
 
                 BasicButton(

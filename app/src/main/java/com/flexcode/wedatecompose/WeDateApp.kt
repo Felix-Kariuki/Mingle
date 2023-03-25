@@ -31,6 +31,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.flexcode.wedate.auth.presentation.forgot_pwd.ForgotPasswordScreen
 import com.flexcode.wedate.auth.presentation.identity_screen.IdentityScreen
 import com.flexcode.wedate.auth.presentation.interests_screen.InterestsScreen
 import com.flexcode.wedate.auth.presentation.login.LoginScreen
@@ -100,6 +101,14 @@ fun NavGraphBuilder.WeDateNavGraph(appState: WeDateAppState) {
         })
     }
 
+    composable(route = FORGOT_PASSWORD_SCREEN) {
+        ForgotPasswordScreen(openAndPopUp = { route, popup ->
+            appState.navigateAndPopUp(route = route, popUp = popup)
+        }, openScreen = { route ->
+            appState.navigate(route = route)
+        })
+    }
+
     composable(route = REGISTER_SCREEN) {
         RegisterScreen(openAndPopUp = { route, popUp ->
             appState.navigateAndPopUp(route = route, popUp = popUp)
@@ -131,9 +140,6 @@ fun NavGraphBuilder.WeDateNavGraph(appState: WeDateAppState) {
         ProfileImagesScreen(
             openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) }
         )
-    }
-
-    composable(route = FORGOT_PASSWORD_SCREEN) {
     }
 
     composable(route = HOME_SCREEN_CONTENT) {

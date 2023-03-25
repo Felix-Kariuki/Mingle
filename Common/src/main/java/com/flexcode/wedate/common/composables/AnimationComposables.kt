@@ -57,3 +57,16 @@ fun NoResultFoundAnimation() {
         alignment = Alignment.Center
     )
 }
+
+@Composable
+fun SearchingPotentialMatches() {
+    val composition by rememberLottieComposition(
+        spec = LottieCompositionSpec.RawRes(R.raw.searching_people)
+    )
+    LottieAnimation(
+        composition = composition,
+        iterations = 200,
+        modifier = Modifier.size(300.dp),
+        alignment = Alignment.Center
+    )
+}

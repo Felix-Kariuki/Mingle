@@ -27,7 +27,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
@@ -42,10 +41,6 @@ class SettingsViewModel @Inject constructor(
 
     fun signOut() {
         authRepository.signOut()
-    }
-
-    private fun deleteUser() {
-        authRepository.deleteUser()
     }
 
     init {
@@ -73,7 +68,6 @@ class SettingsViewModel @Inject constructor(
             useCaseContainer.deleteAccountUseCase.invoke(accountStatus).collect { result ->
                 when (result) {
                     is Resource.Success -> {
-                        Timber.i("SUCCESS DELETE ACCOUNT")
                         deleteUser()
                     }
                     is Resource.Loading -> {}
@@ -81,5 +75,9 @@ class SettingsViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun deleteUser() {
+        authRepository.deleteUser()
     }
 }

@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#common
+-keep class com.flexcode.wedate.common.data.LogService.** { *; }
+-keep class com.flexcode.wedate.common.data.LogServiceImpl.** { *; }

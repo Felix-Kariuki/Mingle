@@ -49,14 +49,14 @@ fun MapsScreen(
     navigateBack: () -> Unit,
     viewModel: AdmirersViewModel = hiltViewModel()
 ) {
-    val ruiru = LatLng(-1.1359858, 36.9700799) // replace with current location
     val state by viewModel.state
+    val myLocation = LatLng(-1.286389, 36.817223)
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(ruiru, 14f)
+        position = CameraPosition.fromLatLngZoom(myLocation, 5f)
     }
     val uiSettings by remember { mutableStateOf(MapUiSettings()) }
     val properties by remember {
-        mutableStateOf(MapProperties(mapType = MapType.TERRAIN))
+        mutableStateOf(MapProperties(mapType = MapType.NORMAL))
     }
     Box(Modifier.fillMaxSize()) {
         GoogleMap(

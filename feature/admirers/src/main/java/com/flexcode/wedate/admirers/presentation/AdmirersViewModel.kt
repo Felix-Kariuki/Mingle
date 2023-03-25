@@ -24,9 +24,9 @@ import com.flexcode.wedate.common.utils.Resource
 import com.flexcode.wedate.home.domain.use_cases.HomeUseCases
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -80,6 +80,7 @@ class AdmirersViewModel @Inject constructor(
                     is Resource.Success -> {
                         state.value = state.value.copy(userDetails = result.data)
                     }
+
                     is Resource.Loading -> {}
                     is Resource.Error -> {
                         Timber.e("INTERESTS IN ERROR::: ${result.message}")

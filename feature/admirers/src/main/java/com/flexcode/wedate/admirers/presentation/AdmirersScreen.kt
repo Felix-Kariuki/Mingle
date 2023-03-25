@@ -127,7 +127,9 @@ fun AdmirersScreen(
                     .basicButton()
                     .height(50.dp)
                     .clip(RoundedCornerShape(10.dp))
-            ) { navigateToAdmirersMaps() }
+            ) {
+                navigateToAdmirersMaps()
+            }
         }
     }
 }

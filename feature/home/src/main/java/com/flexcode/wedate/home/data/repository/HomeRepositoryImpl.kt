@@ -133,8 +133,8 @@ class HomeRepositoryImpl @Inject constructor(
                     profileImage = profileImage,
                     matched = true
                 )
-                dbRef.child(MATCHES).child(crushUserId).child(currentUid).setValue(match).await()//
-                //dbRef.child(LIKES).child(crushUserId).child(currentUid).setValue(match).await()//
+                dbRef.child(MATCHES).child(crushUserId).child(currentUid).setValue(match).await() //
+                // dbRef.child(LIKES).child(crushUserId).child(currentUid).setValue(match).await()//
                 emit(Resource.Success(Any()))
             } catch (e: Exception) {
                 println(e)

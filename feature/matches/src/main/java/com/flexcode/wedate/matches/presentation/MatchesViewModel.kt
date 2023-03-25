@@ -23,9 +23,9 @@ import com.flexcode.wedate.common.utils.Resource
 import com.flexcode.wedate.matches.domain.use_case.UseCaseContainer
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import javax.inject.Inject
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -73,15 +73,19 @@ class MatchesViewModel @Inject constructor(
 
     private fun getChatProfiles() {
         viewModelScope.launch {
-            useCases.getChatProfilesUseCase.invoke().collect { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        state.value = result.data?.let { state.value.copy(chatProfiles = it) }!!
+            while (isActive) {
+                useCases.getChatProfilesUseCase.invoke().collect { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            state.value = result.data?.let { state.value.copy(chatProfiles = it) }!!
+                        }
+
+                        is Resource.Loading -> {}
+                        is Resource.Error -> {
+                            Timber.e("CHAT PROFILE ERROR::: ${result.message}")
+                        }
                     }
-                    is Resource.Loading -> {}
-                    is Resource.Error -> {
-                        Timber.e("CHAT PROFILE ERROR::: ${result.message}")
-                    }
+                    delay(2500)
                 }
             }
         }
