@@ -17,6 +17,7 @@ package com.flexcode.wedate.common.navigation
 
 const val SPLASH_SCREEN = "SplashScreen"
 const val LOGIN_SCREEN = "LoginScreen"
+const val FORGOT_PASSWORD_SCREEN = "ForgotPasswordScreen"
 const val REGISTER_SCREEN = "RegisterScreen"
 const val IDENTITY_SCREEN = "IdentityScreen"
 const val INTERESTS_SCREEN = "InterestsScreen"
@@ -28,7 +29,6 @@ const val ACCOUNT_SCREEN = "AccountScreen"
 const val SETTINGS_SCREEN = "SettingsScreen"
 const val MATCHES_SCREEN = "MatchesScreen"
 const val ADMIRERS_SCREEN = "AdmirersScreen"
-const val FORGOT_PASSWORD_SCREEN = "HomeScreen"
 
 const val LOVE_CALCULATOR_SCREEN = "LoveScreen"
 const val PROFILE_DETAILS_SCREEN = "ProfileDetailsScreen"

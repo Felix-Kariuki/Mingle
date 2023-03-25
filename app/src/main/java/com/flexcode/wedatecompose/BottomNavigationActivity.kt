@@ -35,7 +35,13 @@ import androidx.navigation.navArgument
 import com.flexcode.wedate.account.AccountScreen
 import com.flexcode.wedate.admirers.presentation.AdmirersScreen
 import com.flexcode.wedate.chatsscreen.presentation.ChatsScreen
-import com.flexcode.wedate.common.navigation.*
+import com.flexcode.wedate.common.navigation.BottomNavItem
+import com.flexcode.wedate.common.navigation.CHATS_SCREEN
+import com.flexcode.wedate.common.navigation.EDIT_PROFILE_SCREEN
+import com.flexcode.wedate.common.navigation.LOVE_CALCULATOR_SCREEN
+import com.flexcode.wedate.common.navigation.MAPS_SCREEN
+import com.flexcode.wedate.common.navigation.PROFILE_DETAILS_SCREEN
+import com.flexcode.wedate.common.navigation.SETTINGS_SCREEN
 import com.flexcode.wedate.common.theme.purple
 import com.flexcode.wedate.home.presentation.HomeScreen
 import com.flexcode.wedate.lovecalculator.presentation.LoveCalculatorScreen

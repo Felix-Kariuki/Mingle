@@ -143,7 +143,7 @@ fun ProfileDetailsScreen(
                     fontSize = 18.sp
                 )
                 ResultText(
-                    text = "${state.userDetails?.userBio}",
+                    text = state.userDetails?.userBio ?: "No Bio added yet",
                     color = Color.Gray,
                     fontWeight = FontWeight.Light,
                     modifier = modifier.offset(y = (-8).dp)
@@ -175,6 +175,19 @@ fun ProfileDetailsScreen(
                         }
                     Spacer(modifier = modifier.width(4.dp))
                     InfoItem(text = sexuality)
+                }
+
+                BasicText(
+                    text = AppText.interested_in,
+                    fontSize = 18.sp
+                )
+
+                Row(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp)
+                ) {
+                    InfoItem(text = "${state.userDetails?.interestedIn}")
                 }
 
                 BasicText(

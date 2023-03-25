@@ -19,8 +19,8 @@ android {
         applicationId = "com.flexcode.wedatecompose"
         minSdk = SDK.min
         targetSdk = SDK.max
-        versionCode = 2
-        versionName = "1.0.0.0"
+        versionCode = 3
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -42,6 +42,19 @@ android {
 //                unstrippedNativeLibsDir = "path/to/libs"
             }
         }
+//        debug {
+//            isMinifyEnabled = true
+//            isShrinkResources = true
+//            proguardFiles(
+//                getDefaultProguardFile("proguard-android-optimize.txt"),
+//                "proguard-rules.pro"
+//            )
+//            configure<com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension> {
+//                mappingFileUploadEnabled = false
+// //                nativeSymbolUploadEnabled = true
+// //                unstrippedNativeLibsDir = "path/to/libs"
+//            }
+//        }
     }
     flavorDimensions("environment")
     productFlavors {

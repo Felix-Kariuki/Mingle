@@ -34,6 +34,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,6 +42,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.BasicButton
+import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.LoadingAnimation
 import com.flexcode.wedate.common.composables.ScreenTitlesText
 import com.flexcode.wedate.common.ext.basicButton
@@ -122,6 +124,14 @@ fun ProfileImagesScreen(
                 }
             }
 
+            Spacer(modifier = Modifier.height(16.dp))
+
+            BasicText(
+                text = R.string.profile_images_desc,
+                color = Color.Gray,
+                textAlign = TextAlign.Center
+            )
+
             Row(
                 modifier = modifier
                     .weight(1f)
@@ -129,7 +139,7 @@ fun ProfileImagesScreen(
                 verticalAlignment = Alignment.Bottom
             ) {
                 BasicButton(
-                    text = R.string.register,
+                    text = R.string.update,
                     modifier = modifier
                         .basicButton()
                         .height(50.dp)

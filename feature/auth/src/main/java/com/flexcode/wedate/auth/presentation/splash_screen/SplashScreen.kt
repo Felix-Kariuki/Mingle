@@ -27,11 +27,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flexcode.wedate.auth.presentation.profile_images_screen.ProfileImageState
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.LottieAnimationLove
+import com.flexcode.wedate.common.navigation.PROFILE_IMAGES_SCREEN
 import com.flexcode.wedate.common.navigation.SPLASH_SCREEN
 import com.flexcode.wedate.common.utils.Constants
 import kotlinx.coroutines.delay
+import timber.log.Timber
 
 @Composable
 fun SplashScreen(
@@ -39,9 +42,12 @@ fun SplashScreen(
     modifier: Modifier = Modifier,
     viewModel: SplashScreenViewModel = hiltViewModel()
 ) {
+    val profileImagesState by viewModel.state
+
     Column(
         modifier = modifier
-            .fillMaxSize().testTag(SPLASH_SCREEN),
+            .fillMaxSize()
+            .testTag(SPLASH_SCREEN),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -56,7 +62,27 @@ fun SplashScreen(
     }
 
     LaunchedEffect(key1 = true) {
-        delay(Constants.SPLASH_TIMEOUT)
+        if (viewModel.hasUser()) {
+            viewModel.getUserDetails()
+            delay(Constants.SPLASH_TIMEOUT)
+            checkNoProfileImageAvailablee(profileImagesState, openAndPopUp, viewModel)
+        } else {
+            delay(Constants.SPLASH_TIMEOUT)
+            viewModel.onAppStart(openAndPopUp)
+        }
+    }
+}
+fun checkNoProfileImageAvailablee(
+    state: ProfileImageState,
+    openAndPopUp: (String, String) -> Unit,
+    viewModel: SplashScreenViewModel
+) {
+    if (state.userDetails?.profileImage?.profileImage1 == "" ||
+        state.userDetails?.profileImage?.profileImage2 == ""
+    ) {
+        Timber.i("IMAGES:: True")
+        openAndPopUp(PROFILE_IMAGES_SCREEN, SPLASH_SCREEN)
+    } else {
         viewModel.onAppStart(openAndPopUp)
     }
 }

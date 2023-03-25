@@ -197,6 +197,11 @@ fun EditProfileScreen(
                     onNewValue = editProfileViewModel::onUserBioChange,
                     modifier = modifier.offset(y = (-8).dp)
                 )
+                BasicText(
+                    text = R.string.interested_in,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 18.sp
+                )
             }
 
             if (visible == "true") {

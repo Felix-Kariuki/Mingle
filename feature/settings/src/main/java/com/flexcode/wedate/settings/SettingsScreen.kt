@@ -21,6 +21,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,6 +31,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,6 +40,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -48,6 +52,8 @@ import com.flexcode.wedate.common.ext.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.deepLightPurple
 import com.flexcode.wedate.common.theme.purpleGrey
+import com.flexcode.wedate.common.utils.contact_utils.sendMail
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -70,8 +76,8 @@ fun SettingsScreen(
                 onClick = { openAndPopUp() },
                 icon = Icons.Default.ArrowBackIos,
                 contentDesc = "Back",
-                height = 30.dp,
-                width = 30.dp,
+                height = 20.dp,
+                width = 20.dp,
                 paddingValues = PaddingValues(start = 10.dp, 0.dp),
                 tint = Color.Black
             )
@@ -88,6 +94,18 @@ fun SettingsScreen(
         ) {
             val context = LocalContext.current
             val scope = rememberCoroutineScope()
+            val showDialog = remember {
+                mutableStateOf(false)
+            }
+            if (showDialog.value) {
+                DeleteAccountDialog(
+                    viewModel = viewModel,
+                    scope = scope,
+                    context = context,
+                    showDialog = showDialog.value,
+                    onDismiss = { showDialog.value = false }
+                )
+            }
 
             BasicText(
                 text = AppText.account,
@@ -120,16 +138,52 @@ fun SettingsScreen(
                 fontWeight = FontWeight.Bold
             )
 
-            InfoColumn(AppText.help, "")
+            InfoColumn(
+                AppText.help,
+                "",
+                modifier = Modifier.clickable {
+                    context.sendMail(
+                        "weminglesingle@gmail.com",
+                        "Help "
+                    )
+                }
+            )
             Divider(modifier = Modifier.padding(horizontal = 16.dp))
 
-            InfoColumn(AppText.ask_a_quiz, "")
+            InfoColumn(
+                AppText.ask_a_quiz,
+                "",
+                modifier = Modifier.clickable {
+                    context.sendMail(
+                        "weminglesingle@gmail.com",
+                        "Question From ${state.userDetails?.firstName}"
+                    )
+                }
+            )
             Divider(modifier = Modifier.padding(horizontal = 16.dp))
 
-            InfoColumn(AppText.raise_a_concern, "")
+            InfoColumn(
+                AppText.raise_a_concern,
+                "",
+                modifier = Modifier.clickable {
+                    context.sendMail(
+                        "weminglesingle@gmail.com",
+                        "Concern From ${state.userDetails?.firstName}"
+                    )
+                }
+            )
             Divider(modifier = Modifier.padding(horizontal = 16.dp))
 
-            InfoColumn(AppText.contact_us, "")
+            InfoColumn(
+                AppText.contact_us,
+                "",
+                modifier = Modifier.clickable {
+                    context.sendMail(
+                        "weminglesingle@gmail.com",
+                        "Message From ${state.userDetails?.firstName}"
+                    )
+                }
+            )
 
             BasicText(
                 text = AppText.more,
@@ -139,13 +193,29 @@ fun SettingsScreen(
                     .background(color = deepLightPurple),
                 fontWeight = FontWeight.Bold
             )
-            InfoColumn(AppText.request_a_feature, "")
+            InfoColumn(
+                AppText.request_a_feature,
+                "",
+                modifier = Modifier.clickable {
+                    context.sendMail("weminglesingle@gmail.com", "Feature Request")
+                }
+            )
             Divider(modifier = Modifier.padding(horizontal = 16.dp))
 
-            InfoColumn(AppText.privacy_policy, "")
+            InfoColumn(
+                AppText.privacy_policy,
+                "",
+                modifier = Modifier.clickable {
+                }
+            )
             Divider(modifier = Modifier.padding(horizontal = 16.dp))
 
-            InfoColumn(AppText.term_of_service, "")
+            InfoColumn(
+                AppText.term_of_service,
+                "",
+                modifier = Modifier.clickable {
+                }
+            )
 
             Button(
                 onClick = {
@@ -167,18 +237,13 @@ fun SettingsScreen(
                 Text(text = stringResource(AppText.log_out), fontSize = 16.sp)
             }
 
-            // enable this button at 1000 users
-            /*BasicTextButton(
+            BasicTextButton(
                 text = AppText.delete_account,
                 modifier = modifier.height(50.dp),
                 color = MaterialTheme.colors.onBackground
             ) {
-                viewModel.deleteUserAccount("DELETED")
-                scope.launch {
-                    delay(1000)
-                    restartApp(context)
-                }
-            }*/
+                showDialog.value = true
+            }
             Spacer(modifier = Modifier.height(10.dp))
             LogoComposableImage()
             AppTitleText(
@@ -226,6 +291,53 @@ fun InfoColumn(
             textAlign = TextAlign.End,
             modifier = modifier.padding(16.dp, 8.dp),
             fontWeight = FontWeight.SemiBold
+        )
+    }
+}
+
+@Composable
+fun DeleteAccountDialog(
+    viewModel: SettingsViewModel,
+    scope: CoroutineScope,
+    context: Context,
+    showDialog: Boolean,
+    onDismiss: () -> Unit
+) {
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = onDismiss,
+            title = {
+                Text(
+                    text = "Are you sure you want to delete your account",
+                    style = TextStyle(
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            },
+            text = {
+                Text(
+                    text = "By deleting your account you will loose all your data which " +
+                        "is not recoverable by any means. To delete Click on the Confirm Button" +
+                        "We will be sad if you leave 💔",
+                    fontSize = 17.sp
+                )
+            },
+            confirmButton = {
+                BasicButton(text = AppText.delete_account, modifier = Modifier) {
+                    viewModel.deleteUser()
+                    viewModel.deleteUserAccount("DELETED")
+                    scope.launch {
+                        delay(1000)
+                        restartApp(context)
+                    }
+                }
+            },
+            dismissButton = {
+                BasicButton(text = AppText.cancel, modifier = Modifier) {
+                    onDismiss()
+                }
+            }
         )
     }
 }

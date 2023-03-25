@@ -28,8 +28,8 @@ import com.flexcode.wedate.common.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -157,7 +157,7 @@ class ChatScreenViewModel @Inject constructor(
                             Timber.i("SUCCESS_ERROR:: ${result.data}")
                         }
                     }
-                    delay(3000)
+                    delay(800)
                 }
             }
         }

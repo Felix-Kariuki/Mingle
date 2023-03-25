@@ -16,11 +16,18 @@
 package com.flexcode.wedate.home.presentation
 
 import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,16 +35,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.flexcode.wedate.common.composables.ResultText
+import com.flexcode.wedate.common.R
+import com.flexcode.wedate.common.composables.BasicText
+import com.flexcode.wedate.common.composables.SearchingPotentialMatches
+import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.home.PersonsCardStack
 import com.flexcode.wedate.home.location.GetCurrentLocation
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import timber.log.Timber
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterialApi::class, ExperimentalPermissionsApi::class)
 @Composable
 fun HomeScreen(
@@ -54,6 +68,41 @@ fun HomeScreen(
     }
     val latitude: MutableState<Double> = remember {
         mutableStateOf(0.00)
+    }
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) {
+        if (it) {
+            Timber.i("Permission Granted")
+        } else {
+            Timber.i("Permission Denied")
+        }
+    }
+
+    val permissionCheckResult =
+        ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.POST_NOTIFICATIONS
+        )
+
+    LaunchedEffect(key1 = true) {
+        if (
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED || ContextCompat
+                .checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            if (permissionCheckResult == PackageManager.PERMISSION_GRANTED) {
+                Timber.i("Notification Permission granted")
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+            }
+        }
     }
 
     GetCurrentLocation(
@@ -102,10 +151,24 @@ fun HomeScreen(
                 )
             }
         } else {
-            ResultText(
-                text = "No more People to match with at this time",
-                fontWeight = FontWeight.Bold
-            )
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    modifier = modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    SearchingPotentialMatches()
+                    BasicText(
+                        text = R.string.searching_potential_matches,
+                        fontSize = 15.sp,
+                        textAlign = TextAlign.Center,
+                        color = deepBrown
+                    )
+                }
+            }
         }
     }
 }

@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Firebase
+-keep class com.google.android.gms.** { *; }
+-keep class com.google.firebase.** { *; }
+
+##auth
+-keep class  com.flexcode.wedate.auth.data.models.** { *; }
+-keep class  com.flexcode.wedate.auth.data.local.datastore.** { *; }
