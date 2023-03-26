@@ -13,11 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:Suppress("IMPLICIT_CAST_TO_ANY")
+
 package com.flexcode.wedate.home.presentation
 
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
@@ -85,8 +88,7 @@ fun HomeScreen(
                 Manifest.permission.POST_NOTIFICATIONS
             )
         } else {
-            Timber.i("Below android 13 no notification request")
-            TODO("VERSION.SDK_INT < TIRAMISU")
+
         }
 
     LaunchedEffect(key1 = true) {

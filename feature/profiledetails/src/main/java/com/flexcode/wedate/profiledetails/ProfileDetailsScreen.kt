@@ -65,7 +65,7 @@ fun ProfileDetailsScreen(
     val scrollState = rememberScrollState()
 
     Scaffold(
-        modifier = modifier.padding(bottom = 65.dp),
+        modifier = modifier,
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { navigateToEditProfile() },
@@ -110,7 +110,8 @@ fun ProfileDetailsScreen(
             }
 
             Box(
-                modifier = modifier.weight(1f)
+                modifier = modifier
+                    .weight(1f)
             ) {
                 if (state.userDetails != null) {
                     SliderView(pagerState, imageList)
@@ -135,19 +136,23 @@ fun ProfileDetailsScreen(
             }
 
             Column(
-                modifier = modifier.weight(1f)
+                modifier = modifier
+                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
             ) {
-                BasicText(
-                    text = AppText.about_me,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 18.sp
-                )
-                ResultText(
-                    text = state.userDetails?.userBio ?: "No Bio added yet",
-                    color = Color.Gray,
-                    fontWeight = FontWeight.Light,
-                    modifier = modifier.offset(y = (-8).dp)
-                )
+                if (state.userDetails?.userBio?.isNotEmpty() == true) {
+                    BasicText(
+                        text = AppText.about_me,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 18.sp
+                    )
+                    ResultText(
+                        text = state.userDetails?.userBio ?: "No Bio added yet",
+                        color = Color.Gray,
+                        fontWeight = FontWeight.Light,
+                        modifier = modifier.offset(y = (-8).dp)
+                    )
+                }
 
                 BasicText(
                     text = AppText.my_basics,
@@ -225,6 +230,7 @@ fun ProfileDetailsScreen(
                     text = "${state.userDetails?.locationName}",
                     color = Color.Gray,
                     modifier = modifier.offset(x = (8).dp, y = (-16).dp)
+                        .padding(bottom = 70.dp)
                 )
             }
         }

@@ -19,7 +19,9 @@ import com.flexcode.wedate.common.ext.isDateValid
 import com.flexcode.wedate.common.ext.isFirstNameValid
 import com.flexcode.wedate.common.ext.isMonthValid
 import com.flexcode.wedate.common.ext.isPhoneNumberValid
+import com.flexcode.wedate.common.ext.isValidPassword
 import com.flexcode.wedate.common.ext.isYearValid
+import com.flexcode.wedate.common.ext.passwordMatches
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
@@ -48,6 +50,34 @@ class StringExtTest {
     fun `test valid phone number returns true`() {
         val phone = "0795603871".isPhoneNumberValid()
         assertThat(phone).isTrue()
+    }
+
+    @Test
+    fun `test password is valid`() {
+        val pwd = "123456aF".isValidPassword()
+        assertThat(pwd).isTrue()
+    }
+
+    @Test
+    fun `test invalid password returns false`() {
+        val pwd = "126aF".isValidPassword()
+        assertThat(pwd).isFalse()
+    }
+
+    @Test
+    fun `test password and confirm password match return true`() {
+        val password = "123456aF"
+        val confirmPassword = "123456aF"
+        val result = password.passwordMatches(confirmPassword)
+       assertThat(result).isTrue()
+    }
+
+    @Test
+    fun `test password and confirm password don't match return false`() {
+        val password = "123456aF"
+        val confirmPassword = "123456"
+        val result = password.passwordMatches(confirmPassword)
+        assertThat(result).isFalse()
     }
 
     @Test

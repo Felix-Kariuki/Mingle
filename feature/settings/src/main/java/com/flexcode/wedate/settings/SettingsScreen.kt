@@ -19,6 +19,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -254,7 +255,7 @@ fun SettingsScreen(
                 textColor = purpleGrey
             )
             ResultText(
-                text = "Version 1.0.1",
+                text = "Version 1.0.2",
                 color = purpleGrey,
                 fontSize = 13.sp,
                 textAlign = TextAlign.Center,
@@ -318,19 +319,23 @@ fun DeleteAccountDialog(
             text = {
                 Text(
                     text = "By deleting your account you will loose all your data which " +
-                        "is not recoverable by any means. To delete Click on the Confirm Button" +
-                        "We will be sad if you leave 💔",
+                            "is not recoverable by any means. To delete Click on the Confirm Button" +
+                            "We will be sad if you leave 💔",
                     fontSize = 17.sp
                 )
             },
             confirmButton = {
                 BasicButton(text = AppText.delete_account, modifier = Modifier) {
-                    viewModel.deleteUser()
+                    Toast.makeText(
+                        context, "Account will be deleted after 72 hours",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    /*viewModel.deleteUser()
                     viewModel.deleteUserAccount("DELETED")
                     scope.launch {
                         delay(1000)
                         restartApp(context)
-                    }
+                    }*/
                 }
             },
             dismissButton = {

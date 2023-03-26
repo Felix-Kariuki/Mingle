@@ -17,7 +17,9 @@ package com.flexcode.wedate.auth.presentation.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
@@ -31,6 +33,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
@@ -61,6 +64,7 @@ fun LoginScreen(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = modifier.fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
             Spacer(modifier = modifier.padding(top = 20.dp))
 
@@ -72,7 +76,8 @@ fun LoginScreen(
                 modifier = modifier
                     .background(Color.White, shape = RoundedCornerShape(30.dp))
                     .width(370.dp)
-                    .height(500.dp)
+                    .height(380.dp)
+                    .verticalScroll(rememberScrollState())
             ) {
                 BasicText(text = AppText.email)
                 EmailField(
@@ -108,13 +113,22 @@ fun LoginScreen(
                 }
             }
 
-            BasicTextButton(
-                text = AppText.no_account,
-                modifier = modifier.basicButton(),
-                color = MaterialTheme.colors.onBackground
+            Row(
+                modifier = modifier
+                    .weight(1f)
+                    .padding(bottom = 30.dp),
+                verticalAlignment = Alignment.Bottom
             ) {
-                viewModel.onRegisterClicked(openScreen)
+                BasicTextButton(
+                    text = AppText.no_account,
+                    modifier = modifier.basicButton(),
+                    color = MaterialTheme.colors.onBackground
+                ) {
+                    viewModel.onRegisterClicked(openScreen)
+                }
             }
+
+
         }
 
         if (uiState.isLoading) {
