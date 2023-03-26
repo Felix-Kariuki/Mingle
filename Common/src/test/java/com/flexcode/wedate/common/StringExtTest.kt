@@ -69,7 +69,7 @@ class StringExtTest {
         val password = "123456aF"
         val confirmPassword = "123456aF"
         val result = password.passwordMatches(confirmPassword)
-       assertThat(result).isTrue()
+        assertThat(result).isTrue()
     }
 
     @Test

@@ -33,7 +33,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.ext.basicButton
@@ -127,8 +126,6 @@ fun LoginScreen(
                     viewModel.onRegisterClicked(openScreen)
                 }
             }
-
-
         }
 
         if (uiState.isLoading) {

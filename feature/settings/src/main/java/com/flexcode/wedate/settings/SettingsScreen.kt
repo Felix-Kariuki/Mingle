@@ -319,15 +319,16 @@ fun DeleteAccountDialog(
             text = {
                 Text(
                     text = "By deleting your account you will loose all your data which " +
-                            "is not recoverable by any means. To delete Click on the Confirm Button" +
-                            "We will be sad if you leave 💔",
+                        "is not recoverable by any means. To delete Click on the Confirm Button" +
+                        "We will be sad if you leave 💔",
                     fontSize = 17.sp
                 )
             },
             confirmButton = {
                 BasicButton(text = AppText.delete_account, modifier = Modifier) {
                     Toast.makeText(
-                        context, "Account will be deleted after 72 hours",
+                        context,
+                        "Account will be deleted after 72 hours",
                         Toast.LENGTH_SHORT
                     ).show()
                     /*viewModel.deleteUser()
