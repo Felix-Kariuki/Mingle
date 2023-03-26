@@ -63,7 +63,7 @@ class AdmirersViewModel @Inject constructor(
                             Timber.e("LIKES ERROR::: ${result.message}")
                         }
                     }
-                    delay(2500)
+                    delay(500)
                 }
             }
         }

@@ -63,7 +63,7 @@ fun PhoneField(
 ) {
     OutlinedTextField(
         singleLine = true,
-        modifier = modifier,
+        modifier = modifier.height(53.dp),
         value = value,
         onValueChange = { onNewValue(it) },
         placeholder = { Text(stringResource(text)) },
@@ -115,7 +115,7 @@ fun EmailField(
 ) {
     OutlinedTextField(
         singleLine = singleLine,
-        modifier = modifier,
+        modifier = modifier.height(53.dp),
         value = value,
         onValueChange = { onNewValue(it) },
         placeholder = { Text(stringResource(text)) },
@@ -125,7 +125,7 @@ fun EmailField(
                 contentDescription = stringResource(text)
             )
         },
-        shape = RoundedCornerShape(10.dp),
+        shape = RoundedCornerShape(8.dp),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Email,
             imeAction = ImeAction.Done
@@ -169,7 +169,7 @@ private fun PasswordField(
         if (isVisible) VisualTransformation.None else PasswordVisualTransformation()
 
     OutlinedTextField(
-        modifier = modifier,
+        modifier = modifier.height(53.dp),
         value = value,
         onValueChange = { onNewValue(it) },
         placeholder = { Text(text = stringResource(placeholder)) },

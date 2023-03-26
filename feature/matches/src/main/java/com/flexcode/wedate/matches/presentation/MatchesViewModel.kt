@@ -85,7 +85,7 @@ class MatchesViewModel @Inject constructor(
                             Timber.e("CHAT PROFILE ERROR::: ${result.message}")
                         }
                     }
-                    delay(2500)
+                    delay(500)
                 }
             }
         }

@@ -73,9 +73,9 @@ class RegisterViewModel @Inject constructor(
         user.value = user.value.copy(password = newValue)
     }
 
-    fun onConfirmPasswordChange(newValue: String) {
-        uiState.value = uiState.value.copy(confirmPassword = newValue)
-    }
+//    fun onConfirmPasswordChange(newValue: String) {
+//        uiState.value = uiState.value.copy(confirmPassword = newValue)
+//    }
 
     fun onLoginClick(openAndPopUp: (String, String) -> Unit) {
         launchCatching { openAndPopUp(LOGIN_SCREEN, REGISTER_SCREEN) }
@@ -102,10 +102,10 @@ class RegisterViewModel @Inject constructor(
             return
         }
 
-        if (!password.passwordMatches(uiState.value.confirmPassword)) {
-            SnackBarManager.showMessage(AppText.password_match_error)
-            return
-        }
+//        if (!password.passwordMatches(uiState.value.confirmPassword)) {
+//            SnackBarManager.showMessage(AppText.password_match_error)
+//            return
+//        }
 
         saveUserInfoToDataStore()
         launchCatching {

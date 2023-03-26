@@ -62,6 +62,7 @@ fun RegisterScreen(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = modifier.fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
             Spacer(modifier = modifier.padding(top = 20.dp))
 
@@ -73,7 +74,7 @@ fun RegisterScreen(
                 modifier = modifier
                     .background(Color.White, shape = RoundedCornerShape(30.dp))
                     .width(370.dp)
-                    .height(550.dp)
+                    .height(500.dp)
                     .verticalScroll(rememberScrollState())
             ) {
                 BasicText(text = AppText.first_name)
@@ -108,12 +109,12 @@ fun RegisterScreen(
                     onNewValue = viewModel::onPasswordChange,
                     Modifier.fieldModifier()
                 )
-                BasicText(text = AppText.confirmPassword)
-                ConfirmPasswordField(
-                    value = uiState.confirmPassword,
-                    onNewValue = viewModel::onConfirmPasswordChange,
-                    modifier.fieldModifier()
-                )
+//                BasicText(text = AppText.confirmPassword)
+//                ConfirmPasswordField(
+//                    value = uiState.confirmPassword,
+//                    onNewValue = viewModel::onConfirmPasswordChange,
+//                    modifier.fieldModifier()
+//                )
 
                 BasicButton(
                     text = AppText.register,
