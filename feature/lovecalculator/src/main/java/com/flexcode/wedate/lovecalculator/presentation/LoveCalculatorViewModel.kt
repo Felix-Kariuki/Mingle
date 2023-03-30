@@ -20,7 +20,7 @@ import androidx.lifecycle.viewModelScope
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.data.LogService
-import com.flexcode.wedate.common.ext.isNameValid
+import com.flexcode.wedate.common.extestions.isNameValid
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
 import com.flexcode.wedate.lovecalculator.domain.usecases.CalculatorUseCases

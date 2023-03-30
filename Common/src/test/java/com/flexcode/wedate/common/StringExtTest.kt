@@ -15,13 +15,13 @@
  */
 package com.flexcode.wedate.common
 
-import com.flexcode.wedate.common.ext.isDateValid
-import com.flexcode.wedate.common.ext.isFirstNameValid
-import com.flexcode.wedate.common.ext.isMonthValid
-import com.flexcode.wedate.common.ext.isPhoneNumberValid
-import com.flexcode.wedate.common.ext.isValidPassword
-import com.flexcode.wedate.common.ext.isYearValid
-import com.flexcode.wedate.common.ext.passwordMatches
+import com.flexcode.wedate.common.extestions.isDateValid
+import com.flexcode.wedate.common.extestions.isFirstNameValid
+import com.flexcode.wedate.common.extestions.isMonthValid
+import com.flexcode.wedate.common.extestions.isPhoneNumberValid
+import com.flexcode.wedate.common.extestions.isValidPassword
+import com.flexcode.wedate.common.extestions.isYearValid
+import com.flexcode.wedate.common.extestions.passwordMatches
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 

@@ -23,9 +23,9 @@ import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.data.LogService
-import com.flexcode.wedate.common.ext.isDateValid
-import com.flexcode.wedate.common.ext.isMonthValid
-import com.flexcode.wedate.common.ext.isYearValid
+import com.flexcode.wedate.common.extestions.isDateValid
+import com.flexcode.wedate.common.extestions.isMonthValid
+import com.flexcode.wedate.common.extestions.isYearValid
 import com.flexcode.wedate.common.navigation.INTERESTS_SCREEN
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import dagger.hilt.android.lifecycle.HiltViewModel

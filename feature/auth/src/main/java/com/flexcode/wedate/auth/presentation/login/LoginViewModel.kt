@@ -22,7 +22,7 @@ import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.data.LogService
-import com.flexcode.wedate.common.ext.isValidEmail
+import com.flexcode.wedate.common.extestions.isValidEmail
 import com.flexcode.wedate.common.navigation.FORGOT_PASSWORD_SCREEN
 import com.flexcode.wedate.common.navigation.HOME_SCREEN_CONTENT
 import com.flexcode.wedate.common.navigation.LOGIN_SCREEN

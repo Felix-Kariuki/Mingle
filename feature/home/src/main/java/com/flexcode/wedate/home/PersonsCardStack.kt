@@ -42,8 +42,8 @@ import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.NoResultFoundAnimation
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
-import com.flexcode.wedate.common.ext.moveTo
-import com.flexcode.wedate.common.ext.visible
+import com.flexcode.wedate.common.extestions.moveTo
+import com.flexcode.wedate.common.extestions.visible
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.onlineGreen
 import com.flexcode.wedate.home.presentation.HomeViewModel
@@ -86,9 +86,9 @@ fun PersonsCardStack(
                 NoResultFoundAnimation()
                 BasicText(
                     text = AppText.no_potential_matches,
-                    fontSize = 18.sp,
+                    fontSize = 15.sp,
                     textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.SemiBold,
+                    fontWeight = FontWeight.Normal,
                     color = deepBrown
                 )
             }

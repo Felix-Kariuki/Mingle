@@ -29,7 +29,7 @@ import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.ScreenTitlesText
 import com.flexcode.wedate.common.composables.SelectOption
-import com.flexcode.wedate.common.ext.basicButton
+import com.flexcode.wedate.common.extestions.basicButton
 
 @Composable
 fun InterestsScreen(
