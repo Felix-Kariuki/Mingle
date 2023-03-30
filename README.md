@@ -36,6 +36,15 @@ Take a look at the contributors for this project. 😎
      
      
 ## **Screenshots 📷**
+<img src="./screenshots/login.png" width="300">&emsp;
+<img src="./screenshots/home_empty.png" width="300">&emsp;
+<img src="./screenshots/home_data.png" width="300">&emsp;
+<img src="./screenshots/admirers.png" width="300">&emsp;
+<img src="./screenshots/admirers_data.png" width="300">&emsp;
+<img src="./screenshots/matches.png" width="300">&emsp;
+<img src="./screenshots/love_calculator.png" width="300">&emsp;
+<img src="./screenshots/profile.png" width="300">&emsp;
+<img src="./screenshots/profiledetails.png" width="300">
 
  
 ## **Tech stack & Libraries 🛠️👨‍💻**
@@ -102,7 +111,7 @@ Do Reach Out :
   * [LinkedIn](https://www.linkedin.com/in/felix-kariuki/)
   
   
-  ## License and Copyright
+  ## License and Copyright ©️
   
   ```
     Copyright 2023 Felix Kariuki
