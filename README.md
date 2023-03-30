@@ -13,7 +13,7 @@ app\
        dev
 ```
 `NOTE`
- To simulate the real feel of the application you'll have to create two or three accounts and select different genders and interests in the account creation process. To make this entire process easier you can use this [`google-services.json`]() that already has test users that i am using for development phase. 
+ To simulate the real feel of the application you'll have to create two or three accounts and select different genders and interests in the account creation process. To make this entire process easier you can use this [`google-services.json`](http://bit.ly/3ZCbtI4) that already has test users that i am using for development phase. 
 
 
 I am using product flavours and have three flavours `dev` , `staging` and `production`. Once you have added the `google-services.json` file to the dev flavour variant path,
