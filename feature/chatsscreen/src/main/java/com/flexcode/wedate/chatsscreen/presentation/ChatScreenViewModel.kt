@@ -22,7 +22,7 @@ import com.flexcode.wedate.chatsscreen.domain.use_cases.ChatsUseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.data.LogService
-import com.flexcode.wedate.common.ext.isNameValid
+import com.flexcode.wedate.common.extestions.isNameValid
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
 import com.google.firebase.auth.FirebaseAuth

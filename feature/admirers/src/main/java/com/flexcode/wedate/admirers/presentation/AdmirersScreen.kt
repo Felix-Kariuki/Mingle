@@ -40,7 +40,7 @@ import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ExtraScreenText
 import com.flexcode.wedate.common.composables.LogoComposableImage
 import com.flexcode.wedate.common.composables.NoResultFoundAnimation
-import com.flexcode.wedate.common.ext.basicButton
+import com.flexcode.wedate.common.extestions.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
 
@@ -91,9 +91,9 @@ fun AdmirersScreen(
                     NoResultFoundAnimation()
                     BasicText(
                         text = AppText.no_admirers,
-                        fontSize = 18.sp,
+                        fontSize = 15.sp,
                         textAlign = TextAlign.Center,
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.Normal,
                         color = deepBrown
                     )
                 } else {

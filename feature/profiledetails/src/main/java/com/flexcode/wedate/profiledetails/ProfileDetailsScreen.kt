@@ -44,7 +44,7 @@ import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ResultText
-import com.flexcode.wedate.common.ext.textPadding
+import com.flexcode.wedate.common.extestions.textPadding
 import com.flexcode.wedate.common.theme.lightPurple
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager

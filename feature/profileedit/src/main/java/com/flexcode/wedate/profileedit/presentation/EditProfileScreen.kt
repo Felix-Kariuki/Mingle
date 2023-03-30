@@ -49,7 +49,7 @@ import com.flexcode.wedate.auth.presentation.profile_images_screen.ProfileImages
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.composables.*
-import com.flexcode.wedate.common.ext.fieldModifier
+import com.flexcode.wedate.common.extestions.fieldModifier
 import com.flexcode.wedate.common.theme.lightPurple
 
 @Composable

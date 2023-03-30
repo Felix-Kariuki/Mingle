@@ -42,7 +42,7 @@ import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.NoResultFoundAnimation
 import com.flexcode.wedate.common.composables.SearchTextField
-import com.flexcode.wedate.common.ext.textPadding
+import com.flexcode.wedate.common.extestions.textPadding
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
 import com.flexcode.wedate.matches.composables.ChatItem

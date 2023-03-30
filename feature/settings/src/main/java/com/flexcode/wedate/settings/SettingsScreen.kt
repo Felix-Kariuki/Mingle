@@ -49,7 +49,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
-import com.flexcode.wedate.common.ext.basicButton
+import com.flexcode.wedate.common.extestions.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.deepLightPurple
 import com.flexcode.wedate.common.theme.purpleGrey
@@ -331,6 +331,11 @@ fun DeleteAccountDialog(
                         "Account will be deleted after 72 hours",
                         Toast.LENGTH_SHORT
                     ).show()
+                    viewModel.signOut()
+                    scope.launch {
+                        delay(1000)
+                        restartApp(context)
+                    }
                     /*viewModel.deleteUser()
                     viewModel.deleteUserAccount("DELETED")
                     scope.launch {

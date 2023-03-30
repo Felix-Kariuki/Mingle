@@ -35,7 +35,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.R.drawable as Appicon
 import com.flexcode.wedate.common.composables.ResultText
-import com.flexcode.wedate.common.ext.textPadding
+import com.flexcode.wedate.common.extestions.textPadding
 import com.flexcode.wedate.matches.data.model.ChatProfile
 
 @Composable

@@ -45,8 +45,8 @@ import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.LoadingAnimation
 import com.flexcode.wedate.common.composables.ScreenTitlesText
-import com.flexcode.wedate.common.ext.basicButton
-import com.flexcode.wedate.common.ext.fieldModifier
+import com.flexcode.wedate.common.extestions.basicButton
+import com.flexcode.wedate.common.extestions.fieldModifier
 
 @Composable
 fun ProfileImagesScreen(

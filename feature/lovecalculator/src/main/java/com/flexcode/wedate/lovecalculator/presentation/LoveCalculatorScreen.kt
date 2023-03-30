@@ -42,8 +42,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
-import com.flexcode.wedate.common.ext.basicButton
-import com.flexcode.wedate.common.ext.fieldModifier
+import com.flexcode.wedate.common.extestions.basicButton
+import com.flexcode.wedate.common.extestions.fieldModifier
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
 

@@ -42,7 +42,7 @@ import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.BasicTextButton
-import com.flexcode.wedate.common.ext.basicButton
+import com.flexcode.wedate.common.extestions.basicButton
 
 @Composable
 fun CustomDialogLocation(

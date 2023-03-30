@@ -88,9 +88,9 @@ class ProfileImagesViewModel @Inject constructor(
                                             state.value = state.value.copy(isLoading = "true")
                                         }
                                         is Resource.Success -> {
-                                            SnackBarManager.showError(
-                                                "$imageNumber Uploaded Successfully"
-                                            )
+//                                            SnackBarManager.showError(
+//                                                "$imageNumber Uploaded Successfully"
+//                                            )
                                             getUserDetails()
                                             state.value = state.value.copy(isLoading = "false")
                                         }

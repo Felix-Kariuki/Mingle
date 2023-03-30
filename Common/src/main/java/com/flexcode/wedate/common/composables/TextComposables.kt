@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.flexcode.wedate.common.R
-import com.flexcode.wedate.common.ext.textPadding
+import com.flexcode.wedate.common.extestions.textPadding
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPink
 

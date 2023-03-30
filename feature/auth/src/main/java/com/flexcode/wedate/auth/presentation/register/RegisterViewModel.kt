@@ -22,7 +22,7 @@ import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.data.LogService
-import com.flexcode.wedate.common.ext.*
+import com.flexcode.wedate.common.extestions.*
 import com.flexcode.wedate.common.navigation.IDENTITY_SCREEN
 import com.flexcode.wedate.common.navigation.LOGIN_SCREEN
 import com.flexcode.wedate.common.navigation.REGISTER_SCREEN
