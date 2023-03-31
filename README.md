@@ -36,15 +36,11 @@ Take a look at the contributors for this project. 😎
      
      
 ## **Screenshots 📷**
-<img src="./screenshots/login.png" width="300">&emsp;
-<img src="./screenshots/home_empty.png" width="300">&emsp;
-<img src="./screenshots/home_data.png" width="300">&emsp;
-<img src="./screenshots/admirers.png" width="300">&emsp;
-<img src="./screenshots/admirers_data.png" width="300">&emsp;
-<img src="./screenshots/matches.png" width="300">&emsp;
-<img src="./screenshots/love_calculator.png" width="300">&emsp;
-<img src="./screenshots/profile.png" width="300">&emsp;
-<img src="./screenshots/profiledetails.png" width="300">
+| | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|
+|<img src="./screenshots/login.png" width="300"> | <img src="./screenshots/home_empty.png" width="300"> | <img src="./screenshots/home_data.png" width="300"> |
+|<img src="./screenshots/admirers.png" width="300">  |  <img src="./screenshots/admirers_data.png" width="300"> | <img src="./screenshots/matches.png" width="300"> |
+| <img src="./screenshots/love_calculator.png" width="300">  | <img src="./screenshots/profile.png" width="300"> | <img src="./screenshots/profiledetails.png" width="300"> |
 
  
 ## **Tech stack & Libraries 🛠️👨‍💻**
@@ -62,20 +58,20 @@ Take a look at the contributors for this project. 😎
 
 * [Coroutines](https://developer.android.com/kotlin/coroutines) - a concurrency design pattern that you can use on Android to simplify code that executes asynchronously
 * [Flow](https://developer.android.com/kotlin/flow)- In coroutines, a flow is a type that can emit multiple values sequentially, as opposed to suspend functions that return only a single value.
- * [Firebase]()
-    * [Realtime-database]()
-    * [Firestore-database]()
-    * [Firebase-storage]()
-    * [Fcm]()
-    * [Authentication]()
-    * [Crashlytics]()
- * [Preferences Datastore]()
+ * [Firebase](https://firebase.google.com/) - Firebase is an app development platform that helps you build and grow apps and games users love. Backed by Google and trusted by millions of businesses around the world.
+    * [Realtime-database](https://firebase.google.com/products/realtime-database#:~:text=The%20Firebase%20Realtime%20Database%20is,app%20data%20at%20global%20scale.) - The Firebase Realtime Database is a cloud-hosted NoSQL database that lets you store and sync data between your users in realtime.
+    * [Firestore-database](https://firebase.google.com/products/realtime-database#:~:text=The%20Firebase%20Realtime%20Database%20is,app%20data%20at%20global%20scale.) - Cloud Firestore enables you to store, sync and query app data at global scale.
+    * [Firebase-storage](https://firebase.google.com/docs/storage/web/start#:~:text=Cloud%20Storage%20for%20Firebase%20lets,high%20availability%20and%20global%20redundancy.) - Cloud Storage for Firebase lets you upload and share user generated content, such as images and video, which allows you to build rich media content into your apps
+    * [Fcm](https://firebase.google.com/docs/cloud-messaging) - Firebase Cloud Messaging (FCM) is a cross-platform messaging solution that lets you reliably send messages at no cost.
+    * [Authentication](https://firebase.google.com/docs/auth#:~:text=Firebase%20Authentication%20provides%20backend%20services,Facebook%20and%20Twitter%2C%20and%20more.) - Firebase Authentication provides backend services, easy-to-use SDKs, and ready-made UI libraries to authenticate users to your app
+    * [Crashlytics](https://firebase.google.com/docs/crashlytics) - Firebase Crashlytics is a lightweight, realtime crash reporter that helps you track, prioritize, and fix stability issues that erode your app quality. Crashlytics saves you troubleshooting time by intelligently grouping crashes and highlighting the circumstances that lead up to them.
+ * [Preferences Datastore](https://developer.android.com/codelabs/android-preferences-datastore#0) - DataStore is a new and improved data storage solution aimed at replacing SharedPreferences. Built on Kotlin coroutines and Flow,
 * [CI/CD](https://codemagic.io/android-continuous-integration/) - Continuous integration systems let you automatically build and test your app every time you check in updates to your source control system. 
 
 * [Coil](https://coil-kt.github.io/coil/compose/) - Image Loader library.
 
  * [Compose Navigation]()
- * [Lottie Animation]()
+ * [Lottie Animation](https://lottiefiles.com/what-is-lottie) - A Lottie is a JSON-based animation file format that allows you to ship animations on any platform as easily as shipping static assets. 
  
  
  ## Architecture 🏚️
