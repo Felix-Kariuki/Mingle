@@ -22,7 +22,7 @@ I am using product flavours and have three flavours `dev` , `staging` and `produ
      * Under the :app level module select `devDebug`
      * Once gradle build is done Run the application
      
-## Contribution
+## Contribution 🪶
 To contribute to the project clone it and make your changes. Once done with making changes, on the terminal of your android studio run
    1. * ` ./gradlew spotlessApply `
    2.  * `./gradlew ktlintFormat `
@@ -30,7 +30,7 @@ To contribute to the project clone it and make your changes. Once done with maki
  
   Once the code passes all ktlint checks push the code and open a `Pull Request`
      
-## Contributor(s) 🪶🤝
+## Contributor(s) 🤝
 
 Take a look at the contributors for this project. 😎
      
