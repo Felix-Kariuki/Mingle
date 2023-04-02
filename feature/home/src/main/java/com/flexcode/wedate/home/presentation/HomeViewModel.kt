@@ -78,7 +78,11 @@ class HomeViewModel @Inject constructor(
         var locationName = ""
         if (addresses != null && addresses.size > 0) {
             val address: Address = addresses[0]
-            locationName = address.locality
+            locationName = (
+                if (address.locality != null) address.locality
+                else address.countryName
+                ).toString()
+
             if (locationName != "") {
                 updateUserLocation(
                     locationName,
@@ -310,7 +314,8 @@ class HomeViewModel @Inject constructor(
                 when (result) {
                     is Resource.Success -> {
                         Timber.i("SUCCESS LIKES:: ${result.data}")
-                        //state.value  = state.value.copy(likedBy = result.data as MutableList<Likes>)
+                        //state.value  = state.value.copy(likedBy = result.data as
+                        MutableList<Likes>)
 
                         Timber.i("SUCCESS LIKES:: ${(result.data)?.first()}")
                     }

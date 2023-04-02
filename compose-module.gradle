@@ -61,6 +61,9 @@ dependencies {
     implementation ("com.google.maps.android:maps-compose:2.10.0")
     implementation ("com.google.android.gms:play-services-maps:18.1.0")
 
+    //in app purchases
+    implementation ("com.github.Felix-Kariuki:InAppPurchasesComposeLibrary:0.1.2")
+
 
     //leak canary
     debugImplementation ("com.squareup.leakcanary:leakcanary-android:2.10")

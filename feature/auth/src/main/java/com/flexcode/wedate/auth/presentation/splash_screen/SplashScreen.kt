@@ -62,14 +62,19 @@ fun SplashScreen(
     }
 
     LaunchedEffect(key1 = true) {
-        if (viewModel.hasUser()) {
+        delay(Constants.SPLASH_TIMEOUT)
+        viewModel.onAppStart(openAndPopUp)
+        /**
+         * do this check at home screen when done here means impact on app startup time
+         */
+        /*if (viewModel.hasUser()) {
             viewModel.getUserDetails()
             delay(Constants.SPLASH_TIMEOUT)
             checkNoProfileImageAvailablee(profileImagesState, openAndPopUp, viewModel)
         } else {
             delay(Constants.SPLASH_TIMEOUT)
             viewModel.onAppStart(openAndPopUp)
-        }
+        }*/
     }
 }
 fun checkNoProfileImageAvailablee(

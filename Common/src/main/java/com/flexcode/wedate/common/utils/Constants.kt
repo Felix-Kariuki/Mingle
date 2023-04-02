@@ -18,7 +18,9 @@ package com.flexcode.wedate.common.utils
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 
 object Constants {
-    const val SPLASH_TIMEOUT = 1800L
+    const val SPLASH_TIMEOUT = 1000L
+
+    // const val SPLASH_TIMEOUT = 1800L
     const val MIN_PASS_LENGTH = 6
     const val MIN_PHONE_LENGTH = 10
     const val PASS_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$"
