@@ -49,7 +49,7 @@ subprojects {
         debug.set(true)
         outputToConsole.set(true)
         outputColorName.set("RED")
-        ignoreFailures.set(true)
+        ignoreFailures.set(false)
         enableExperimentalRules.set(true)
         disabledRules.set(setOf("no-wildcard-imports", "filename", "experimental:package-name"))
         reporters {
