@@ -43,37 +43,34 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.6.0")
-    implementation("com.google.android.material:material:1.7.0")
-    implementation("androidx.compose.ui:ui:1.3.3")
-    implementation("androidx.compose.material:material:1.3.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.3.3")
-    implementation("androidx.compose.material:material-icons-extended:1.3.1")
+    implementation(libs.core)
+    implementation(libs.appCompat)
+    implementation(libs.material)
+    implementation(libs.googleMaterial)
+    implementation(libs.bundles.compose)
 
     // navigation
-    implementation("androidx.navigation:navigation-compose:2.5.3")
+    implementation(libs.composeNavigation)
 
     // material 3
-    implementation("androidx.compose.material3:material3:1.0.1")
-    implementation("androidx.compose.material3:material3-window-size-class:1.0.1")
+    implementation(libs.material3)
+    implementation(libs.material3Window)
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:30.4.1"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.firebase)
 
     // Preferences DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation(libs.datastore)
 
     // ui controller
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
+    implementation(libs.accompanistController)
 
     // lottie
-    implementation("com.airbnb.android:lottie-compose:5.2.0")
+    implementation(libs.lottieAnimation)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
-    testImplementation("com.google.truth:truth:1.1.3")
+    testImplementation(libs.jUnit)
+    androidTestImplementation(libs.testJUnit)
+    androidTestImplementation(libs.esspresso)
+    androidTestImplementation(libs.truth)
 }

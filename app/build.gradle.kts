@@ -82,7 +82,8 @@ android {
     }
     packagingOptions {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            pickFirsts.add("/META-INF/{AL2.0,LGPL2.1}")
+            pickFirsts.add("META-INF/gradle/incremental.annotation.processors")
         }
     }
 }
@@ -104,79 +105,68 @@ dependencies {
     implementation(project(":feature:chatsscreen"))
     implementation(project(":feature:maps"))
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("com.google.android.material:material:1.6.1")
-    implementation("androidx.compose.ui:ui:1.1.1")
-    implementation("androidx.compose.material:material:1.1.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.1.1")
-    implementation("androidx.compose.material:material-icons-extended:1.1.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-alpha02")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-    implementation("androidx.activity:activity-compose:1.6.0-rc02")
-    implementation("androidx.navigation:navigation-compose:2.6.0-alpha01")
-    implementation("androidx.preference:preference-ktx:1.2.0")
+    implementation(libs.core)
+    implementation(libs.appCompat)
+    implementation(libs.material)
+    implementation(libs.bundles.compose)
 
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    implementation("com.google.dagger:hilt-android:2.44.2")
-    kapt("com.google.dagger:hilt-compiler:2.44.2")
+    implementation(libs.bundles.lifecycle)
+    implementation(libs.activityCompose)
+    implementation(libs.composeNavigation)
+    implementation(libs.preference)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
+    // dagger hilt
+    implementation(libs.bundles.hilt)
+    kapt(libs.hiltNavigation)
+
+    implementation(libs.kotlinXCoroutines)
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:30.4.1"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.firebase:firebase-firestore-ktx")
-    implementation("com.google.firebase:firebase-storage-ktx")
-    implementation("com.google.firebase:firebase-perf-ktx")
-    implementation("com.google.firebase:firebase-config-ktx")
-    implementation("com.google.firebase:firebase-database-ktx")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.firebase)
 
     // material 3
-    implementation("androidx.compose.material3:material3:1.0.1")
-    implementation("androidx.compose.material3:material3-window-size-class:1.0.1")
+    implementation(libs.material3)
+    implementation(libs.material3Window)
 
     // lottie
-    implementation("com.airbnb.android:lottie-compose:5.2.0")
+    implementation(libs.lottieAnimation)
 
     // ui controller
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.28.0")
+    implementation(libs.accompanistController)
 
     // timber
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(libs.timber)
 
     // Preferences DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation(libs.datastore)
 
     // retrofit
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3")
+    implementation(libs.retrofitGson)
+    implementation(libs.loggingInterceptor)
 
     // coil
-    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation(libs.coil)
 
     // maps
-    implementation("com.google.maps.android:maps-compose:2.10.0")
-    implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation(libs.composeMaps)
+    implementation(libs.playServicesSecrets)
 
-    testImplementation("junit:junit:4.+")
+    testImplementation(libs.jUnit)
 
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.1.1")
+    androidTestImplementation(libs.testJUnit)
+    androidTestImplementation(libs.composeUiJunitTest)
     // androidTestImplementation ("junit:junit:4.12")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.43.2")
-    androidTestImplementation("com.google.truth:truth:1.1.3")
-    androidTestImplementation("androidx.navigation:navigation-testing:2.5.3")
-    androidTestImplementation("androidx.test:runner:1.2.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation(libs.hiltTest)
+    androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.navigationTest)
+    androidTestImplementation(libs.testRunner)
+    androidTestImplementation(libs.esspresso)
 
-    testImplementation("org.robolectric:robolectric:4.9")
-    testImplementation("androidx.compose.ui:ui-test-junit4:1.1.1")
+    testImplementation(libs.roboelectric)
+    testImplementation(libs.composeUiJunitTest)
 
-    kaptAndroidTest("com.google.dagger:hilt-compiler:2.43.2")
+    // kaptAndroidTest(libs.testHiltCompiler)
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.1.1")
+    debugImplementation(libs.bundles.composeTesting)
 }
