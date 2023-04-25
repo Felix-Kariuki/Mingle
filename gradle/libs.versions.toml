@@ -1,0 +1,101 @@
+[versions]
+kotlin = "1.8.0"
+compose = "1.4.1"
+spotless = "5.17.1"
+ktlint = "11.0.0"
+maps_secret = "2.0.0"
+android = "7.4.0"
+material = "1.4.2"
+app_compat = "1.5.1"
+androidxCore = "1.7.0"
+firebaseBom = "30.4.1"
+hilt = "2.44.2"
+accompanist = "0.28.0"
+mockk = "1.13.3"
+compose_testing = "1.3.3"
+lifecycle = "2.6.1"
+
+[libraries]
+compose_ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose_material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose_tooling = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose_icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
+composeNavigation= "androidx.navigation:navigation-compose:2.6.0-alpha09"
+activityCompose = "androidx.activity:activity-compose:1.6.0-rc02"
+constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+
+lifecycle_runtime_compose = {module = "androidx.lifecycle:lifecycle-runtime-compose",version.ref="lifecycle"}
+lifecycleViewModel = {module = "androidx.lifecycle:lifecycle-viewmodel-ktx",version.ref="lifecycle"}
+
+material = { module = "com.google.android.material:material", version.ref = "material" }
+googleMaterial = "com.google.android.material:material:1.7.0"
+core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
+appCompat = { module = "androidx.appcompat:appcompat", version.ref = "app_compat" }
+
+firebase_bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase_auth = { module = "com.google.firebase:firebase-auth-ktx" }
+firebase_firestore = {module = "com.google.firebase:firebase-firestore-ktx" }
+firebase_storage = {module = "com.google.firebase:firebase-storage-ktx"}
+firebase_database = {module = "com.google.firebase:firebase-database-ktx"}
+firebase_crashlytics = {module = "com.google.firebase:firebase-crashlytics-ktx"}
+firebase_analytics = {module = "com.google.firebase:firebase-analytics-ktx"}
+firebase_pref = {module = "com.google.firebase:firebase-perf-ktx"}
+firebase_config = {module = "com.google.firebase:firebase-config-ktx"}
+firebasePlugin = "com.google.firebase:perf-plugin:1.4.2"
+firebasecrashlytics = "com.google.firebase:firebase-crashlytics-gradle:2.9.4"
+googleServices = "com.google.gms:google-services:4.3.15"
+hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.44.2"
+androidTools = "com.android.tools.build:gradle:3.4.0"
+timber = "com.jakewharton.timber:timber:5.0.1"
+hilt_compiler ={module = "com.google.dagger:hilt-compiler",version.ref = "hilt"}
+hilt_android ={module = "com.google.dagger:hilt-android",version.ref = "hilt"}
+googleHiltAndroid = "com.google.dagger:hilt-android:2.44.2"
+kotlinGradle = {module  = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin"}
+hiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0"
+retrofitGson  = "com.squareup.retrofit2:converter-gson:2.9.0"
+loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:4.10.0"
+kotlinxSerialization = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+kotlinxJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
+kotlinXCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4"
+datastore = "androidx.datastore:datastore-preferences:1.0.0"
+lottieAnimation = "com.airbnb.android:lottie-compose:5.2.0"
+coil = "io.coil-kt:coil-compose:2.3.0"
+playSerivesLocation = "com.google.android.gms:play-services-location:21.0.1"
+playServicesSecrets = "com.google.android.gms:play-services-maps:18.1.0"
+composeMaps = "com.google.maps.android:maps-compose:2.10.0"
+leakCanary = "com.squareup.leakcanary:leakcanary-android:2.10"
+accompanist_permissions = {module = "com.google.accompanist:accompanist-permissions",version.ref = "accompanist"}
+accompanist_pager = {module= "com.google.accompanist:accompanist-pager",version.ref = "accompanist"}
+accompanistController = {module = "com.google.accompanist:accompanist-systemuicontroller",version.ref = "accompanist"}
+material3 = "androidx.compose.material3:material3:1.0.1"
+material3Window = "androidx.compose.material3:material3-window-size-class:1.0.1"
+preference = "androidx.preference:preference-ktx:1.2.0"
+mockk_android = {module = "io.mockk:mockk-android",version.ref = "mockk"}
+mockk_agent = { module = "io.mockk:mockk-agent",version.ref = "mockk"}
+compose_ui_tooling ={module= "androidx.compose.ui:ui-tooling",version.ref = "compose_testing"}
+compose_ui_testing={module= "androidx.compose.ui:ui-test-manifest",version.ref = "compose_testing"}
+jUnit = "junit:junit:4.13.2"
+testJUnit = "androidx.test.ext:junit:1.1.5"
+esspresso = "androidx.test.espresso:espresso-core:3.5.1"
+composeUiJunitTest = "androidx.compose.ui:ui-test-junit4:1.1.1"
+hiltTest= "com.google.dagger:hilt-android-testing:2.44.2"
+testRunner = "androidx.test:runner:1.5.2"
+testHiltCompiler = "com.google.dagger:hilt-compiler:2.44.2"
+mockWebServer = "com.squareup.okhttp3:mockwebserver:4.9.1"
+roboelectric = "org.robolectric:robolectric:4.9"
+navigationTest = "androidx.navigation:navigation-testing:2.5.3"
+truth = "com.google.truth:truth:1.1.3"
+
+[bundles]
+compose = ["compose.ui", "compose.material", "compose.tooling","compose.icons"]
+firebase = ["firebase_auth","firebase.firestore","firebase.storage","firebase.database","firebase.crashlytics","firebase.analytics","firebase.pref","firebase.config"]
+hilt = ["hilt.android","hilt.compiler"]
+lifecycle = ["lifecycleViewModel","lifecycle.runtime.compose"]
+accompanist = ["accompanist_pager","accompanist_permissions"]
+mockk = ["mockk.agent","mockk.android"]
+composeTesting = ["compose.ui.tooling","compose.ui.testing"]
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+mapsPlatformSecret = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "maps_secret" }
