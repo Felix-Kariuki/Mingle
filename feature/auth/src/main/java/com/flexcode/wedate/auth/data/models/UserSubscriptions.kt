@@ -16,13 +16,19 @@
 package com.flexcode.wedate.auth.data.models
 
 data class UserSubscriptions(
-    val unlockSeeDistance: String = "false",
-    val unlockSeeDistanceTime: Long = 0L,
-    val seeAdmirers: String = "false",
+    val seeDistanceBetweenYouAndCrush:Int = -1,
+    val seeDistanceBetweenYouAndCrushTime: Long = 0L,
+    val seeAdmirersOnMap : Int = -1,
     val seeAdmirersTime: Long = 0L,
-    val hideMyLocation: String = "false",
-    val hideMyLocationTime: Long = 0L
+    val hideYourLocationFromOthers: Int = -1,
+    val hideYourLocationFromOthersTime: Long = 0L,
+    val lifeTimeSubscriptions: Int = -1,   //15000
+    val lifeTimeSubscriptionsTime:Long= 0L
+    /**
+     *  -1 is for false 1000 for success
+     */
 )
+
 /**
  * save last login time at home and if last login time is not greater than
  * <expire time hours(9)>  don't update else update and if its greater or ==

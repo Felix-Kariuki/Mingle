@@ -25,7 +25,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -49,7 +48,6 @@ import com.flexcode.wedate.lovecalculator.presentation.LoveCalculatorScreen
 import com.flexcode.wedate.maps.MapsScreen
 import com.flexcode.wedate.matches.presentation.MatchesScreen
 import com.flexcode.wedate.profiledetails.ProfileDetailsScreen
-import com.flexcode.wedate.profiledetails.ProfileDetailsViewModel
 import com.flexcode.wedate.profileedit.presentation.EditProfileScreen
 import com.flexcode.wedate.settings.SettingsScreen
 
@@ -114,10 +112,7 @@ fun NavigationGraph(navController: NavHostController) {
             )
         }
         composable(route = PROFILE_DETAILS_SCREEN) {
-            val viewModel: ProfileDetailsViewModel = hiltViewModel()
-
             ProfileDetailsScreen(
-                viewModel.state.value,
                 navigateToEditProfile = {
                     navController.navigate(route = EDIT_PROFILE_SCREEN)
                 },

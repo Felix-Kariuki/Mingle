@@ -16,25 +16,34 @@
 package com.flexcode.wedate.admirers.presentation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flexcode.inapppurchasescompose.SubscriptionsHelper
 import com.flexcode.wedate.common.R
-import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ExtraScreenText
@@ -43,6 +52,7 @@ import com.flexcode.wedate.common.composables.NoResultFoundAnimation
 import com.flexcode.wedate.common.extestions.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
+import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun AdmirersScreen(
@@ -52,6 +62,13 @@ fun AdmirersScreen(
     viewModel: AdmirersViewModel = hiltViewModel()
 ) {
     val state by viewModel.state
+
+    val billingPurchaseHelper = SubscriptionsHelper(LocalContext.current,
+        "see_admirers_on_map_sub")
+    billingPurchaseHelper.setUpBillingPurchases()
+    val purchaseDone by billingPurchaseHelper.purchaseDone.collectAsState(false)
+    val productName by billingPurchaseHelper.productName.collectAsState("")
+    val purchaseStatus by billingPurchaseHelper.purchaseStatus.collectAsState("")
 
     val gradient = Brush.verticalGradient(
         listOf(lightPurple, Color.White),
@@ -77,9 +94,12 @@ fun AdmirersScreen(
                 text = AppText.admirers,
                 color = MaterialTheme.colors.background,
                 fontSize = 25.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
-            BasicText(text = AppText.admirers_text, color = MaterialTheme.colors.background)
+            BasicText(
+                text = AppText.admirers_text,
+                color = MaterialTheme.colors.background
+            )
 
             Column(
                 modifier = modifier
@@ -120,7 +140,11 @@ fun AdmirersScreen(
             }
         }
 
-        Row(modifier = modifier.padding(bottom = 60.dp).align(Alignment.BottomCenter)) {
+        Row(
+            modifier = modifier
+                .padding(bottom = 60.dp)
+                .align(Alignment.BottomCenter)
+        ) {
             BasicButton(
                 text = R.string.view_on_map,
                 modifier = modifier
@@ -128,8 +152,16 @@ fun AdmirersScreen(
                     .height(50.dp)
                     .clip(RoundedCornerShape(10.dp))
             ) {
-                navigateToAdmirersMaps()
+                if (purchaseDone){
+                    billingPurchaseHelper.initializePurchase()
+                }else{
+                    //save purchase
+                    navigateToAdmirersMaps()
+                }
+
             }
         }
+
     }
 }
+
