@@ -35,9 +35,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.R
@@ -54,12 +54,13 @@ import com.google.accompanist.pager.rememberPagerState
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ProfileDetailsScreen(
+    state: ProfileState,
     navigateToEditProfile: () -> Unit,
     navigateToAccountScreen: () -> Unit,
-    modifier: Modifier = Modifier,
-    viewModel: ProfileDetailsViewModel = hiltViewModel()
+    modifier: Modifier = Modifier
+    // viewModel: ProfileDetailsViewModel = hiltViewModel()
 ) {
-    val state by viewModel.state
+    // val state by viewModel.state
     val pagerState = rememberPagerState()
     val imageList = remember { mutableListOf<String>() }
     val scrollState = rememberScrollState()
@@ -196,6 +197,19 @@ fun ProfileDetailsScreen(
                 }
 
                 BasicText(
+                    text = AppText.interested_in_search_for,
+                    fontSize = 18.sp
+                )
+
+                Row(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp)
+                ) {
+                    InfoItem(text = "${state.userDetails?.searchingFor}")
+                }
+
+                BasicText(
                     text = AppText.interests,
                     fontSize = 18.sp
                 )
@@ -229,7 +243,8 @@ fun ProfileDetailsScreen(
                 ResultText(
                     text = "${state.userDetails?.locationName}",
                     color = Color.Gray,
-                    modifier = modifier.offset(x = (8).dp, y = (-16).dp)
+                    modifier = modifier
+                        .offset(x = (8).dp, y = (-16).dp)
                         .padding(bottom = 70.dp)
                 )
             }
@@ -313,4 +328,14 @@ fun SliderView(pagerState: PagerState, imageList: MutableList<String>) {
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun ProfileDetailsPreview() {
+    ProfileDetailsScreen(
+        state = ProfileState(),
+        navigateToEditProfile = { /*TODO*/ },
+        navigateToAccountScreen = { /*TODO*/ }
+    )
 }

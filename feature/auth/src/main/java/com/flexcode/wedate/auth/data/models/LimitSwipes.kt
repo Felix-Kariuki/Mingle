@@ -15,32 +15,10 @@
  */
 package com.flexcode.wedate.auth.data.models
 
-data class User(
-    val id: String = "",
-    val anonymous: Boolean = true,
-    val firstName: String = "",
-    val phoneNumber: String = "",
-    val email: String = "",
-    val password: String = "",
-    val dateOfBirth: String = "",
-    val monthOfBirth: String = "",
-    val yearOfBirth: String = "",
-    val years: String = "",
-    val gender: String = "",
-    val interestedIn: String = "",
-    val searchingFor: String = "",
-    val profileImage: ProfileImage? = null,
-    val free: Boolean = true,
-    val datingStatus: String = "Single",
-    val locationName: String = "Hidden",
-    val latitude: String = "1.687",
-    val longitude: String = "36.12547",
-    val online: Boolean = true,
-    val likedBy: HashMap<String, Any>? = null,
-    val userBio: String = "",
-    val accountStatus: String = "ACTIVE",
-    val subscriptions: UserSubscriptions? = null,
-    val swipes: LimitSwipes? = null
+data class LimitSwipes(
+    val swipedTimes: Int = 0,
+    val swipesExpiredTime: Long = 0L,
+    val lastLoginTime: Long = 0L
 )
 
 /**

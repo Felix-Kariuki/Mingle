@@ -31,6 +31,7 @@
     <string name="identify">Identify Yourself</string>
     <string name="interest">Who are you \n interested in</string>
     <string name="interested_in">Interested in</string>
+    <string name="interested_in_search_for">Looking for 🔍</string>
     <string name="searching_for">What are you \n searching for</string>
     <string name="profile_image">Add your \n profile</string>
     <string name="gender">Gender</string>

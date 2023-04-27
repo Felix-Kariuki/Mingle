@@ -255,7 +255,7 @@ fun SettingsScreen(
                 textColor = purpleGrey
             )
             ResultText(
-                text = "Version 1.0.2",
+                text = "Version 1.0.4",
                 color = purpleGrey,
                 fontSize = 13.sp,
                 textAlign = TextAlign.Center,

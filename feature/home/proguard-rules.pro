@@ -26,3 +26,4 @@
 
 ##home
 -keep class  com.flexcode.wedate.home.data.model.** { *; }
+-keep class  com.flexcode.wedate.home.** { *; }

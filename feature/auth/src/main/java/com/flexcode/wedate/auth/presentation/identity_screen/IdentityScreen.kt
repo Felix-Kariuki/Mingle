@@ -37,7 +37,6 @@ fun IdentityScreen(
     openScreen: (String) -> Unit,
     viewModel: IdentifyScreenViewModel = hiltViewModel()
 ) {
-    val user by viewModel.user
     val state by viewModel.state
 
     Column(

@@ -62,6 +62,9 @@ dependencies {
     implementation(libs.composeMaps)
     implementation(libs.playServicesSecrets)
 
+    //in app purchases
+    implementation ("com.github.Felix-Kariuki:InAppPurchasesComposeLibrary:0.1.2")
+
 
     //leak canary
     debugImplementation (libs.leakCanary)

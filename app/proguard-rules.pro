@@ -39,4 +39,6 @@
 -keep class  com.flexcode.wedate.lovecalculator.data.dto.** { *; }
 ## matches
 -keep class  com.flexcode.wedate.matches.data.model.** { *; }
+## home
+-keep class  com.flexcode.wedate.home.** { *; }
 

@@ -49,7 +49,6 @@ import com.flexcode.wedate.common.theme.lightPurple
 @Composable
 fun ForgotPasswordScreen(
     openAndPopUp: (String, String) -> Unit,
-    openScreen: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
