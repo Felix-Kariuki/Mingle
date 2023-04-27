@@ -51,7 +51,7 @@ data class User(
 
 /**
  * save the swipes expired time exactly at the last swipe made then:
- * perfom checks on home screen to see if cureent timestamp minus the `swipesExpiredTime`
+ * perfom checks on home screen to see if current timestamp minus the `swipesExpiredTime`
  * is <expire time hours(9)> or more if so reset swiped times to 0 and at expiration update
  * `swipesExpiredTime`
  */

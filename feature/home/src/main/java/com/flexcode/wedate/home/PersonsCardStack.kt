@@ -16,6 +16,7 @@
 package com.flexcode.wedate.home
 
 import android.content.Context
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -37,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.AsyncImage
 import com.flexcode.wedate.auth.data.models.User
+import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.NoResultFoundAnimation
@@ -47,6 +49,7 @@ import com.flexcode.wedate.common.extestions.visible
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.onlineGreen
 import com.flexcode.wedate.home.presentation.HomeViewModel
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -230,65 +233,98 @@ fun PersonsCardStack(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun PersonCard(
     modifier: Modifier = Modifier,
     person: User,
     cardStackController: CardStackController
 ) {
-    Box(modifier = modifier) {
-        AsyncImage(
-            model = person.profileImage?.profileImage1,
-            contentDescription = person.firstName,
-            contentScale = ContentScale.Crop,
-            modifier = modifier.fillMaxSize()
-        )
-        Row(
-            modifier = modifier
-                .wrapContentWidth()
-                .padding(10.dp),
-            horizontalArrangement = Arrangement.Start
-        ) {
-            StatusItem(
-                status = if (person.online == false) { AppText.offline } else { AppText.online },
-                backgroundColor = if (person.online == false) { deepBrown } else { onlineGreen }
-            )
-        }
+    val modalBottomSheetState =
+        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+    val scope = rememberCoroutineScope()
+    ModalBottomSheetLayout(
+        sheetContent = {
+            BottomSheetContent(modifier =modifier,person)
+        },
+        sheetState = modalBottomSheetState,
+        sheetShape = RoundedCornerShape(topEnd = 25.dp,
+            bottomEnd = 25.dp,
+            topStart = 25.dp,
+            bottomStart = 25.dp),
+        sheetBackgroundColor = Color.White,
 
-        Column(
-            modifier = modifier
-                .align(Alignment.BottomStart)
-                .padding(10.dp)
-        ) {
-            ResultText(
-                text = "${person.firstName},${person.years}",
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-                fontSize = 25.sp,
-                modifier = modifier.offset(x = (-16).dp, y = (30).dp)
+    ) {
+        Box(modifier = modifier) {
+            AsyncImage(
+                model = person.profileImage?.profileImage1,
+                contentDescription = person.firstName,
+                contentScale = ContentScale.Crop,
+                modifier = modifier.fillMaxSize()
             )
-
-            ResultText(
-                text = person.locationName,
-                color = Color.White,
-                fontSize = 20.sp,
-                modifier = modifier.offset(x = ((-16).dp), y = 16.dp)
-            )
-
-            Row {
-                SwipeRightLeftIcon(
-                    onClick = { cardStackController.swipeLeft() },
-                    icon = Icons.Default.Close,
-                    contentDesc = "Dislike${person.firstName}",
-                    paddingValues = PaddingValues(50.dp, 0.dp, 0.dp, 0.dp)
+            Row(
+                modifier = modifier
+                    .wrapContentWidth()
+                    .padding(10.dp),
+                horizontalArrangement = Arrangement.Start
+            ) {
+                StatusItem(
+                    status = if (person.online == false) {
+                        AppText.offline
+                    } else {
+                        AppText.online
+                    },
+                    backgroundColor = if (person.online == false) {
+                        deepBrown
+                    } else {
+                        onlineGreen
+                    }
                 )
-                Spacer(modifier = Modifier.weight(1f))
+            }
 
-                SwipeRightLeftIcon(
-                    onClick = { cardStackController.swipeRight() },
-                    icon = Icons.Default.FavoriteBorder,
-                    contentDesc = "Like${person.firstName}"
+            Column(
+                modifier = modifier
+                    .align(Alignment.BottomStart)
+                    .padding(10.dp)
+            ) {
+                ResultText(
+                    text = "${person.firstName},${person.years}",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp,
+                    modifier = modifier.offset(x = (-16).dp, y = (30).dp)
                 )
+
+                ResultText(
+                    text = person.locationName,
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    modifier = modifier.offset(x = ((-16).dp), y = 16.dp)
+                )
+
+                Row {
+                    SwipeRightLeftIcon(
+                        onClick = { cardStackController.swipeLeft() },
+                        icon = Icons.Default.Close,
+                        contentDesc = "Dislike${person.firstName}",
+                        paddingValues = PaddingValues(50.dp, 0.dp, 0.dp, 0.dp)
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    BasicButton(
+                        text =AppText.more,
+                        modifier = modifier,
+                    ) {
+                        scope.launch {
+                            modalBottomSheetState.show()
+                        }
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                    SwipeRightLeftIcon(
+                        onClick = { cardStackController.swipeRight() },
+                        icon = Icons.Default.FavoriteBorder,
+                        contentDesc = "Like${person.firstName}"
+                    )
+                }
             }
         }
     }

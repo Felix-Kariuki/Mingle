@@ -19,7 +19,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -30,37 +29,30 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
-import com.flexcode.wedate.common.R
-import com.flexcode.wedate.common.R.string as AppText
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.wedate.common.composables.BasicText
+import com.flexcode.wedate.common.composables.DotsIndicator
 import com.flexcode.wedate.common.composables.ResultText
+import com.flexcode.wedate.common.composables.SliderView
 import com.flexcode.wedate.common.extestions.textPadding
 import com.flexcode.wedate.common.theme.lightPurple
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
+import com.flexcode.wedate.common.R.string as AppText
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ProfileDetailsScreen(
-    state: ProfileState,
     navigateToEditProfile: () -> Unit,
     navigateToAccountScreen: () -> Unit,
-    modifier: Modifier = Modifier
-    // viewModel: ProfileDetailsViewModel = hiltViewModel()
+    modifier: Modifier = Modifier,
+    viewModel: ProfileDetailsViewModel = hiltViewModel()
 ) {
-    // val state by viewModel.state
+    val state by viewModel.state
     val pagerState = rememberPagerState()
     val imageList = remember { mutableListOf<String>() }
     val scrollState = rememberScrollState()
@@ -197,19 +189,6 @@ fun ProfileDetailsScreen(
                 }
 
                 BasicText(
-                    text = AppText.interested_in_search_for,
-                    fontSize = 18.sp
-                )
-
-                Row(
-                    modifier = modifier
-                        .fillMaxWidth()
-                        .padding(start = 16.dp)
-                ) {
-                    InfoItem(text = "${state.userDetails?.searchingFor}")
-                }
-
-                BasicText(
                     text = AppText.interests,
                     fontSize = 18.sp
                 )
@@ -243,8 +222,7 @@ fun ProfileDetailsScreen(
                 ResultText(
                     text = "${state.userDetails?.locationName}",
                     color = Color.Gray,
-                    modifier = modifier
-                        .offset(x = (8).dp, y = (-16).dp)
+                    modifier = modifier.offset(x = (8).dp, y = (-16).dp)
                         .padding(bottom = 70.dp)
                 )
             }
@@ -269,73 +247,3 @@ fun InfoItem(text: String) {
     }
 }
 
-@Composable
-fun DotsIndicator(
-    totalDots: Int,
-    selectedIndex: Int
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(5.dp)
-    ) {
-        for (i in 0..totalDots) {
-            if (i == selectedIndex) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(7.dp)
-                        .weight(1f)
-                        .padding(horizontal = 5.dp)
-                        .background(lightPurple, shape = RoundedCornerShape(100.dp))
-                )
-            } else {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(7.dp)
-                        .weight(1f)
-                        .padding(horizontal = 5.dp)
-                        .background(Color.White, shape = RoundedCornerShape(100.dp))
-                )
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalPagerApi::class)
-@Composable
-fun SliderView(pagerState: PagerState, imageList: MutableList<String>) {
-    val imageUrl = remember { mutableStateOf("") }
-    HorizontalPager(
-        state = pagerState,
-        count = imageList.size,
-        modifier = Modifier
-            .fillMaxWidth(),
-        userScrollEnabled = true
-    ) { page ->
-        imageUrl.value = imageList[page]
-        Column {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(imageUrl.value)
-                    .crossfade(true)
-                    .build(),
-                placeholder = painterResource(R.drawable.sharon),
-                contentDescription = "",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-    }
-}
-
-@Preview
-@Composable
-fun ProfileDetailsPreview() {
-    ProfileDetailsScreen(
-        state = ProfileState(),
-        navigateToEditProfile = { /*TODO*/ },
-        navigateToAccountScreen = { /*TODO*/ }
-    )
-}

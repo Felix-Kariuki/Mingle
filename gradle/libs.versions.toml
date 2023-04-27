@@ -70,6 +70,8 @@ accompanistController = {module = "com.google.accompanist:accompanist-systemuico
 material3 = "androidx.compose.material3:material3:1.0.1"
 material3Window = "androidx.compose.material3:material3-window-size-class:1.0.1"
 preference = "androidx.preference:preference-ktx:1.2.0"
+googleBilling = "com.android.billingclient:billing:5.2.0"
+
 mockk_android = {module = "io.mockk:mockk-android",version.ref = "mockk"}
 mockk_agent = { module = "io.mockk:mockk-agent",version.ref = "mockk"}
 compose_ui_tooling ={module= "androidx.compose.ui:ui-tooling",version.ref = "compose_testing"}

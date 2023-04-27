@@ -113,5 +113,6 @@
     <string name="msg_error">Message can\'t be blank</string>
     <string name="profile_images_desc">Add at least two images (first and second)</string>
 
+    <string name="back">Back</string>
 
 </resources>

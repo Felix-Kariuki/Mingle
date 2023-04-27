@@ -66,6 +66,13 @@ dependencies {
     // ui controller
     implementation(libs.accompanistController)
 
+    //accompanist permissions
+    //accompanist pager
+    implementation(libs.bundles.accompanist)
+
+    //coil
+    implementation(libs.coil)
+
     // lottie
     implementation(libs.lottieAnimation)
 

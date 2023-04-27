@@ -28,14 +28,16 @@ import com.flexcode.wedate.common.theme.lightPurple
 fun BasicButton(
     @StringRes text: Int,
     modifier: Modifier,
-    action: () -> Unit
+    backGroundColor:Color  = lightPurple,
+    contentColor:Color  = MaterialTheme.colors.onPrimary,
+    action: () -> Unit,
 ) {
     Button(
         onClick = action,
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = lightPurple,
-            contentColor = MaterialTheme.colors.onPrimary
+            backgroundColor = backGroundColor,
+            contentColor = contentColor
         )
     ) {
         Text(text = stringResource(text), fontSize = 16.sp)

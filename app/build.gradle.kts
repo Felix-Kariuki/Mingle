@@ -19,8 +19,8 @@ android {
         applicationId = "com.flexcode.wedatecompose"
         minSdk = SDK.min
         targetSdk = SDK.max
-        versionCode = 7
-        versionName = "1.0.4"
+        versionCode = 8
+        versionName = "1.0.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -116,8 +116,9 @@ dependencies {
     implementation(libs.preference)
 
     // dagger hilt
-    implementation(libs.bundles.hilt)
-    kapt(libs.hiltNavigation)
+    implementation(libs.hiltNavigation)
+    implementation(libs.googleHiltAndroid)
+    kapt(libs.testHiltCompiler)
 
     implementation(libs.kotlinXCoroutines)
 

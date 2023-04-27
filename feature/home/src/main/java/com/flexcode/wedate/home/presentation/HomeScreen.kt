@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:Suppress("IMPLICIT_CAST_TO_ANY")
+
 package com.flexcode.wedate.home.presentation
 
 import android.Manifest
@@ -130,7 +132,7 @@ fun HomeScreen(
                                 viewModel.getUid()
                             ) && user.accountStatus != "DELETED"
                         }
-                        ).shuffled(),
+                        ),
                     onEmptyStack = {
                         state.isEmpty = false
                     },

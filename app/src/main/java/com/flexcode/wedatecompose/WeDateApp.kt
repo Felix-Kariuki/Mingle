@@ -104,8 +104,6 @@ fun NavGraphBuilder.WeDateNavGraph(appState: WeDateAppState) {
     composable(route = FORGOT_PASSWORD_SCREEN) {
         ForgotPasswordScreen(openAndPopUp = { route, popup ->
             appState.navigateAndPopUp(route = route, popUp = popup)
-        }, openScreen = { route ->
-            appState.navigate(route = route)
         })
     }
 
