@@ -16,14 +16,14 @@
 package com.flexcode.wedate.auth.data.models
 
 data class UserSubscriptions(
-    val seeDistanceBetweenYouAndCrush:Int = -1,
+    val seeDistanceBetweenYouAndCrush: Int = -1,
     val seeDistanceBetweenYouAndCrushTime: Long = 0L,
-    val seeAdmirersOnMap : Int = -1,
+    val seeAdmirersOnMap: Int = -1,
     val seeAdmirersTime: Long = 0L,
     val hideYourLocationFromOthers: Int = -1,
     val hideYourLocationFromOthersTime: Long = 0L,
-    val lifeTimeSubscriptions: Int = -1,   //15000
-    val lifeTimeSubscriptionsTime:Long= 0L
+    val lifeTimeSubscriptions: Int = -1, // 15000
+    val lifeTimeSubscriptionsTime: Long = 0L
     /**
      *  -1 is for false 1000 for success
      */

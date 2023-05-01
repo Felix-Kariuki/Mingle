@@ -28,9 +28,9 @@ import com.flexcode.wedate.common.theme.lightPurple
 fun BasicButton(
     @StringRes text: Int,
     modifier: Modifier,
-    backGroundColor:Color  = lightPurple,
-    contentColor:Color  = MaterialTheme.colors.onPrimary,
-    action: () -> Unit,
+    backGroundColor: Color = lightPurple,
+    contentColor: Color = MaterialTheme.colors.onPrimary,
+    action: () -> Unit
 ) {
     Button(
         onClick = action,

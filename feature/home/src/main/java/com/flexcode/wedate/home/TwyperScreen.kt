@@ -1,7 +1,21 @@
+/*
+ * Copyright 2023 Felix Kariuki.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.flexcode.wedate.home
 
 import android.content.Context
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -31,7 +45,6 @@ import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
 import com.flexcode.wedate.common.theme.deepBrown
-import com.flexcode.wedate.common.theme.lightPurple
 import com.flexcode.wedate.common.theme.onlineGreen
 import com.flexcode.wedate.common.theme.purpleGrey
 import com.flexcode.wedate.home.presentation.HomeUiState
@@ -48,7 +61,6 @@ fun TwyperScreen(
     viewModel: HomeViewModel,
     context: Context
 ) {
-
     val state by viewModel.state
 
     Column(
@@ -64,7 +76,7 @@ fun TwyperScreen(
                 )
             ),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val twyperController = rememberTwyperController()
         Twyper(
@@ -72,9 +84,9 @@ fun TwyperScreen(
             twyperController = twyperController,
             onItemRemoved = { item, direction ->
                 if (direction.toString() == "RIGHT") {
-                    onLikePerson(viewModel, item, items, state,context)
+                    onLikePerson(viewModel, item, items, state, context)
                 } else {
-                    onDislikePerson(viewModel, item, items, state,context)
+                    onDislikePerson(viewModel, item, items, state, context)
                     items.remove(item)
                 }
             },
@@ -97,9 +109,9 @@ fun TwyperScreen(
                     topStart = 25.dp,
                     bottomStart = 25.dp
                 ),
-                sheetBackgroundColor = Color.White,
+                sheetBackgroundColor = Color.White
 
-                ) {
+            ) {
                 Box(
                     modifier = modifier.clip(
                         shape = RoundedCornerShape(
@@ -159,7 +171,7 @@ fun TwyperScreen(
                             SwipeRightLeftIcon(
                                 onClick = {
                                     twyperController.swipeLeft()
-                                    onDislikePerson(viewModel, item, items, state,context)
+                                    onDislikePerson(viewModel, item, items, state, context)
                                 },
                                 icon = Icons.Default.Close,
                                 contentDesc = "Dislike${item.firstName}",
@@ -180,7 +192,7 @@ fun TwyperScreen(
                             SwipeRightLeftIcon(
                                 onClick = {
                                     twyperController.swipeRight()
-                                    onLikePerson(viewModel, item, items, state,context)
+                                    onLikePerson(viewModel, item, items, state, context)
                                 },
                                 icon = Icons.Default.FavoriteBorder,
                                 contentDesc = "Like${item.firstName}"
@@ -188,8 +200,6 @@ fun TwyperScreen(
                         }
                     }
                 }
-
-
             }
         }
     }

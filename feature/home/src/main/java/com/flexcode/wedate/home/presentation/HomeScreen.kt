@@ -13,8 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("IMPLICIT_CAST_TO_ANY")
-
 package com.flexcode.wedate.home.presentation
 
 import android.Manifest
@@ -135,14 +133,16 @@ fun HomeScreen(
         if (!state.isEmpty) {
             if (state.interestedIn == "Everyone") {
                 TwyperScreen(
-                    items = (state.potentialMatches.filter { user ->
+                    items = (
+                        state.potentialMatches.filter { user ->
                             user.id != viewModel.getUid() && !user.likedBy!!.contains(
                                 viewModel.getUid()
                             ) && user.accountStatus != "DELETED"
-                        }).toMutableList(),
-                    modifier =modifier,
-                    viewModel =viewModel,
-                    context =context,
+                        }
+                        ).toMutableList(),
+                    modifier = modifier,
+                    viewModel = viewModel,
+                    context = context
 
                 )
 //                PersonsCardStack(
@@ -161,14 +161,16 @@ fun HomeScreen(
 //                )
             } else {
                 TwyperScreen(
-                   items = (state.potentialMatches.filter { user ->
-                        user.id != viewModel.getUid() && user.gender == state.interestedIn &&
-                            !user.likedBy!!.contains(viewModel.getUid()) &&
-                            user.accountStatus != "DELETED"
-                    }.shuffled()).toMutableList(),
-                    modifier =modifier,
-                    viewModel =viewModel,
-                    context =context,
+                    items = (
+                        state.potentialMatches.filter { user ->
+                            user.id != viewModel.getUid() && user.gender == state.interestedIn &&
+                                !user.likedBy!!.contains(viewModel.getUid()) &&
+                                user.accountStatus != "DELETED"
+                        }.shuffled()
+                        ).toMutableList(),
+                    modifier = modifier,
+                    viewModel = viewModel,
+                    context = context
                 )
 //                PersonsCardStack(
 //                    items = state.potentialMatches.filter { user ->
@@ -196,18 +198,17 @@ fun HomeScreen(
 
 @Composable
 fun HomeLoading(modifier: Modifier = Modifier) {
-        Column(
-            modifier = modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            SearchingPotentialMatches()
-            BasicText(
-                text = R.string.searching_potential_matches,
-                fontSize = 15.sp,
-                textAlign = TextAlign.Center,
-                color = deepBrown
-            )
-        }
-
+    Column(
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        SearchingPotentialMatches()
+        BasicText(
+            text = R.string.searching_potential_matches,
+            fontSize = 15.sp,
+            textAlign = TextAlign.Center,
+            color = deepBrown
+        )
+    }
 }

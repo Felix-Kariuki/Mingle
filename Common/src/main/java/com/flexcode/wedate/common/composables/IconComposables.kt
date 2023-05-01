@@ -32,7 +32,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.flexcode.wedate.common.theme.lightPurple
 
 @Composable
 fun SwipeRightLeftIcon(
@@ -44,7 +43,7 @@ fun SwipeRightLeftIcon(
     width: Dp = 50.dp,
     contentDesc: String,
     tint: Color = Color.White,
-    circleColor:Color = Color.Transparent
+    circleColor: Color = Color.Transparent
 ) {
     IconButton(
         modifier = modifier
@@ -62,13 +61,4 @@ fun SwipeRightLeftIcon(
                 .width(width)
         )
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun IconPreview() {
-    SwipeRightLeftIcon(
-        onClick = { /*TODO*/ }, icon = Icons.Default.ShapeLine,
-        contentDesc = ""
-    )
 }

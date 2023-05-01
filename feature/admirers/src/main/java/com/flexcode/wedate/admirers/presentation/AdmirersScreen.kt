@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.inapppurchasescompose.SubscriptionsHelper
 import com.flexcode.wedate.common.R
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ExtraScreenText
@@ -52,7 +53,6 @@ import com.flexcode.wedate.common.composables.NoResultFoundAnimation
 import com.flexcode.wedate.common.extestions.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
-import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun AdmirersScreen(
@@ -63,8 +63,10 @@ fun AdmirersScreen(
 ) {
     val state by viewModel.state
 
-    val billingPurchaseHelper = SubscriptionsHelper(LocalContext.current,
-        "see_admirers_on_map_sub")
+    val billingPurchaseHelper = SubscriptionsHelper(
+        LocalContext.current,
+        "see_admirers_on_map_sub"
+    )
     billingPurchaseHelper.setUpBillingPurchases()
     val purchaseDone by billingPurchaseHelper.purchaseDone.collectAsState(false)
     val productName by billingPurchaseHelper.productName.collectAsState("")
@@ -94,7 +96,7 @@ fun AdmirersScreen(
                 text = AppText.admirers,
                 color = MaterialTheme.colors.background,
                 fontSize = 25.sp,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Bold
             )
             BasicText(
                 text = AppText.admirers_text,
@@ -152,16 +154,13 @@ fun AdmirersScreen(
                     .height(50.dp)
                     .clip(RoundedCornerShape(10.dp))
             ) {
-                if (purchaseDone){
+                if (purchaseDone) {
                     billingPurchaseHelper.initializePurchase()
-                }else{
-                    //save purchase
+                } else {
+                    // save purchase
                     navigateToAdmirersMaps()
                 }
-
             }
         }
-
     }
 }
-

@@ -66,11 +66,11 @@ dependencies {
     // ui controller
     implementation(libs.accompanistController)
 
-    //accompanist permissions
-    //accompanist pager
+    // accompanist permissions
+    // accompanist pager
     implementation(libs.bundles.accompanist)
 
-    //coil
+    // coil
     implementation(libs.coil)
 
     // lottie
@@ -79,5 +79,5 @@ dependencies {
     testImplementation(libs.jUnit)
     androidTestImplementation(libs.testJUnit)
     androidTestImplementation(libs.esspresso)
-    androidTestImplementation(libs.truth)
+    testImplementation(libs.truth)
 }
