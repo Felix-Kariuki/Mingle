@@ -5,7 +5,7 @@ spotless = "5.17.1"
 ktlint = "11.0.0"
 maps_secret = "2.0.0"
 android = "7.4.0"
-material = "1.4.2"
+material = "1.8.0"
 app_compat = "1.5.1"
 androidxCore = "1.7.0"
 firebaseBom = "30.4.1"
@@ -29,7 +29,6 @@ lifecycle_runtime_compose = {module = "androidx.lifecycle:lifecycle-runtime-comp
 lifecycleViewModel = {module = "androidx.lifecycle:lifecycle-viewmodel-ktx",version.ref="lifecycle"}
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
-googleMaterial = "com.google.android.material:material:1.7.0"
 core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 appCompat = { module = "androidx.appcompat:appcompat", version.ref = "app_compat" }
 

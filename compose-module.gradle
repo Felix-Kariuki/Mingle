@@ -13,7 +13,6 @@ dependencies {
     implementation(libs.core)
     implementation(libs.appCompat)
     implementation(libs.material)
-    implementation(libs.googleMaterial)
     implementation(libs.bundles.compose)
 
 
