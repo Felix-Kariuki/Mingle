@@ -26,7 +26,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -35,8 +35,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -44,7 +46,7 @@ import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.SearchingPotentialMatches
 import com.flexcode.wedate.common.theme.deepBrown
-import com.flexcode.wedate.home.PersonsCardStack
+import com.flexcode.wedate.home.TwyperScreen
 import com.flexcode.wedate.home.location.GetCurrentLocation
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
@@ -52,7 +54,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import timber.log.Timber
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalPermissionsApi::class)
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -116,62 +118,96 @@ fun HomeScreen(
         latitude,
         viewModel
     )
-
     Column(
         modifier = modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .clip(
+                shape = RoundedCornerShape(
+                    topEnd = 130.dp,
+                    bottomEnd = 25.dp,
+                    topStart = 25.dp,
+                    bottomStart = 25.dp
+                )
+            ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         if (!state.isEmpty) {
             if (state.interestedIn == "Everyone") {
-                PersonsCardStack(
-                    items = (
-                        state.potentialMatches.filter { user ->
+                TwyperScreen(
+                    items = (state.potentialMatches.filter { user ->
                             user.id != viewModel.getUid() && !user.likedBy!!.contains(
                                 viewModel.getUid()
                             ) && user.accountStatus != "DELETED"
-                        }
-                        ),
-                    onEmptyStack = {
-                        state.isEmpty = false
-                    },
-                    viewModel = viewModel,
-                    context = context
+                        }).toMutableList(),
+                    modifier =modifier,
+                    viewModel =viewModel,
+                    context =context,
+
                 )
+//                PersonsCardStack(
+//                    items = (
+//                        state.potentialMatches.filter { user ->
+//                            user.id != viewModel.getUid() && !user.likedBy!!.contains(
+//                                viewModel.getUid()
+//                            ) && user.accountStatus != "DELETED"
+//                        }
+//                        ),
+//                    onEmptyStack = {
+//                        state.isEmpty = false
+//                    },
+//                    viewModel = viewModel,
+//                    context = context
+//                )
             } else {
-                PersonsCardStack(
-                    items = state.potentialMatches.filter { user ->
+                TwyperScreen(
+                   items = (state.potentialMatches.filter { user ->
                         user.id != viewModel.getUid() && user.gender == state.interestedIn &&
                             !user.likedBy!!.contains(viewModel.getUid()) &&
                             user.accountStatus != "DELETED"
-                    }.shuffled(),
-                    onEmptyStack = {
-                        state.isEmpty = false
-                    },
-                    viewModel = viewModel,
-                    context = context
+                    }.shuffled()).toMutableList(),
+                    modifier =modifier,
+                    viewModel =viewModel,
+                    context =context,
                 )
+//                PersonsCardStack(
+//                    items = state.potentialMatches.filter { user ->
+//                        user.id != viewModel.getUid() && user.gender == state.interestedIn &&
+//                            !user.likedBy!!.contains(viewModel.getUid()) &&
+//                            user.accountStatus != "DELETED"
+//                    }.shuffled(),
+//                    onEmptyStack = {
+//                        state.isEmpty = false
+//                    },
+//                    viewModel = viewModel,
+//                    context = context
+//                )
             }
         } else {
             Box(
                 modifier = modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                Column(
-                    modifier = modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    SearchingPotentialMatches()
-                    BasicText(
-                        text = R.string.searching_potential_matches,
-                        fontSize = 15.sp,
-                        textAlign = TextAlign.Center,
-                        color = deepBrown
-                    )
-                }
+                HomeLoading()
             }
         }
     }
+}
+
+@Composable
+fun HomeLoading(modifier: Modifier = Modifier) {
+        Column(
+            modifier = modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            SearchingPotentialMatches()
+            BasicText(
+                text = R.string.searching_potential_matches,
+                fontSize = 15.sp,
+                textAlign = TextAlign.Center,
+                color = deepBrown
+            )
+        }
+
 }

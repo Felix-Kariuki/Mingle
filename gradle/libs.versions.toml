@@ -14,6 +14,7 @@ accompanist = "0.28.0"
 mockk = "1.13.3"
 compose_testing = "1.3.3"
 lifecycle = "2.6.1"
+twyper = "0.0.4"
 
 [libraries]
 compose_ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
@@ -87,6 +88,7 @@ mockWebServer = "com.squareup.okhttp3:mockwebserver:4.9.1"
 roboelectric = "org.robolectric:robolectric:4.9"
 navigationTest = "androidx.navigation:navigation-testing:2.5.3"
 truth = "com.google.truth:truth:1.1.3"
+twyper = { module = "com.github.theapache64:twyper", version.ref = "twyper" }
 
 [bundles]
 compose = ["compose.ui", "compose.material", "compose.tooling","compose.icons"]

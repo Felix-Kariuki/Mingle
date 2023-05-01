@@ -47,7 +47,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.extestions.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
@@ -57,6 +56,7 @@ import com.flexcode.wedate.common.utils.contact_utils.sendMail
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun SettingsScreen(
@@ -254,8 +254,9 @@ fun SettingsScreen(
                 color = purpleGrey,
                 textColor = purpleGrey
             )
+
             ResultText(
-                text = "Version 1.0.4",
+                text = "Version ${getVersionName(context)}",
                 color = purpleGrey,
                 fontSize = 13.sp,
                 textAlign = TextAlign.Center,
@@ -360,4 +361,14 @@ fun restartApp(context: Context) {
     val restartIntent: Intent = Intent.makeRestartActivityTask(componentName)
     context.startActivity(restartIntent)
     Runtime.getRuntime().exit(0)
+}
+
+fun getVersionName(context: Context): String {
+    return try {
+        context.packageManager
+            .getPackageInfo(context.packageName, 0).versionName
+    } catch (e: PackageManager.NameNotFoundException) {
+        e.printStackTrace()
+        ""
+    }
 }

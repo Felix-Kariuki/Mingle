@@ -32,7 +32,7 @@ data class User(
     val profileImage: ProfileImage? = null,
     val free: Boolean = true,
     val datingStatus: String = "Single",
-    val locationName: String = "Hidden",
+    val locationName: String = "",
     val latitude: String = "1.687",
     val longitude: String = "36.12547",
     val online: Boolean = true,

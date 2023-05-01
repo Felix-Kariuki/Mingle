@@ -68,6 +68,9 @@ dependencies {
     //in app purchases
     implementation ("com.github.Felix-Kariuki:InAppPurchasesComposeLibrary:0.1.3")
 
+    //twyper
+    implementation (libs.twyper)
+
 
     //leak canary
     debugImplementation (libs.leakCanary)

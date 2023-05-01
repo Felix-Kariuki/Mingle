@@ -193,13 +193,16 @@ class HomeRepositoryImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
+//    user.id != uid &&  user.accountStatus != "DELETED" &&
+//    !user.likedBy!!.contains(uid)
+
     override suspend fun getAllUsers(): Flow<Resource<List<User>>> {
         return flow<Resource<List<User>>> {
             emit(Resource.Loading())
             try {
+                val uid = auth.currentUser?.uid!!
                 val allUserProfiles = ArrayList<User>()
                 val allUsers = dbRef.child(USER_PATH).get().await()
-
                 for (i in allUsers.children) {
                     val result = i.getValue(User::class.java)
                     allUserProfiles.add(result!!)

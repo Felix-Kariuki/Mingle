@@ -91,7 +91,8 @@ fun MapsScreen(
                 .background(color = lightPurple, shape = RoundedCornerShape(100.dp)),
             height = 30.dp,
             width = 30.dp,
-            paddingValues = PaddingValues(4.dp)
+            paddingValues = PaddingValues(4.dp),
+            circleColor = lightPurple
         )
     }
 }
