@@ -47,7 +47,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":Common"))
-    implementation(project(":feature:profiledetails"))
     implementation(project(":feature:auth"))
+    implementation(project(":Network"))
 }

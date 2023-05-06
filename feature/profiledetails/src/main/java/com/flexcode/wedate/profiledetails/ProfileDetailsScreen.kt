@@ -222,7 +222,8 @@ fun ProfileDetailsScreen(
                 ResultText(
                     text = "${state.userDetails?.locationName}",
                     color = Color.Gray,
-                    modifier = modifier.offset(x = (8).dp, y = (-16).dp)
+                    modifier = modifier
+                        .offset(x = (8).dp, y = (-16).dp)
                         .padding(bottom = 70.dp)
                 )
             }

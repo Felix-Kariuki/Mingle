@@ -19,7 +19,7 @@ android {
         applicationId = "com.flexcode.wedatecompose"
         minSdk = SDK.min
         targetSdk = SDK.max
-        versionCode = 9
+        versionCode = 10
         versionName = "1.0.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -104,6 +104,7 @@ dependencies {
     implementation(project(":feature:profileedit"))
     implementation(project(":feature:chatsscreen"))
     implementation(project(":feature:maps"))
+    implementation(project(":Network"))
 
     implementation(libs.core)
     implementation(libs.appCompat)

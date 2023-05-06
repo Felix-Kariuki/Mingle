@@ -45,4 +45,7 @@ object Constants {
     val USER_DATA = stringSetPreferencesKey("user_data")
 
     const val ONESIGNAL_APP_ID = "e363b214-60c5-4e1a-8b2b-********"
+
+    const val SEE_ON_MAP = "see_admirers_on_map_sub"
+    const val LOVE_CALCULATOR = "love_calculator"
 }

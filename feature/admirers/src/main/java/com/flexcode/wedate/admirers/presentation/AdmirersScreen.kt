@@ -53,6 +53,7 @@ import com.flexcode.wedate.common.composables.NoResultFoundAnimation
 import com.flexcode.wedate.common.extestions.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
+import com.flexcode.wedate.common.utils.Constants
 
 @Composable
 fun AdmirersScreen(
@@ -65,7 +66,7 @@ fun AdmirersScreen(
 
     val billingPurchaseHelper = SubscriptionsHelper(
         LocalContext.current,
-        "see_admirers_on_map_sub"
+        Constants.SEE_ON_MAP
     )
     billingPurchaseHelper.setUpBillingPurchases()
     val purchaseDone by billingPurchaseHelper.purchaseDone.collectAsState(false)

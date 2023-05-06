@@ -15,7 +15,7 @@
  */
 package com.flexcode.wedate.account
 
-import com.flexcode.wedate.auth.data.models.User
+import com.flexcode.wedatecompose.network.data.models.auth.User
 
 data class AccountState(
     var isLoading: Boolean = false,

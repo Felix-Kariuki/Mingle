@@ -39,7 +39,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.DotsIndicator
@@ -49,6 +48,7 @@ import com.flexcode.wedate.common.extestions.textPadding
 import com.flexcode.wedate.common.theme.WedateComposeTheme
 import com.flexcode.wedate.common.theme.lightPurple
 import com.flexcode.wedate.common.theme.purpleGrey
+import com.flexcode.wedatecompose.network.data.models.auth.User
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 

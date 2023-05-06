@@ -37,7 +37,7 @@ import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.home.MatchNotificationService
-import com.flexcode.wedate.home.data.model.Likes
+import com.flexcode.wedatecompose.network.data.models.home.Likes
 import timber.log.Timber
 
 @Composable

@@ -18,8 +18,6 @@ package com.flexcode.wedate.auth.presentation.identity_screen
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
-import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.data.LogService
@@ -28,6 +26,8 @@ import com.flexcode.wedate.common.extestions.isMonthValid
 import com.flexcode.wedate.common.extestions.isYearValid
 import com.flexcode.wedate.common.navigation.INTERESTS_SCREEN
 import com.flexcode.wedate.common.snackbar.SnackBarManager
+import com.flexcode.wedatecompose.network.data.datastore.AuthDataStore
+import com.flexcode.wedatecompose.network.data.models.auth.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.text.SimpleDateFormat
 import java.util.Date

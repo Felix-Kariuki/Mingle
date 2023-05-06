@@ -38,7 +38,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.BasicText
@@ -49,6 +48,7 @@ import com.flexcode.wedate.common.theme.onlineGreen
 import com.flexcode.wedate.common.theme.purpleGrey
 import com.flexcode.wedate.home.presentation.HomeUiState
 import com.flexcode.wedate.home.presentation.HomeViewModel
+import com.flexcode.wedatecompose.network.data.models.auth.User
 import com.github.theapache64.twyper.Twyper
 import com.github.theapache64.twyper.rememberTwyperController
 import kotlinx.coroutines.launch

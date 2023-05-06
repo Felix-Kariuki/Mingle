@@ -21,13 +21,13 @@ import android.location.Geocoder
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.auth.data.models.User
-import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
-import com.flexcode.wedate.home.domain.use_cases.HomeUseCases
+import com.flexcode.wedatecompose.network.data.models.auth.User
+import com.flexcode.wedatecompose.network.domain.use_cases.auth.UseCaseContainer
+import com.flexcode.wedatecompose.network.domain.use_cases.home.HomeUseCases
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.text.SimpleDateFormat

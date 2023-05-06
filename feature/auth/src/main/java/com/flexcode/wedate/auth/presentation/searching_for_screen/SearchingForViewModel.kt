@@ -18,17 +18,16 @@ package com.flexcode.wedate.auth.presentation.searching_for_screen
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
-import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.navigation.PROFILE_IMAGES_SCREEN
 import com.flexcode.wedate.common.navigation.SEARCHING_FOR_SCREEN
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedatecompose.network.data.datastore.AuthDataStore
+import com.flexcode.wedatecompose.network.domain.use_cases.auth.UseCaseContainer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @HiltViewModel

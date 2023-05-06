@@ -15,8 +15,8 @@
  */
 package com.flexcode.wedate.admirers.presentation
 
-import com.flexcode.wedate.auth.data.models.User
-import com.flexcode.wedate.home.data.model.Likes
+import com.flexcode.wedatecompose.network.data.models.auth.User
+import com.flexcode.wedatecompose.network.data.models.home.Likes
 
 data class AdmirersState(
     // val admirers: HashMap<String, Any>? = null

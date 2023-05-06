@@ -48,5 +48,5 @@ android {
 
 dependencies {
 
-    implementation(project(":feature:auth"))
+    implementation(project(":Network"))
 }

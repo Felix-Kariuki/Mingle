@@ -15,7 +15,7 @@
  */
 package com.flexcode.wedate.auth.presentation.profile_images_screen
 
-import com.flexcode.wedate.auth.data.models.User
+import com.flexcode.wedatecompose.network.data.models.auth.User
 
 data class ProfileImageState(
     val isLoading: String = "false",

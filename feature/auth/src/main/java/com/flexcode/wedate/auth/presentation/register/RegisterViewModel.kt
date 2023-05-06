@@ -17,16 +17,19 @@ package com.flexcode.wedate.auth.presentation.register
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
-import com.flexcode.wedate.auth.data.models.User
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.data.LogService
-import com.flexcode.wedate.common.extestions.*
+import com.flexcode.wedate.common.extestions.isFirstNameValid
+import com.flexcode.wedate.common.extestions.isPhoneNumberValid
+import com.flexcode.wedate.common.extestions.isValidEmail
+import com.flexcode.wedate.common.extestions.isValidPassword
 import com.flexcode.wedate.common.navigation.IDENTITY_SCREEN
 import com.flexcode.wedate.common.navigation.LOGIN_SCREEN
 import com.flexcode.wedate.common.navigation.REGISTER_SCREEN
 import com.flexcode.wedate.common.snackbar.SnackBarManager
+import com.flexcode.wedatecompose.network.data.datastore.AuthDataStore
+import com.flexcode.wedatecompose.network.data.models.auth.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch

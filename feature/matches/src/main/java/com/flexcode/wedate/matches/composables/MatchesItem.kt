@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.R
-import com.flexcode.wedate.matches.data.model.Matches
+import com.flexcode.wedatecompose.network.data.models.matches.Matches
 
 @Composable
 fun MatchesItem(

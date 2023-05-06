@@ -17,8 +17,6 @@ package com.flexcode.wedate.auth.presentation.login
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.auth.domain.repository.AuthRepository
-import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.data.LogService
@@ -29,6 +27,8 @@ import com.flexcode.wedate.common.navigation.LOGIN_SCREEN
 import com.flexcode.wedate.common.navigation.REGISTER_SCREEN
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedatecompose.network.domain.repository.auth.AuthRepository
+import com.flexcode.wedatecompose.network.domain.use_cases.auth.UseCaseContainer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch

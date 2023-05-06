@@ -49,5 +49,5 @@ android {
 
 dependencies {
 
-    implementation(project(":Common"))
+    implementation(project(":Network"))
 }

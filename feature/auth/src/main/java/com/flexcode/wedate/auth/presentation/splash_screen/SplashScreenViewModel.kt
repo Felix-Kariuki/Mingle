@@ -17,14 +17,14 @@ package com.flexcode.wedate.auth.presentation.splash_screen
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.auth.domain.repository.AuthRepository
-import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.auth.presentation.profile_images_screen.ProfileImageState
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.navigation.LOGIN_SCREEN
 import com.flexcode.wedate.common.navigation.SPLASH_SCREEN
 import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedatecompose.network.domain.repository.auth.AuthRepository
+import com.flexcode.wedatecompose.network.domain.use_cases.auth.UseCaseContainer
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

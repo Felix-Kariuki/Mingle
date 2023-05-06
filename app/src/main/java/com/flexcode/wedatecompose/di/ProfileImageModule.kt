@@ -15,8 +15,8 @@
  */
 package com.flexcode.wedatecompose.di
 
-import com.flexcode.wedate.auth.data.repository.ProfileImageRepositoryImpl
-import com.flexcode.wedate.auth.domain.repository.ProfileImageRepository
+import com.flexcode.wedatecompose.network.data.repository.auth.ProfileImageRepositoryImpl
+import com.flexcode.wedatecompose.network.domain.repository.auth.ProfileImageRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import dagger.Module

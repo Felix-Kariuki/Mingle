@@ -15,6 +15,10 @@ mockk = "1.13.3"
 compose_testing = "1.3.3"
 lifecycle = "2.6.1"
 twyper = "0.0.4"
+agp = "7.4.0"
+junit = "4.13.2"
+androidx-test-ext-junit = "1.1.5"
+espresso-core = "3.5.1"
 
 [libraries]
 compose_ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
@@ -88,6 +92,9 @@ roboelectric = "org.robolectric:robolectric:4.9"
 navigationTest = "androidx.navigation:navigation-testing:2.5.3"
 truth = "com.google.truth:truth:1.1.3"
 twyper = { module = "com.github.theapache64:twyper", version.ref = "twyper" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 
 [bundles]
 compose = ["compose.ui", "compose.material", "compose.tooling","compose.icons"]
@@ -102,3 +109,4 @@ composeTesting = ["compose.ui.tooling","compose.ui.testing"]
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 mapsPlatformSecret = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "maps_secret" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
