@@ -75,7 +75,7 @@ Take a look at the contributors for this project. 😎
  
  
  ## Architecture 🏚️
-The application is built following a multi module approach with all features being developed as separate modules. The modules follow the 3 layer (ui,domain,data) approach as shown below.
+The application is built following a multi module approach with all features being developed as separate modules. We have the Network Module which contains the data and domain layers for alll the features and each feature contains its own presentation (ui layer).
 
 ### 1.UI layer
 The role of the UI layer (or presentation layer) is to display the application data on the screen. Whenever the data changes, either due to user interaction (such as pressing a button) or external input (such as a network response), the UI should update to reflect the changes.
