@@ -15,10 +15,12 @@
  */
 package com.flexcode.wedate.common.composables
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
@@ -37,10 +39,13 @@ fun SwipeRightLeftIcon(
     height: Dp = 50.dp,
     width: Dp = 50.dp,
     contentDesc: String,
-    tint: Color = Color.White
+    tint: Color = Color.White,
+    circleColor: Color = Color.Transparent
 ) {
     IconButton(
-        modifier = modifier.padding(paddingValues),
+        modifier = modifier
+            .padding(paddingValues)
+            .background(color = circleColor, shape = RoundedCornerShape(100.dp)),
         onClick = { onClick() }
     ) {
         Icon(

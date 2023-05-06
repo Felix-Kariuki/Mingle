@@ -15,8 +15,8 @@
  */
 package com.flexcode.wedate.matches.presentation
 
-import com.flexcode.wedate.matches.data.model.ChatProfile
-import com.flexcode.wedate.matches.data.model.Matches
+import com.flexcode.wedatecompose.network.data.models.matches.ChatProfile
+import com.flexcode.wedatecompose.network.data.models.matches.Matches
 
 data class MatchesState(
     val isLoading: Boolean = true,

@@ -18,7 +18,6 @@ package com.flexcode.wedate.auth.presentation.profile_images_screen
 import android.net.Uri
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.data.LogService
@@ -26,6 +25,7 @@ import com.flexcode.wedate.common.navigation.HOME_SCREEN_CONTENT
 import com.flexcode.wedate.common.navigation.PROFILE_IMAGES_SCREEN
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedatecompose.network.domain.use_cases.auth.UseCaseContainer
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

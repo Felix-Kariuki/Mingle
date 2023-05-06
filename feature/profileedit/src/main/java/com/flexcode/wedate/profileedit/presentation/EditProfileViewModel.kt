@@ -21,10 +21,9 @@ import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
-import com.flexcode.wedate.profileedit.domain.use_case.EditUseCaseContainer
+import com.flexcode.wedatecompose.network.domain.use_cases.profile_edit.EditUseCaseContainer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @HiltViewModel

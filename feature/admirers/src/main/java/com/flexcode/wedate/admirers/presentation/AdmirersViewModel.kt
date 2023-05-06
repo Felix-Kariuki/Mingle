@@ -17,11 +17,11 @@ package com.flexcode.wedate.admirers.presentation
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.auth.domain.usecase.UseCaseContainer
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.utils.Resource
-import com.flexcode.wedate.home.domain.use_cases.HomeUseCases
+import com.flexcode.wedatecompose.network.domain.use_cases.auth.UseCaseContainer
+import com.flexcode.wedatecompose.network.domain.use_cases.home.HomeUseCases
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

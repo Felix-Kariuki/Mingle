@@ -254,8 +254,9 @@ fun SettingsScreen(
                 color = purpleGrey,
                 textColor = purpleGrey
             )
+
             ResultText(
-                text = "Version 1.0.4",
+                text = "Version ${getVersionName(context)}",
                 color = purpleGrey,
                 fontSize = 13.sp,
                 textAlign = TextAlign.Center,
@@ -360,4 +361,14 @@ fun restartApp(context: Context) {
     val restartIntent: Intent = Intent.makeRestartActivityTask(componentName)
     context.startActivity(restartIntent)
     Runtime.getRuntime().exit(0)
+}
+
+fun getVersionName(context: Context): String {
+    return try {
+        context.packageManager
+            .getPackageInfo(context.packageName, 0).versionName
+    } catch (e: PackageManager.NameNotFoundException) {
+        e.printStackTrace()
+        ""
+    }
 }

@@ -28,6 +28,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -46,6 +47,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.flexcode.inapppurchasescompose.SubscriptionsHelper
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.R.string as AppText
@@ -54,6 +56,7 @@ import com.flexcode.wedate.common.extestions.basicButton
 import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
 import com.flexcode.wedate.common.theme.purple
+import com.flexcode.wedate.common.utils.Constants
 
 @Composable
 fun AccountScreen(
@@ -64,6 +67,13 @@ fun AccountScreen(
     viewModel: AccountScreenViewModel = hiltViewModel()
 ) {
     val state by viewModel.state
+
+    val billingPurchaseHelper = SubscriptionsHelper(
+        LocalContext.current,
+        Constants.LOVE_CALCULATOR
+    )
+    billingPurchaseHelper.setUpBillingPurchases()
+    val purchaseDone by billingPurchaseHelper.purchaseDone.collectAsState(false)
 
     val gradient = Brush.verticalGradient(
         listOf(lightPurple, Color.White),
@@ -149,7 +159,12 @@ fun AccountScreen(
                         .height(50.dp)
                         .clip(RoundedCornerShape(10.dp))
                 ) {
-                    openScreen()
+                    if (purchaseDone) {
+                        billingPurchaseHelper.initializePurchase()
+                    } else {
+                        // save purchase if done
+                        openScreen()
+                    }
                 }
             }
         }

@@ -20,7 +20,7 @@ import androidx.lifecycle.viewModelScope
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.utils.Resource
-import com.flexcode.wedate.matches.domain.use_case.UseCaseContainer
+import com.flexcode.wedatecompose.network.domain.use_cases.matches.MatchesUseCaseContainer
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -33,7 +33,7 @@ import timber.log.Timber
 class MatchesViewModel @Inject constructor(
     logService: LogService,
     private val auth: FirebaseAuth,
-    private val useCases: UseCaseContainer
+    private val useCases: MatchesUseCaseContainer
 ) : BaseViewModel(logService) {
     var state = mutableStateOf(MatchesState())
         private set

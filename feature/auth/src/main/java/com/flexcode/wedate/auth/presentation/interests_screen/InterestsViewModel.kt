@@ -18,11 +18,11 @@ package com.flexcode.wedate.auth.presentation.interests_screen
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
-import com.flexcode.wedate.auth.data.local.datastore.AuthDataStore
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.navigation.SEARCHING_FOR_SCREEN
 import com.flexcode.wedate.common.snackbar.SnackBarManager
+import com.flexcode.wedatecompose.network.data.datastore.AuthDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch

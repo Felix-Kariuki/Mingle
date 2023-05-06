@@ -13,7 +13,6 @@ dependencies {
     implementation(libs.core)
     implementation(libs.appCompat)
     implementation(libs.material)
-    implementation(libs.googleMaterial)
     implementation(libs.bundles.compose)
 
 
@@ -67,6 +66,9 @@ dependencies {
 
     //in app purchases
     implementation ("com.github.Felix-Kariuki:InAppPurchasesComposeLibrary:0.1.3")
+
+    //twyper
+    implementation (libs.twyper)
 
 
     //leak canary

@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.DotsIndicator
 import com.flexcode.wedate.common.composables.ResultText
@@ -42,7 +43,6 @@ import com.flexcode.wedate.common.extestions.textPadding
 import com.flexcode.wedate.common.theme.lightPurple
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
-import com.flexcode.wedate.common.R.string as AppText
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -222,7 +222,8 @@ fun ProfileDetailsScreen(
                 ResultText(
                     text = "${state.userDetails?.locationName}",
                     color = Color.Gray,
-                    modifier = modifier.offset(x = (8).dp, y = (-16).dp)
+                    modifier = modifier
+                        .offset(x = (8).dp, y = (-16).dp)
                         .padding(bottom = 70.dp)
                 )
             }
@@ -246,4 +247,3 @@ fun InfoItem(text: String) {
         )
     }
 }
-

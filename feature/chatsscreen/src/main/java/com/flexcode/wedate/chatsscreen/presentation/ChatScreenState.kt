@@ -15,8 +15,8 @@
  */
 package com.flexcode.wedate.chatsscreen.presentation
 
-import com.flexcode.wedate.auth.data.models.User
-import com.flexcode.wedate.chatsscreen.data.model.Messsage
+import com.flexcode.wedatecompose.network.data.models.auth.User
+import com.flexcode.wedatecompose.network.data.models.chat.Messsage
 
 data class ChatScreenState(
     var userDetails: User? = null,
