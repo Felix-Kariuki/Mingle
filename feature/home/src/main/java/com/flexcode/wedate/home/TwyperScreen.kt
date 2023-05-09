@@ -112,16 +112,7 @@ fun TwyperScreen(
                 sheetBackgroundColor = Color.White
 
             ) {
-                Box(
-                    modifier = modifier.clip(
-                        shape = RoundedCornerShape(
-                            topEnd = 130.dp,
-                            bottomEnd = 25.dp,
-                            topStart = 25.dp,
-                            bottomStart = 25.dp
-                        )
-                    )
-                ) {
+                Box() {
                     AsyncImage(
                         model = item.profileImage?.profileImage1,
                         contentDescription = item.firstName,

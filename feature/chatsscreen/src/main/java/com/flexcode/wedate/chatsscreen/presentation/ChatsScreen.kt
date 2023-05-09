@@ -19,6 +19,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -27,6 +28,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -51,6 +53,7 @@ import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
 import com.flexcode.wedate.common.theme.deepLightPurple
 import com.flexcode.wedate.common.theme.lightPurple
 import com.flexcode.wedate.common.theme.onlineGreen
+import kotlinx.coroutines.launch
 
 @Composable
 fun ChatsScreen(
@@ -60,6 +63,15 @@ fun ChatsScreen(
     viewModel: ChatScreenViewModel = hiltViewModel()
 ) {
     val state by viewModel.state
+    val scope = rememberCoroutineScope()
+    val scrollState = rememberLazyListState()
+    LaunchedEffect(key1 = state.messages.size) {
+        scope.launch {
+            if (state.messages.size > 1) {
+                scrollState.animateScrollToItem(state.messages.size - 1)
+            }
+        }
+    }
 
     Scaffold(topBar = {
         TopBar(modifier, navigateToMatchScreen, state)
@@ -72,7 +84,8 @@ fun ChatsScreen(
             LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
-                    .padding(bottom = 75.dp)
+                    .padding(bottom = 75.dp),
+                state = scrollState
             ) {
                 items(state.messages.size) { i ->
                     val msg = state.messages.sortedBy { it.timeStamp }[i]
