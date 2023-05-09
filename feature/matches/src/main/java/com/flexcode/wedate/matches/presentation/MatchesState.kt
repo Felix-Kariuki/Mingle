@@ -19,7 +19,7 @@ import com.flexcode.wedatecompose.network.data.models.matches.ChatProfile
 import com.flexcode.wedatecompose.network.data.models.matches.Matches
 
 data class MatchesState(
-    val isLoading: Boolean = true,
+    val isLoading: Boolean = false,
     val searchValue: String = "",
     val matches: List<Matches> = emptyList(),
     val chatProfiles: List<ChatProfile> = emptyList()
