@@ -40,7 +40,8 @@ data class User(
     val userBio: String = "",
     val accountStatus: String = "ACTIVE",
     val subscriptions: UserSubscriptions? = null,
-    val swipes: LimitSwipes? = null
+    val swipes: LimitSwipes? = null,
+    val nickName: String = ""
 )
 
 /**

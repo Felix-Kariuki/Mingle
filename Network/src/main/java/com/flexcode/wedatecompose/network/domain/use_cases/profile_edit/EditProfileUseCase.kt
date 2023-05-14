@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.Flow
 
 class EditProfileUseCase(private val repository: EditProfileRepository) {
 
-    suspend operator fun invoke(userBio: String): Flow<Resource<Any>> {
-        return repository.updateUserProfileInfo(userBio)
+    suspend operator fun invoke(userBio: String, nickName: String): Flow<Resource<Any>> {
+        return repository.updateUserProfileInfo(userBio = userBio, nickName = nickName)
     }
 }

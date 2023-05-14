@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.*
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.R.string as AppText
@@ -87,11 +88,12 @@ fun BioField(
     onNewValue: (String) -> Unit,
     modifier: Modifier = Modifier,
     text: Int = AppText.about_me,
-    singleLine: Boolean = false
+    singleLine: Boolean = false,
+    height: Dp = 68.dp
 ) {
     OutlinedTextField(
         singleLine = singleLine,
-        modifier = modifier.height(100.dp).textPadding(),
+        modifier = modifier.height(height).textPadding(),
         value = value,
         onValueChange = { onNewValue(it) },
         placeholder = { Text(stringResource(text)) },

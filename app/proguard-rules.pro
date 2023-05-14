@@ -42,3 +42,7 @@
 ## home
 -keep class  com.flexcode.wedate.home.** { *; }
 
+##Network
+-keep class com.flexcode.wedatecompose.network.data** { *; }
+-keep class com.flexcode.wedatecompose.network.datastore** { *; }
+

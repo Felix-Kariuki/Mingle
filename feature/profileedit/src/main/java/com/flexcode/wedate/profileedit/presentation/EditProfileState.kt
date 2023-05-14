@@ -16,5 +16,7 @@
 package com.flexcode.wedate.profileedit.presentation
 
 data class EditProfileState(
-    val userBio: String = ""
+    val userBio: String = "",
+    val nickName: String = "",
+    val isEdited: Boolean = false
 )

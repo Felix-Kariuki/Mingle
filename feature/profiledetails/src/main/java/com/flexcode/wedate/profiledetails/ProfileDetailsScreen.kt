@@ -142,7 +142,7 @@ fun ProfileDetailsScreen(
                     ResultText(
                         text = state.userDetails?.userBio ?: "No Bio added yet",
                         color = Color.Gray,
-                        fontWeight = FontWeight.Light,
+                        fontWeight = FontWeight.Normal,
                         modifier = modifier.offset(y = (-8).dp)
                     )
                 }

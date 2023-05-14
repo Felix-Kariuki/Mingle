@@ -50,4 +50,7 @@ android {
 dependencies {
     implementation(project(":feature:home"))
     implementation(project(":Network"))
+
+    // coil
+    implementation(libs.coil)
 }

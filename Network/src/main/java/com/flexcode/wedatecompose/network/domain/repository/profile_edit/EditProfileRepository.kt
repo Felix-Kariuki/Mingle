@@ -19,5 +19,5 @@ import com.flexcode.wedate.common.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface EditProfileRepository {
-    suspend fun updateUserProfileInfo(userBio: String): Flow<Resource<Any>>
+    suspend fun updateUserProfileInfo(userBio: String, nickName: String): Flow<Resource<Any>>
 }
