@@ -72,7 +72,12 @@ fun EditProfileScreen(
         modifier = modifier.padding(2.dp),
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                onClick = { editProfileViewModel.updateUserProfile(uiState.userBio) },
+                onClick = {
+                    editProfileViewModel.updateUserProfile(
+                        userBio = uiState.userBio,
+                        nickName = uiState.nickName
+                    )
+                },
                 backgroundColor = lightPurple,
                 contentColor = Color.White,
                 icon = {
@@ -195,12 +200,19 @@ fun EditProfileScreen(
                 BioField(
                     value = uiState.userBio,
                     onNewValue = editProfileViewModel::onUserBioChange,
-                    modifier = modifier.offset(y = (-8).dp)
+                    modifier = modifier.offset(y = (-8).dp),
+                    height = 100.dp
                 )
                 BasicText(
-                    text = R.string.interested_in,
+                    text = R.string.nick_name,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 18.sp
+                )
+                BioField(
+                    value = uiState.nickName,
+                    onNewValue = editProfileViewModel::onUserNickNameChange,
+                    modifier = modifier.offset(y = (-8).dp),
+                    text = R.string.nick_name
                 )
             }
 

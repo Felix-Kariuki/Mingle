@@ -92,6 +92,7 @@ class LoginViewModel @Inject constructor(
             useCase.loginUseCase(email, password).collect { result ->
                 when (result) {
                     is Resource.Success -> {
+                        uiState.value = uiState.value.copy(isLoading = false)
                         launchCatching {
                             openAndPopUp(HOME_SCREEN_CONTENT, LOGIN_SCREEN)
                         }
@@ -101,6 +102,7 @@ class LoginViewModel @Inject constructor(
                     }
 
                     is Resource.Error -> {
+                        uiState.value = uiState.value.copy(isLoading = false)
                         SnackBarManager.showError(result.message.toString())
                     }
                 }

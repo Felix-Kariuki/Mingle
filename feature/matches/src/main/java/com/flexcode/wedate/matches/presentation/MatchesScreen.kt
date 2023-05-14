@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -41,6 +42,7 @@ import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.NoResultFoundAnimation
+import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SearchTextField
 import com.flexcode.wedate.common.extestions.textPadding
 import com.flexcode.wedate.common.theme.deepBrown
@@ -93,10 +95,10 @@ fun MatchesScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                BasicText(
-                    text = AppText.matches,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold
+                ResultText(
+                    text = "${stringResource(id = AppText.matches)} (${state.matches.size})",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Normal
                 )
                 MatchesComposable(state, navigateToChats)
                 NoResultFoundAnimation()
@@ -107,13 +109,17 @@ fun MatchesScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                BasicText(
-                    text = AppText.matches,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold
+                ResultText(
+                    text = "${stringResource(id = AppText.matches)} (${state.matches.size})",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Normal
                 )
                 MatchesComposable(state, navigateToChats)
-                BasicText(text = AppText.chats, fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+                ResultText(
+                    text = "${stringResource(id = AppText.chats)} (${state.chatProfiles.size})",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Normal
+                )
                 ChatsComposable(state, navigateToChats)
             }
         }

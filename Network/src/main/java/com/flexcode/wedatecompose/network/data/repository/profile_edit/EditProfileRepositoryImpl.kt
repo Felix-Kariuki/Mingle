@@ -31,13 +31,16 @@ class EditProfileRepositoryImpl @Inject constructor(
 ) : EditProfileRepository {
     private val dbRef = FirebaseDatabase.getInstance().reference
 
-    override suspend fun updateUserProfileInfo(userBio: String): Flow<Resource<Any>> {
+    override suspend fun updateUserProfileInfo(userBio: String, nickName: String):
+        Flow<Resource<Any>> {
         return flow {
             emit(Resource.Loading())
             try {
                 val userId = auth.uid!!
                 dbRef.child(USER_PATH).child(userId).child("userBio")
                     .setValue(userBio).await()
+                dbRef.child(USER_PATH).child(userId).child("nickName")
+                    .setValue(nickName).await()
                 emit(Resource.Success(Any()))
             } catch (e: Exception) {
                 println(e)

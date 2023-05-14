@@ -263,7 +263,9 @@ fun ProfileImage(
             modifier = Modifier
                 .size(100.dp)
                 .clip(CircleShape)
-                .border(1.dp, deepBrown, CircleShape),
+                .border(1.dp, deepBrown, CircleShape).clickable {
+                    navigateToProfileDetails()
+                },
             contentScale = ContentScale.Crop
         )
     }

@@ -19,8 +19,8 @@ android {
         applicationId = "com.flexcode.wedatecompose"
         minSdk = SDK.min
         targetSdk = SDK.max
-        versionCode = 10
-        versionName = "1.0.6"
+        versionCode = 13
+        versionName = "1.0.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
