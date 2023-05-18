@@ -132,11 +132,11 @@ fun ChatsComposable(
     navigateToChats: (String) -> Unit
 ) {
     LazyColumn(
-        Modifier.fillMaxWidth(),
+        Modifier.fillMaxWidth().padding(bottom = 42.dp),
         contentPadding = PaddingValues(16.dp)
     ) {
         items(state.chatProfiles.size) { chat ->
-            val chatProfile = state.chatProfiles[chat]
+            val chatProfile = state.chatProfiles.sortedByDescending { it.lastMsgTime }[chat]
             ChatItem(chatProfile = chatProfile, navigateToChats)
             Divider(modifier = Modifier.padding(horizontal = 16.dp))
         }
