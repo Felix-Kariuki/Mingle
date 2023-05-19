@@ -1,4 +1,5 @@
 [versions]
+appUpdate = "2.0.1"
 kotlin = "1.8.0"
 compose = "1.4.1"
 spotless = "5.17.1"
@@ -21,6 +22,8 @@ androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 
 [libraries]
+app-update = { module = "com.google.android.play:app-update", version.ref = "appUpdate" }
+app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "appUpdate" }
 compose_ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose_material = { module = "androidx.compose.material:material", version.ref = "compose" }
 compose_tooling = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }

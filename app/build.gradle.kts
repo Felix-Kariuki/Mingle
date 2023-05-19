@@ -19,7 +19,7 @@ android {
         applicationId = "com.flexcode.wedatecompose"
         minSdk = SDK.min
         targetSdk = SDK.max
-        versionCode = 14
+        versionCode = 15
         versionName = "1.0.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -153,6 +153,10 @@ dependencies {
     // maps
     implementation(libs.composeMaps)
     implementation(libs.playServicesSecrets)
+
+    // in app updates
+    implementation(libs.app.update)
+    implementation(libs.app.update.ktx)
 
     testImplementation(libs.jUnit)
 
