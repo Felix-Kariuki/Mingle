@@ -2,6 +2,7 @@
 appUpdate = "2.0.1"
 kotlin = "1.8.0"
 compose = "1.4.1"
+playServicesAds = "22.0.0"
 spotless = "5.17.1"
 ktlint = "11.0.0"
 maps_secret = "2.0.0"
@@ -53,6 +54,7 @@ firebasecrashlytics = "com.google.firebase:firebase-crashlytics-gradle:2.9.4"
 googleServices = "com.google.gms:google-services:4.3.15"
 hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.44.2"
 androidTools = "com.android.tools.build:gradle:3.4.0"
+play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
 timber = "com.jakewharton.timber:timber:5.0.1"
 hilt_compiler ={module = "com.google.dagger:hilt-compiler",version.ref = "hilt"}
 hilt_android ={module = "com.google.dagger:hilt-android",version.ref = "hilt"}
@@ -98,6 +100,7 @@ twyper = { module = "com.github.theapache64:twyper", version.ref = "twyper" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+play-services-ads-lite = { group = "com.google.android.gms", name = "play-services-ads-lite", version = "22.1.0" }
 
 [bundles]
 compose = ["compose.ui", "compose.material", "compose.tooling","compose.icons"]

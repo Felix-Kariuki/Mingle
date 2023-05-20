@@ -24,5 +24,5 @@ data class Matches(
     val lat: String = "",
     val long: String = "",
     val profileImage: String = "",
-    val timeStamp:Long = System.currentTimeMillis()
+    val timeStamp: Long = System.currentTimeMillis()
 )

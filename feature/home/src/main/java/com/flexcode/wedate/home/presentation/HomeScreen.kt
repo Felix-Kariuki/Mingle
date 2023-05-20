@@ -13,8 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("IMPLICIT_CAST_TO_ANY")
-
 package com.flexcode.wedate.home.presentation
 
 import android.Manifest
@@ -60,7 +58,6 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-
     val state by viewModel.state
     val context = LocalContext.current
     val permissionState = rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -125,7 +122,7 @@ fun HomeScreen(
             .fillMaxSize()
             .clip(
                 shape = RoundedCornerShape(
-                    topEnd = 130.dp,
+                    topEnd = 60.dp,
                     bottomEnd = 25.dp,
                     topStart = 25.dp,
                     bottomStart = 25.dp
@@ -216,4 +213,3 @@ fun HomeLoading(modifier: Modifier = Modifier) {
         )
     }
 }
-

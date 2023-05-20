@@ -18,7 +18,6 @@ package com.flexcode.wedate.admirers.presentation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -45,6 +44,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.flexcode.inapppurchasescompose.SubscriptionsHelper
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.R.string as AppText
+import com.flexcode.wedate.common.composables.BannerAdView
 import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ExtraScreenText
@@ -143,11 +143,13 @@ fun AdmirersScreen(
             }
         }
 
-        Row(
+        Column(
             modifier = modifier
-                .padding(bottom = 60.dp)
                 .align(Alignment.BottomCenter)
+                .padding(bottom = 60.dp)
         ) {
+            BannerAdView()
+
             BasicButton(
                 text = R.string.view_on_map,
                 modifier = modifier

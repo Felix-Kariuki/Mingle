@@ -16,15 +16,19 @@
 package com.flexcode.wedate.home
 
 import android.content.Context
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.UnfoldMoreDouble
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,18 +38,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.flexcode.wedate.common.R
-import com.flexcode.wedate.common.composables.BasicButton
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
 import com.flexcode.wedate.common.theme.deepBrown
+import com.flexcode.wedate.common.theme.lightPurple
 import com.flexcode.wedate.common.theme.onlineGreen
-import com.flexcode.wedate.common.theme.purpleGrey
+import com.flexcode.wedate.common.theme.purple
 import com.flexcode.wedate.home.presentation.HomeUiState
 import com.flexcode.wedate.home.presentation.HomeViewModel
 import com.flexcode.wedatecompose.network.data.models.auth.User
@@ -69,7 +74,7 @@ fun TwyperScreen(
             .padding(bottom = 60.dp, top = 10.dp, start = 10.dp, end = 10.dp)
             .clip(
                 shape = RoundedCornerShape(
-                    topEnd = 130.dp,
+                    topEnd = 60.dp,
                     bottomEnd = 25.dp,
                     topStart = 25.dp,
                     bottomStart = 25.dp
@@ -112,12 +117,18 @@ fun TwyperScreen(
                 sheetBackgroundColor = Color.White
 
             ) {
-                Box() {
+                Box {
                     AsyncImage(
                         model = item.profileImage?.profileImage1,
                         contentDescription = item.firstName,
                         contentScale = ContentScale.Crop,
-                        modifier = modifier.fillMaxSize()
+                        modifier = modifier
+                            .fillMaxSize()
+                            .clickable {
+                                scope.launch {
+                                    modalBottomSheetState.show()
+                                }
+                            }
                     )
                     Row(
                         modifier = modifier
@@ -167,17 +178,21 @@ fun TwyperScreen(
                                 icon = Icons.Default.Close,
                                 contentDesc = "Dislike${item.firstName}",
                                 paddingValues = PaddingValues(50.dp, 0.dp, 0.dp, 0.dp),
-                                circleColor = deepBrown
+
+                                circleColor = lightPurple
                             )
                             Spacer(modifier = Modifier.weight(1f))
-                            BasicButton(
-                                text = R.string.more,
-                                modifier = modifier,
-                                backGroundColor = purpleGrey
-                            ) {
+                            IconButton(onClick = {
                                 scope.launch {
                                     modalBottomSheetState.show()
                                 }
+                            }) {
+                                Icon(
+                                    imageVector = Icons.Default.UnfoldMoreDouble,
+                                    contentDescription = stringResource(id = R.string.more),
+                                    tint = purple,
+                                    modifier = modifier.size(40.dp)
+                                )
                             }
                             Spacer(modifier = Modifier.weight(1f))
                             SwipeRightLeftIcon(

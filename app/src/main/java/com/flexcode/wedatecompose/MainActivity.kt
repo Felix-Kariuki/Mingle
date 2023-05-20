@@ -31,9 +31,9 @@ import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.ktx.isFlexibleUpdateAllowed
 import com.google.android.play.core.ktx.isImmediateUpdateAllowed
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.time.Duration.Companion.seconds
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
-        if (updateType==AppUpdateType.FLEXIBLE){
+        if (updateType == AppUpdateType.FLEXIBLE) {
             appUpdateManager.registerListener(installStateUpdatedListener)
         }
         checkForUpdates()
@@ -66,7 +66,6 @@ class MainActivity : ComponentActivity() {
                 delay(5.seconds)
                 appUpdateManager.completeUpdate()
             }
-
         }
     }
 
@@ -80,7 +79,10 @@ class MainActivity : ComponentActivity() {
             }
             if (isUpdateAvailable && isUpdateAllowed) {
                 appUpdateManager.startUpdateFlowForResult(
-                    info, updateType, this, 77
+                    info,
+                    updateType,
+                    this,
+                    77
                 )
             }
         }
@@ -88,14 +90,17 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        //FOR FLEXIBLE UPDATES
+        // FOR FLEXIBLE UPDATES
         if (updateType == AppUpdateType.IMMEDIATE) {
             appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
                 if (info.updateAvailability() ==
                     UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
                 ) {
                     appUpdateManager.startUpdateFlowForResult(
-                        info, updateType, this, 77
+                        info,
+                        updateType,
+                        this,
+                        77
                     )
                 }
             }
@@ -104,7 +109,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (updateType == AppUpdateType.FLEXIBLE){
+        if (updateType == AppUpdateType.FLEXIBLE) {
             appUpdateManager.unregisterListener(installStateUpdatedListener)
         }
     }

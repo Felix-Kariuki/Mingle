@@ -20,8 +20,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
@@ -80,6 +82,7 @@ fun AccountScreen(
         startY = 500.0f,
         endY = 1300.0f
     )
+    val scrollState = rememberScrollState()
 
     Box(
         modifier = modifier
@@ -89,7 +92,9 @@ fun AccountScreen(
     ) {
         Column(
             horizontalAlignment = CenterHorizontally,
-            modifier = modifier.fillMaxSize()
+            modifier = modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
         ) {
             Row(
                 modifier = modifier.fillMaxWidth(),
@@ -146,12 +151,13 @@ fun AccountScreen(
                 SubscriptionsCard(text = AppText.subscriptions, icon = AppIcon.logo)
             }
 
-            Row(
+            Column(
                 modifier = modifier
                     .weight(1f)
                     .padding(bottom = 60.dp),
-                verticalAlignment = Alignment.Bottom
+                verticalArrangement = Arrangement.Bottom
             ) {
+                BannerAdView()
                 BasicButton(
                     text = R.string.calculator,
                     modifier = modifier
@@ -244,7 +250,9 @@ fun ProfileImage(
             backgroundColor = purple
         ) {
             Image(
-                modifier = Modifier.size(40.dp).padding(8.dp),
+                modifier = Modifier
+                    .size(40.dp)
+                    .padding(8.dp),
                 imageVector = Icons.Default.Edit,
                 contentDescription = "edit profile"
             )
@@ -263,7 +271,8 @@ fun ProfileImage(
             modifier = Modifier
                 .size(100.dp)
                 .clip(CircleShape)
-                .border(1.dp, deepBrown, CircleShape).clickable {
+                .border(1.dp, deepBrown, CircleShape)
+                .clickable {
                     navigateToProfileDetails()
                 },
             contentScale = ContentScale.Crop

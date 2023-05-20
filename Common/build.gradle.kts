@@ -1,4 +1,6 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.flexcode.wedate.buildsrc.SDK
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -17,6 +19,8 @@ android {
     }
 
     buildTypes {
+        val bannerId: String = gradleLocalProperties(rootDir).getProperty("BANNER_ADD_ID")
+
         release {
             isMinifyEnabled = true
             isShrinkResources = false
@@ -24,6 +28,16 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BANNER_ADD_ID", bannerId)
+        }
+        debug {
+            isMinifyEnabled = true
+            isShrinkResources = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            buildConfigField("String", "BANNER_ADD_ID", bannerId)
         }
     }
     compileOptions {
@@ -74,6 +88,9 @@ dependencies {
 
     // lottie
     implementation(libs.lottieAnimation)
+
+    // ads
+    implementation(libs.play.services.ads)
 
     testImplementation(libs.jUnit)
     androidTestImplementation(libs.testJUnit)
