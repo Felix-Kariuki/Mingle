@@ -21,6 +21,16 @@ I am using product flavours and have three flavours `dev` , `staging` and `produ
      * navigate to bottom left side of your android studio and select `Build Variants`
      * Under the :app level module select `devDebug`
      * Once gradle build is done Run the application
+ 
+   `NOTE` You will also need to add this to your `local.properties` file. 
+  
+  ```gradle
+  
+  MAPS_API_KEY = API_KEY_HERE
+  ADMOB_APP_ID = APP_ID_HERE
+  BANNER_ADD_ID = "BANNER_ID_HERE"
+  
+  ```
      
 ## Contribution 🪶
 To contribute to the project clone it and make your changes. Once done with making changes, on the terminal of your android studio run
@@ -29,6 +39,7 @@ To contribute to the project clone it and make your changes. Once done with maki
    3. * `./gradlew ktlintcheck `
  
   Once the code passes all ktlint checks push the code and open a `Pull Request`
+ 
      
 ## Contributor(s) 🤝
 
