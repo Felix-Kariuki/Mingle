@@ -20,19 +20,29 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '11'
-          
+
       - name: Create google json
         run: cat /home/runner/work/Mingle/Mingle/app/google-services.json | base64
-        
+
       - name: 📖 Read data from secrets and Putting data to json
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo $DATA > /home/runner/work/Mingle/Mingle/app/google-services.json
-        
+
       - name: Get Maps Api Key
         env:
           MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
         run: echo MAPS_API_KEY="$MAPS_API_KEY" > ./local.properties
+
+      - name: Get BANNER_ADD_ID
+        env:
+           MAPS_API_KEY: ${{ secrets.BANNER_ADD_ID }}
+        run: echo MAPS_API_KEY="BANNER_ADD_ID" > ./local.properties
+          
+      - name: Get ADMOB_APP_ID
+        env:
+           MAPS_API_KEY: ${{ secrets.ADMOB_APP_ID }}
+        run: echo MAPS_API_KEY="ADMOB_APP_ID" > ./local.properties
 
       - name: Build with gradle
         run: ./gradlew build --stacktrace
