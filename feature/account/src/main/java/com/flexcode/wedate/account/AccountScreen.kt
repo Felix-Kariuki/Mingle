@@ -47,9 +47,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.flexcode.inapppurchasescompose.SubscriptionsHelper
+import com.flexcode.wedate.common.ImageShimmer
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.R.string as AppText
@@ -59,6 +61,7 @@ import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
 import com.flexcode.wedate.common.theme.purple
 import com.flexcode.wedate.common.utils.Constants
+import kotlinx.coroutines.launch
 
 @Composable
 fun AccountScreen(
@@ -257,25 +260,20 @@ fun ProfileImage(
                 contentDescription = "edit profile"
             )
         }
-        Image(
-            painter = rememberAsyncImagePainter(
-                ImageRequest
-                    .Builder(LocalContext.current)
-                    .data(
-                        data = state.userDetails?.profileImage?.profileImage1
-                    )
-                    .placeholder(AppIcon.logo)
-                    .build()
-            ),
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(state.userDetails?.profileImage?.profileImage1)
+                .crossfade(true)
+                .placeholder(ImageShimmer().shimmerDrawable)
+                .build(),
             contentDescription = "profile image",
+            contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(100.dp)
-                .clip(CircleShape)
-                .border(1.dp, deepBrown, CircleShape)
                 .clickable {
                     navigateToProfileDetails()
-                },
-            contentScale = ContentScale.Crop
+                }
+                .size(100.dp)
+                .clip(CircleShape)
         )
     }
 }

@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.flexcode.wedate.common.ImageShimmer
 import com.flexcode.wedate.common.R.drawable as Appicon
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.extestions.textPadding
@@ -53,6 +54,7 @@ fun ChatItem(
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(chatProfile.profileImage)
+                .placeholder(ImageShimmer().shimmerDrawable)
                 .crossfade(true)
                 .build(),
             placeholder = painterResource(Appicon.sharon),

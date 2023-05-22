@@ -50,6 +50,7 @@ import com.flexcode.wedate.matches.presentation.MatchesScreen
 import com.flexcode.wedate.profiledetails.ProfileDetailsScreen
 import com.flexcode.wedate.profileedit.presentation.EditProfileScreen
 import com.flexcode.wedate.settings.SettingsScreen
+import com.flexcode.wedatecompose.explore.presentation.ExploreScreen
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
@@ -63,6 +64,9 @@ fun NavigationGraph(navController: NavHostController) {
                     navController.navigate(route = MAPS_SCREEN)
                 }
             )
+        }
+        composable(BottomNavItem.Explore.screen_route) {
+            ExploreScreen()
         }
         composable(BottomNavItem.Matches.screen_route) {
             MatchesScreen(
@@ -144,6 +148,7 @@ fun BottomNavigation(
     bottomBarState: MutableState<Boolean>
 ) {
     val items = listOf(
+        BottomNavItem.Explore,
         BottomNavItem.Home,
         BottomNavItem.Admirers,
         BottomNavItem.Matches,

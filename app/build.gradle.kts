@@ -19,7 +19,7 @@ android {
         applicationId = "com.flexcode.wedatecompose"
         minSdk = SDK.min
         targetSdk = SDK.max
-        versionCode = 16
+        versionCode = 17
         versionName = "1.0.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -94,6 +94,7 @@ dependencies {
 
     implementation(project(":Common"))
     implementation(project(":feature:auth"))
+    implementation(project(":feature:explore"))
     implementation(project(":feature:home"))
     implementation(project(":feature:account"))
     implementation(project(":feature:admirers"))

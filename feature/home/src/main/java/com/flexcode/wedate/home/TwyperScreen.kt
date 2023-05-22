@@ -43,6 +43,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.flexcode.wedate.common.ImageShimmer
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ResultText
@@ -119,7 +121,11 @@ fun TwyperScreen(
             ) {
                 Box {
                     AsyncImage(
-                        model = item.profileImage?.profileImage1,
+                        model = ImageRequest.Builder(context)
+                            .data(item.profileImage?.profileImage1)
+                            .crossfade(true)
+                            .placeholder(ImageShimmer().shimmerDrawable)
+                            .build(),
                         contentDescription = item.firstName,
                         contentScale = ContentScale.Crop,
                         modifier = modifier
@@ -130,25 +136,25 @@ fun TwyperScreen(
                                 }
                             }
                     )
-                    Row(
-                        modifier = modifier
-                            .wrapContentWidth()
-                            .padding(10.dp),
-                        horizontalArrangement = Arrangement.Start
-                    ) {
-                        StatusItem(
-                            status = if (item.online == false) {
-                                R.string.offline
-                            } else {
-                                R.string.online
-                            },
-                            backgroundColor = if (item.online == false) {
-                                deepBrown
-                            } else {
-                                onlineGreen
-                            }
-                        )
-                    }
+//                    Row(
+//                        modifier = modifier
+//                            .wrapContentWidth()
+//                            .padding(10.dp),
+//                        horizontalArrangement = Arrangement.Start
+//                    ) {
+//                        StatusItem(
+//                            status = if (item.online == false) {
+//                                R.string.offline
+//                            } else {
+//                                R.string.online
+//                            },
+//                            backgroundColor = if (item.online == false) {
+//                                deepBrown
+//                            } else {
+//                                onlineGreen
+//                            }
+//                        )
+//                    }
                     Column(
                         modifier = modifier
                             .align(Alignment.BottomStart)
@@ -191,7 +197,7 @@ fun TwyperScreen(
                                     imageVector = Icons.Default.UnfoldMoreDouble,
                                     contentDescription = stringResource(id = R.string.more),
                                     tint = purple,
-                                    modifier = modifier.size(40.dp)
+                                    modifier = modifier.size(30.dp)
                                 )
                             }
                             Spacer(modifier = Modifier.weight(1f))

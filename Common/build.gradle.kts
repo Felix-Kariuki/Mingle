@@ -92,6 +92,9 @@ dependencies {
     // ads
     implementation(libs.play.services.ads)
 
+    // shimmer
+    implementation(libs.shimmer)
+
     testImplementation(libs.jUnit)
     androidTestImplementation(libs.testJUnit)
     androidTestImplementation(libs.esspresso)

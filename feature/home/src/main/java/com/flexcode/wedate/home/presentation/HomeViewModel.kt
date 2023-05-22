@@ -36,6 +36,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import kotlin.time.Duration.Companion.seconds
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -47,6 +48,8 @@ class HomeViewModel @Inject constructor(
 
     var state = mutableStateOf(HomeUiState())
         private set
+
+    var initialLocationName = ""
 
     init {
         // perform validations:
@@ -84,11 +87,13 @@ class HomeViewModel @Inject constructor(
                 ).toString()
 
             if (locationName != "") {
-                updateUserLocation(
-                    locationName,
-                    latitude = latitude.value.toString(),
-                    longitude = longitude.value.toString()
-                )
+                if (locationName != initialLocationName) {
+                    updateUserLocation(
+                        locationName,
+                        latitude = latitude.value.toString(),
+                        longitude = longitude.value.toString()
+                    )
+                }
             }
         }
         return locationName
@@ -149,6 +154,7 @@ class HomeViewModel @Inject constructor(
                 when (result) {
                     is Resource.Success -> {
                         state.value = state.value.copy(userDetails = result.data)
+                        initialLocationName = result.data?.locationName ?: ""
                         when (result.data?.interestedIn) {
                             "Men" -> {
                                 state.value = state.value.copy(interestedIn = "Male")
@@ -164,7 +170,7 @@ class HomeViewModel @Inject constructor(
                         }
                         val userAge = result.data?.years
                         val yob = result.data?.dateOfBirth
-                        delay(3000)
+                        delay(3.seconds)
                         calculateAge(userAge, yob)
                     }
 

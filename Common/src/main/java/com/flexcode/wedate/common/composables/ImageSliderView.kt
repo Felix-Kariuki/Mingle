@@ -34,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.flexcode.wedate.common.ImageShimmer
 import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.theme.lightPurple
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -57,8 +58,8 @@ fun SliderView(pagerState: PagerState, imageList: MutableList<String>) {
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(imageUrl.value)
                     .crossfade(true)
+                    .placeholder(ImageShimmer().shimmerDrawable)
                     .build(),
-                placeholder = painterResource(R.drawable.sharon),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxWidth()

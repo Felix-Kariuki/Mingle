@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.flexcode.wedate.common.ImageShimmer
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
 import com.flexcode.wedate.common.theme.deepBrown
@@ -70,6 +71,7 @@ fun AdmirerItem(
                     model = ImageRequest.Builder(context)
                         .data(like.profileImage)
                         .crossfade(true)
+                        .placeholder(ImageShimmer().shimmerDrawable)
                         .build(),
                     contentDescription = "Admired by ${like.firstName}",
                     contentScale = ContentScale.Crop

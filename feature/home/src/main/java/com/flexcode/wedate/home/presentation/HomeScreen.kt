@@ -16,6 +16,7 @@
 package com.flexcode.wedate.home.presentation
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -28,6 +29,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,6 +46,8 @@ import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.SearchingPotentialMatches
 import com.flexcode.wedate.common.theme.deepBrown
+import com.flexcode.wedate.common.utils.conection.ConnectivityObserver
+import com.flexcode.wedate.common.utils.conection.NetworkConnectivityObserver
 import com.flexcode.wedate.home.TwyperScreen
 import com.flexcode.wedate.home.location.GetCurrentLocation
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -52,6 +56,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import timber.log.Timber
 
+private lateinit var connectivityObserver: ConnectivityObserver
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun HomeScreen(
@@ -69,6 +74,10 @@ fun HomeScreen(
     val latitude: MutableState<Double> = remember {
         mutableStateOf(0.00)
     }
+    connectivityObserver = NetworkConnectivityObserver(LocalContext.current)
+    val status by connectivityObserver.observe().collectAsState(
+        initial = ConnectivityObserver.Status.Unavailable
+    )
 
     val permissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -109,14 +118,16 @@ fun HomeScreen(
         }
     }
 
-    GetCurrentLocation(
-        permissionState,
-        context,
-        fusedLocationClient,
-        longitude,
-        latitude,
-        viewModel
-    )
+    if (status == ConnectivityObserver.Status.Available) {
+        GetCurrentLocation(
+            permissionState,
+            context,
+            fusedLocationClient,
+            longitude,
+            latitude,
+            viewModel
+        )
+    }
     Column(
         modifier = modifier
             .fillMaxSize()

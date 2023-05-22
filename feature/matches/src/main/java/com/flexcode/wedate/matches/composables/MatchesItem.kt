@@ -29,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.flexcode.wedate.common.ImageShimmer
 import com.flexcode.wedate.common.R
 import com.flexcode.wedatecompose.network.data.models.matches.Matches
 
@@ -51,6 +52,7 @@ fun MatchesItem(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(match.profileImage)
                 .crossfade(true)
+                .placeholder(ImageShimmer().shimmerDrawable)
                 .build(),
             placeholder = painterResource(R.drawable.sharon),
             contentDescription = "chat with ${match.firstName}",
