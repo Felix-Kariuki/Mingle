@@ -47,7 +47,6 @@ import com.flexcode.wedate.common.composables.SliderView
 import com.flexcode.wedate.common.extestions.textPadding
 import com.flexcode.wedate.common.theme.WedateComposeTheme
 import com.flexcode.wedate.common.theme.lightPurple
-import com.flexcode.wedate.common.theme.purpleGrey
 import com.flexcode.wedatecompose.network.data.models.auth.User
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
@@ -103,7 +102,7 @@ fun BottomSheetContent(
             Row(
                 modifier = modifier
                     .fillMaxWidth()
-                    .background(color = purpleGrey),
+                    .background(color = lightPurple),
                 horizontalArrangement = Arrangement.Center
             ) {
                 Image(
@@ -227,6 +226,19 @@ fun BottomSheetContent(
                         .padding(start = 16.dp)
                 ) {
                     InfoItem(text = "${person?.interestedIn}")
+                }
+
+                BasicText(
+                    text = R.string.interested_in_search_for,
+                    fontSize = 18.sp
+                )
+
+                Row(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp)
+                ) {
+                    InfoItem(text = "${person?.searchingFor}")
                 }
 
                 BasicText(

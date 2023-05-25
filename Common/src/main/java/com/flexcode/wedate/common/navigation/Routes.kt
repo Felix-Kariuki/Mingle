@@ -29,6 +29,7 @@ const val ACCOUNT_SCREEN = "AccountScreen"
 const val SETTINGS_SCREEN = "SettingsScreen"
 const val MATCHES_SCREEN = "MatchesScreen"
 const val ADMIRERS_SCREEN = "AdmirersScreen"
+const val EXPLORE_SCREEN = "ExploreScreen"
 
 const val LOVE_CALCULATOR_SCREEN = "LoveScreen"
 const val PROFILE_DETAILS_SCREEN = "ProfileDetailsScreen"

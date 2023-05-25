@@ -23,5 +23,6 @@ data class Matches(
     val years: String = "",
     val lat: String = "",
     val long: String = "",
-    val profileImage: String = ""
+    val profileImage: String = "",
+    val timeStamp: Long = System.currentTimeMillis()
 )

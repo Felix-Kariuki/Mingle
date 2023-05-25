@@ -65,10 +65,13 @@ dependencies {
     implementation(libs.playServicesSecrets)
 
     //in app purchases
-    implementation ("com.github.Felix-Kariuki:InAppPurchasesComposeLibrary:0.1.3")
+    implementation ("com.github.Felix-Kariuki:InAppPurchasesComposeLibrary:0.1.4")
 
     //twyper
     implementation (libs.twyper)
+
+    // shimmer
+    implementation(libs.shimmer)
 
 
     //leak canary

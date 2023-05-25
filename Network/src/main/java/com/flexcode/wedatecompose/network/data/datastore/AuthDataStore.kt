@@ -105,7 +105,26 @@ class AuthDataStore(private val dataStore: DataStore<Preferences>, private val g
         (pref[Constants.AGE_KEY] ?: "").toString()
     }
 
-    // // save the entire user data as an object
+    suspend fun saveUserLatitude(lat: String) {
+        dataStore.edit {
+            it[Constants.USER_LAT_KEY] = setOf(lat)
+        }
+    }
+
+    val getUserLatitude: Flow<String> = dataStore.data.map { pref ->
+        (pref[Constants.USER_LAT_KEY] ?: "0.0").toString()
+    }
+
+    suspend fun saveUserLongitude(long: String) {
+        dataStore.edit {
+            it[Constants.USER_LONG_KEY] = setOf(long)
+        }
+    }
+
+    val getUserLongitude: Flow<String> = dataStore.data.map { pref ->
+        (pref[Constants.USER_LONG_KEY] ?: "0.0").toString()
+    }
+
     suspend fun saveUserInfo(user: User) {
         dataStore.edit { pref ->
             pref[Constants.USER_DATA] = setOf(gson.toJson(user))

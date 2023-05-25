@@ -19,8 +19,8 @@ android {
         applicationId = "com.flexcode.wedatecompose"
         minSdk = SDK.min
         targetSdk = SDK.max
-        versionCode = 13
-        versionName = "1.0.7"
+        versionCode = 20
+        versionName = "1.0.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -94,6 +94,7 @@ dependencies {
 
     implementation(project(":Common"))
     implementation(project(":feature:auth"))
+    implementation(project(":feature:explore"))
     implementation(project(":feature:home"))
     implementation(project(":feature:account"))
     implementation(project(":feature:admirers"))
@@ -153,6 +154,10 @@ dependencies {
     // maps
     implementation(libs.composeMaps)
     implementation(libs.playServicesSecrets)
+
+    // in app updates
+    implementation(libs.app.update)
+    implementation(libs.app.update.ktx)
 
     testImplementation(libs.jUnit)
 

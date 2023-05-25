@@ -21,18 +21,14 @@ import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.utils.Resource
 import com.flexcode.wedatecompose.network.domain.use_cases.matches.MatchesUseCaseContainer
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @HiltViewModel
 class MatchesViewModel @Inject constructor(
     logService: LogService,
-    private val auth: FirebaseAuth,
     private val useCases: MatchesUseCaseContainer
 ) : BaseViewModel(logService) {
     var state = mutableStateOf(MatchesState())
@@ -52,7 +48,6 @@ class MatchesViewModel @Inject constructor(
 
     private fun getMatches() {
         viewModelScope.launch {
-            while (isActive) {
                 useCases.getAllUserMatchesUseCase.invoke().collect { result ->
                     when (result) {
                         is Resource.Success -> {
@@ -65,15 +60,13 @@ class MatchesViewModel @Inject constructor(
                             Timber.e("MATCHES ERROR::: ${result.message}")
                         }
                     }
-                    delay(2500)
                 }
-            }
+
         }
     }
 
     private fun getChatProfiles() {
         viewModelScope.launch {
-            while (isActive) {
                 useCases.getChatProfilesUseCase.invoke().collect { result ->
                     when (result) {
                         is Resource.Success -> {
@@ -85,13 +78,8 @@ class MatchesViewModel @Inject constructor(
                             Timber.e("CHAT PROFILE ERROR::: ${result.message}")
                         }
                     }
-                    delay(500)
                 }
             }
-        }
-    }
 
-    fun getUid(): String {
-        return auth.uid!!
     }
 }
