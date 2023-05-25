@@ -25,6 +25,7 @@ import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.snackbar.SnackBarManager
 import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedatecompose.network.data.datastore.AuthDataStore
 import com.flexcode.wedatecompose.network.data.models.auth.User
 import com.flexcode.wedatecompose.network.domain.use_cases.auth.UseCaseContainer
 import com.flexcode.wedatecompose.network.domain.use_cases.home.HomeUseCases
@@ -43,7 +44,8 @@ class HomeViewModel @Inject constructor(
     logService: LogService,
     private val useCaseContainer: UseCaseContainer,
     private val homeUseCases: HomeUseCases,
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    private val dataStore: AuthDataStore
 ) : BaseViewModel(logService) {
 
     var state = mutableStateOf(HomeUiState())
@@ -76,25 +78,32 @@ class HomeViewModel @Inject constructor(
         latitude: MutableState<Double>,
         longitude: MutableState<Double>
     ): String {
-        val geocoder = Geocoder(context, Locale.getDefault())
-        val addresses = geocoder.getFromLocation(latitude.value, longitude.value, 1)
-        var locationName = ""
-        if (addresses != null && addresses.size > 0) {
-            val address: Address = addresses[0]
-            locationName = (
-                if (address.locality != null) address.locality
-                else address.countryName
-                ).toString()
+        var locationName = initialLocationName
+        try {
 
-            if (locationName != "") {
-                if (locationName != initialLocationName) {
-                    updateUserLocation(
-                        locationName,
-                        latitude = latitude.value.toString(),
-                        longitude = longitude.value.toString()
-                    )
+            val geocoder = Geocoder(context, Locale.getDefault())
+            val addresses = geocoder.getFromLocation(latitude.value, longitude.value, 1)
+
+            if (addresses != null && addresses.size > 0) {
+                val address: Address = addresses[0]
+                locationName = (
+                        if (address.locality != null) address.locality
+                        else address.countryName
+                        ).toString()
+
+                if (locationName != "") {
+                    if (locationName != initialLocationName) {
+                        updateUserLocation(
+                            locationName,
+                            latitude = latitude.value.toString(),
+                            longitude = longitude.value.toString()
+                        )
+                    }
                 }
             }
+
+        }catch (e:Exception){
+            Timber.e("Error: Couldn't get location name reason $e")
         }
         return locationName
     }
@@ -153,6 +162,7 @@ class HomeViewModel @Inject constructor(
             useCaseContainer.getUserDetailsUseCase.invoke(getUid()).collect { result ->
                 when (result) {
                     is Resource.Success -> {
+                        saveUserDetails(result.data)
                         state.value = state.value.copy(userDetails = result.data)
                         initialLocationName = result.data?.locationName ?: ""
                         when (result.data?.interestedIn) {
@@ -176,22 +186,35 @@ class HomeViewModel @Inject constructor(
 
                     is Resource.Loading -> {}
                     is Resource.Error -> {
-                        Timber.e("INTERESTS IN ERROR::: ${result.message}")
+                        Timber.e("INTERESTS IN ERROR::: ${result.message}  + ++  " +
+                                "${result.data}")
                     }
                 }
             }
         }
     }
 
-    private fun calculateAge(userAge: String?, yob: String?) {
-        val yearOfBirth = "$yob 00:00"
-        val today = Date()
-        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm")
-        val formattedYearOfBirth = sdf.parse(yearOfBirth)
-        val years = (today.time - formattedYearOfBirth.time) / 31536000000
-        if (years.toInt() > userAge.toString().toInt()) {
-            updateUserAge(years.toInt())
+    private fun saveUserDetails(data: User?) {
+        launchCatching {
+            data?.latitude?.let { dataStore.saveUserLatitude(it) }
+            data?.longitude?.let { dataStore.saveUserLongitude(it) }
         }
+    }
+
+    private fun calculateAge(userAge: String?, yob: String?) {
+        try {
+            val yearOfBirth = "$yob 00:00"
+            val today = Date()
+            val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm")
+            val formattedYearOfBirth = sdf.parse(yearOfBirth)
+            val years = (today.time - formattedYearOfBirth.time) / 31536000000
+            if (years.toInt() > userAge.toString().toInt()) {
+                updateUserAge(years.toInt())
+            }
+        }catch (e:Exception){
+            Timber.e("The error is $e    details:: $yob  $userAge ")
+        }
+
     }
 
     private fun updateUserAge(years: Int) {

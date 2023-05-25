@@ -20,9 +20,11 @@ import androidx.lifecycle.viewModelScope
 import com.flexcode.wedate.common.BaseViewModel
 import com.flexcode.wedate.common.data.LogService
 import com.flexcode.wedate.common.utils.Resource
+import com.flexcode.wedatecompose.network.data.datastore.AuthDataStore
 import com.flexcode.wedatecompose.network.domain.use_cases.auth.UseCaseContainer
 import com.flexcode.wedatecompose.network.domain.use_cases.home.HomeUseCases
 import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.delay
@@ -35,6 +37,7 @@ class AdmirersViewModel @Inject constructor(
     logService: LogService,
     private val homeUseCases: HomeUseCases,
     private val useCases: UseCaseContainer,
+    private val dataStore: AuthDataStore,
     private val auth: FirebaseAuth
 ) : BaseViewModel(logService) {
 
@@ -44,6 +47,24 @@ class AdmirersViewModel @Inject constructor(
     init {
         getAllLikedBy(getUid())
         getUserDetails()
+        getUserLocation()
+    }
+
+
+    fun getUserLocation() : LatLng{
+        var latitude = 0.0
+        var longitude = 0.0
+        viewModelScope.launch {
+            dataStore.getUserLatitude.collect{
+                latitude = it.substring(1, it.length - 1).toDouble()
+            }
+        }
+        viewModelScope.launch {
+            dataStore.getUserLongitude.collect{
+                longitude = it.substring(1, it.length - 1).toDouble()
+            }
+        }
+        return LatLng(latitude, longitude)
     }
 
     fun getAllLikedBy(currentUserId: String) {

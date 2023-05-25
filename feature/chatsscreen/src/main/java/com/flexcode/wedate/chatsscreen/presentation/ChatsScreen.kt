@@ -50,6 +50,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.ImageShimmer
 import com.flexcode.wedate.common.R
+import com.flexcode.wedate.common.composables.BannerAdView
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
 import com.flexcode.wedate.common.theme.deepLightPurple
@@ -86,7 +87,7 @@ fun ChatsScreen(
             LazyColumn(
                 modifier = modifier
                     .fillMaxSize()
-                    .padding(bottom = 75.dp),
+                    .padding(bottom = 125.dp),
                 state = scrollState
             ) {
                 items(state.messages.size) { i ->
@@ -100,16 +101,23 @@ fun ChatsScreen(
                 }
             }
 
-            CustomTextField(
-                text = state.message,
-                onValueChange = viewModel::onMessageChange,
-                viewModel = viewModel,
-                state = state,
-                modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 16.dp)
-                    .align(Alignment.BottomCenter),
-                userId = data!!
-            )
+            Column(
+                modifier = modifier.align(Alignment.BottomCenter),
+            ) {
+                CustomTextField(
+                    text = state.message,
+                    onValueChange = viewModel::onMessageChange,
+                    viewModel = viewModel,
+                    state = state,
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp, vertical = 16.dp),
+                    userId = data!!
+                )
+                BannerAdView()
+            }
+
+
+
         }
 
         LaunchedEffect(key1 = state.userDetails) {

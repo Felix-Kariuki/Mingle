@@ -157,6 +157,7 @@ fun AdmirersScreen(
                     .height(50.dp)
                     .clip(RoundedCornerShape(10.dp))
             ) {
+
                 if (purchaseDone) {
                     billingPurchaseHelper.initializePurchase()
                 } else {

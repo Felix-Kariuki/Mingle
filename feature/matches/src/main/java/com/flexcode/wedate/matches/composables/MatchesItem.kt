@@ -54,7 +54,6 @@ fun MatchesItem(
                 .crossfade(true)
                 .placeholder(ImageShimmer().shimmerDrawable)
                 .build(),
-            placeholder = painterResource(R.drawable.sharon),
             contentDescription = "chat with ${match.firstName}",
             contentScale = ContentScale.Crop,
             modifier = Modifier

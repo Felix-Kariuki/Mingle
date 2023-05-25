@@ -43,6 +43,9 @@ object Constants {
     val Y_O_B_KEY = stringSetPreferencesKey("y_o_b_key")
     val AGE_KEY = stringSetPreferencesKey("AGE_key")
     val USER_DATA = stringSetPreferencesKey("user_data")
+    val USER_LAT_KEY = stringSetPreferencesKey("USER_LAT_key")
+    val USER_LONG_KEY = stringSetPreferencesKey("USER_LONG_key")
+
 
     const val ONESIGNAL_APP_ID = "e363b214-60c5-4e1a-8b2b-********"
 

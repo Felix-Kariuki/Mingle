@@ -19,7 +19,7 @@ android {
         applicationId = "com.flexcode.wedatecompose"
         minSdk = SDK.min
         targetSdk = SDK.max
-        versionCode = 17
+        versionCode = 20
         versionName = "1.0.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

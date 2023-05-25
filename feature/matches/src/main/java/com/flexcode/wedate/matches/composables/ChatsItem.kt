@@ -57,7 +57,6 @@ fun ChatItem(
                 .placeholder(ImageShimmer().shimmerDrawable)
                 .crossfade(true)
                 .build(),
-            placeholder = painterResource(Appicon.sharon),
             contentDescription = "chat with${chatProfile.profileImage}",
             contentScale = ContentScale.Crop,
             modifier = Modifier
