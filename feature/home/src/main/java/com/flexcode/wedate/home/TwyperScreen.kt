@@ -59,6 +59,7 @@ import com.flexcode.wedatecompose.network.data.models.auth.User
 import com.github.theapache64.twyper.Twyper
 import com.github.theapache64.twyper.rememberTwyperController
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -98,6 +99,7 @@ fun TwyperScreen(
                 }
             },
             onEmpty = {
+
                 println("End reached")
             }
         ) { item ->

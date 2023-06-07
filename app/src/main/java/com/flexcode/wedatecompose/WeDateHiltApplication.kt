@@ -34,7 +34,7 @@ class WeDateHiltApplication : Application() {
         super.onCreate()
         initTimber()
         createNotificationChannel()
-        Firebase.database.setPersistenceEnabled(true)
+       // Firebase.database.setPersistenceEnabled(true)
     }
 
     private fun createNotificationChannel() {
