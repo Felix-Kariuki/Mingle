@@ -105,7 +105,8 @@ fun TwyperScreen(
         ) { item ->
 
             val modalBottomSheetState =
-                rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+                rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden,
+                    skipHalfExpanded = true)
             val scope = rememberCoroutineScope()
             ModalBottomSheetLayout(
                 sheetContent = {

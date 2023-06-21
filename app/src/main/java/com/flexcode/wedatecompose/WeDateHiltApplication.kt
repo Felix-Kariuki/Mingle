@@ -22,8 +22,6 @@ import android.content.Context
 import android.os.Build
 import com.flexcode.wedate.common.utils.Constants
 import com.flexcode.wedatecompose.crashlyics.CrashlyticsTree
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -34,7 +32,7 @@ class WeDateHiltApplication : Application() {
         super.onCreate()
         initTimber()
         createNotificationChannel()
-       // Firebase.database.setPersistenceEnabled(true)
+        // Firebase.database.setPersistenceEnabled(true)
     }
 
     private fun createNotificationChannel() {
