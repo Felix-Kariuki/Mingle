@@ -16,7 +16,6 @@
 package com.flexcode.wedate.home.presentation
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -57,6 +56,7 @@ import com.google.android.gms.location.LocationServices
 import timber.log.Timber
 
 private lateinit var connectivityObserver: ConnectivityObserver
+
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun HomeScreen(
@@ -146,12 +146,13 @@ fun HomeScreen(
             if (state.interestedIn == "Everyone") {
                 TwyperScreen(
                     items = (
-                        state.potentialMatches.filter { user ->
-                            user.id != viewModel.getUid() && !user.likedBy!!.contains(
-                                viewModel.getUid()
-                            ) && user.accountStatus != "DELETED"
-                        }
-                        ).toMutableList(),
+                            state.potentialMatches.filter { user ->
+                                user.id != viewModel.getUid() && !user.likedBy!!.contains(
+                                    viewModel.getUid()
+                                ) && user.accountStatus != "DELETED" &&
+                                        user.profileImage?.profileImage1 != ""
+                            }
+                            ).toMutableList(),
                     modifier = modifier,
                     viewModel = viewModel,
                     context = context
@@ -174,12 +175,13 @@ fun HomeScreen(
             } else {
                 TwyperScreen(
                     items = (
-                        state.potentialMatches.filter { user ->
-                            user.id != viewModel.getUid() && user.gender == state.interestedIn &&
-                                !user.likedBy!!.contains(viewModel.getUid()) &&
-                                user.accountStatus != "DELETED"
-                        }.shuffled()
-                        ).toMutableList(),
+                            state.potentialMatches.filter { user ->
+                                user.id != viewModel.getUid() && user.gender == state.interestedIn
+                                        && !user.likedBy!!.contains(viewModel.getUid()) &&
+                                        user.accountStatus != "DELETED" &&
+                                        user.profileImage?.profileImage1 != ""
+                            }.shuffled()
+                            ).toMutableList(),
                     modifier = modifier,
                     viewModel = viewModel,
                     context = context
