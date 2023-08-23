@@ -17,7 +17,6 @@ package com.flexcode.wedate.account
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -48,7 +47,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.flexcode.inapppurchasescompose.SubscriptionsHelper
 import com.flexcode.wedate.common.ImageShimmer
@@ -57,11 +55,9 @@ import com.flexcode.wedate.common.R.drawable as AppIcon
 import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.*
 import com.flexcode.wedate.common.extestions.basicButton
-import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
 import com.flexcode.wedate.common.theme.purple
 import com.flexcode.wedate.common.utils.Constants
-import kotlinx.coroutines.launch
 
 @Composable
 fun AccountScreen(

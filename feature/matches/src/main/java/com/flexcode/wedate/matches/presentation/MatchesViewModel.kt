@@ -48,38 +48,36 @@ class MatchesViewModel @Inject constructor(
 
     private fun getMatches() {
         viewModelScope.launch {
-                useCases.getAllUserMatchesUseCase.invoke().collect { result ->
-                    when (result) {
-                        is Resource.Success -> {
-                            Timber.i("MATCHES:: ${result.data}")
-                            state.value = result.data?.let { state.value.copy(matches = it) }!!
-                        }
+            useCases.getAllUserMatchesUseCase.invoke().collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        Timber.i("MATCHES:: ${result.data}")
+                        state.value = result.data?.let { state.value.copy(matches = it) }!!
+                    }
 
-                        is Resource.Loading -> {}
-                        is Resource.Error -> {
-                            Timber.e("MATCHES ERROR::: ${result.message}")
-                        }
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("MATCHES ERROR::: ${result.message}")
                     }
                 }
-
+            }
         }
     }
 
     private fun getChatProfiles() {
         viewModelScope.launch {
-                useCases.getChatProfilesUseCase.invoke().collect { result ->
-                    when (result) {
-                        is Resource.Success -> {
-                            state.value = result.data?.let { state.value.copy(chatProfiles = it) }!!
-                        }
+            useCases.getChatProfilesUseCase.invoke().collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        state.value = result.data?.let { state.value.copy(chatProfiles = it) }!!
+                    }
 
-                        is Resource.Loading -> {}
-                        is Resource.Error -> {
-                            Timber.e("CHAT PROFILE ERROR::: ${result.message}")
-                        }
+                    is Resource.Loading -> {}
+                    is Resource.Error -> {
+                        Timber.e("CHAT PROFILE ERROR::: ${result.message}")
                     }
                 }
             }
-
+        }
     }
 }

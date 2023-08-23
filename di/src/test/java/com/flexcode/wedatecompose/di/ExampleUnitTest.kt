@@ -13,15 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedate.common.utils.conection
+package com.flexcode.wedatecompose.di
 
-import kotlinx.coroutines.flow.Flow
+import org.junit.Assert.*
+import org.junit.Test
 
-interface ConnectivityObserver {
-
-    fun observe(): Flow<Status>
-
-    enum class Status {
-        Available, Unavailable, Losing, Lost
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+class ExampleUnitTest {
+    @Test
+    fun addition_isCorrect() {
+        assertEquals(4, 2 + 2)
     }
 }

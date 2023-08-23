@@ -34,10 +34,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import kotlin.time.Duration.Companion.seconds
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -80,16 +80,15 @@ class HomeViewModel @Inject constructor(
     ): String {
         var locationName = initialLocationName
         try {
-
             val geocoder = Geocoder(context, Locale.getDefault())
             val addresses = geocoder.getFromLocation(latitude.value, longitude.value, 1)
 
             if (addresses != null && addresses.size > 0) {
                 val address: Address = addresses[0]
                 locationName = (
-                        if (address.locality != null) address.locality
-                        else address.countryName
-                        ).toString()
+                    if (address.locality != null) address.locality
+                    else address.countryName
+                    ).toString()
 
                 if (locationName != "") {
                     if (locationName != initialLocationName) {
@@ -101,8 +100,7 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             }
-
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Timber.e("Error: Couldn't get location name reason $e")
         }
         return locationName
@@ -186,8 +184,10 @@ class HomeViewModel @Inject constructor(
 
                     is Resource.Loading -> {}
                     is Resource.Error -> {
-                        Timber.e("INTERESTS IN ERROR::: ${result.message}  + ++  " +
-                                "${result.data}")
+                        Timber.e(
+                            "INTERESTS IN ERROR::: ${result.message}  + ++  " +
+                                "${result.data}"
+                        )
                     }
                 }
             }
@@ -211,10 +211,9 @@ class HomeViewModel @Inject constructor(
             if (years.toInt() > userAge.toString().toInt()) {
                 updateUserAge(years.toInt())
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Timber.e("The error is $e    details:: $yob  $userAge ")
         }
-
     }
 
     private fun updateUserAge(years: Int) {

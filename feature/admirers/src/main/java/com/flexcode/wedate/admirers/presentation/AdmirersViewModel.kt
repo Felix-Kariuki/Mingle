@@ -23,8 +23,8 @@ import com.flexcode.wedate.common.utils.Resource
 import com.flexcode.wedatecompose.network.data.datastore.AuthDataStore
 import com.flexcode.wedatecompose.network.domain.use_cases.auth.UseCaseContainer
 import com.flexcode.wedatecompose.network.domain.use_cases.home.HomeUseCases
-import com.google.firebase.auth.FirebaseAuth
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.delay
@@ -50,17 +50,16 @@ class AdmirersViewModel @Inject constructor(
         getUserLocation()
     }
 
-
-    fun getUserLocation() : LatLng{
+    fun getUserLocation(): LatLng {
         var latitude = 0.0
         var longitude = 0.0
         viewModelScope.launch {
-            dataStore.getUserLatitude.collect{
+            dataStore.getUserLatitude.collect {
                 latitude = it.substring(1, it.length - 1).toDouble()
             }
         }
         viewModelScope.launch {
-            dataStore.getUserLongitude.collect{
+            dataStore.getUserLongitude.collect {
                 longitude = it.substring(1, it.length - 1).toDouble()
             }
         }

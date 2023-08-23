@@ -46,7 +46,6 @@ object Constants {
     val USER_LAT_KEY = stringSetPreferencesKey("USER_LAT_key")
     val USER_LONG_KEY = stringSetPreferencesKey("USER_LONG_key")
 
-
     const val ONESIGNAL_APP_ID = "e363b214-60c5-4e1a-8b2b-********"
 
     const val SEE_ON_MAP = "see_admirers_on_map_sub"

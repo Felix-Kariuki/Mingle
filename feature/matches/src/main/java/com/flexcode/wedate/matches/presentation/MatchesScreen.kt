@@ -38,6 +38,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flexcode.wedate.common.R.drawable as AppIcon
+import com.flexcode.wedate.common.R.string as AppText
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.NoResultFoundAnimation
 import com.flexcode.wedate.common.composables.ResultText
@@ -47,8 +49,6 @@ import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
 import com.flexcode.wedate.matches.composables.ChatItem
 import com.flexcode.wedate.matches.composables.MatchesItem
-import com.flexcode.wedate.common.R.drawable as AppIcon
-import com.flexcode.wedate.common.R.string as AppText
 
 @Composable
 fun MatchesScreen(
@@ -87,8 +87,8 @@ fun MatchesScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                    NoResultFoundAnimation()
-                    ErrorMessage(text = AppText.no_matches)
+                NoResultFoundAnimation()
+                ErrorMessage(text = AppText.no_matches)
             }
         } else if (state.matches.isNotEmpty() && state.chatProfiles.isEmpty()) {
             Column(

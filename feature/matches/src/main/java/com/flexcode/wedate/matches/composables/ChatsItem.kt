@@ -25,7 +25,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -34,7 +33,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.flexcode.wedate.common.ImageShimmer
-import com.flexcode.wedate.common.R.drawable as Appicon
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.extestions.textPadding
 import com.flexcode.wedatecompose.network.data.models.matches.ChatProfile

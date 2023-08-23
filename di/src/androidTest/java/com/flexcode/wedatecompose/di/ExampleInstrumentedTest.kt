@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.flexcode.wedatecompose.explore
+package com.flexcode.wedatecompose.di
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -32,6 +32,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.flexcode.wedatecompose.explore.test", appContext.packageName)
+        assertEquals("com.flexcode.wedatecompose.di.test", appContext.packageName)
     }
 }

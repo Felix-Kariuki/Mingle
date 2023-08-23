@@ -19,7 +19,7 @@ android {
         applicationId = "com.flexcode.wedatecompose"
         minSdk = SDK.min
         targetSdk = SDK.max
-        versionCode = 22
+        versionCode = 23
         versionName = "1.0.9"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -106,6 +106,7 @@ dependencies {
     implementation(project(":feature:chatsscreen"))
     implementation(project(":feature:maps"))
     implementation(project(":Network"))
+    implementation(project(":di"))
 
     implementation(libs.core)
     implementation(libs.appCompat)
