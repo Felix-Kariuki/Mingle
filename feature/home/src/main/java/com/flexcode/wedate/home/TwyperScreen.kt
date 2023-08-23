@@ -49,9 +49,7 @@ import com.flexcode.wedate.common.R
 import com.flexcode.wedate.common.composables.BasicText
 import com.flexcode.wedate.common.composables.ResultText
 import com.flexcode.wedate.common.composables.SwipeRightLeftIcon
-import com.flexcode.wedate.common.theme.deepBrown
 import com.flexcode.wedate.common.theme.lightPurple
-import com.flexcode.wedate.common.theme.onlineGreen
 import com.flexcode.wedate.common.theme.purple
 import com.flexcode.wedate.home.presentation.HomeUiState
 import com.flexcode.wedate.home.presentation.HomeViewModel
@@ -59,7 +57,6 @@ import com.flexcode.wedatecompose.network.data.models.auth.User
 import com.github.theapache64.twyper.Twyper
 import com.github.theapache64.twyper.rememberTwyperController
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -99,14 +96,15 @@ fun TwyperScreen(
                 }
             },
             onEmpty = {
-
                 println("End reached")
             }
         ) { item ->
 
             val modalBottomSheetState =
-                rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden,
-                    skipHalfExpanded = true)
+                rememberModalBottomSheetState(
+                    initialValue = ModalBottomSheetValue.Hidden,
+                    skipHalfExpanded = true
+                )
             val scope = rememberCoroutineScope()
             ModalBottomSheetLayout(
                 sheetContent = {

@@ -29,7 +29,10 @@ import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
 
 @Module
-@TestInstallIn(components = [SingletonComponent::class], replaces = [FirebaseModule::class])
+@TestInstallIn(
+    components = [SingletonComponent::class],
+    replaces = [com.flexcode.wedatecompose.di.FirebaseModule::class]
+)
 object TestFirebaseModule {
     private const val HOST = "10.0.2.2"
     private const val AUTH_PORT = 9099

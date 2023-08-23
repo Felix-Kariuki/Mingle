@@ -37,16 +37,16 @@ fun ExploreScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         ResultText(
             "Explore Feature is coming Soon..... From this point you'll get to see" +
-                    " all potential singles all at once", color = deepBrown, fontSize = 22.sp
+                " all potential singles all at once",
+            color = deepBrown,
+            fontSize = 22.sp
         )
         Spacer(modifier = modifier.height(32.dp))
         BannerAdView()
     }
 }
-
 
 @Preview
 @Composable

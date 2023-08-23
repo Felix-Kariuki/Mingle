@@ -17,7 +17,6 @@ package com.flexcode.wedate.chatsscreen.presentation
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -38,7 +37,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -102,7 +100,7 @@ fun ChatsScreen(
             }
 
             Column(
-                modifier = modifier.align(Alignment.BottomCenter),
+                modifier = modifier.align(Alignment.BottomCenter)
             ) {
                 CustomTextField(
                     text = state.message,
@@ -115,9 +113,6 @@ fun ChatsScreen(
                 )
                 BannerAdView()
             }
-
-
-
         }
 
         LaunchedEffect(key1 = state.userDetails) {

@@ -146,13 +146,13 @@ fun HomeScreen(
             if (state.interestedIn == "Everyone") {
                 TwyperScreen(
                     items = (
-                            state.potentialMatches.filter { user ->
-                                user.id != viewModel.getUid() && !user.likedBy!!.contains(
-                                    viewModel.getUid()
-                                ) && user.accountStatus != "DELETED" &&
-                                        user.profileImage?.profileImage1 != ""
-                            }
-                            ).toMutableList(),
+                        state.potentialMatches.filter { user ->
+                            user.id != viewModel.getUid() && !user.likedBy!!.contains(
+                                viewModel.getUid()
+                            ) && user.accountStatus != "DELETED" &&
+                                user.profileImage?.profileImage1 != ""
+                        }
+                        ).toMutableList(),
                     modifier = modifier,
                     viewModel = viewModel,
                     context = context
@@ -175,13 +175,13 @@ fun HomeScreen(
             } else {
                 TwyperScreen(
                     items = (
-                            state.potentialMatches.filter { user ->
-                                user.id != viewModel.getUid() && user.gender == state.interestedIn
-                                        && !user.likedBy!!.contains(viewModel.getUid()) &&
-                                        user.accountStatus != "DELETED" &&
-                                        user.profileImage?.profileImage1 != ""
-                            }.shuffled()
-                            ).toMutableList(),
+                        state.potentialMatches.filter { user ->
+                            user.id != viewModel.getUid() && user.gender == state.interestedIn &&
+                                !user.likedBy!!.contains(viewModel.getUid()) &&
+                                user.accountStatus != "DELETED" &&
+                                user.profileImage?.profileImage1 != ""
+                        }.shuffled()
+                        ).toMutableList(),
                     modifier = modifier,
                     viewModel = viewModel,
                     context = context

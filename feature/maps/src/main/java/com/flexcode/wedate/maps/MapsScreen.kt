@@ -48,7 +48,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 fun MapsScreen(
     modifier: Modifier = Modifier,
     navigateBack: () -> Unit,
-    viewModel: AdmirersViewModel = hiltViewModel(),
+    viewModel: AdmirersViewModel = hiltViewModel()
 ) {
     val state by viewModel.state
 
@@ -93,10 +93,12 @@ fun MapsScreen(
                         val longitude = i.long.toDouble()
                         val latlng = LatLng(lat, longitude)
                         if (lat != 0.0 && longitude != 0.0) {
-                            val name = if (i.firstName != state.userDetails?.firstName)
-                                "Liked by ${i.firstName}" else "Your Location"
-                            val title = if (i.firstName != state.userDetails?.firstName)
-                                i.firstName else "You"
+                            val name = if (i.firstName != state.userDetails?.firstName) {
+                                "Liked by ${i.firstName}"
+                            } else "Your Location"
+                            val title = if (i.firstName != state.userDetails?.firstName) {
+                                i.firstName
+                            } else "You"
                             Marker(
                                 state = MarkerState(position = latlng),
                                 title = title,
@@ -108,7 +110,6 @@ fun MapsScreen(
                 }
             }
         } else {
-
             GoogleMap(
                 modifier = modifier.matchParentSize(),
                 cameraPositionState = cameraPositionState,
@@ -118,10 +119,9 @@ fun MapsScreen(
                 Marker(
                     state = MarkerState(position = myLocation),
                     title = "You",
-                    snippet = "Your Location",
-                    //icon = bitmap?.let { BitmapDescriptorFactory.fromBitmap(it) }
+                    snippet = "Your Location"
+                    // icon = bitmap?.let { BitmapDescriptorFactory.fromBitmap(it) }
                 )
-
             }
         }
     }
@@ -138,5 +138,4 @@ fun MapsScreen(
         paddingValues = PaddingValues(4.dp),
         circleColor = lightPurple
     )
-
 }
